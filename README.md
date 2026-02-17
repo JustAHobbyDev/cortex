@@ -69,3 +69,4 @@ Cortex is a long-term cognitive multiplier.
 
 ---
 
+Artifact Admission Rules: [ARTIFACT_ADMISSION.md]

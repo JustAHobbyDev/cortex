@@ -3,7 +3,7 @@
 Version: v0  
 Status: Track-only  
 Inputs:
-- `tools/**/*.sh` and other bash-shebang scripts
+- shell-runner files and other bash-shebang scripts
 
 ## Purpose
 
@@ -38,10 +38,10 @@ Continuously audit embedded Python heredoc usage inside bash scripts so extracti
 
 1. Run:
    ```bash
-   python3 scripts/run_shell_embedding_audit.py
+   <audit-runner> --audit shell-embedding
    ```
 2. Inspect `reports/shell_embedding_audit_v0.json`.
-3. Prioritize top offenders for extraction into shared `scripts/*.py` modules when practical.
+3. Prioritize top offenders for extraction into shared reusable modules when practical.
 4. Keep inline Python for short, single-purpose glue code.
 
 ## Definition of Done

@@ -35,8 +35,8 @@ Any new canonical outcome written to `scenes/` must include:
 If source references are missing, artifact status must be advisory, not canonical.
 
 ## Legacy Controls
-- `tools/sb_closeout.sh` requires explicit `--legacy-session-write`.
-- `tools/sb.py commit-session` requires explicit `--legacy-session-write`.
+- closeout runner requires explicit `--legacy-session-write`.
+- session-commit command requires explicit `--legacy-session-write`.
 
 These controls prevent accidental new session sprawl in `sessions/`.
 

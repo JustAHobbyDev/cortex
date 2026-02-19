@@ -121,7 +121,6 @@ insufficient_input and include a note describing the missing source field.
 - Versioning rule: threshold changes must increment draft revision metadata in this spec.
 
 ## Evaluator Implementation Task (v0)
-- Required implementation artifact: tools/sb_invariant_drift_eval_v0.sh
+- Required implementation artifact: invariant drift evaluator runner
 - Output target: scene/audit_reports/v0/invariant_drift_report_<date>_v0.json
 - Mode: track-only, report generation only, no auto-remediation.
-

@@ -2,20 +2,42 @@
 
 Status: Draft
 Source: distilled from `pm-recurring-cycle` skill candidate.
-Scope: deterministic PM consultation cycles in `project/second-brain`.
+Scope: deterministic PM consultation cycles across any compatible project runtime.
 
 ## Outcome
 
 Run one PM loop that keeps stage visibility current, asks or resolves exactly one consultation decision, and records all mutations in scene artifacts and the mutation ledger.
 
-## Required State Surfaces
+## Portability Contract
 
-- `scene/agent/project_manager/status_v0.json`
-- `scene/agent/project_manager/ideas_v0.json`
-- `scene/agent/project_manager/consultation_queue_v0.json`
-- `scene/task_queue/v0.json`
-- `scene/authority/registry_v0.json`
-- `scene/ledger/mutations_v0.jsonl`
+This runbook is interface-first, not storage-path-first.
+
+Any implementation is valid if it can:
+- Read and write the interfaces listed below.
+- Apply one bounded mutation set atomically per cycle.
+- Append one immutable mutation record per cycle.
+- Produce deterministic, machine-checkable execution status.
+
+## Required Interfaces
+
+- `pm_status`: stage summary, active signals, and `next_consultation_due`.
+- `pm_ideas`: current option/idea list that PM may advance or defer.
+- `pm_consultation_queue`: queue of pending/resolved consultations.
+- `task_queue`: task rows relevant to PM orchestration.
+- `authority_registry`: current delegation/execution authority records.
+- `mutation_ledger`: append-only record of cycle mutations.
+
+## Adapter Mapping
+
+Define one adapter mapping from interface names to local resources before running cycles.
+
+Example mapping (reference implementation only):
+- `pm_status` -> `scene/agent/project_manager/status_v0.json`
+- `pm_ideas` -> `scene/agent/project_manager/ideas_v0.json`
+- `pm_consultation_queue` -> `scene/agent/project_manager/consultation_queue_v0.json`
+- `task_queue` -> `scene/task_queue/v0.json`
+- `authority_registry` -> `scene/authority/registry_v0.json`
+- `mutation_ledger` -> `scene/ledger/mutations_v0.jsonl`
 
 ## Trigger Boundaries
 
@@ -26,43 +48,52 @@ Run one PM loop that keeps stage visibility current, asks or resolves exactly on
 
 ## Cycle Workflow
 
-1) Inspect current state and pending consultation.
+1) Read a snapshot from all required interfaces.
 
-```bash
-jq '.stage_summary, .signals, .next_consultation_due' scene/agent/project_manager/status_v0.json
-jq '.items[] | select(.state=="pending")' scene/agent/project_manager/consultation_queue_v0.json
-jq '.tasks[] | select(.owner_agent=="agent/project_manager_v0") | {task_id,state,last_progress_at}' scene/task_queue/v0.json
-```
+- Inspect stage summary, signals, and next consultation due from `pm_status`.
+- Inspect pending consultation items from `pm_consultation_queue`.
+- Inspect PM-owned rows from `task_queue`.
 
 2) Select exactly one branch:
 - `consult`: resolve one pending consultation from an explicit user choice.
 - `kickoff`: if none pending, add one next consultation and update stage focus.
 - `status-only`: refresh stage signals with no new consultation.
 
-3) Apply updates via a small local Python mutator script (write only target files).
+3) Build a single-cycle mutation plan.
 
-4) Execute one deterministic wrapper cycle (never write tracked artifacts directly):
+- Use a deterministic mutator (script or function).
+- Limit writes to mapped PM target interfaces only.
+- Resolve exactly one consultation decision unless the user explicitly requests batching.
+
+4) Execute via a cycle runner abstraction (never bypass it for tracked artifacts).
+
+Generic contract:
 
 ```bash
-./tools/sb_agent_run_cycle_v0.sh \
-  --agent-id agent/project_manager_v0 \
-  --targets scene/agent/project_manager/status_v0.json,scene/agent/project_manager/ideas_v0.json,scene/agent/project_manager/consultation_queue_v0.json,scene/task_queue/v0.json \
-  --reason "<pm cycle reason>" \
-  --task-id task/project-manager-recurring-cycle-v0 \
-  --phase <phase_slug> \
+<cycle-runner> \
+  --agent-id <agent-id> \
+  --targets <mapped-target-list> \
+  --reason "<cycle reason>" \
+  --task-id <task-id> \
+  --phase <phase-slug> \
   --mutation-type UPDATE \
-  --inputs OPEN_QUESTIONS.md,scene/task_queue/v0.json,scene/agent/project_manager/consultation_queue_v0.json \
-  --exec-cmd "python3 /tmp/<mutator>.py"
+  --inputs <provenance-input-list> \
+  --exec-cmd "<deterministic mutator command>"
 ```
 
-5) Verify and report:
+Required behavior:
+- Acquire any required claims/locks for target resources.
+- Execute mutator exactly once.
+- Apply and persist updates atomically.
+- Append one mutation entry to `mutation_ledger`.
+- Return a clear success/failure status with changed targets.
 
-```bash
-jq '.items[] | select(.state=="pending")' scene/agent/project_manager/consultation_queue_v0.json
-jq '.stage_summary, .signals' scene/agent/project_manager/status_v0.json
-jq '.tasks[] | select(.task_id=="task/project-manager-recurring-cycle-v0" or .task_id=="task/oq3-autonomy-risk-policy-propose-v0") | {task_id,state,last_progress_at}' scene/task_queue/v0.json
-tail -n 5 scene/ledger/mutations_v0.jsonl
-```
+5) Verify and report.
+
+- Confirm pending consultation state is valid.
+- Confirm stage summary/signals are coherent post-update.
+- Confirm PM task rows show updated progress timestamps/state.
+- Confirm one new ledger entry exists for this cycle.
 
 ## Decision Contract
 

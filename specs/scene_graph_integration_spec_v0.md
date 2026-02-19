@@ -73,4 +73,4 @@ graph/graph.json (sorted, stable serialization)
 - Operation and schema artifacts are linked from the repository index.
 
 ## Immediate Next Step
-Execute `operations/incorporate_scene_into_graph_v0.md` via `tools/sb_graph_ingest_v0.sh` on a small scene set, then run repeat-run drift verification.
+Execute `operations/incorporate_scene_into_graph_v0.md` via the configured graph-ingest runner on a small scene set, then run repeat-run drift verification.

@@ -10,8 +10,8 @@ Automates deployment steps 1-4:
 4. Register recurring task queue entry
 
 ## Tool
-- `tools/sb_agent_deploy_v0.sh`
-- `tools/sb_agent_run_cycle_v0.sh`
+- agent deployment runner
+- cycle execution runner
 
 ## List Deployed Agents
 ```bash
@@ -26,13 +26,13 @@ jq -r '.initial_agents[]' scene/authority/registry_v0.json
 
 ## Command
 ```bash
-tools/sb_agent_deploy_v0.sh \
+<agent-deploy-runner> \
   --agent-id agent/<name>_v0
 ```
 
 ## Useful Options
 ```bash
-tools/sb_agent_deploy_v0.sh \
+<agent-deploy-runner> \
   --agent-id agent/research_planner_v0 \
   --project-scope project/dan_personal_cognitive_infrastructure \
   --issued-by agent/orchestrator_v0 \
@@ -41,7 +41,7 @@ tools/sb_agent_deploy_v0.sh \
 
 Dry run:
 ```bash
-tools/sb_agent_deploy_v0.sh --agent-id agent/research_planner_v0 --dry-run
+<agent-deploy-runner> --agent-id agent/research_planner_v0 --dry-run
 ```
 
 ## Files Created (if missing)
@@ -61,7 +61,7 @@ tools/sb_agent_deploy_v0.sh --agent-id agent/research_planner_v0 --dry-run
 
 ## Run One Cycle (wrapper for steps 3-5)
 ```bash
-tools/sb_agent_run_cycle_v0.sh \
+<agent-cycle-runner> \
   --agent-id agent/project_manager_v0 \
   --targets scene/agent/project_manager/status_v0.json,scene/agent/project_manager/ideas_v0.json \
   --reason \"pm cycle update\" \
@@ -70,7 +70,7 @@ tools/sb_agent_run_cycle_v0.sh \
 
 Dry run:
 ```bash
-tools/sb_agent_run_cycle_v0.sh \
+<agent-cycle-runner> \
   --agent-id agent/project_manager_v0 \
   --targets scene/agent/project_manager/status_v0.json,scene/agent/project_manager/ideas_v0.json \
   --reason \"pm cycle update\" \

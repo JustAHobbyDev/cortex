@@ -33,11 +33,11 @@ Compute and persist the first vision-alignment KPI:
 ## Procedure
 1. Run (propose-only default):
    ```bash
-   python3 scripts/run_vision_alignment_audit.py
+   <vision-alignment-audit-runner>
    ```
 2. Optional: generate a remediation trigger (still no direct scene mutation):
    ```bash
-   python3 scripts/run_vision_alignment_audit.py --mutate yes
+   <vision-alignment-audit-runner> --mutate yes
    ```
 3. Inspect report at `reports/vision_alignment_audit_v0.json`.
 4. If below pass threshold, prioritize backfilling principle links in low-coverage artifacts.
@@ -52,16 +52,16 @@ Compute and persist the first vision-alignment KPI:
 
 ## Recurring Audit Loop Integration
 
-When running `tools/sb_agent_audit_loop.sh`, this vision audit is paired with:
+When running the recurring audit orchestrator, this vision audit is paired with:
 
-- `scripts/run_shell_embedding_audit.py`
+- shell-embedding audit runner
 - Output: `reports/shell_embedding_audit_v0.json`
-- `scripts/run_namespace_boundary_audit.py`
+- namespace-boundary audit runner
 - Output: `reports/namespace_boundary_audit_v0.json`
 
 All audit reports are attached to the generated recurring audit summary report for review.
 
 Recurring loop also runs:
 
-- `scripts/run_secret_scan_audit.py`
+- secret-scan audit runner
 - Output: `reports/secret_scan_audit_v0.json`

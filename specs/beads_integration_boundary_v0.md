@@ -133,7 +133,7 @@ Pass condition (per cycle):
 ### Step 5: Canonical materialization
 - For each accepted decision, write a canonical artifact in `scenes/` with refs back to pilot cycle logs.
 - Emit `scene/audit_reports/v0/<run_id>_materialization_v0.json`.
-- Run `python3 scripts/run_beads_boundary_audit.py` and retain report output for disposition.
+- Run the configured beads-boundary audit runner and retain report output for disposition.
 
 Pass condition:
 - `decision_materialization_coverage == 100`

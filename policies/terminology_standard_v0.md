@@ -14,7 +14,7 @@ This document standardizes usage of:
 - Domain Model
 
 Agents and humans must use these terms consistently.
-Enforcement anchors: `meta/CLOSEOUT_CONTRACT_v0.md`, `operations/vision_alignment_audit_v0.md`, and `scripts/run_vision_alignment_audit.py`.
+Enforcement anchors: `meta/CLOSEOUT_CONTRACT_v0.md`, `operations/vision_alignment_audit_v0.md`, and the configured vision-alignment audit runner.
 Audit KPI hook: track terminology-fidelity trend in session summaries, target 100% no-conflation in reviewed artifacts.
 If ambiguity arises, this document is authoritative.
 
@@ -91,7 +91,7 @@ Characteristics:
 
 Example:
 - `graph/canonical.jsonl` (derived)
-- `tools/sb_graph_ingest_v0.sh` (builder)
+- graph ingest runner (builder)
 
 Non-example:
 - A pure hierarchy with no cross-edge semantics.

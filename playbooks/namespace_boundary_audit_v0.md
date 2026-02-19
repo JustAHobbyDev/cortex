@@ -3,8 +3,8 @@
 Version: v0
 Status: Track-only
 Inputs:
-- `tools/**/*.sh`
-- `scripts/**/*.py`
+- shell-runner files
+- audit/automation runner files
 - `policies/scene_namespace_boundary_v0.md` (policy context)
 
 ## Purpose
@@ -39,7 +39,7 @@ Detect mutating tools that are missing required namespace-boundary declarations:
 
 1. Run:
    ```bash
-   python3 scripts/run_namespace_boundary_audit.py
+   <audit-runner> --audit namespace-boundary
    ```
 2. Inspect `reports/namespace_boundary_audit_v0.json`.
 3. Prioritize missing declaration remediation on high-change mutating tools first.

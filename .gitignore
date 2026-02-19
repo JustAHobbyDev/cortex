@@ -1,0 +1,6 @@
+# Intake policy: raw external source repositories are not tracked in Cortex.
+intake/books/
+
+# Keep policy docs tracked.
+!intake/README.md
+!intake/sources.md

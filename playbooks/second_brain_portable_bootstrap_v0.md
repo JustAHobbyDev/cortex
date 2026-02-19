@@ -15,7 +15,7 @@ Make `project/second-brain` runnable from any machine with deterministic startup
 From repo root:
 
 ```bash
-./tools/sb_up_v0.sh
+<bootstrap-runner>
 ```
 
 Or with `just`:
@@ -26,15 +26,15 @@ just sb-up
 
 ## Startup Sequence (deterministic)
 
-1) `tools/sb_bootstrap_skills_v0.sh`
+1) skill-bootstrap runner
 
 - Discovers local skills under `skills/*/SKILL.md`.
 - Installs to `${CODEX_HOME:-~/.codex}/skills/local/second-brain` (or override path).
 - Supports `--mode symlink` (default) and `--mode copy`.
 
-2) `tools/sb_doctor_v0.sh`
+2) environment doctor runner
 
-- Checks required commands: `bash`, `git`, `jq`, `python3` (and warns on missing `just`).
+- Checks required commands: `bash`, `git`, `jq`, and a Python runtime (and warns on missing `just`).
 - Checks core repo files required for agent workflows.
 - Checks whether local skills are installed.
 - Checks `git config core.hooksPath` status.
@@ -42,17 +42,17 @@ just sb-up
 ## Common Flags
 
 ```bash
-./tools/sb_up_v0.sh --dry-run
-./tools/sb_up_v0.sh --mode copy --force
-./tools/sb_up_v0.sh --strict
-./tools/sb_doctor_v0.sh --json
+<bootstrap-runner> --dry-run
+<bootstrap-runner> --mode copy --force
+<bootstrap-runner> --strict
+<environment-doctor-runner> --json
 ```
 
 ## Recommended First-Time Setup
 
 ```bash
 git config core.hooksPath .githooks
-./tools/sb_up_v0.sh --mode symlink
+<bootstrap-runner> --mode symlink
 ```
 
 ## Notes

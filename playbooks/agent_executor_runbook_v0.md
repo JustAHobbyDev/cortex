@@ -23,9 +23,9 @@ Purpose: run project/agent_executor_v0 tasks deterministically with Level 2 trac
    - meta/AGENT_EXECUTOR_CONTRACT_v0.md
 2. Select one task file from scenes/task/.
 3. Run preflight claim check (warning-only):
-   - tools/sb_coord_claim_preflight_v0.sh --path <target> --actor <agent> --mode claim
+   - `<coord-claim-runner> preflight --path <target> --actor <agent> --mode claim`
 4. Append claim:
-   - tools/sb_coord_claim_append_v0.sh --path <target> --actor <agent>
+   - `<coord-claim-runner> append --path <target> --actor <agent>`
 5. Update state/agent_executor/cursor.json to the active task and phase.
 6. Execute bounded task loop (3-5 iterations unless task explicitly overrides).
 7. Append checkpoint events to state/agent_executor/ledger.jsonl.

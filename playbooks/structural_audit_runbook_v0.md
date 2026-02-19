@@ -107,9 +107,8 @@ Archive the entire run folder under `operations/aslb_runs/` and reference it in 
 ---
 
 ## 8. Automation Hooks (future)
-- Wrap steps 2–5 in a script (e.g., `scripts/run_aslb.py`) that:
+- Wrap steps 2–5 in a deterministic automation runner (for example, an `aslb-runner`) that:
   - Captures repo state
   - Runs prompt set via API
   - Assembles JSON contract
 - Integrate with CI to fail builds when ASLB thresholds are not met (aggregate < 16 or tier < 3).
-

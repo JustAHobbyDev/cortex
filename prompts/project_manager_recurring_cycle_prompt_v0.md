@@ -4,4 +4,4 @@ Display Name: PM Recurring Cycle
 Short Description: Run deterministic PM consult cycles.
 
 Default Prompt:
-Run one PM recurring cycle: inspect state, propose next decision, execute selected branch, and update scene artifacts via sb_agent_run_cycle_v0.sh.
+Run one PM recurring cycle: inspect mapped PM interfaces, propose the next decision, execute exactly one branch, and apply updates through the configured cycle runner.

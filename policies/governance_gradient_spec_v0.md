@@ -26,11 +26,11 @@ Each invariant must map to one primary enforcement mechanism.
 
 | Invariant | Primary Mechanism | Level | Notes |
 |---|---|---|---|
-| Checkpoint provenance continuity | `.githooks/pre-commit` + `tools/sb_precommit_checkpoint.sh` + git history | 1 (hook gate) | Primary audit surface for mutation provenance. |
-| Vision alignment drift | `scripts/run_vision_alignment_audit.py` + `operations/vision_alignment_audit_v0.md` | 2 (audit/track) | Proposes remediation only. |
-| KPI rollups and health trends | `tools/sb_kpi_compute_v0.sh` + `scenes/kpi-dashboard.scene.json` | 2 (track-only) | No direct mutations. |
-| Terminology consistency | `meta/TERMINOLOGY_STANDARD_v0.md` + `tools/sb_terminology_scan_v0.sh` | 2 (audit/track) | Escalate to level 3 only if repeated failures. |
-| Graph derivation integrity | `tools/sb_graph_ingest_v0.sh` | 1 (hard gate on ingest run) | Scenes remain source of truth. |
+| Checkpoint provenance continuity | `.githooks/pre-commit` + checkpoint-report runner + git history | 1 (hook gate) | Primary audit surface for mutation provenance. |
+| Vision alignment drift | vision-alignment audit runner + `operations/vision_alignment_audit_v0.md` | 2 (audit/track) | Proposes remediation only. |
+| KPI rollups and health trends | KPI compute runner + `scenes/kpi-dashboard.scene.json` | 2 (track-only) | No direct mutations. |
+| Terminology consistency | `meta/TERMINOLOGY_STANDARD_v0.md` + terminology scan runner | 2 (audit/track) | Escalate to level 3 only if repeated failures. |
+| Graph derivation integrity | graph ingest runner | 1 (hard gate on ingest run) | Scenes remain source of truth. |
 
 ## Entropy Guard
 Ingest rule:
@@ -47,11 +47,11 @@ Quick check for 1:1 mechanism coverage:
 ```bash
 jq -r '.[] | [.invariant, .primary_mechanism] | @tsv' <<'JSON'
 [
-  {"invariant":"checkpoint_provenance","primary_mechanism":"sb_precommit_checkpoint"},
-  {"invariant":"vision_alignment","primary_mechanism":"run_vision_alignment_audit"},
-  {"invariant":"kpi_rollups","primary_mechanism":"sb_kpi_compute"},
-  {"invariant":"terminology_consistency","primary_mechanism":"sb_terminology_scan"},
-  {"invariant":"graph_derivation","primary_mechanism":"sb_graph_ingest"}
+  {"invariant":"checkpoint_provenance","primary_mechanism":"checkpoint_report_runner"},
+  {"invariant":"vision_alignment","primary_mechanism":"vision_alignment_audit_runner"},
+  {"invariant":"kpi_rollups","primary_mechanism":"kpi_compute_runner"},
+  {"invariant":"terminology_consistency","primary_mechanism":"terminology_scan_runner"},
+  {"invariant":"graph_derivation","primary_mechanism":"graph_ingest_runner"}
 ]
 JSON
 ```

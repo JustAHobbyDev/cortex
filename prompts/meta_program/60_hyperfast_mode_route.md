@@ -4,7 +4,7 @@ Execution contract:
 1. Load scene: `scenes/hyperfast-agent-closeout.scene.json`.
 2. Use protocol `hyperfast_agent_protocol` as the runtime execution route.
 3. Constrain session loops to hyperfast bounds (3-5 iterations max unless explicit override).
-4. Enforce closeout via `tools/sb_closeout.sh` and include scene fold suggestions in output.
+4. Enforce closeout via the configured closeout runner and include scene fold suggestions in output.
 5. If closeout threshold fails (`resumption_score < 6`), stop and emit remediation actions.
 
 Output requirement:

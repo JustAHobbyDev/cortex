@@ -29,8 +29,8 @@ Use this runbook only for controlled migration/backfill workflows.
    - Confirm staged set: `git status -sb`.
 
 4. **Generate checkpoint report**
-   - Run `tools/sb_precommit_checkpoint.sh`.
-   - Script emits:
+   - Run the configured checkpoint-report runner.
+   - Runner emits:
      - New timestamped report in `reports/checkpoints/`.
      - Updates `reports/checkpoints/LATEST.md`.
      - Appends to `reports/checkpoints/index.jsonl`.
@@ -53,5 +53,5 @@ Use this runbook only for controlled migration/backfill workflows.
 
 ## Troubleshooting
 - **Script fails due to unstaged files**: return to Step 3, stage required inputs first.
-- **Checkpoint slug undesirable**: re-run `tools/sb_precommit_checkpoint.sh` after adjusting staged file names; script derives slug from staged names.
-- **Need to redo closeout**: amend the JSON, rerun steps 2–5 (script can be rerun; it will create a fresh checkpoint with new timestamp).
+- **Checkpoint slug undesirable**: re-run the checkpoint-report runner after adjusting staged file names; slug derives from staged names.
+- **Need to redo closeout**: amend the JSON, rerun steps 2–5 (runner can be rerun; it will create a fresh checkpoint with new timestamp).

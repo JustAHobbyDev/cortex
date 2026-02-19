@@ -58,9 +58,9 @@ Second Brain (project/dan_personal_cognitive_infrastructure)
 │   └── Runtime/utilities: Chrome, Claude Co-Work
 ├── 6. Operational Toolchain
 │   ├── Second-brain CLI (sb)
-│   │   └── Source: tools/sb.py
+│   │   └── Source: repository CLI entrypoint
 │   ├── Session index updater
-│   │   └── Source: scripts/update_index.py
+│   │   └── Source: session index updater runner
 │   └── Concept: session index maintenance
 └── 7. Key Artifacts
     ├── Four principles case-study artifact

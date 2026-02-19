@@ -19,7 +19,7 @@ Validate two minimal Beads hardening controls:
 ## Procedure
 1. Run:
    ```bash
-   python3 scripts/run_beads_boundary_audit.py
+   <audit-runner> --audit beads-boundary
    ```
 2. Inspect output at:
    - `scene/audit_reports/v0/beads_boundary_audit_<YYYY_MM_DD>_v0.json`

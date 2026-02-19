@@ -5,7 +5,7 @@ Status: Legacy (deprecated default)
 Inputs:
 - `templates/session_template.json`
 - `prompts/session_ending_prompt.md`
-- `tools/sb_closeout.sh`
+- configured closeout runner
 
 ## Purpose
 Define the legacy session-closeout contract for controlled migration/backfill runs.
@@ -59,5 +59,5 @@ Primary audit surfaces are git history and `reports/checkpoints/*`.
 - After successful closeout, suggest scene fold targets based on overlap with linked IDs.
 
 ## Reference Implementation
-- `tools/sb_closeout.sh`
-- Requires explicit `--legacy-session-write` opt-in.
+- repository-local closeout runner
+- Requires explicit `--legacy-session-write` opt-in (or equivalent explicit legacy-write flag).

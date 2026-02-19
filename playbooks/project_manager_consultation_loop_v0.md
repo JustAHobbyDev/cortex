@@ -29,14 +29,14 @@ Purpose: operationalize agent/project_manager_v0 as a steady planning and consul
 Use this watcher to refresh Kalshi gate state and mirror it into PM status:
 
 ```bash
-tools/sb_kalshi_gate_watcher_v0.sh \
+<gate-watcher-runner> \
   --signal-latest-kalshi-session
 ```
 
 Direct override (when no signal file is available):
 
 ```bash
-tools/sb_kalshi_gate_watcher_v0.sh \
+<gate-watcher-runner> \
   --usable-windows 161 \
   --required 200 \
   --last-checked 2026-02-15
@@ -45,7 +45,7 @@ tools/sb_kalshi_gate_watcher_v0.sh \
 Dry run from signal file:
 
 ```bash
-tools/sb_kalshi_gate_watcher_v0.sh \
+<gate-watcher-runner> \
   --signal-latest-kalshi-session \
   --dry-run
 ```

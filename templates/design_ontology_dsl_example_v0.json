@@ -1,0 +1,60 @@
+{
+  "id": "saas_futurist_dsl_v0",
+  "influence": {
+    "anti_patterns": [
+      "avoid ornamental motion",
+      "avoid gradient oversaturation"
+    ],
+    "primary": "Swiss grid discipline",
+    "secondary": "SaaS futurism",
+    "style_cluster": "tech minimalism cluster"
+  },
+  "layout": {
+    "density": "airy",
+    "grid": "12-column asymmetric grid",
+    "narrative_flow": "problem-to-solution arc",
+    "rhythm": "alternating panel cadence",
+    "spacing": "96px vertical rhythm",
+    "structure": "hero-dominant above fold"
+  },
+  "motion": {
+    "hover": "200ms ease-out hover scale",
+    "interaction_signatures": [
+      "magnetic CTA pull",
+      "card lift hover"
+    ],
+    "reduced_motion_strategy": "opacity-only fallback",
+    "scroll": "fade-up staggered reveal",
+    "timing_profile": "snappy timing profile"
+  },
+  "name": "SaaS Futurist DSL Example",
+  "quality_targets": {
+    "brand_fit": 8,
+    "clarity": 9,
+    "novelty": 7,
+    "usability": 8
+  },
+  "surface": {
+    "accent": "electric accent glow",
+    "base": "charcoal base layer",
+    "depth_model": "hybrid",
+    "panels": "frosted glass panel",
+    "shadows": "ambient shadow cloud",
+    "textures": [
+      "restrained gradient diffusion",
+      "textured haze overlay"
+    ]
+  },
+  "typography": {
+    "body": "18px high x-height body face with line-height breathing room",
+    "families": [
+      "Space Grotesk",
+      "IBM Plex Sans"
+    ],
+    "hero": "oversized neo-grotesk hero",
+    "scale": "optical size contrast",
+    "tracking_strategy": "tight display tracking",
+    "weight_strategy": "weight-contrast ladder"
+  },
+  "version": "v0"
+}

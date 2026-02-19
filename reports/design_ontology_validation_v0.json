@@ -1,0 +1,26 @@
+{
+  "instances_checked": [
+    "templates/design_ontology_dsl_example_v0.json",
+    "templates/design_ontology_example_v0.json"
+  ],
+  "results": [
+    {
+      "instance": "templates/design_ontology_dsl_example_v0.json",
+      "language_quality": "pass",
+      "notes": [],
+      "schema": "pass",
+      "syntax": "pass"
+    },
+    {
+      "instance": "templates/design_ontology_example_v0.json",
+      "language_quality": "pass",
+      "notes": [],
+      "schema": "pass",
+      "syntax": "pass"
+    }
+  ],
+  "run_at": "2026-02-19T10:45:03Z",
+  "schema_path": "templates/design_ontology_v0.schema.json",
+  "status": "pass",
+  "version": "v0"
+}

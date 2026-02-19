@@ -1,0 +1,97 @@
+{
+  "id": "saas_futurist_baseline",
+  "version": "v0",
+  "name": "SaaS Futurist Baseline",
+  "context": {
+    "product_type": "B2B SaaS marketing site",
+    "audience": "technical decision-makers",
+    "constraints": [
+      "High readability at small laptop widths",
+      "No heavy animation on low-power devices"
+    ],
+    "references": [
+      "https://www.awwwards.com/",
+      "https://www.behance.net/",
+      "https://godly.website/"
+    ]
+  },
+  "layout": {
+    "grid": "12-column asymmetric",
+    "spacing": "96px vertical rhythm",
+    "density": "airy",
+    "rhythm": "alternating dense and breathing sections",
+    "structure": "hero-dominant above fold with narrative mid-page proofs",
+    "narrative_flow": "problem -> proof -> capability -> conversion"
+  },
+  "typography": {
+    "hero": "88px bold neo-grotesk with tight tracking",
+    "body": "18px light weight with generous line height",
+    "families": [
+      "Space Grotesk",
+      "IBM Plex Sans"
+    ],
+    "scale": "display-heavy with restrained supporting hierarchy",
+    "weight_strategy": "high hero-to-body contrast",
+    "tracking_strategy": "tight display, neutral body"
+  },
+  "surface": {
+    "base": "charcoal black",
+    "accent": "electric blue glow",
+    "panels": "subtle glass panels with low-opacity borders",
+    "depth_model": "hybrid",
+    "shadows": "soft ambient shadows below cards",
+    "textures": [
+      "faint radial gradient haze"
+    ]
+  },
+  "motion": {
+    "scroll": "fade-up staggered reveals with short delays",
+    "hover": "200ms ease-out scale and border-brighten",
+    "timing_profile": "snappy interactions, restrained transitions",
+    "interaction_signatures": [
+      "magnetic CTA",
+      "card lift on hover"
+    ],
+    "reduced_motion_strategy": "replace transforms with opacity-only reveals"
+  },
+  "influence": {
+    "primary": "Swiss grid discipline",
+    "secondary": "contemporary SaaS futurism",
+    "style_cluster": "tech minimalism with cyber accents",
+    "anti_patterns": [
+      "oversaturated gradients",
+      "ornamental motion without feedback value"
+    ]
+  },
+  "composition": {
+    "inherits_from": [
+      "minimal_saas_core"
+    ],
+    "overrides": [
+      "surface",
+      "motion"
+    ],
+    "variants": [
+      {
+        "name": "enterprise",
+        "changes": [
+          "Reduce accent glow intensity",
+          "Increase body contrast for compliance-heavy environments"
+        ]
+      },
+      {
+        "name": "product_launch",
+        "changes": [
+          "Increase novelty target",
+          "Use stronger motion signatures on hero CTAs"
+        ]
+      }
+    ]
+  },
+  "quality_targets": {
+    "clarity": 9,
+    "novelty": 7,
+    "usability": 8,
+    "brand_fit": 8
+  }
+}

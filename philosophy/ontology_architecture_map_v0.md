@@ -154,6 +154,7 @@ Ontologies define meaning.
 - `scenes/_schemas/phase_history_v0.schema.json` — representation for whole phase-history scenes (projects, drift signals, ordered events).
 - `templates/session_template.json` — structured session output contract used by closure operations and agents.
 - `templates/session_closing_checklist.md` — deterministic textual checklist ensuring inputs fill the session template consistently.
+- `templates/design_ontology_v0.schema.json` — validation contract for structured visual design ontology artifacts.
 
 ### Ontology → Schema Reference Matrix (v0)
 
@@ -163,6 +164,7 @@ Ontologies define meaning.
 | Phase-history ontology (e.g., `scenes/kalshi_phase_history.scene.json`) | `scenes/_schemas/phase_history_v0.schema.json` + `scenes/_schemas/phase_event_v0.schema.json` |
 | Session closure ritual (session ontology derived from `meta/META_PROGRAM_SPEC_v0.md`) | `templates/session_template.json` + `templates/session_closing_checklist.md` |
 | Prompt lineage ontology (`meta/PROMPT_LINEAGE_ONTOLOGY_SPEC_v0.md`) | *(Schema pending — reference upcoming lineage schema; meanwhile use lineage artifacts + session template context.)* |
+| Design ontology (`specs/design_ontology_schema_spec_v0.md`) | `templates/design_ontology_v0.schema.json` |
 
 ---
 

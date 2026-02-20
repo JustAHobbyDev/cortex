@@ -1,0 +1,25 @@
+{
+  "actions": [
+    {
+      "instruction": "Create next versioned artifacts (`v1`) for changed semantics and rerun coach/audit.",
+      "step": "Advance project lifecycle",
+      "target": ".cortex/manifest_v0.json"
+    }
+  ],
+  "applied_drafts": [],
+  "apply_mode": false,
+  "apply_scope": [
+    "design",
+    "direction",
+    "governance"
+  ],
+  "audit_status": "pass",
+  "cycle_id": "20260220T003748Z",
+  "failed_checks": [],
+  "incomplete_phases": [],
+  "project_id": "cortex_repo",
+  "project_name": "Cortex Repository",
+  "run_at": "2026-02-20T00:37:48Z",
+  "skipped_drafts": [],
+  "version": "v0"
+}

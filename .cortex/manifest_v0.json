@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "design_dsl": ".cortex/artifacts/design_cortex_repo_v0.dsl",
+    "design_json": ".cortex/artifacts/design_cortex_repo_v0.json",
+    "direction": ".cortex/artifacts/direction_cortex_repo_v0.md",
+    "governance": ".cortex/artifacts/governance_cortex_repo_v0.md",
+    "project_prompt": ".cortex/prompts/project_coach_prompt_cortex_repo_v0.md"
+  },
+  "created_at": "2026-02-20T00:37:41Z",
+  "phases": {
+    "design_spec_compiled": true,
+    "direction_defined": true,
+    "governance_defined": true,
+    "lifecycle_audited": true
+  },
+  "project_id": "cortex_repo",
+  "project_name": "Cortex Repository",
+  "updated_at": "2026-02-20T00:37:48Z",
+  "version": "v0"
+}

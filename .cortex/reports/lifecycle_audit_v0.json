@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "exists:.cortex/manifest_v0.json",
+      "status": "pass"
+    },
+    {
+      "check": "exists:.cortex/artifacts",
+      "status": "pass"
+    },
+    {
+      "check": "exists:.cortex/prompts",
+      "status": "pass"
+    },
+    {
+      "check": "exists:.cortex/reports",
+      "status": "pass"
+    },
+    {
+      "check": "manifest_version",
+      "status": "pass"
+    },
+    {
+      "check": "design_schema_validation",
+      "detail": "",
+      "status": "pass"
+    }
+  ],
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-20T00:37:48Z",
+  "status": "pass",
+  "version": "v0"
+}

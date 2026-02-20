@@ -24,3 +24,10 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# Cortex maintainer mode (track governance artifacts, ignore transient files)
+.cortex/**/*.tmp
+.cortex/**/*.bak
+.cortex/**/*.swp
+.cortex/**/.DS_Store
+.cortex/**/tmp/

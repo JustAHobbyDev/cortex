@@ -1,0 +1,163 @@
+# Cortex Coach Decoupling Plan v0
+
+## Purpose
+
+Define how `cortex` and `cortex-coach` can be developed together while becoming separate projects with clear implementation boundaries.
+
+## North Star
+
+`cortex` remains the cognitive governance source (principles/specs/policies/templates).  
+`cortex-coach` becomes an installable runtime tool that consumes Cortex-compatible assets via a stable contract.
+
+## Separation Boundary
+
+`cortex` owns:
+- conceptual model
+- governance/spec artifacts
+- asset definitions and templates
+- contract evolution decisions
+
+`cortex-coach` owns:
+- CLI/runtime behavior
+- audit/check implementations
+- context loading behavior
+- packaging, release, and distribution
+
+## Core Design: Producer/Consumer Contract
+
+1. Cortex is the producer of versioned coach assets.
+2. Coach is the consumer/executor of those assets.
+3. Compatibility is explicit via `asset_contract_version`.
+4. Coach must fail closed on unsupported contract versions.
+
+## Required Contract Surface (v0 target)
+
+- manifest schema expectations
+- spec registry shape
+- policy artifact expectations
+- decision artifact schema
+- report file schema expectations (where required)
+- required/optional asset paths
+
+## Co-Development Workflow (Two Repos)
+
+1. Propose design/governance change in `cortex` first.
+2. Add contract impact note in the Cortex change.
+3. Implement runtime delta in `cortex-coach`.
+4. Link paired PRs (`cortex` + `cortex-coach`).
+5. Merge only when both compatibility checks pass.
+
+## Testing Strategy
+
+- Keep canonical fixture bundles exported from `cortex`.
+- In `cortex-coach` CI, run contract tests against those fixture bundles.
+- In `cortex` CI, run compatibility smoke test against pinned `cortex-coach`.
+- No shared runtime code across repos; share fixtures/contracts only.
+
+## Versioning Model
+
+- `cortex` publishes `asset_contract_version`.
+- `cortex-coach` declares supported contract versions.
+- Breaking contract change requires explicit version bump + migration notes.
+- `cortex` pins recommended `cortex-coach` version for maintainers.
+
+## Governance Rules
+
+- No new runtime features land in Cortex-only paths after Phase 2 starts.
+- Every contract change must include:
+  - compatibility statement
+  - migration guidance
+  - test fixture update
+- Every coach release must include supported contract matrix.
+
+## Execution Checklist
+
+## Phase 1: Internal Contract Refactor (in current repo)
+
+### Tasks
+
+- [ ] Define `coach_asset_contract_v0` spec file in Cortex.
+- [ ] Add explicit asset-loader abstraction in coach runtime.
+- [ ] Remove hard-coded same-repo path assumptions where contract assets are consumed.
+- [ ] Add `coach contract-check` command for compatibility validation.
+- [ ] Add test fixtures for valid/invalid contract version scenarios.
+
+### Acceptance Criteria
+
+- [ ] Coach can run with default bundled assets.
+- [ ] Coach can run with override assets path (`--assets-dir` or equivalent).
+- [ ] Unsupported contract versions fail with clear errors.
+- [ ] CI includes contract compatibility tests.
+
+## Phase 2: Standalone Coach Repository
+
+### Tasks
+
+- [ ] Create `cortex-coach` repository with package + CLI + docs + CI.
+- [ ] Move runtime/test/docs assets from Cortex to new repo.
+- [ ] Publish install instructions (`uv tool install` and pip fallback).
+- [ ] Add release tagging/versioning workflow for coach.
+- [ ] Add compatibility matrix doc (`coach_version` -> `asset_contract_version`).
+
+### Acceptance Criteria
+
+- [ ] `cortex-coach` installs and runs without cloning Cortex.
+- [ ] New repo CI passes unit + contract tests.
+- [ ] Versioned release artifact is published.
+- [ ] Compatibility matrix is documented and tested.
+
+## Phase 3: Dual-Path Stabilization
+
+### Tasks
+
+- [ ] Keep temporary wrapper commands in Cortex that call installed coach.
+- [ ] Run parity checks between in-repo implementation and external coach.
+- [ ] Capture differences and fix until behavior is aligned.
+- [ ] Freeze in-repo coach feature development (bugfix-only mode).
+
+### Acceptance Criteria
+
+- [ ] Parity test suite passes for key commands (`init`, `audit`, `coach`, `context-load`, decision commands).
+- [ ] No unresolved blocking behavior differences.
+- [ ] Cortex docs default to external coach usage.
+
+## Phase 4: Full Decoupling
+
+### Tasks
+
+- [ ] Remove in-repo coach runtime implementation from Cortex.
+- [ ] Keep thin wrappers + docs for external coach usage.
+- [ ] Archive migration notes for users transitioning from in-repo scripts.
+- [ ] Update governance docs to reflect final ownership boundary.
+
+### Acceptance Criteria
+
+- [ ] Cortex has no runtime coach code dependency on internal scripts.
+- [ ] All maintainer workflows run through external `cortex-coach`.
+- [ ] Migration docs and troubleshooting are complete.
+
+## Operating Cadence
+
+- Weekly: sync review between Cortex contract changes and coach runtime changes.
+- Per PR: include contract impact statement in both repos when applicable.
+- Pre-release: run compatibility matrix checks against latest Cortex fixture bundle.
+
+## Work Tracking Fields
+
+Use this minimal issue template in both repos:
+
+- `Type`: contract | runtime | fixture | docs | migration
+- `Phase`: 1 | 2 | 3 | 4
+- `Contract Impact`: none | backward-compatible | breaking
+- `Paired PR`: link to related PR in other repo
+- `Acceptance`: checklist item(s) this issue closes
+
+## Decision Gate Rules
+
+- Do not start Phase 2 until all Phase 1 acceptance criteria are met.
+- Do not start Phase 4 until parity is proven in Phase 3.
+- Breaking contract changes require migration notes before merge.
+
+## Status
+
+Draft v1 (execution-ready checklist).

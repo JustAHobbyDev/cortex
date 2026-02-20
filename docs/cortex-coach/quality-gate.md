@@ -1,6 +1,8 @@
 # Quality Gate
 
-Use one deterministic command for local pre-merge and pre-release checks.
+Use two deterministic commands:
+- strict local maintainer gate
+- CI correctness gate
 
 ## Run
 
@@ -16,14 +18,34 @@ Fallback without `just`:
 ./scripts/quality_gate_v0.sh
 ```
 
+CI mode:
+
+```bash
+just quality-gate-ci
+```
+
+Fallback:
+
+```bash
+./scripts/quality_gate_ci_v0.sh
+```
+
 ## What It Checks
+
+`quality-gate` (strict local):
 
 1. `audit-needed` with fail-on-required behavior
 2. `cortex-coach` smoke commands
 3. docs local-link + JSON integrity
 4. focused `cortex-coach` pytest suite
 
+`quality-gate-ci`:
+
+1. `cortex-coach` smoke commands
+2. docs local-link + JSON integrity
+3. focused `cortex-coach` pytest suite
+
 ## When to Run
 
-- Before opening or updating a PR to `main`
-- Before release-tagging or handoff
+- `quality-gate` before merge/release in local maintainer flow
+- `quality-gate-ci` in GitHub Actions (and optional local CI parity checks)

@@ -369,7 +369,7 @@
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=5, findings=0",
+      "detail": "promoted=6, findings=0",
       "status": "pass"
     }
   ],
@@ -380,7 +380,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-20T15:24:24Z",
+  "run_at": "2026-02-20T21:18:38Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -392,7 +392,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 5,
+    "promoted_decision_count": 6,
     "status": "pass"
   },
   "version": "v0"

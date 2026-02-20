@@ -5,19 +5,19 @@ export UV_CACHE_DIR="${UV_CACHE_DIR:-$PWD/.uv-cache}"
 mkdir -p "$UV_CACHE_DIR"
 
 echo "[quality-gate] 1/5 audit-needed"
-uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
+python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json \
   --fail-on-required
 
 echo "[quality-gate] 2/5 coach smoke checks"
-uv run python3 scripts/cortex_project_coach_v0.py --help >/dev/null
-uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
+python3 scripts/cortex_project_coach_v0.py --help >/dev/null
+python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json >/dev/null
 
 echo "[quality-gate] 3/5 decision gap check"
-uv run python3 scripts/cortex_project_coach_v0.py decision-gap-check \
+python3 scripts/cortex_project_coach_v0.py decision-gap-check \
   --project-dir . \
   --format json >/dev/null
 

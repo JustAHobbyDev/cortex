@@ -109,8 +109,35 @@
       "rationale": "Ensure reflection governance portability across agents and keep durable repo-based memory.",
       "status": "promoted",
       "title": "Require agent-agnostic reflection loop for governance learning"
+    },
+    {
+      "captured_at": "2026-02-20T21:17:18Z",
+      "decision": "Remove stale local cortex-coach entrypoint metadata, install standalone coach in CI, and call delegator via python3 to avoid uv shadowing side effects.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_fix_decoupled_coach_entrypoint_shadowing_in_ci_and_scripts_v1.md",
+      "decision_id": "dec_20260220T211718Z_fix_decoupled_coach_entr",
+      "impact_scope": [
+        "governance",
+        "ci",
+        "tooling",
+        "docs"
+      ],
+      "linked_artifacts": [
+        "pyproject.toml",
+        ".github/workflows/cortex-validation.yml",
+        "scripts/quality_gate_ci_v0.sh",
+        "scripts/quality_gate_v0.sh",
+        "scripts/cortex_coach_wrapper_v0.sh",
+        "docs/cortex-coach/commands.md",
+        "docs/cortex-coach/faq.md",
+        "docs/cortex-coach/install.md",
+        "docs/cortex-coach/quickstart.md"
+      ],
+      "promoted_at": "2026-02-20T21:17:21Z",
+      "rationale": "Prevents ModuleNotFoundError from broken local script shadowing and aligns execution with external-only coach ownership.",
+      "status": "promoted",
+      "title": "Fix decoupled coach entrypoint shadowing in CI and scripts"
     }
   ],
-  "updated_at": "2026-02-20T15:16:46Z",
+  "updated_at": "2026-02-20T21:17:21Z",
   "version": "v0"
 }

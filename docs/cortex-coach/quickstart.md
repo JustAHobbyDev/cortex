@@ -70,7 +70,7 @@ cortex-coach coach \
 Use:
 
 ```bash
-uv run python3 scripts/cortex_project_coach_v0.py <command> ...
+python3 scripts/cortex_project_coach_v0.py <command> ...
 ```
 
 Prefer installing standalone `cortex-coach`; script fallback is transitional during decoupling.

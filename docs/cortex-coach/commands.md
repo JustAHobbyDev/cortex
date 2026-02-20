@@ -1,7 +1,7 @@
 # Commands
 
 Examples below use installed CLI form (`cortex-coach`).
-Fallback (temporary migration path): `uv run python3 scripts/cortex_project_coach_v0.py ...`
+Fallback (temporary migration path): `python3 scripts/cortex_project_coach_v0.py ...`
 
 In this repository, `just coach-*` recipes now route through
 `scripts/cortex_coach_wrapper_v0.sh` (Phase 3 dual-path stabilization):

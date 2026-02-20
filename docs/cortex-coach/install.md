@@ -31,7 +31,7 @@ pip install git+https://github.com/JustAHobbyDev/cortex-coach.git
 If you do not want to install, run directly from repo root:
 
 ```bash
-uv run python3 scripts/cortex_project_coach_v0.py --help
+python3 scripts/cortex_project_coach_v0.py --help
 ```
 
 Or use `just` recipes:

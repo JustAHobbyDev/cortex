@@ -17,14 +17,5 @@ dev = [
   "pytest==9.0.2",
 ]
 
-[project.scripts]
-cortex-coach = "cortex_project_coach.cli:main"
-
 [tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["cortex_project_coach*"]
-
-[tool.setuptools.package-data]
-"cortex_project_coach.data" = ["*.json"]
+py-modules = []

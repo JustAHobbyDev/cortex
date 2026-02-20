@@ -22,6 +22,10 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
 
+      - name: Install standalone cortex-coach
+        run: |
+          uv tool install --force git+https://github.com/JustAHobbyDev/cortex-coach.git@v0.1.0
+
       - name: Run CI quality gate
         run: |
           chmod +x scripts/ci_validate_docs_and_json_v0.sh

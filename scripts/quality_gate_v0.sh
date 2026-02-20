@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export UV_CACHE_DIR="${UV_CACHE_DIR:-$PWD/.uv-cache}"
+mkdir -p "$UV_CACHE_DIR"
+
 echo "[quality-gate] 1/4 audit-needed"
 uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \

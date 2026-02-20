@@ -5,6 +5,7 @@ Use two deterministic commands:
 - CI correctness gate
 
 Both gates run tests from the locked `dev` dependency group in `pyproject.toml` via `uv.lock`.
+Gate scripts set `UV_CACHE_DIR` to a repo-local `.uv-cache/` by default to avoid host-level cache permission issues.
 
 ## Run
 

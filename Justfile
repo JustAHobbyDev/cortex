@@ -68,6 +68,10 @@ coach-policy-enable project_dir policy="usage-decision":
     --project-dir "{{project_dir}}" \
     --policy "{{policy}}"
 
+coach-contract-check project_dir:
+  uv run python3 scripts/cortex_project_coach_v0.py contract-check \
+    --project-dir "{{project_dir}}"
+
 coach-decision-capture project_dir title decision="" rationale="" impact_scope="" linked_artifacts="":
   uv run python3 scripts/cortex_project_coach_v0.py decision-capture \
     --project-dir "{{project_dir}}" \

@@ -68,6 +68,7 @@ DEFAULT_CORTEX_AUDIT_SCAN_DIRS = [
 ]
 DECISION_CANDIDATES_FILE = ".cortex/reports/decision_candidates_v0.json"
 DECISION_ARTIFACTS_DIR = ".cortex/artifacts/decisions"
+DEFAULT_CONTRACT_FILE = "contracts/coach_asset_contract_v0.json"
 
 
 def default_spec_registry(project_id: str) -> dict[str, Any]:
@@ -742,6 +743,99 @@ def compute_unsynced_decisions(project_dir: Path, ignore_rules: list[tuple[str, 
         "status": status,
         "promoted_decision_count": promoted_count,
         "findings": findings[:100],
+    }
+
+
+def load_asset_contract(contract_file: Path) -> tuple[dict[str, Any] | None, str | None]:
+    if not contract_file.exists():
+        return None, f"missing contract file: {contract_file}"
+    try:
+        obj = json.loads(contract_file.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return None, f"invalid contract json: {exc}"
+    if not isinstance(obj, dict):
+        return None, "invalid contract shape: expected object"
+    if obj.get("asset_contract_version") != "v0":
+        return None, (
+            "unsupported asset contract version: "
+            f"{obj.get('asset_contract_version')!r}; supported: 'v0'"
+        )
+    return obj, None
+
+
+def compute_contract_check(project_dir: Path, contract_file: Path) -> dict[str, Any]:
+    contract_obj, err = load_asset_contract(contract_file)
+    checks: list[dict[str, Any]] = []
+    status = "pass"
+    if err is not None:
+        return {
+            "version": "v0",
+            "run_at": utc_now(),
+            "project_dir": str(project_dir),
+            "contract_file": str(contract_file),
+            "status": "fail",
+            "checks": [{"check": "contract_file", "status": "fail", "detail": err}],
+        }
+
+    required_paths = contract_obj.get("required_paths", [])
+    if not isinstance(required_paths, list):
+        required_paths = []
+    for rel in required_paths:
+        rel_path = str(rel)
+        exists = (project_dir / rel_path).exists()
+        checks.append(
+            {
+                "check": f"required_path:{rel_path}",
+                "status": "pass" if exists else "fail",
+            }
+        )
+        if not exists:
+            status = "fail"
+
+    manifest_rules = contract_obj.get("required_manifest", {})
+    manifest = project_dir / ".cortex" / MANIFEST_FILE
+    if manifest.exists():
+        try:
+            manifest_obj = json.loads(manifest.read_text(encoding="utf-8"))
+            expected_version = str(manifest_rules.get("version", "v0"))
+            manifest_version_ok = manifest_obj.get("version") == expected_version
+            checks.append(
+                {
+                    "check": "manifest_version",
+                    "status": "pass" if manifest_version_ok else "fail",
+                    "detail": f"expected={expected_version} actual={manifest_obj.get('version')}",
+                }
+            )
+            if not manifest_version_ok:
+                status = "fail"
+
+            required_keys = manifest_rules.get("required_top_level_keys", [])
+            if not isinstance(required_keys, list):
+                required_keys = []
+            missing = [k for k in required_keys if k not in manifest_obj]
+            checks.append(
+                {
+                    "check": "manifest_required_keys",
+                    "status": "pass" if not missing else "fail",
+                    "detail": f"missing={missing}" if missing else "",
+                }
+            )
+            if missing:
+                status = "fail"
+        except Exception as exc:  # noqa: BLE001
+            checks.append({"check": "manifest_parse", "status": "fail", "detail": str(exc)})
+            status = "fail"
+    else:
+        checks.append({"check": "manifest_exists", "status": "fail"})
+        status = "fail"
+
+    return {
+        "version": "v0",
+        "run_at": utc_now(),
+        "project_dir": str(project_dir),
+        "contract_file": str(contract_file),
+        "status": status,
+        "checks": checks,
     }
 
 
@@ -1625,6 +1719,29 @@ def decision_promote_project(args: argparse.Namespace) -> int:
     return 0
 
 
+def contract_check_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    repo_root = repo_root_from_script()
+    contract_file = Path(args.contract_file).resolve() if args.contract_file else (repo_root / DEFAULT_CONTRACT_FILE)
+    report = compute_contract_check(project_dir, contract_file)
+
+    if args.format == "json":
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"status: {report['status']}")
+        print(f"contract_file: {report['contract_file']}")
+        failed = [c for c in report.get("checks", []) if c.get("status") != "pass"]
+        print(f"failed_checks: {len(failed)}")
+
+    if args.out_file:
+        out = Path(args.out_file)
+        if not out.is_absolute():
+            out = project_dir / out
+        atomic_write_text(out, json.dumps(report, indent=2, sort_keys=True) + "\n")
+
+    return 0 if report.get("status") == "pass" else 1
+
+
 def audit_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     cortex_dir = project_dir / ".cortex"
@@ -2004,6 +2121,19 @@ def build_parser() -> argparse.ArgumentParser:
     p_decision_promote.add_argument("--format", choices=["text", "json"], default="text")
     add_lock_args(p_decision_promote)
     p_decision_promote.set_defaults(func=decision_promote_project)
+
+    p_contract_check = sub.add_parser(
+        "contract-check",
+        help="Validate project compatibility against coach asset contract.",
+    )
+    p_contract_check.add_argument("--project-dir", required=True)
+    p_contract_check.add_argument(
+        "--contract-file",
+        help=f"Optional contract file path (default: {DEFAULT_CONTRACT_FILE} in repo root).",
+    )
+    p_contract_check.add_argument("--format", choices=["text", "json"], default="text")
+    p_contract_check.add_argument("--out-file")
+    p_contract_check.set_defaults(func=contract_check_project)
 
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
     p_coach.add_argument("--project-dir", required=True)

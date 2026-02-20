@@ -80,6 +80,31 @@ cortex-coach audit-needed \
   --out-file .cortex/reports/audit_needed_v0.json
 ```
 
+## `contract-check`
+
+Validate the target project against the coach asset contract.
+
+```bash
+cortex-coach contract-check \
+  --project-dir /path/to/project
+```
+
+JSON output:
+
+```bash
+cortex-coach contract-check \
+  --project-dir /path/to/project \
+  --format json
+```
+
+Use a custom contract file:
+
+```bash
+cortex-coach contract-check \
+  --project-dir /path/to/project \
+  --contract-file /path/to/coach_asset_contract_v0.json
+```
+
 ## `coach`
 
 Run one lifecycle guidance cycle.

@@ -54,6 +54,20 @@ DEFAULT_IGNORED_PATTERNS = [
     ".cortex/**/*.bak",
     ".cortex/**/*.swp",
 ]
+DEFAULT_CORTEX_AUDIT_SCAN_DIRS = [
+    "principles",
+    "patterns",
+    "contracts",
+    "specs",
+    "templates",
+    "prompts",
+    "playbooks",
+    "policies",
+    "philosophy",
+    "operating_model",
+]
+DECISION_CANDIDATES_FILE = ".cortex/reports/decision_candidates_v0.json"
+DECISION_ARTIFACTS_DIR = ".cortex/artifacts/decisions"
 
 
 def default_spec_registry(project_id: str) -> dict[str, Any]:
@@ -151,6 +165,106 @@ This policy is enforced as an operating discipline (human + agent behavior), and
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def normalize_rel_path(path: str) -> str:
+    return path.replace("\\", "/").lstrip("./")
+
+
+def slugify(value: str) -> str:
+    out = re.sub(r"[^a-zA-Z0-9]+", "_", value.strip().lower()).strip("_")
+    return out or "decision"
+
+
+def parse_csv_list(raw: str | None) -> list[str]:
+    if not raw:
+        return []
+    return [item.strip() for item in raw.split(",") if item.strip()]
+
+
+def read_manifest_project_id(project_dir: Path) -> str | None:
+    manifest = project_dir / ".cortex" / MANIFEST_FILE
+    if not manifest.exists():
+        return None
+    try:
+        obj = json.loads(manifest.read_text(encoding="utf-8"))
+        project_id = obj.get("project_id")
+        return project_id if isinstance(project_id, str) and project_id else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def load_decision_candidates(project_dir: Path) -> dict[str, Any]:
+    path = project_dir / DECISION_CANDIDATES_FILE
+    if not path.exists():
+        return {"version": "v0", "entries": []}
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return {"version": "v0", "entries": []}
+    if not isinstance(obj, dict):
+        return {"version": "v0", "entries": []}
+    entries = obj.get("entries")
+    if not isinstance(entries, list):
+        obj["entries"] = []
+    obj.setdefault("version", "v0")
+    return obj
+
+
+def save_decision_candidates(project_dir: Path, payload: dict[str, Any]) -> Path:
+    path = project_dir / DECISION_CANDIDATES_FILE
+    payload["updated_at"] = utc_now()
+    atomic_write_text(path, json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    return path
+
+
+def next_versioned_decision_path(project_dir: Path, slug: str) -> Path:
+    root = project_dir / DECISION_ARTIFACTS_DIR
+    root.mkdir(parents=True, exist_ok=True)
+    matches = sorted(root.glob(f"decision_{slug}_v*.md"))
+    if not matches:
+        return root / f"decision_{slug}_v1.md"
+    latest = matches[-1]
+    m = re.search(r"_v(\d+)\.md$", latest.name)
+    current = int(m.group(1)) if m else 1
+    return root / f"decision_{slug}_v{current + 1}.md"
+
+
+def load_cortexignore(project_dir: Path) -> list[tuple[str, bool]]:
+    """
+    Load .cortexignore patterns.
+    Returns a list of (pattern, is_negated) with order preserved.
+    """
+    path = project_dir / ".cortexignore"
+    if not path.exists():
+        return []
+
+    rules: list[tuple[str, bool]] = []
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        is_negated = line.startswith("!")
+        pattern = line[1:] if is_negated else line
+        pattern = normalize_rel_path(pattern)
+        if not pattern:
+            continue
+        if pattern.endswith("/"):
+            pattern = f"{pattern}**"
+        rules.append((pattern, is_negated))
+    return rules
+
+
+def matches_cortexignore(rel_path: str, rules: list[tuple[str, bool]]) -> bool:
+    if not rules:
+        return False
+    path = normalize_rel_path(rel_path)
+    ignored = False
+    for pattern, is_negated in rules:
+        norm_pattern = pattern.lstrip("/")
+        if fnmatch(path, norm_pattern):
+            ignored = not is_negated
+    return ignored
 
 
 def atomic_write_text(path: Path, content: str) -> None:
@@ -443,6 +557,194 @@ def validate_design_json(design_json: Path, schema: Path) -> tuple[bool, str]:
         return False, str(exc)
 
 
+def detect_foreign_project_ids(text: str, local_project_id: str | None) -> list[str]:
+    ids = sorted(set(re.findall(r"project/[A-Za-z0-9_.-]+", text)))
+    if not ids:
+        return []
+    if not local_project_id:
+        return ids
+    local = f"project/{local_project_id}"
+    return [pid for pid in ids if pid != local]
+
+
+def is_reference_file(text: str) -> bool:
+    return bool(
+        re.search(r"(?im)^\s*status\s*:\s*reference\b", text)
+        or re.search(r"(?im)^\s*canonical\s*:\s*false\b", text)
+        or re.search(r"(?im)\bnon-canonical\b", text)
+    )
+
+
+def extract_backticked_rel_paths(text: str) -> list[str]:
+    out: list[str] = []
+    for raw in re.findall(r"`([^`]+)`", text):
+        candidate = normalize_rel_path(raw)
+        if "/" not in candidate:
+            continue
+        if candidate.startswith(("http://", "https://", "file://")):
+            continue
+        if candidate.startswith("../"):
+            continue
+        if " " in candidate:
+            continue
+        out.append(candidate)
+    return out
+
+
+def compute_artifact_conformance(
+    project_dir: Path,
+    local_project_id: str | None,
+    ignore_rules: list[tuple[str, bool]] | None = None,
+) -> dict[str, Any]:
+    rules = ignore_rules or []
+    findings: list[dict[str, Any]] = []
+    scanned = 0
+
+    for rel_dir in DEFAULT_CORTEX_AUDIT_SCAN_DIRS:
+        root = project_dir / rel_dir
+        if not root.exists():
+            continue
+        for path in sorted(root.rglob("*.md")):
+            rel = str(path.relative_to(project_dir))
+            if matches_cortexignore(rel, rules):
+                continue
+            scanned += 1
+            text = path.read_text(encoding="utf-8")
+            foreign = detect_foreign_project_ids(text, local_project_id)
+            reference = is_reference_file(text)
+
+            if foreign and not reference:
+                findings.append(
+                    {
+                        "severity": "fail",
+                        "path": rel,
+                        "check": "foreign_project_scope",
+                        "detail": (
+                            "references project IDs outside local manifest scope "
+                            f"(foreign_ids={foreign[:5]}) without explicit reference status"
+                        ),
+                    }
+                )
+            elif foreign and reference:
+                findings.append(
+                    {
+                        "severity": "warn",
+                        "path": rel,
+                        "check": "foreign_project_scope_reference",
+                        "detail": f"reference-scoped foreign project IDs present (foreign_ids={foreign[:5]})",
+                    }
+                )
+
+            missing_rel_paths: list[str] = []
+            for candidate in extract_backticked_rel_paths(text):
+                if candidate.startswith(".cortex/"):
+                    continue
+                if not (project_dir / candidate).exists():
+                    missing_rel_paths.append(candidate)
+            if missing_rel_paths and not reference:
+                findings.append(
+                    {
+                        "severity": "warn",
+                        "path": rel,
+                        "check": "missing_source_paths",
+                        "detail": f"references missing project paths (examples={missing_rel_paths[:5]})",
+                    }
+                )
+
+    has_fail = any(f["severity"] == "fail" for f in findings)
+    has_warn = any(f["severity"] == "warn" for f in findings)
+    status = "fail" if has_fail else ("warn" if has_warn else "pass")
+    return {
+        "status": status,
+        "scanned_files": scanned,
+        "findings": findings[:100],
+    }
+
+
+def compute_unsynced_decisions(project_dir: Path, ignore_rules: list[tuple[str, bool]] | None = None) -> dict[str, Any]:
+    rules = ignore_rules or []
+    registry = load_decision_candidates(project_dir)
+    entries = registry.get("entries", [])
+    if not isinstance(entries, list):
+        entries = []
+
+    findings: list[dict[str, Any]] = []
+    promoted_count = 0
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        status = str(entry.get("status", "candidate")).lower()
+        if status != "promoted":
+            continue
+        promoted_count += 1
+
+        decision_id = str(entry.get("decision_id", "unknown"))
+        artifact_path = str(entry.get("decision_artifact", "")).strip()
+        impact_scope = entry.get("impact_scope", [])
+        linked = entry.get("linked_artifacts", [])
+        if not isinstance(impact_scope, list):
+            impact_scope = []
+        if not isinstance(linked, list):
+            linked = []
+
+        if not artifact_path:
+            findings.append(
+                {
+                    "severity": "fail",
+                    "decision_id": decision_id,
+                    "check": "missing_decision_artifact",
+                    "detail": "promoted decision missing decision_artifact path",
+                }
+            )
+            continue
+
+        artifact = project_dir / artifact_path
+        if (not matches_cortexignore(artifact_path, rules)) and not artifact.exists():
+            findings.append(
+                {
+                    "severity": "fail",
+                    "decision_id": decision_id,
+                    "path": artifact_path,
+                    "check": "decision_artifact_missing",
+                    "detail": "promoted decision artifact path does not exist",
+                }
+            )
+
+        if impact_scope and not linked:
+            findings.append(
+                {
+                    "severity": "fail",
+                    "decision_id": decision_id,
+                    "path": artifact_path,
+                    "check": "impact_scope_without_links",
+                    "detail": "promoted decision has impact_scope but no linked_artifacts",
+                }
+            )
+
+        for rel in linked:
+            rel_path = str(rel)
+            if matches_cortexignore(rel_path, rules):
+                continue
+            if not (project_dir / rel_path).exists():
+                findings.append(
+                    {
+                        "severity": "fail",
+                        "decision_id": decision_id,
+                        "path": rel_path,
+                        "check": "linked_artifact_missing",
+                        "detail": "linked_artifact path does not exist",
+                    }
+                )
+
+    has_fail = any(f["severity"] == "fail" for f in findings)
+    status = "fail" if has_fail else "pass"
+    return {
+        "status": status,
+        "promoted_decision_count": promoted_count,
+        "findings": findings[:100],
+    }
+
+
 def compute_audit_report(project_dir: Path) -> tuple[str, dict[str, Any]]:
     cortex_dir = project_dir / ".cortex"
     manifest_path = cortex_dir / MANIFEST_FILE
@@ -498,7 +800,13 @@ def compute_audit_report(project_dir: Path) -> tuple[str, dict[str, Any]]:
         checks.append({"check": "design_schema_validation", "status": "fail", "detail": "design_json missing"})
         status = "fail"
 
-    spec_coverage = compute_spec_coverage(project_dir)
+    ignore_rules = load_cortexignore(project_dir)
+
+    local_project_id: str | None = None
+    if manifest_obj and isinstance(manifest_obj.get("project_id"), str):
+        local_project_id = manifest_obj["project_id"]
+
+    spec_coverage = compute_spec_coverage(project_dir, ignore_rules=ignore_rules)
     checks.append(
         {
             "check": "spec_coverage",
@@ -513,6 +821,41 @@ def compute_audit_report(project_dir: Path) -> tuple[str, dict[str, Any]]:
     if spec_coverage.get("status") == "fail":
         status = "fail"
 
+    artifact_conformance = compute_artifact_conformance(
+        project_dir,
+        local_project_id=local_project_id,
+        ignore_rules=ignore_rules,
+    )
+    checks.append(
+        {
+            "check": "artifact_conformance",
+            "status": artifact_conformance.get("status", "warn"),
+            "detail": (
+                f"scanned={artifact_conformance.get('scanned_files', 0)}, "
+                f"findings={len(artifact_conformance.get('findings', []))}"
+            ),
+        }
+    )
+    if artifact_conformance.get("status") == "fail":
+        status = "fail"
+
+    unsynced_decisions = compute_unsynced_decisions(
+        project_dir,
+        ignore_rules=ignore_rules,
+    )
+    checks.append(
+        {
+            "check": "unsynced_decisions",
+            "status": unsynced_decisions.get("status", "warn"),
+            "detail": (
+                f"promoted={unsynced_decisions.get('promoted_decision_count', 0)}, "
+                f"findings={len(unsynced_decisions.get('findings', []))}"
+            ),
+        }
+    )
+    if unsynced_decisions.get("status") == "fail":
+        status = "fail"
+
     report = {
         "version": "v0",
         "run_at": utc_now(),
@@ -520,6 +863,13 @@ def compute_audit_report(project_dir: Path) -> tuple[str, dict[str, Any]]:
         "status": status,
         "checks": checks,
         "spec_coverage": spec_coverage,
+        "artifact_conformance": artifact_conformance,
+        "unsynced_decisions": unsynced_decisions,
+        "cortexignore": {
+            "enabled": bool(ignore_rules),
+            "path": str((project_dir / ".cortexignore").relative_to(project_dir)),
+            "rules": len(ignore_rules),
+        },
     }
     return status, report
 
@@ -578,14 +928,21 @@ def classify_artifact_scope(target: str) -> str | None:
     return None
 
 
-def _glob_files(project_dir: Path, patterns: list[str]) -> list[Path]:
+def _glob_files(
+    project_dir: Path,
+    patterns: list[str],
+    ignore_rules: list[tuple[str, bool]] | None = None,
+) -> list[Path]:
     out: list[Path] = []
     seen: set[str] = set()
+    rules = ignore_rules or []
     for pat in patterns:
         for p in sorted(project_dir.glob(pat)):
             if not p.is_file():
                 continue
             rel = str(p.relative_to(project_dir))
+            if matches_cortexignore(rel, rules):
+                continue
             if rel in seen:
                 continue
             seen.add(rel)
@@ -609,7 +966,7 @@ def load_spec_registry(project_dir: Path) -> tuple[dict[str, Any] | None, str | 
     return obj, None
 
 
-def compute_spec_coverage(project_dir: Path) -> dict[str, Any]:
+def compute_spec_coverage(project_dir: Path, ignore_rules: list[tuple[str, bool]] | None = None) -> dict[str, Any]:
     registry, err = load_spec_registry(project_dir)
     if err is not None:
         return {
@@ -643,8 +1000,8 @@ def compute_spec_coverage(project_dir: Path) -> dict[str, Any]:
         if not isinstance(source_patterns, list):
             source_patterns = []
 
-        spec_files = _glob_files(project_dir, [str(p) for p in spec_patterns])
-        source_files = _glob_files(project_dir, [str(p) for p in source_patterns])
+        spec_files = _glob_files(project_dir, [str(p) for p in spec_patterns], ignore_rules=ignore_rules)
+        source_files = _glob_files(project_dir, [str(p) for p in source_patterns], ignore_rules=ignore_rules)
         for sf in spec_files:
             matched_spec_paths.add(str(sf.relative_to(project_dir)))
 
@@ -676,7 +1033,7 @@ def compute_spec_coverage(project_dir: Path) -> dict[str, Any]:
 
     orphan_patterns = registry.get("orphan_spec_patterns", [])
     if isinstance(orphan_patterns, list):
-        all_candidate_specs = _glob_files(project_dir, [str(p) for p in orphan_patterns])
+        all_candidate_specs = _glob_files(project_dir, [str(p) for p in orphan_patterns], ignore_rules=ignore_rules)
         for p in all_candidate_specs:
             rel = str(p.relative_to(project_dir))
             if rel not in matched_spec_paths:
@@ -1131,6 +1488,143 @@ def policy_enable_project(args: argparse.Namespace) -> int:
     return 0
 
 
+def decision_capture_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    payload = load_decision_candidates(project_dir)
+    entries = payload.setdefault("entries", [])
+    if not isinstance(entries, list):
+        entries = []
+        payload["entries"] = entries
+
+    title = args.title.strip()
+    decision_id = f"dec_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}_{slugify(title)[:24]}"
+    entry = {
+        "decision_id": decision_id,
+        "title": title,
+        "status": "candidate",
+        "captured_at": utc_now(),
+        "decision": args.decision.strip(),
+        "rationale": args.rationale.strip(),
+        "impact_scope": parse_csv_list(args.impact_scope),
+        "linked_artifacts": parse_csv_list(args.linked_artifacts),
+        "decision_artifact": None,
+    }
+    entries.append(entry)
+    path = save_decision_candidates(project_dir, payload)
+
+    if args.format == "json":
+        print(json.dumps(entry, indent=2, sort_keys=True))
+    else:
+        print(f"decision_id: {decision_id}")
+        print(f"registry: {path}")
+    return 0
+
+
+def decision_list_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    payload = load_decision_candidates(project_dir)
+    entries = payload.get("entries", [])
+    if not isinstance(entries, list):
+        entries = []
+    status_filter = args.status.lower().strip() if args.status else None
+    if status_filter:
+        entries = [e for e in entries if str(e.get("status", "")).lower() == status_filter]
+    if args.format == "json":
+        print(json.dumps({"version": payload.get("version", "v0"), "entries": entries}, indent=2, sort_keys=True))
+    else:
+        print(f"entries: {len(entries)}")
+        for e in entries:
+            print(f"- {e.get('decision_id')} [{e.get('status')}] {e.get('title')}")
+    return 0
+
+
+def decision_promote_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    payload = load_decision_candidates(project_dir)
+    entries = payload.get("entries", [])
+    if not isinstance(entries, list):
+        print("invalid decision candidates registry", file=sys.stderr)
+        return 1
+
+    candidate = None
+    for e in entries:
+        if isinstance(e, dict) and e.get("decision_id") == args.decision_id:
+            candidate = e
+            break
+    if candidate is None:
+        print(f"decision candidate not found: {args.decision_id}", file=sys.stderr)
+        return 1
+
+    title = str(candidate.get("title", "Decision"))
+    decision_text = str(candidate.get("decision", ""))
+    rationale = str(candidate.get("rationale", ""))
+    impact_scope = candidate.get("impact_scope", [])
+    linked_artifacts = candidate.get("linked_artifacts", [])
+    if not isinstance(impact_scope, list):
+        impact_scope = []
+    if not isinstance(linked_artifacts, list):
+        linked_artifacts = []
+
+    slug = slugify(title)
+    target = next_versioned_decision_path(project_dir, slug)
+    rel_target = str(target.relative_to(project_dir))
+    project_id = read_manifest_project_id(project_dir)
+    project_scope = f"project/{project_id}" if project_id else "project/unknown"
+
+    lines = [
+        f"# Decision: {title}",
+        "",
+        f"DecisionID: {candidate.get('decision_id')}",
+        "Status: Active",
+        f"Scope: {project_scope}",
+        f"CapturedAt: {candidate.get('captured_at', utc_now())}",
+        f"PromotedAt: {utc_now()}",
+        f"ImpactScope: {', '.join(str(x) for x in impact_scope) if impact_scope else '(none)'}",
+        "LinkedArtifacts:",
+    ]
+    if linked_artifacts:
+        for rel in linked_artifacts:
+            lines.append(f"- `{rel}`")
+    else:
+        lines.append("- (none)")
+
+    lines.extend(
+        [
+            "",
+            "## Context",
+            "- Captured via `cortex-coach decision-capture`.",
+            "",
+            "## Decision",
+            decision_text if decision_text else "- Fill decision statement.",
+            "",
+            "## Rationale",
+            rationale if rationale else "- Fill rationale.",
+        ]
+    )
+    atomic_write_text(target, "\n".join(lines).rstrip() + "\n")
+
+    candidate["status"] = "promoted"
+    candidate["promoted_at"] = utc_now()
+    candidate["decision_artifact"] = rel_target
+    save_decision_candidates(project_dir, payload)
+
+    if args.format == "json":
+        print(
+            json.dumps(
+                {
+                    "decision_id": candidate.get("decision_id"),
+                    "status": "promoted",
+                    "decision_artifact": rel_target,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+    else:
+        print(rel_target)
+    return 0
+
+
 def audit_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     cortex_dir = project_dir / ".cortex"
@@ -1470,6 +1964,47 @@ def build_parser() -> argparse.ArgumentParser:
     add_lock_args(p_policy_enable)
     p_policy_enable.set_defaults(func=policy_enable_project)
 
+    p_decision_capture = sub.add_parser(
+        "decision-capture",
+        help="Capture a decision candidate from conversation/workstream.",
+    )
+    p_decision_capture.add_argument("--project-dir", required=True)
+    p_decision_capture.add_argument("--title", required=True)
+    p_decision_capture.add_argument("--decision", default="")
+    p_decision_capture.add_argument("--rationale", default="")
+    p_decision_capture.add_argument(
+        "--impact-scope",
+        default="",
+        help="Comma-separated impacted domains/artifacts (for example: governance,specs,docs).",
+    )
+    p_decision_capture.add_argument(
+        "--linked-artifacts",
+        default="",
+        help="Comma-separated project-relative artifact paths already updated by this decision.",
+    )
+    p_decision_capture.add_argument("--format", choices=["text", "json"], default="text")
+    add_lock_args(p_decision_capture)
+    p_decision_capture.set_defaults(func=decision_capture_project)
+
+    p_decision_list = sub.add_parser(
+        "decision-list",
+        help="List decision candidates/promoted decisions.",
+    )
+    p_decision_list.add_argument("--project-dir", required=True)
+    p_decision_list.add_argument("--status", choices=["candidate", "promoted"])
+    p_decision_list.add_argument("--format", choices=["text", "json"], default="text")
+    p_decision_list.set_defaults(func=decision_list_project)
+
+    p_decision_promote = sub.add_parser(
+        "decision-promote",
+        help="Promote a captured decision candidate into canonical decision artifact.",
+    )
+    p_decision_promote.add_argument("--project-dir", required=True)
+    p_decision_promote.add_argument("--decision-id", required=True)
+    p_decision_promote.add_argument("--format", choices=["text", "json"], default="text")
+    add_lock_args(p_decision_promote)
+    p_decision_promote.set_defaults(func=decision_promote_project)
+
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
     p_coach.add_argument("--project-dir", required=True)
     p_coach.add_argument("--no-sync-phases", action="store_false", dest="sync_phases")
@@ -1489,7 +2024,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    if args.cmd in {"init", "audit", "coach", "policy-enable"}:
+    if args.cmd in {"init", "audit", "coach", "policy-enable", "decision-capture", "decision-promote"}:
         project_dir = Path(args.project_dir).resolve()
         try:
             with project_lock(

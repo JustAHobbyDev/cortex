@@ -35,6 +35,20 @@ cortex-coach policy-enable --project-dir /path/to/project --policy usage-decisio
 
 This writes a policy file in that project rather than assuming global defaults.
 
+## Can I exclude files from audit/conformance checks?
+
+Yes. Add `.cortexignore` at the project root with gitignore-style patterns.
+
+Use this for explicit, intentional exclusions (for example imported reference artifacts).
+
+## How do I preserve important decisions for future agents?
+
+Use decision lifecycle commands:
+
+1. `decision-capture` during work
+2. `decision-promote` when accepted
+3. `audit` to verify promoted decisions are linked to impacted artifacts
+
 ## What is the recommended command cadence?
 
 1. `init` once

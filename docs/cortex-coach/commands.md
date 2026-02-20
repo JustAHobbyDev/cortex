@@ -34,9 +34,25 @@ Output:
 
 - `.cortex/reports/lifecycle_audit_v0.json`
 - includes `spec_coverage` findings when `.cortex/spec_registry_v0.json` exists
+- includes `artifact_conformance` findings (for example foreign project scope references)
 
 Spec coverage registry is bootstrapped by `init` at:
 - `.cortex/spec_registry_v0.json`
+
+### `.cortexignore` exclusions
+
+`audit` and conformance checks support project-local exclusions via `.cortexignore`
+using gitignore-style glob patterns.
+
+Example:
+
+```text
+# ignore imported reference docs
+philosophy/legacy_imports/**
+
+# keep one file included
+!philosophy/legacy_imports/README.md
+```
 
 ## `audit-needed`
 
@@ -166,6 +182,58 @@ cortex-coach policy-enable \
   --force
 ```
 
+## `decision-capture`
+
+Capture a decision candidate during active work.
+
+```bash
+cortex-coach decision-capture \
+  --project-dir /path/to/project \
+  --title "Split local and CI quality gates" \
+  --decision "Use strict local gate and CI correctness gate." \
+  --rationale "Avoid dirty-tree false negatives in CI." \
+  --impact-scope governance,ci,docs \
+  --linked-artifacts .github/workflows/cortex-validation.yml,docs/cortex-coach/quality-gate.md
+```
+
+Writes/updates:
+- `.cortex/reports/decision_candidates_v0.json`
+
+## `decision-list`
+
+List decision candidates or promoted decisions.
+
+```bash
+cortex-coach decision-list \
+  --project-dir /path/to/project \
+  --format json
+```
+
+Optional status filter:
+
+```bash
+cortex-coach decision-list \
+  --project-dir /path/to/project \
+  --status promoted
+```
+
+## `decision-promote`
+
+Promote a captured decision into canonical decision artifact.
+
+```bash
+cortex-coach decision-promote \
+  --project-dir /path/to/project \
+  --decision-id dec_20260220T000000Z_example
+```
+
+Writes:
+- `.cortex/artifacts/decisions/decision_<slug>_vN.md`
+- updates `.cortex/reports/decision_candidates_v0.json`
+
+Audit behavior:
+- `audit` fails `unsynced_decisions` when promoted decisions have `impact_scope` but no `linked_artifacts`.
+
 ## `just quality-gate`
 
 Run the unified maintainer quality gate for local/CI parity.
@@ -178,4 +246,18 @@ Fallback:
 
 ```bash
 ./scripts/quality_gate_v0.sh
+```
+
+## `just quality-gate-ci`
+
+Run CI-focused correctness checks without local dirty-tree enforcement.
+
+```bash
+just quality-gate-ci
+```
+
+Fallback:
+
+```bash
+./scripts/quality_gate_ci_v0.sh
 ```

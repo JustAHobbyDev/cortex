@@ -21,7 +21,10 @@ CONTROL_PLANE_ORDER = [
     ".cortex/manifest_v0.json",
     ".cortex/reports/lifecycle_audit_v0.json",
     ".cortex/reports/audit_needed_v0.json",
+    ".cortex/reports/decision_candidates_v0.json",
 ]
+ACTIVE_DECISION_GLOB = ".cortex/artifacts/decisions/decision_*_v*.md"
+MAX_ACTIVE_DECISIONS = 3
 
 TASK_PATTERNS = {
     "direction": [
@@ -106,6 +109,19 @@ def select_control_plane(project_dir: Path) -> tuple[list[dict[str, Any]], list[
             warnings.append(f"missing_control_plane_file:{rel}")
             continue
         selected.append({"path": str(p.relative_to(project_dir)), "selected_by": "control_plane"})
+
+    # Load latest promoted decision artifacts early so future agents inherit recent decisions.
+    decision_candidates = sorted(project_dir.glob(ACTIVE_DECISION_GLOB))
+    if not decision_candidates:
+        warnings.append(f"missing_control_plane_file:{ACTIVE_DECISION_GLOB}")
+    else:
+        for p in decision_candidates[-MAX_ACTIVE_DECISIONS:]:
+            selected.append(
+                {
+                    "path": str(p.relative_to(project_dir)),
+                    "selected_by": "control_plane:active_decision",
+                }
+            )
     return selected, warnings
 
 

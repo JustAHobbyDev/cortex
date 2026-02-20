@@ -5,7 +5,8 @@ Recommended entrypoint is now `cortex-coach context-load`.
 
 It loads:
 1. control-plane artifacts first (`manifest`, latest audit reports)
-2. task-relevant files next (`direction`, `governance`, `design`, `spec`)
+2. latest promoted decision artifacts (`.cortex/artifacts/decisions/decision_*_v*.md`)
+3. task-relevant files next (`direction`, `governance`, `design`, `spec`)
 
 ## Preferred CLI Usage
 

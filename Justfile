@@ -68,5 +68,33 @@ coach-policy-enable project_dir policy="usage-decision":
     --project-dir "{{project_dir}}" \
     --policy "{{policy}}"
 
+coach-decision-capture project_dir title decision="" rationale="" impact_scope="" linked_artifacts="":
+  uv run python3 scripts/cortex_project_coach_v0.py decision-capture \
+    --project-dir "{{project_dir}}" \
+    --title "{{title}}" \
+    --decision "{{decision}}" \
+    --rationale "{{rationale}}" \
+    --impact-scope "{{impact_scope}}" \
+    --linked-artifacts "{{linked_artifacts}}"
+
+coach-decision-list project_dir format="text":
+  uv run python3 scripts/cortex_project_coach_v0.py decision-list \
+    --project-dir "{{project_dir}}" \
+    --format "{{format}}"
+
+coach-decision-list-status project_dir status format="text":
+  uv run python3 scripts/cortex_project_coach_v0.py decision-list \
+    --project-dir "{{project_dir}}" \
+    --status "{{status}}" \
+    --format "{{format}}"
+
+coach-decision-promote project_dir decision_id:
+  uv run python3 scripts/cortex_project_coach_v0.py decision-promote \
+    --project-dir "{{project_dir}}" \
+    --decision-id "{{decision_id}}"
+
 quality-gate:
   ./scripts/quality_gate_v0.sh
+
+quality-gate-ci:
+  ./scripts/quality_gate_ci_v0.sh

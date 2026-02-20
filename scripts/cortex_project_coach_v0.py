@@ -49,6 +49,19 @@ DEFAULT_MEDIUM_RISK_PATTERNS = [
     "playbooks/**",
     "templates/**",
 ]
+DEFAULT_DECISION_GAP_PATTERNS = [
+    ".cortex/manifest_v0.json",
+    ".cortex/policies/**",
+    ".cortex/artifacts/decisions/**",
+    "policies/**",
+    "playbooks/**",
+    "scripts/quality_gate*.sh",
+    "scripts/cortex_project_coach_v0.py",
+    "Justfile",
+    "pyproject.toml",
+    "uv.lock",
+    "docs/cortex-coach/**",
+]
 DEFAULT_IGNORED_PATTERNS = [
     ".cortex/.lock",
     ".cortex/**/*.tmp",
@@ -227,6 +240,13 @@ def utc_now() -> str:
 
 def normalize_rel_path(path: str) -> str:
     return path.replace("\\", "/").lstrip("./")
+
+
+def normalize_repo_rel_path(path: str) -> str:
+    out = path.replace("\\", "/")
+    while out.startswith("./"):
+        out = out[2:]
+    return out
 
 
 def slugify(value: str) -> str:
@@ -1316,6 +1336,71 @@ def classify_dirty_files(files: list[str]) -> dict[str, list[str]]:
     return out
 
 
+def compute_decision_gap_check(project_dir: Path, cortex_dir: Path) -> tuple[str, dict[str, Any]]:
+    files, err = git_dirty_files(project_dir)
+    if err is not None:
+        report = {
+            "version": "v0",
+            "run_at": utc_now(),
+            "project_dir": str(project_dir),
+            "cortex_root": str(cortex_dir),
+            "status": "unknown",
+            "reason": err,
+            "dirty_files": [],
+            "governance_impact_files": [],
+            "covered_files": [],
+            "uncovered_files": [],
+            "decision_matches": [],
+        }
+        return "unknown", report
+
+    normalized_files = sorted({normalize_repo_rel_path(f) for f in files if f.strip()})
+    impact_files = [
+        path for path in normalized_files if any(fnmatch(path, pat) for pat in DEFAULT_DECISION_GAP_PATTERNS)
+    ]
+
+    registry = load_decision_candidates(project_dir, cortex_dir=cortex_dir)
+    entries = registry.get("entries", [])
+    if not isinstance(entries, list):
+        entries = []
+
+    decision_matches: dict[str, list[str]] = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        status = str(entry.get("status", "candidate")).lower()
+        if status not in {"candidate", "promoted"}:
+            continue
+        decision_id = str(entry.get("decision_id", "unknown"))
+        linked = entry.get("linked_artifacts", [])
+        if not isinstance(linked, list):
+            continue
+        linked_norm = {normalize_repo_rel_path(str(x)) for x in linked}
+        matched = sorted([p for p in impact_files if p in linked_norm])
+        if matched:
+            decision_matches[decision_id] = matched
+
+    covered = sorted({p for matched in decision_matches.values() for p in matched})
+    uncovered = [p for p in impact_files if p not in covered]
+    status = "pass" if not uncovered else "fail"
+    report = {
+        "version": "v0",
+        "run_at": utc_now(),
+        "project_dir": str(project_dir),
+        "cortex_root": str(cortex_dir),
+        "status": status,
+        "dirty_files": normalized_files,
+        "governance_impact_files": impact_files,
+        "covered_files": covered,
+        "uncovered_files": uncovered,
+        "decision_matches": [
+            {"decision_id": did, "matched_files": matched}
+            for did, matched in sorted(decision_matches.items(), key=lambda item: item[0])
+        ],
+    }
+    return status, report
+
+
 def apply_coach_actions(
     project_dir: Path,
     actions: list[dict[str, str]],
@@ -1766,6 +1851,32 @@ def decision_list_project(args: argparse.Namespace) -> int:
         for e in entries:
             print(f"- {e.get('decision_id')} [{e.get('status')}] {e.get('title')}")
     return 0
+
+
+def decision_gap_check_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    cortex_dir = resolve_cortex_dir(project_dir, getattr(args, "cortex_root", None))
+    status, report = compute_decision_gap_check(project_dir, cortex_dir)
+
+    if args.format == "json":
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"status: {report['status']}")
+        print(f"governance_impact_files: {len(report.get('governance_impact_files', []))}")
+        print(f"covered_files: {len(report.get('covered_files', []))}")
+        print(f"uncovered_files: {len(report.get('uncovered_files', []))}")
+        if report.get("uncovered_files"):
+            print("uncovered:")
+            for rel in report["uncovered_files"]:
+                print(f"- {rel}")
+
+    if args.out_file:
+        out = Path(args.out_file)
+        if not out.is_absolute():
+            out = project_dir / out
+        atomic_write_text(out, json.dumps(report, indent=2, sort_keys=True) + "\n")
+
+    return 0 if status == "pass" else 1
 
 
 def decision_promote_project(args: argparse.Namespace) -> int:
@@ -2287,6 +2398,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_decision_list.add_argument("--status", choices=["candidate", "promoted"])
     p_decision_list.add_argument("--format", choices=["text", "json"], default="text")
     p_decision_list.set_defaults(func=decision_list_project)
+
+    p_decision_gap = sub.add_parser(
+        "decision-gap-check",
+        help="Fail when governance-impacting dirty files are not linked to decision entries.",
+    )
+    p_decision_gap.add_argument("--project-dir", required=True)
+    add_cortex_root_arg(p_decision_gap)
+    p_decision_gap.add_argument("--format", choices=["text", "json"], default="text")
+    p_decision_gap.add_argument("--out-file")
+    p_decision_gap.set_defaults(func=decision_gap_check_project)
 
     p_decision_promote = sub.add_parser(
         "decision-promote",

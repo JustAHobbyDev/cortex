@@ -44,8 +44,30 @@
       "rationale": "Ensures deterministic pytest/toolchain resolution across local and CI runs; avoids floating uv run --with pytest behavior.",
       "status": "promoted",
       "title": "Use locked dev dependency group for pytest"
+    },
+    {
+      "captured_at": "2026-02-20T12:02:28Z",
+      "decision": "Set governance completeness and enforceability as higher priority than coach/cortex decoupling; decoupling milestones depend on active governance-completeness checks.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_prioritize_governance_completeness_over_decoupling_v1.md",
+      "decision_id": "dec_20260220T120228Z_prioritize_governance_co",
+      "impact_scope": [
+        "governance",
+        "policy",
+        "workflow",
+        "decoupling"
+      ],
+      "linked_artifacts": [
+        "playbooks/cortex_coach_decoupling_plan_v0.md",
+        "playbooks/session_governance_hybrid_plan_v0.md",
+        "scripts/quality_gate_v0.sh",
+        "scripts/quality_gate_ci_v0.sh"
+      ],
+      "promoted_at": "2026-02-20T12:02:31Z",
+      "rationale": "Recent misses showed that integrity checks pass even when decision capture completeness is incomplete; priority must shift to close this governance gap first.",
+      "status": "promoted",
+      "title": "Prioritize governance completeness over decoupling"
     }
   ],
-  "updated_at": "2026-02-20T11:26:26Z",
+  "updated_at": "2026-02-20T12:02:31Z",
   "version": "v0"
 }

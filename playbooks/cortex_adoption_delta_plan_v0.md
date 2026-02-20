@@ -104,4 +104,6 @@ Provide one deterministic command that maintainers and CI can both run.
 
 ## Status
 
-Saved, not yet executed.
+- PR 1: completed
+- PR 2: completed
+- PR 3: completed

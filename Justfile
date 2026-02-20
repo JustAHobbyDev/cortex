@@ -67,3 +67,6 @@ coach-policy-enable project_dir policy="usage-decision":
   uv run python3 scripts/cortex_project_coach_v0.py policy-enable \
     --project-dir "{{project_dir}}" \
     --policy "{{policy}}"
+
+quality-gate:
+  ./scripts/quality_gate_v0.sh

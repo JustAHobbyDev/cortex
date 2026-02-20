@@ -83,6 +83,7 @@ Primary operational entrypoints should be callable through `just` recipes that s
 ## User Documentation
 
 - Cortex Coach docs: `docs/cortex-coach/README.md`
+- Unified maintainer gate: `just quality-gate` (fallback: `./scripts/quality_gate_v0.sh`)
 
 ---
 

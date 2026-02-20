@@ -33,9 +33,16 @@ just coach-maintainer-sequence . cortex_repo "Cortex Repository"
 just coach-cycle-apply . direction,governance
 ```
 
+5. Run the quality gate before merge/release:
+
+```bash
+just quality-gate
+```
+
 ## Operating Rules
 
 - Run dependent tasks sequentially (not in parallel).
 - Treat failed audits as blockers.
 - Version semantic changes (`vN -> vN+1`).
 - Commit `.cortex` lifecycle artifacts with related governance/spec changes.
+- Require `quality-gate` to pass before merge/release.

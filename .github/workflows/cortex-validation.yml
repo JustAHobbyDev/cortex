@@ -7,9 +7,9 @@ on:
     branches: [main]
 
 jobs:
-  docs-and-json-validation:
+  quality-gate:
     runs-on: ubuntu-latest
-    name: Docs + JSON Integrity
+    name: Quality Gate
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,51 +19,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run docs/json validator
+      - name: Run unified quality gate
         run: |
           chmod +x scripts/ci_validate_docs_and_json_v0.sh
-          ./scripts/ci_validate_docs_and_json_v0.sh
-
-  coach-smoke-check:
-    runs-on: ubuntu-latest
-    name: Coach Smoke Check
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install minimal dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install jsonschema
-
-      - name: Run coach smoke commands
-        run: |
-          python3 scripts/cortex_project_coach_v0.py --help
-          python3 scripts/cortex_project_coach_v0.py audit-needed --project-dir . --format json
-
-  coach-tests:
-    runs-on: ubuntu-latest
-    name: Coach Tests
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install test dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install jsonschema
-          python3 -m pip install -r tests/requirements.txt
-
-      - name: Run focused coach tests
-        run: |
-          python3 -m pytest -q tests/test_coach_*.py
+          chmod +x scripts/quality_gate_v0.sh
+          ./scripts/quality_gate_v0.sh

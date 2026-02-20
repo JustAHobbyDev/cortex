@@ -165,3 +165,17 @@ cortex-coach policy-enable \
   --policy usage-decision \
   --force
 ```
+
+## `just quality-gate`
+
+Run the unified maintainer quality gate for local/CI parity.
+
+```bash
+just quality-gate
+```
+
+Fallback:
+
+```bash
+./scripts/quality_gate_v0.sh
+```

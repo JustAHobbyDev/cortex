@@ -1,0 +1,9 @@
+# Cortex-local audit exclusions.
+#
+# Use this file for targeted exclusions inside the selected cortex root.
+# Keep repository-wide governance/spec exclusions out of this file so
+# `--audit-scope all` can still audit the broader operating surface.
+
+.cortex/**/*.tmp
+.cortex/**/*.bak
+.cortex/**/*.swp

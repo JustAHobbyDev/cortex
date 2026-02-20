@@ -15,6 +15,7 @@ cortex-coach init \
   --project-dir /path/to/project \
   --project-id my_project \
   --project-name "My Project" \
+  --cortex-root .cortex \
   --assets-dir /path/to/cortex-assets
 ```
 
@@ -32,8 +33,14 @@ Validate lifecycle artifacts and emit a health report.
 ```bash
 cortex-coach audit \
   --project-dir /path/to/project \
+  --cortex-root .cortex \
+  --audit-scope cortex-only \
   --assets-dir /path/to/cortex-assets
 ```
+
+`--audit-scope` options:
+- `cortex-only` (default): conformance scans only inside the selected cortex root.
+- `all`: conformance scans broader governance/spec dirs in the repository.
 
 Output:
 
@@ -117,7 +124,9 @@ Run one lifecycle guidance cycle.
 
 ```bash
 cortex-coach coach \
-  --project-dir /path/to/project
+  --project-dir /path/to/project \
+  --cortex-root .cortex \
+  --audit-scope cortex-only
 ```
 
 Outputs:

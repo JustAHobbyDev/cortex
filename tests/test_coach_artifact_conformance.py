@@ -15,7 +15,7 @@ def test_audit_fails_on_foreign_project_scope_without_reference(initialized_proj
         encoding="utf-8",
     )
 
-    run_coach(initialized_project, "audit", expect_code=1)
+    run_coach(initialized_project, "audit", "--audit-scope", "all", expect_code=1)
     audit = load_json(initialized_project / ".cortex" / "reports" / "lifecycle_audit_v0.json")
 
     assert audit["status"] == "fail"
@@ -38,11 +38,12 @@ def test_cortexignore_excludes_paths_from_artifact_conformance(initialized_proje
         encoding="utf-8",
     )
 
-    run_coach(initialized_project, "audit")
+    run_coach(initialized_project, "audit", "--audit-scope", "all")
     audit = load_json(initialized_project / ".cortex" / "reports" / "lifecycle_audit_v0.json")
     conformance = audit["artifact_conformance"]
 
     assert audit["status"] == "pass"
+    assert audit["audit_scope"] == "all"
     assert conformance["status"] == "pass"
     assert conformance["findings"] == []
     assert audit["cortexignore"]["enabled"] is True

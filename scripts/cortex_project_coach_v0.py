@@ -36,6 +36,7 @@ VALID_APPLY_SCOPES = {"direction", "governance", "design"}
 LOCK_FILE = ".lock"
 DEFAULT_LOCK_TIMEOUT_SECONDS = 10.0
 DEFAULT_LOCK_STALE_SECONDS = 300.0
+DEFAULT_CORTEX_ROOT = ".cortex"
 DEFAULT_HIGH_RISK_PATTERNS = [
     ".cortex/manifest_v0.json",
     ".cortex/artifacts/**",
@@ -71,7 +72,14 @@ DECISION_ARTIFACTS_DIR = ".cortex/artifacts/decisions"
 DEFAULT_CONTRACT_FILE = "contracts/coach_asset_contract_v0.json"
 
 
-def default_spec_registry(project_id: str) -> dict[str, Any]:
+def resolve_cortex_dir(project_dir: Path, raw_cortex_root: str | None) -> Path:
+    if raw_cortex_root:
+        root = Path(raw_cortex_root)
+        return root.resolve() if root.is_absolute() else (project_dir / root).resolve()
+    return (project_dir / DEFAULT_CORTEX_ROOT).resolve()
+
+
+def default_spec_registry(project_id: str, cortex_root_rel: str = DEFAULT_CORTEX_ROOT) -> dict[str, Any]:
     return {
         "version": "v0",
         "domains": [
@@ -80,7 +88,7 @@ def default_spec_registry(project_id: str) -> dict[str, Any]:
                 "name": "Direction",
                 "required": True,
                 "severity": "block",
-                "spec_patterns": [".cortex/artifacts/direction_*.md"],
+                "spec_patterns": [f"{cortex_root_rel}/artifacts/direction_*.md"],
                 "source_patterns": [],
             },
             {
@@ -88,7 +96,7 @@ def default_spec_registry(project_id: str) -> dict[str, Any]:
                 "name": "Governance",
                 "required": True,
                 "severity": "block",
-                "spec_patterns": [".cortex/artifacts/governance_*.md"],
+                "spec_patterns": [f"{cortex_root_rel}/artifacts/governance_*.md"],
                 "source_patterns": [],
             },
             {
@@ -96,7 +104,7 @@ def default_spec_registry(project_id: str) -> dict[str, Any]:
                 "name": "Design",
                 "required": True,
                 "severity": "warn",
-                "spec_patterns": [".cortex/artifacts/design_*.json", ".cortex/artifacts/design_*.dsl"],
+                "spec_patterns": [f"{cortex_root_rel}/artifacts/design_*.json", f"{cortex_root_rel}/artifacts/design_*.dsl"],
                 "source_patterns": [],
             },
             {
@@ -244,8 +252,9 @@ def read_manifest_project_id(project_dir: Path) -> str | None:
         return None
 
 
-def load_decision_candidates(project_dir: Path) -> dict[str, Any]:
-    path = project_dir / DECISION_CANDIDATES_FILE
+def load_decision_candidates(project_dir: Path, cortex_dir: Path | None = None) -> dict[str, Any]:
+    base = cortex_dir if cortex_dir is not None else (project_dir / DEFAULT_CORTEX_ROOT)
+    path = base / "reports" / "decision_candidates_v0.json"
     if not path.exists():
         return {"version": "v0", "entries": []}
     try:
@@ -261,15 +270,17 @@ def load_decision_candidates(project_dir: Path) -> dict[str, Any]:
     return obj
 
 
-def save_decision_candidates(project_dir: Path, payload: dict[str, Any]) -> Path:
-    path = project_dir / DECISION_CANDIDATES_FILE
+def save_decision_candidates(project_dir: Path, payload: dict[str, Any], cortex_dir: Path | None = None) -> Path:
+    base = cortex_dir if cortex_dir is not None else (project_dir / DEFAULT_CORTEX_ROOT)
+    path = base / "reports" / "decision_candidates_v0.json"
     payload["updated_at"] = utc_now()
     atomic_write_text(path, json.dumps(payload, indent=2, sort_keys=True) + "\n")
     return path
 
 
-def next_versioned_decision_path(project_dir: Path, slug: str) -> Path:
-    root = project_dir / DECISION_ARTIFACTS_DIR
+def next_versioned_decision_path(project_dir: Path, slug: str, cortex_dir: Path | None = None) -> Path:
+    base = cortex_dir if cortex_dir is not None else (project_dir / DEFAULT_CORTEX_ROOT)
+    root = base / "artifacts" / "decisions"
     root.mkdir(parents=True, exist_ok=True)
     matches = sorted(root.glob(f"decision_{slug}_v*.md"))
     if not matches:
@@ -375,12 +386,13 @@ def _lock_stale_reason(lock_path: Path, stale_seconds: float) -> str | None:
 @contextmanager
 def project_lock(
     project_dir: Path,
+    cortex_root: str | None,
     lock_timeout_seconds: float,
     lock_stale_seconds: float,
     force_unlock: bool,
     command_name: str,
 ):
-    cortex_dir = project_dir / ".cortex"
+    cortex_dir = resolve_cortex_dir(project_dir, cortex_root)
     cortex_dir.mkdir(parents=True, exist_ok=True)
     lock_path = cortex_dir / LOCK_FILE
 
@@ -504,7 +516,11 @@ score brand_fit | 8
 def init_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     assets_dir = resolve_assets_dir(getattr(args, "assets_dir", None))
-    cortex_dir = project_dir / ".cortex"
+    cortex_dir = resolve_cortex_dir(project_dir, getattr(args, "cortex_root", None))
+    try:
+        cortex_root_rel = str(cortex_dir.relative_to(project_dir))
+    except ValueError:
+        cortex_root_rel = DEFAULT_CORTEX_ROOT
     artifacts_dir = cortex_dir / "artifacts"
     prompts_dir = cortex_dir / "prompts"
     reports_dir = cortex_dir / "reports"
@@ -525,11 +541,11 @@ def init_project(args: argparse.Namespace) -> int:
             "lifecycle_audited": False,
         },
         "artifacts": {
-            "direction": f".cortex/artifacts/direction_{project_id}_v0.md",
-            "governance": f".cortex/artifacts/governance_{project_id}_v0.md",
-            "design_dsl": f".cortex/artifacts/design_{project_id}_v0.dsl",
-            "design_json": f".cortex/artifacts/design_{project_id}_v0.json",
-            "project_prompt": f".cortex/prompts/project_coach_prompt_{project_id}_v0.md",
+            "direction": f"{cortex_root_rel}/artifacts/direction_{project_id}_v0.md",
+            "governance": f"{cortex_root_rel}/artifacts/governance_{project_id}_v0.md",
+            "design_dsl": f"{cortex_root_rel}/artifacts/design_{project_id}_v0.dsl",
+            "design_json": f"{cortex_root_rel}/artifacts/design_{project_id}_v0.json",
+            "project_prompt": f"{cortex_root_rel}/prompts/project_coach_prompt_{project_id}_v0.md",
         },
     }
 
@@ -557,7 +573,7 @@ def init_project(args: argparse.Namespace) -> int:
 """
     prompt_md = f"""# Project Coach Prompt ({project_id}) v0
 
-Use `.cortex/manifest_v0.json` and `.cortex/artifacts/*` as source of truth.
+Use `{cortex_root_rel}/manifest_v0.json` and `{cortex_root_rel}/artifacts/*` as source of truth.
 
 Tasks:
 1. Propose concrete updates to direction/governance/design artifacts.
@@ -571,7 +587,13 @@ Tasks:
     changed.append(write_if_missing(artifacts_dir / f"governance_{project_id}_v0.md", governance_md, args.force))
     changed.append(write_if_missing(artifacts_dir / f"design_{project_id}_v0.dsl", default_design_dsl(project_id, project_name), args.force))
     changed.append(write_if_missing(prompts_dir / f"project_coach_prompt_{project_id}_v0.md", prompt_md, args.force))
-    changed.append(write_if_missing(registry_path, json.dumps(default_spec_registry(project_id), indent=2, sort_keys=True) + "\n", args.force))
+    changed.append(
+        write_if_missing(
+            registry_path,
+            json.dumps(default_spec_registry(project_id, cortex_root_rel=cortex_root_rel), indent=2, sort_keys=True) + "\n",
+            args.force,
+        )
+    )
     reports_dir.mkdir(parents=True, exist_ok=True)
 
     # Compile DSL to JSON via existing compiler.
@@ -664,17 +686,26 @@ def extract_backticked_rel_paths(text: str) -> list[str]:
 
 def compute_artifact_conformance(
     project_dir: Path,
+    cortex_dir: Path,
     local_project_id: str | None,
+    audit_scope: str = "cortex-only",
     ignore_rules: list[tuple[str, bool]] | None = None,
 ) -> dict[str, Any]:
     rules = ignore_rules or []
     findings: list[dict[str, Any]] = []
     scanned = 0
 
-    for rel_dir in DEFAULT_CORTEX_AUDIT_SCAN_DIRS:
-        root = project_dir / rel_dir
-        if not root.exists():
-            continue
+    roots: list[Path] = []
+    if audit_scope == "all":
+        for rel_dir in DEFAULT_CORTEX_AUDIT_SCAN_DIRS:
+            root = project_dir / rel_dir
+            if root.exists():
+                roots.append(root)
+    else:
+        if cortex_dir.exists():
+            roots.append(cortex_dir)
+
+    for root in roots:
         for path in sorted(root.rglob("*.md")):
             rel = str(path.relative_to(project_dir))
             if matches_cortexignore(rel, rules):
@@ -732,9 +763,13 @@ def compute_artifact_conformance(
     }
 
 
-def compute_unsynced_decisions(project_dir: Path, ignore_rules: list[tuple[str, bool]] | None = None) -> dict[str, Any]:
+def compute_unsynced_decisions(
+    project_dir: Path,
+    cortex_dir: Path,
+    ignore_rules: list[tuple[str, bool]] | None = None,
+) -> dict[str, Any]:
     rules = ignore_rules or []
-    registry = load_decision_candidates(project_dir)
+    registry = load_decision_candidates(project_dir, cortex_dir=cortex_dir)
     entries = registry.get("entries", [])
     if not isinstance(entries, list):
         entries = []
@@ -833,7 +868,7 @@ def load_asset_contract(contract_file: Path) -> tuple[dict[str, Any] | None, str
     return obj, None
 
 
-def compute_contract_check(project_dir: Path, contract_file: Path) -> dict[str, Any]:
+def compute_contract_check(project_dir: Path, contract_file: Path, cortex_dir: Path | None = None) -> dict[str, Any]:
     contract_obj, err = load_asset_contract(contract_file)
     checks: list[dict[str, Any]] = []
     status = "pass"
@@ -863,7 +898,8 @@ def compute_contract_check(project_dir: Path, contract_file: Path) -> dict[str, 
             status = "fail"
 
     manifest_rules = contract_obj.get("required_manifest", {})
-    manifest = project_dir / ".cortex" / MANIFEST_FILE
+    resolved_cortex_dir = cortex_dir or resolve_cortex_dir(project_dir, None)
+    manifest = resolved_cortex_dir / MANIFEST_FILE
     if manifest.exists():
         try:
             manifest_obj = json.loads(manifest.read_text(encoding="utf-8"))
@@ -909,9 +945,14 @@ def compute_contract_check(project_dir: Path, contract_file: Path) -> dict[str, 
     }
 
 
-def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> tuple[str, dict[str, Any]]:
-    cortex_dir = project_dir / ".cortex"
-    manifest_path = cortex_dir / MANIFEST_FILE
+def compute_audit_report(
+    project_dir: Path,
+    assets_dir: Path | None = None,
+    cortex_dir: Path | None = None,
+    audit_scope: str = "cortex-only",
+) -> tuple[str, dict[str, Any]]:
+    resolved_cortex_dir = cortex_dir or resolve_cortex_dir(project_dir, None)
+    manifest_path = resolved_cortex_dir / MANIFEST_FILE
     resolved_assets_dir = assets_dir or resolve_assets_dir(None)
     schema_path = resolve_asset_path(resolved_assets_dir, "templates/design_ontology_v0.schema.json")
 
@@ -920,9 +961,9 @@ def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> t
 
     required = [
         manifest_path,
-        cortex_dir / "artifacts",
-        cortex_dir / "prompts",
-        cortex_dir / "reports",
+        resolved_cortex_dir / "artifacts",
+        resolved_cortex_dir / "prompts",
+        resolved_cortex_dir / "reports",
     ]
     for p in required:
         exists = p.exists()
@@ -979,7 +1020,7 @@ def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> t
     if manifest_obj and isinstance(manifest_obj.get("project_id"), str):
         local_project_id = manifest_obj["project_id"]
 
-    spec_coverage = compute_spec_coverage(project_dir, ignore_rules=ignore_rules)
+    spec_coverage = compute_spec_coverage(project_dir, resolved_cortex_dir, ignore_rules=ignore_rules)
     checks.append(
         {
             "check": "spec_coverage",
@@ -996,7 +1037,9 @@ def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> t
 
     artifact_conformance = compute_artifact_conformance(
         project_dir,
+        resolved_cortex_dir,
         local_project_id=local_project_id,
+        audit_scope=audit_scope,
         ignore_rules=ignore_rules,
     )
     checks.append(
@@ -1014,6 +1057,7 @@ def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> t
 
     unsynced_decisions = compute_unsynced_decisions(
         project_dir,
+        resolved_cortex_dir,
         ignore_rules=ignore_rules,
     )
     checks.append(
@@ -1033,7 +1077,9 @@ def compute_audit_report(project_dir: Path, assets_dir: Path | None = None) -> t
         "version": "v0",
         "run_at": utc_now(),
         "project_dir": str(project_dir),
+        "cortex_root": str(resolved_cortex_dir),
         "assets_dir": str(resolved_assets_dir),
+        "audit_scope": audit_scope,
         "status": status,
         "checks": checks,
         "spec_coverage": spec_coverage,
@@ -1124,10 +1170,10 @@ def _glob_files(
     return out
 
 
-def load_spec_registry(project_dir: Path) -> tuple[dict[str, Any] | None, str | None]:
-    path = project_dir / ".cortex" / "spec_registry_v0.json"
+def load_spec_registry(project_dir: Path, cortex_dir: Path) -> tuple[dict[str, Any] | None, str | None]:
+    path = cortex_dir / "spec_registry_v0.json"
     if not path.exists():
-        return None, "missing spec registry (.cortex/spec_registry_v0.json)"
+        return None, f"missing spec registry ({path.relative_to(project_dir)})"
     try:
         obj = json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc:  # noqa: BLE001
@@ -1140,8 +1186,12 @@ def load_spec_registry(project_dir: Path) -> tuple[dict[str, Any] | None, str | 
     return obj, None
 
 
-def compute_spec_coverage(project_dir: Path, ignore_rules: list[tuple[str, bool]] | None = None) -> dict[str, Any]:
-    registry, err = load_spec_registry(project_dir)
+def compute_spec_coverage(
+    project_dir: Path,
+    cortex_dir: Path,
+    ignore_rules: list[tuple[str, bool]] | None = None,
+) -> dict[str, Any]:
+    registry, err = load_spec_registry(project_dir, cortex_dir=cortex_dir)
     if err is not None:
         return {
             "status": "warn",
@@ -1807,9 +1857,10 @@ def decision_promote_project(args: argparse.Namespace) -> int:
 
 def contract_check_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
+    cortex_dir = resolve_cortex_dir(project_dir, getattr(args, "cortex_root", None))
     assets_dir = resolve_assets_dir(getattr(args, "assets_dir", None))
     contract_file = Path(args.contract_file).resolve() if args.contract_file else resolve_asset_path(assets_dir, DEFAULT_CONTRACT_FILE)
-    report = compute_contract_check(project_dir, contract_file)
+    report = compute_contract_check(project_dir, contract_file, cortex_dir=cortex_dir)
 
     if args.format == "json":
         print(json.dumps(report, indent=2, sort_keys=True))
@@ -1830,10 +1881,15 @@ def contract_check_project(args: argparse.Namespace) -> int:
 
 def audit_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
+    cortex_dir = resolve_cortex_dir(project_dir, getattr(args, "cortex_root", None))
     assets_dir = resolve_assets_dir(getattr(args, "assets_dir", None))
-    cortex_dir = project_dir / ".cortex"
     manifest_path = cortex_dir / MANIFEST_FILE
-    status, report = compute_audit_report(project_dir, assets_dir=assets_dir)
+    status, report = compute_audit_report(
+        project_dir,
+        assets_dir=assets_dir,
+        cortex_dir=cortex_dir,
+        audit_scope=args.audit_scope,
+    )
 
     reports_dir = cortex_dir / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -1858,7 +1914,7 @@ def audit_project(args: argparse.Namespace) -> int:
 def coach_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     assets_dir = resolve_assets_dir(getattr(args, "assets_dir", None))
-    cortex_dir = project_dir / ".cortex"
+    cortex_dir = resolve_cortex_dir(project_dir, getattr(args, "cortex_root", None))
     manifest_path = cortex_dir / MANIFEST_FILE
     if not manifest_path.exists():
         print(f"missing manifest: {manifest_path}", file=sys.stderr)
@@ -1879,7 +1935,12 @@ def coach_project(args: argparse.Namespace) -> int:
         manifest_obj["updated_at"] = utc_now()
         atomic_write_text(manifest_path, json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n")
 
-    audit_status, audit_report = compute_audit_report(project_dir, assets_dir=assets_dir)
+    audit_status, audit_report = compute_audit_report(
+        project_dir,
+        assets_dir=assets_dir,
+        cortex_dir=cortex_dir,
+        audit_scope=args.audit_scope,
+    )
     reports_dir = cortex_dir / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
     audit_out = reports_dir / "lifecycle_audit_v0.json"
@@ -2096,17 +2157,35 @@ def build_parser() -> argparse.ArgumentParser:
             help="Optional Cortex assets root (defaults to CORTEX_ASSETS_DIR or embedded repo assets).",
         )
 
+    def add_cortex_root_arg(p: argparse.ArgumentParser) -> None:
+        p.add_argument(
+            "--cortex-root",
+            default=DEFAULT_CORTEX_ROOT,
+            help=f"Cortex lifecycle root directory (default: {DEFAULT_CORTEX_ROOT}).",
+        )
+
+    def add_audit_scope_arg(p: argparse.ArgumentParser) -> None:
+        p.add_argument(
+            "--audit-scope",
+            choices=["cortex-only", "all"],
+            default="cortex-only",
+            help="Artifact conformance scope: cortex-only (default) or all repository governance dirs.",
+        )
+
     p_init = sub.add_parser("init", help="Bootstrap .cortex artifacts for a project.")
     p_init.add_argument("--project-dir", required=True)
     p_init.add_argument("--project-id", required=True)
     p_init.add_argument("--project-name", required=True)
     p_init.add_argument("--force", action="store_true")
+    add_cortex_root_arg(p_init)
     add_assets_arg(p_init)
     add_lock_args(p_init)
     p_init.set_defaults(func=init_project)
 
     p_audit = sub.add_parser("audit", help="Audit .cortex lifecycle artifact health.")
     p_audit.add_argument("--project-dir", required=True)
+    add_cortex_root_arg(p_audit)
+    add_audit_scope_arg(p_audit)
     add_assets_arg(p_audit)
     add_lock_args(p_audit)
     p_audit.set_defaults(func=audit_project)
@@ -2228,6 +2307,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--contract-file",
         help=f"Optional contract file path (default: <assets-dir>/{DEFAULT_CONTRACT_FILE}).",
     )
+    add_cortex_root_arg(p_contract_check)
     add_assets_arg(p_contract_check)
     p_contract_check.add_argument("--format", choices=["text", "json"], default="text")
     p_contract_check.add_argument("--out-file")
@@ -2242,6 +2322,8 @@ def build_parser() -> argparse.ArgumentParser:
         default="direction,governance,design",
         help="Comma-separated scopes for --apply: direction,governance,design",
     )
+    add_cortex_root_arg(p_coach)
+    add_audit_scope_arg(p_coach)
     add_assets_arg(p_coach)
     add_lock_args(p_coach)
     p_coach.set_defaults(sync_phases=True)
@@ -2258,6 +2340,7 @@ def main() -> int:
         try:
             with project_lock(
                 project_dir=project_dir,
+                cortex_root=getattr(args, "cortex_root", None),
                 lock_timeout_seconds=args.lock_timeout_seconds,
                 lock_stale_seconds=args.lock_stale_seconds,
                 force_unlock=args.force_unlock,

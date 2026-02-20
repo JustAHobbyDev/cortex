@@ -102,15 +102,15 @@ Decoupling work should proceed only insofar as governance completeness is mainta
 
 - [x] Create `cortex-coach` repository with package + CLI + docs + CI.
 - [x] Move runtime/test/docs assets from Cortex to new repo.
-- [ ] Publish install instructions (`uv tool install` and pip fallback).
-- [ ] Add release tagging/versioning workflow for coach.
+- [x] Publish install instructions (`uv tool install` and pip fallback).
+- [x] Add release tagging/versioning workflow for coach.
 - [x] Add compatibility matrix doc (`coach_version` -> `asset_contract_version`).
 
 ### Acceptance Criteria
 
 - [x] `cortex-coach` installs and runs without cloning Cortex.
 - [x] New repo CI passes unit + contract tests.
-- [ ] Versioned release artifact is published.
+- [x] Versioned release artifact is published.
 - [x] Compatibility matrix is documented and tested.
 
 ## Phase 3: Dual-Path Stabilization
@@ -201,13 +201,8 @@ Allow Phase 2+ advancement only when:
 
 ## Closeout Scope
 
-Functional decoupling (Phases 1, 3, 4) is complete.
-
-Phase 2 release-process follow-ups remain open and are tracked explicitly:
-- publish install instructions (`uv tool install` + pip fallback)
-- add release tagging/versioning workflow for coach
-- publish a versioned release artifact
+Phases 1-4 are complete, including Phase 2 release-process follow-ups.
 
 ## Status
 
-Active v1 (decoupling delivered; release-process follow-ups pending).
+Closed v1 (Phases 1-4 completed; decoupling delivered).

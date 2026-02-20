@@ -62,3 +62,8 @@ coach-context-load project_dir task="default" max_files="12" max_chars_per_file=
 coach-context-policy project_dir:
   uv run python3 scripts/cortex_project_coach_v0.py context-policy \
     --project-dir "{{project_dir}}"
+
+coach-policy-enable project_dir policy="usage-decision":
+  uv run python3 scripts/cortex_project_coach_v0.py policy-enable \
+    --project-dir "{{project_dir}}" \
+    --policy "{{policy}}"

@@ -139,3 +139,25 @@ cortex-coach context-policy \
   --format json \
   --out-file .cortex/reports/context_policy_v0.json
 ```
+
+## `policy-enable`
+
+Enable an opt-in policy file inside the target project.
+
+```bash
+cortex-coach policy-enable \
+  --project-dir /path/to/project \
+  --policy usage-decision
+```
+
+Default output path:
+- `.cortex/policies/cortex_coach_usage_decision_policy_v0.md`
+
+Optional overwrite:
+
+```bash
+cortex-coach policy-enable \
+  --project-dir /path/to/project \
+  --policy usage-decision \
+  --force
+```

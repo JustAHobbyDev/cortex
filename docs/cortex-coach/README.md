@@ -8,8 +8,9 @@ This documentation is for users running `cortex-coach` in their own projects.
 2. [Quickstart](quickstart.md)
 3. [Commands](commands.md)
 4. [Maintainer Mode](maintainer-mode.md)
-5. [FAQ](faq.md)
-6. [Troubleshooting](troubleshooting.md)
+5. [Agent Context Loader](agent-context-loader.md)
+6. [FAQ](faq.md)
+7. [Troubleshooting](troubleshooting.md)
 
 ## What Cortex Coach Does
 

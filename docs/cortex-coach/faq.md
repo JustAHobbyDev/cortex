@@ -25,6 +25,16 @@ A `.cortex/` folder containing:
 
 For governance-heavy workflows, yes. Track meaningful `.cortex/` artifacts and ignore transient temp files.
 
+## Can policy rules be opt-in per project?
+
+Yes. Use:
+
+```bash
+cortex-coach policy-enable --project-dir /path/to/project --policy usage-decision
+```
+
+This writes a policy file in that project rather than assuming global defaults.
+
 ## What is the recommended command cadence?
 
 1. `init` once

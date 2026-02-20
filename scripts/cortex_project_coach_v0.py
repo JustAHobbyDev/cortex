@@ -56,6 +56,58 @@ DEFAULT_IGNORED_PATTERNS = [
 ]
 
 
+def usage_decision_policy_text(project_dir: Path) -> str:
+    return f"""# Cortex Coach Usage Decision Policy
+
+Version: v0
+Status: Active
+Scope: This repository (`{project_dir}`)
+
+## Purpose
+
+Ensure `cortex-coach` is consistently considered before next-step execution so lifecycle governance is not skipped due to operator memory gaps.
+
+## Rule
+
+Before substantial next-step work, the operator/agent must make an explicit decision:
+
+1. `Use coach now`, or
+2. `Coach not needed yet` (with concrete reason).
+
+## Default Decision Procedure
+
+1. Run:
+   ```bash
+   cortex-coach audit-needed --project-dir .
+   ```
+2. If `audit_required=true`:
+   - run `cortex-coach coach --project-dir .`
+   - run `cortex-coach audit --project-dir .`
+   - proceed only after handling blocking findings
+3. If `audit_required=false`:
+   - proceed with work
+   - run audit at the next milestone boundary (before merge/release)
+
+## High-Risk Trigger Guidance
+
+Treat changes as high-risk (likely requiring coach/audit) when they touch:
+
+- `specs/`
+- `policies/`
+- `.cortex/manifest_v0.json`
+- `.cortex/artifacts/`
+- `scripts/cortex_project_coach_v0.py`
+
+## Exceptions
+
+Skip immediate coach usage only for tiny, non-governance edits (for example simple typo-only changes), but still run audit before merge/release.
+
+## Enforcement Style
+
+This policy is enforced as an operating discipline (human + agent behavior), and may later be promoted to CI gating.
+"""
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -801,6 +853,50 @@ def context_policy_project(args: argparse.Namespace) -> int:
     return 0
 
 
+def policy_enable_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    policy_name = args.policy.lower().strip()
+    if policy_name != "usage-decision":
+        print(
+            "unsupported policy. valid values: usage-decision",
+            file=sys.stderr,
+        )
+        return 1
+
+    rel_path = (
+        args.out_file
+        if args.out_file
+        else ".cortex/policies/cortex_coach_usage_decision_policy_v0.md"
+    )
+    out = Path(rel_path)
+    if not out.is_absolute():
+        out = project_dir / out
+    if out.exists() and not args.force:
+        print(f"policy already exists: {out}", file=sys.stderr)
+        print("rerun with --force to overwrite", file=sys.stderr)
+        return 1
+
+    text = usage_decision_policy_text(project_dir)
+    atomic_write_text(out, text)
+
+    manifest_path = project_dir / ".cortex" / MANIFEST_FILE
+    if manifest_path.exists():
+        try:
+            m = json.loads(manifest_path.read_text(encoding="utf-8"))
+            m.setdefault("policies", {})
+            enabled = m["policies"].setdefault("enabled", [])
+            rel = str(out.relative_to(project_dir))
+            if rel not in enabled:
+                enabled.append(rel)
+            m["updated_at"] = utc_now()
+            atomic_write_text(manifest_path, json.dumps(m, indent=2, sort_keys=True) + "\n")
+        except Exception:
+            pass
+
+    print(str(out))
+    return 0
+
+
 def audit_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     cortex_dir = project_dir / ".cortex"
@@ -1086,6 +1182,24 @@ def build_parser() -> argparse.ArgumentParser:
     p_context_policy.add_argument("--out-file")
     p_context_policy.set_defaults(func=context_policy_project)
 
+    p_policy_enable = sub.add_parser(
+        "policy-enable",
+        help="Enable an opt-in coach policy in a target project.",
+    )
+    p_policy_enable.add_argument("--project-dir", required=True)
+    p_policy_enable.add_argument(
+        "--policy",
+        default="usage-decision",
+        help="Policy key to enable (default: usage-decision).",
+    )
+    p_policy_enable.add_argument(
+        "--out-file",
+        help="Optional output policy path (absolute or project-relative).",
+    )
+    p_policy_enable.add_argument("--force", action="store_true", help="Overwrite existing policy file.")
+    add_lock_args(p_policy_enable)
+    p_policy_enable.set_defaults(func=policy_enable_project)
+
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
     p_coach.add_argument("--project-dir", required=True)
     p_coach.add_argument("--no-sync-phases", action="store_false", dest="sync_phases")
@@ -1105,7 +1219,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    if args.cmd in {"init", "audit", "coach"}:
+    if args.cmd in {"init", "audit", "coach", "policy-enable"}:
         project_dir = Path(args.project_dir).resolve()
         try:
             with project_lock(

@@ -80,4 +80,10 @@ Primary operational entrypoints should be callable through `just` recipes that s
 
 ---
 
+## User Documentation
+
+- Cortex Coach docs: `docs/cortex-coach/README.md`
+
+---
+
 Artifact Admission Rules: [ARTIFACT_ADMISSION.md]

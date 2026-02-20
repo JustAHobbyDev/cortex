@@ -201,4 +201,4 @@ Allow Phase 2+ advancement only when:
 
 ## Status
 
-Active v1 (partially executed; Phase 2 in progress).
+Closed v1 (Phases 1-4 completed; decoupling delivered).

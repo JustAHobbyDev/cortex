@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""
-Thin Phase 4 delegator for cortex-coach runtime.
-
-Behavior:
-- prefer installed `cortex-coach`
-- fallback to in-repo legacy runtime for compatibility
-- force legacy mode with `CORTEX_COACH_FORCE_INTERNAL=1`
-"""
+"""Thin Phase 4 delegator for installed standalone `cortex-coach`."""
 
 from __future__ import annotations
 
@@ -14,46 +7,28 @@ import os
 import shutil
 import subprocess
 import sys
-from pathlib import Path
-
-
-def _run_legacy() -> int:
-    legacy = Path(__file__).resolve().with_name("cortex_project_coach_runtime_legacy_v0.py")
-    proc = subprocess.run([sys.executable, str(legacy), *sys.argv[1:]], check=False)
-    return proc.returncode
 
 
 def main() -> int:
     if os.environ.get("CORTEX_COACH_FORCE_INTERNAL") == "1":
-        return _run_legacy()
+        print(
+            "CORTEX_COACH_FORCE_INTERNAL is no longer supported in Phase 4. "
+            "Use installed standalone `cortex-coach`.",
+            file=sys.stderr,
+        )
+        return 1
 
     coach_bin = shutil.which("cortex-coach")
-    if coach_bin:
-        proc = subprocess.run(
-            [coach_bin, *sys.argv[1:]],
-            check=False,
-            text=True,
-            capture_output=True,
+    if not coach_bin:
+        print(
+            "missing `cortex-coach` on PATH. Install standalone coach "
+            "(for example: `uv tool install git+https://github.com/JustAHobbyDev/cortex-coach.git`).",
+            file=sys.stderr,
         )
-        if proc.returncode == 0:
-            if proc.stdout:
-                print(proc.stdout, end="")
-            return 0
-        stderr = proc.stderr or ""
-        startup_fail = (
-            "No module named" in stderr
-            or "ModuleNotFoundError" in stderr
-            or "ImportError" in stderr
-        )
-        if not startup_fail:
-            if proc.stdout:
-                print(proc.stdout, end="")
-            if proc.stderr:
-                print(proc.stderr, end="", file=sys.stderr)
-            return proc.returncode
+        return 1
 
-    # Compatibility fallback during migration window.
-    return _run_legacy()
+    proc = subprocess.run([coach_bin, *sys.argv[1:]], check=False)
+    return proc.returncode
 
 
 if __name__ == "__main__":

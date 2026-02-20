@@ -66,8 +66,31 @@
       "rationale": "Recent misses showed that integrity checks pass even when decision capture completeness is incomplete; priority must shift to close this governance gap first.",
       "status": "promoted",
       "title": "Prioritize governance completeness over decoupling"
+    },
+    {
+      "captured_at": "2026-02-20T14:40:52Z",
+      "decision": "Remove in-repo coach runtime fallback and make cortex coach entrypoints delegate to installed standalone cortex-coach; finalize ownership-boundary governance docs.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_complete_phase_4_external_only_coach_delegation_v1.md",
+      "decision_id": "dec_20260220T144052Z_complete_phase_4_externa",
+      "impact_scope": [
+        "governance",
+        "decoupling",
+        "runtime",
+        "docs"
+      ],
+      "linked_artifacts": [
+        "scripts/cortex_project_coach_v0.py",
+        "playbooks/cortex_coach_decoupling_plan_v0.md",
+        "docs/cortex-coach/migration_to_standalone_v0.md",
+        "policies/cortex_coach_final_ownership_boundary_v0.md",
+        ".cortex/artifacts/decisions/decision_complete_phase_4_external_only_coach_delegation_v1.md"
+      ],
+      "promoted_at": "2026-02-20T14:40:56Z",
+      "rationale": "Phase 3 parity is complete and standalone coach is operational; retaining internal runtime risks boundary drift.",
+      "status": "promoted",
+      "title": "Complete phase 4 external-only coach delegation"
     }
   ],
-  "updated_at": "2026-02-20T12:02:31Z",
+  "updated_at": "2026-02-20T14:40:56Z",
   "version": "v0"
 }

@@ -137,16 +137,21 @@ Phase 3 evidence:
 ### Tasks
 
 - [x] Convert `scripts/cortex_project_coach_v0.py` to thin external-first delegator (with temporary legacy fallback).
-- [ ] Remove in-repo coach runtime implementation from Cortex.
+- [x] Remove in-repo coach runtime implementation from Cortex.
 - [x] Keep thin wrappers + docs for external coach usage.
 - [x] Archive migration notes for users transitioning from in-repo scripts.
-- [ ] Update governance docs to reflect final ownership boundary.
+- [x] Update governance docs to reflect final ownership boundary.
 
 ### Acceptance Criteria
 
-- [ ] Cortex has no runtime coach code dependency on internal scripts.
-- [ ] All maintainer workflows run through external `cortex-coach`.
-- [ ] Migration docs and troubleshooting are complete.
+- [x] Cortex has no runtime coach code dependency on internal scripts.
+- [x] All maintainer workflows run through external `cortex-coach`.
+- [x] Migration docs and troubleshooting are complete.
+
+Phase 4 evidence:
+- `scripts/cortex_project_coach_v0.py` (external-only delegator)
+- `docs/cortex-coach/migration_to_standalone_v0.md`
+- `policies/cortex_coach_final_ownership_boundary_v0.md`
 
 ## Operating Cadence
 

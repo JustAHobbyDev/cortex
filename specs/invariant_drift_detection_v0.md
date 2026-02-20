@@ -1,5 +1,7 @@
 # Invariant Drift Detection v0 (Draft)
 
+Canonical: false
+
 Status: Draft (PROPOSE-only, not activated)
 Owner (draft): agent/orchestrator_v0
 Prepared at: 2026-02-16T22:37:53Z

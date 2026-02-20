@@ -1,5 +1,7 @@
 # Cortex Project Coach Runbook v0
 
+Canonical: false
+
 ## Purpose
 
 Operational guide for using the Project Coach application to:

@@ -1,5 +1,7 @@
 # Second Brain Taxonomy
 
+Canonical: false
+
 Version: v0
 Status: Experimental
 Generated On (UTC): 2026-02-14T06:26:02Z

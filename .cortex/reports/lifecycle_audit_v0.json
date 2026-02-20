@@ -2,28 +2,22 @@
   "artifact_conformance": {
     "findings": [
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/agent_executor_v0', 'project/dan_personal_cognitive_infrastructure']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/agent_executor_v0', 'project/dan_personal_cognitive_infrastructure'])",
         "path": "contracts/agent_executor_contract_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/second-brain']) without explicit reference status",
-        "path": "contracts/closeout_contract_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['templates/session_template.json', 'prompts/session_ending_prompt.md', 'project/second-brain', 'reports/checkpoints/*', 'artifact/{llm}_{YYYY_MM_DD}_{kebab-case-3-to-6-word-slug}'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/second-brain'])",
         "path": "contracts/closeout_contract_v0.md",
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline'])",
         "path": "contracts/project_manager_agent_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -32,14 +26,8 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline']) without explicit reference status",
-        "path": "specs/beads_integration_boundary_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['inv/beads_boundary_01', 'inv/beads_boundary_02', 'scenes/', 'inv/beads_boundary_03', 'scene/ledger/*'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline'])",
         "path": "specs/beads_integration_boundary_v0.md",
         "severity": "warn"
       },
@@ -50,10 +38,10 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline'])",
         "path": "specs/invariant_drift_detection_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -80,22 +68,16 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/second-brain']) without explicit reference status",
-        "path": "templates/session_closing_checklist.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['project/second-brain', 'reports/checkpoints/*', 'artifact/{llm}_{YYYY_MM_DD}_{kebab-case-3-to-6-word-slug}', 'bash\\nsessions/<assistant_or_tool>/YYYY-MM-DD-slug.json\\n', 'bash\\nsessions/chatgpt/2026-02-11-trading-pipeline.json\\n'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/second-brain'])",
         "path": "templates/session_closing_checklist.md",
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/...']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/...'])",
         "path": "prompts/codex_session_ending_prompt_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -134,28 +116,28 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/...', 'project/dan_cognitive_infra']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/...', 'project/dan_cognitive_infra'])",
         "path": "prompts/session_archiver_prompt_template_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/...']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/...'])",
         "path": "prompts/session_ending_prompt_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure'])",
         "path": "playbooks/agent_deploy_flow_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/agent_executor_v0', 'project/dan_personal_cognitive_infrastructure']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/agent_executor_v0', 'project/dan_personal_cognitive_infrastructure'])",
         "path": "playbooks/agent_executor_runbook_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -170,14 +152,8 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/second-brain']) without explicit reference status",
-        "path": "playbooks/claude_session_closeout_runbook_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['sessions/', 'project/second-brain', 'prompts/session_ending_prompt.md', 'second-brain/', 'sessions/claude/YYYY-MM-DD-<slug>.json'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/second-brain'])",
         "path": "playbooks/claude_session_closeout_runbook_v0.md",
         "severity": "warn"
       },
@@ -200,10 +176,10 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/.cortex']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/.cortex'])",
         "path": "playbooks/cortex_project_coach_runbook_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -212,14 +188,8 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/scene']) without explicit reference status",
-        "path": "playbooks/generate_project_history_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['reports/checkpoints/', 'scenes/', 'operations/', 'meta/', 'profiles/'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/scene'])",
         "path": "playbooks/generate_project_history_v0.md",
         "severity": "warn"
       },
@@ -236,10 +206,10 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure.']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure.'])",
         "path": "playbooks/project_manager_consultation_loop_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "missing_source_paths",
@@ -248,14 +218,8 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/second-brain']) without explicit reference status",
-        "path": "playbooks/second_brain_portable_bootstrap_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['project/second-brain'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/second-brain'])",
         "path": "playbooks/second_brain_portable_bootstrap_v0.md",
         "severity": "warn"
       },
@@ -302,38 +266,20 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure']) without explicit reference status",
-        "path": "policies/oq3_autonomy_risk_policy_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['scene/authority/'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure'])",
         "path": "policies/oq3_autonomy_risk_policy_v0.md",
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure']) without explicit reference status",
-        "path": "policies/scene_namespace_boundary_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['scenes/', 'scene/', 'inv/scene_ns_01', 'scenes/', 'inv/scene_ns_02'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure'])",
         "path": "policies/scene_namespace_boundary_v0.md",
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure']) without explicit reference status",
-        "path": "policies/session_tracking_externalization_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['sessions/', 'reports/checkpoints/*', 'scenes/', 'sessions/*', 'scenes/'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure'])",
         "path": "policies/session_tracking_externalization_v0.md",
         "severity": "warn"
       },
@@ -344,26 +290,14 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/second_brain_build']) without explicit reference status",
-        "path": "philosophy/second_brain_taxonomy_aggregated_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['scenes/'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/second_brain_build'])",
         "path": "philosophy/second_brain_taxonomy_aggregated_v0.md",
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/second_brain_build']) without explicit reference status",
-        "path": "philosophy/second_brain_taxonomy_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['scenes/dan_personal_cognitive_infrastructure.scene.json', 'scenes/dan_codex_meta_workflow_v1.scene.json', 'scenes/four_principles_second_brain.scene.json', 'scenes/second_brain_toolchain.scene.json'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/second_brain_build'])",
         "path": "philosophy/second_brain_taxonomy_v0.md",
         "severity": "warn"
       },
@@ -374,10 +308,10 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc']) without explicit reference status",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc'])",
         "path": "operating_model/multi_agent_mutation_authority_model_v0.md",
-        "severity": "fail"
+        "severity": "warn"
       },
       {
         "check": "foreign_project_scope_reference",
@@ -386,20 +320,14 @@
         "severity": "warn"
       },
       {
-        "check": "foreign_project_scope",
-        "detail": "references project IDs outside local manifest scope (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline']) without explicit reference status",
-        "path": "operating_model/swarm_runner_v0.md",
-        "severity": "fail"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['scenes/', 'scene/ledger/mutations_v0.jsonl', 'project/kalshi_15m_btc_pipeline', 'scenes/kalshi_15m_btc_pipeline.scene.json', 'scenes/kalshi_data_gate_v0.scene.json'])",
+        "check": "foreign_project_scope_reference",
+        "detail": "reference-scoped foreign project IDs present (foreign_ids=['project/dan_personal_cognitive_infrastructure', 'project/kalshi_15m_btc_pipeline'])",
         "path": "operating_model/swarm_runner_v0.md",
         "severity": "warn"
       }
     ],
     "scanned_files": 70,
-    "status": "fail"
+    "status": "warn"
   },
   "assets_dir": "/home/d/codex/cortex-coach/cortex_coach/data/assets",
   "audit_scope": "all",
@@ -436,8 +364,8 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=70, findings=66",
-      "status": "fail"
+      "detail": "scanned=70, findings=54",
+      "status": "warn"
     },
     {
       "check": "unsynced_decisions",
@@ -452,7 +380,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-20T15:17:15Z",
+  "run_at": "2026-02-20T15:22:05Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -461,7 +389,7 @@
     "status": "pass",
     "warnings": []
   },
-  "status": "fail",
+  "status": "pass",
   "unsynced_decisions": {
     "findings": [],
     "promoted_decision_count": 5,

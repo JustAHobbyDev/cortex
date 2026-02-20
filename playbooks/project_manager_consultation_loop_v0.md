@@ -1,5 +1,7 @@
 # Project Manager Consultation Loop v0
 
+Canonical: false
+
 Purpose: operationalize agent/project_manager_v0 as a steady planning and consultation surface.
 
 ## Cadence

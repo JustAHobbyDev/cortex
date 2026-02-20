@@ -1,5 +1,7 @@
 # Claude Session Closeout Runbook
 
+Canonical: false
+
 Status: Legacy (deprecated default)
 
 Purpose: deterministically capture a Claude session artifact, register it in the index, checkpoint the repo state, and commit the change set so downstream automations discoverable the new session.

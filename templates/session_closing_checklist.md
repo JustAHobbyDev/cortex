@@ -1,5 +1,7 @@
 # Session Closing Checklist
 
+Canonical: false
+
 Status: Legacy (deprecated default in `project/second-brain`)
 
 This checklist is for controlled migration/backfill only.

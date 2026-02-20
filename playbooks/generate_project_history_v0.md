@@ -1,5 +1,7 @@
 # Generate Project History Operation
 
+Canonical: false
+
 Version: v0
 Status: Experimental
 Inputs:

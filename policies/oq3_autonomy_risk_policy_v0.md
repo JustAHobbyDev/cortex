@@ -1,5 +1,7 @@
 # OQ-3 Autonomy Risk Policy v0 (Draft)
 
+Canonical: false
+
 Status: Draft (PROPOSE-only, not activated)
 Prepared at: 2026-02-17T07:35:14Z
 Scope: project/dan_personal_cognitive_infrastructure

@@ -1,3 +1,5 @@
+Canonical: false
+
 You are a session archivist. Using the conversation history,
 produce a valid JSON session artifact following this schema:
 

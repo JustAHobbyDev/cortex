@@ -1,5 +1,7 @@
 # Closeout Contract
 
+Canonical: false
+
 Version: v0
 Status: Legacy (deprecated default)
 Inputs:

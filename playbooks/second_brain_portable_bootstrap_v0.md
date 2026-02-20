@@ -1,5 +1,7 @@
 # Second Brain Portable Bootstrap v0
 
+Canonical: false
+
 ## Purpose
 
 Make `project/second-brain` runnable from any machine with deterministic startup checks.

@@ -1,5 +1,7 @@
 # Project Manager Agent v0
 
+Canonical: false
+
 Version: v0
 Status: Draft
 Scope: project/dan_personal_cognitive_infrastructure

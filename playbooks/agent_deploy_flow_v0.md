@@ -1,5 +1,7 @@
 # Agent Deploy Flow v0
 
+Canonical: false
+
 Purpose: deterministic deployment flow for new agents in this repository.
 
 ## Scope

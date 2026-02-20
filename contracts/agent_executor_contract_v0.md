@@ -1,5 +1,7 @@
 # Agent Executor Contract v0
 
+Canonical: false
+
 Version: v0
 Status: Draft
 Scope: project/agent_executor_v0 (scoped worker under project/dan_personal_cognitive_infrastructure)

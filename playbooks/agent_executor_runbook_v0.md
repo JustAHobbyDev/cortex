@@ -1,5 +1,7 @@
 # Agent Executor Runbook v0
 
+Canonical: false
+
 Purpose: run project/agent_executor_v0 tasks deterministically with Level 2 track-only quality checks.
 
 ## Scope

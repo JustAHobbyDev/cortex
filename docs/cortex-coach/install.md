@@ -6,19 +6,12 @@
 - `uv` (recommended)
 - `just` (recommended for task shortcuts)
 
-## From Source (Current Recommended)
+## Standalone Install (Recommended)
 
-Clone the repository:
-
-```bash
-git clone https://github.com/JustAHobbyDev/cortex.git
-cd cortex
-```
-
-Install the CLI:
+Install from the standalone repository:
 
 ```bash
-uv pip install -e .
+uv tool install git+https://github.com/JustAHobbyDev/cortex-coach.git
 ```
 
 Run:
@@ -27,7 +20,13 @@ Run:
 cortex-coach --help
 ```
 
-## No-Install Run Mode (Fallback)
+Pip fallback:
+
+```bash
+pip install git+https://github.com/JustAHobbyDev/cortex-coach.git
+```
+
+## In-Repo Script Mode (Temporary Fallback)
 
 If you do not want to install, run directly from repo root:
 
@@ -40,3 +39,5 @@ Or use `just` recipes:
 ```bash
 just --list
 ```
+
+This fallback is transitional and will be removed after full decoupling.

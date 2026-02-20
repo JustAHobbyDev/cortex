@@ -57,10 +57,11 @@ cortex-coach audit --project-dir /path/to/project
 
 ## `uv` permission/cache issues
 
-If `uv` fails in restricted environments, run directly with Python:
+If `uv` fails in restricted environments, run directly with Python (temporary fallback):
 
 ```bash
 python3 scripts/cortex_project_coach_v0.py --help
 ```
 
 Then return to `uv` in normal environments.
+Preferred long-term path is installed standalone `cortex-coach`.

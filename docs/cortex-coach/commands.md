@@ -1,13 +1,14 @@
 # Commands
 
 Examples below use installed CLI form (`cortex-coach`).
-Fallback: `uv run python3 scripts/cortex_project_coach_v0.py ...`
+Fallback (temporary migration path): `uv run python3 scripts/cortex_project_coach_v0.py ...`
 
 In this repository, `just coach-*` recipes now route through
 `scripts/cortex_coach_wrapper_v0.sh` (Phase 3 dual-path stabilization):
 - prefer installed `cortex-coach`
 - fallback to in-repo script mode
 - set `CORTEX_COACH_FORCE_INTERNAL=1` to force script mode for parity checks
+- script fallback is temporary and will be removed in full decoupling
 
 Common option:
 - `--assets-dir /path/to/cortex-assets` to load contract/schema/vocabulary assets from an external Cortex asset root.

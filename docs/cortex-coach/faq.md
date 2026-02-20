@@ -69,8 +69,10 @@ cortex-coach coach --project-dir /path/to/project --apply --apply-scope directio
 
 ## Can I still use script mode instead of installed CLI?
 
-Yes. Use:
+Temporarily, yes during migration. Use:
 
 ```bash
 uv run python3 scripts/cortex_project_coach_v0.py <command> ...
 ```
+
+Preferred path is installed standalone `cortex-coach`. Script mode will be removed after full decoupling.

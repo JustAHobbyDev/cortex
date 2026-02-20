@@ -65,13 +65,15 @@ cortex-coach coach \
   --apply-scope direction,governance
 ```
 
-## If `cortex-coach` Is Not Installed
+## If `cortex-coach` Is Not Installed (Temporary Migration Fallback)
 
 Use:
 
 ```bash
 uv run python3 scripts/cortex_project_coach_v0.py <command> ...
 ```
+
+Prefer installing standalone `cortex-coach`; script fallback is transitional during decoupling.
 
 ## Expected Output Location
 

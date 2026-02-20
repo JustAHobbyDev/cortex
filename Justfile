@@ -108,6 +108,11 @@ quality-gate:
 quality-gate-ci:
   ./scripts/quality_gate_ci_v0.sh
 
+phase3-parity-check external_bin="/home/d/codex/cortex-coach/.venv/bin/cortex-coach":
+  UV_CACHE_DIR=.uv-cache uv run python3 scripts/phase3_parity_check_v0.py \
+    --repo-root . \
+    --external-bin "{{external_bin}}"
+
 session-governance-check:
   UV_CACHE_DIR=.uv-cache uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
     --project-dir . \

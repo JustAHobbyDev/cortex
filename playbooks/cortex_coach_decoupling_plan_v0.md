@@ -117,8 +117,8 @@ Decoupling work should proceed only insofar as governance completeness is mainta
 
 ### Tasks
 
-- [ ] Keep temporary wrapper commands in Cortex that call installed coach.
-- [ ] Run parity checks between in-repo implementation and external coach.
+- [x] Keep temporary wrapper commands in Cortex that call installed coach.
+- [x] Run parity checks between in-repo implementation and external coach.
 - [ ] Capture differences and fix until behavior is aligned.
 - [ ] Freeze in-repo coach feature development (bugfix-only mode).
 

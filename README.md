@@ -89,3 +89,9 @@ Primary operational entrypoints should be callable through `just` recipes that s
 ---
 
 Artifact Admission Rules: [ARTIFACT_ADMISSION.md]
+
+---
+
+## Footnotes
+
+[1] Reflection-loop pattern inspiration: [`aviadr1/claude-meta`](https://github.com/aviadr1/claude-meta)

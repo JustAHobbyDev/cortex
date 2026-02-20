@@ -24,10 +24,23 @@
       "check": "design_schema_validation",
       "detail": "",
       "status": "pass"
+    },
+    {
+      "check": "spec_coverage",
+      "detail": "missing_required=0, stale=0, orphan=0",
+      "status": "pass"
     }
   ],
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-20T01:06:59Z",
+  "run_at": "2026-02-20T04:51:25Z",
+  "spec_coverage": {
+    "missing_required": [],
+    "orphan": [],
+    "registry_loaded": true,
+    "stale": [],
+    "status": "pass",
+    "warnings": []
+  },
   "status": "pass",
   "version": "v0"
 }

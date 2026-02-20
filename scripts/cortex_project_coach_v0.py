@@ -56,6 +56,47 @@ DEFAULT_IGNORED_PATTERNS = [
 ]
 
 
+def default_spec_registry(project_id: str) -> dict[str, Any]:
+    return {
+        "version": "v0",
+        "domains": [
+            {
+                "id": "direction",
+                "name": "Direction",
+                "required": True,
+                "severity": "block",
+                "spec_patterns": [".cortex/artifacts/direction_*.md"],
+                "source_patterns": [],
+            },
+            {
+                "id": "governance",
+                "name": "Governance",
+                "required": True,
+                "severity": "block",
+                "spec_patterns": [".cortex/artifacts/governance_*.md"],
+                "source_patterns": [],
+            },
+            {
+                "id": "design",
+                "name": "Design",
+                "required": True,
+                "severity": "warn",
+                "spec_patterns": [".cortex/artifacts/design_*.json", ".cortex/artifacts/design_*.dsl"],
+                "source_patterns": [],
+            },
+            {
+                "id": f"{project_id}_specs",
+                "name": "Project Specs",
+                "required": False,
+                "severity": "warn",
+                "spec_patterns": ["specs/*.md"],
+                "source_patterns": ["src/**", "app/**", "api/**", "server/**"],
+            },
+        ],
+        "orphan_spec_patterns": ["specs/*.md"],
+    }
+
+
 def usage_decision_policy_text(project_dir: Path) -> str:
     return f"""# Cortex Coach Usage Decision Policy
 
@@ -289,6 +330,7 @@ def init_project(args: argparse.Namespace) -> int:
     artifacts_dir = cortex_dir / "artifacts"
     prompts_dir = cortex_dir / "prompts"
     reports_dir = cortex_dir / "reports"
+    registry_path = cortex_dir / "spec_registry_v0.json"
     project_id = args.project_id
     project_name = args.project_name
 
@@ -351,6 +393,7 @@ Tasks:
     changed.append(write_if_missing(artifacts_dir / f"governance_{project_id}_v0.md", governance_md, args.force))
     changed.append(write_if_missing(artifacts_dir / f"design_{project_id}_v0.dsl", default_design_dsl(project_id, project_name), args.force))
     changed.append(write_if_missing(prompts_dir / f"project_coach_prompt_{project_id}_v0.md", prompt_md, args.force))
+    changed.append(write_if_missing(registry_path, json.dumps(default_spec_registry(project_id), indent=2, sort_keys=True) + "\n", args.force))
     reports_dir.mkdir(parents=True, exist_ok=True)
 
     # Compile DSL to JSON via existing compiler.
@@ -455,12 +498,28 @@ def compute_audit_report(project_dir: Path) -> tuple[str, dict[str, Any]]:
         checks.append({"check": "design_schema_validation", "status": "fail", "detail": "design_json missing"})
         status = "fail"
 
+    spec_coverage = compute_spec_coverage(project_dir)
+    checks.append(
+        {
+            "check": "spec_coverage",
+            "status": spec_coverage.get("status", "warn"),
+            "detail": (
+                f"missing_required={len(spec_coverage.get('missing_required', []))}, "
+                f"stale={len(spec_coverage.get('stale', []))}, "
+                f"orphan={len(spec_coverage.get('orphan', []))}"
+            ),
+        }
+    )
+    if spec_coverage.get("status") == "fail":
+        status = "fail"
+
     report = {
         "version": "v0",
         "run_at": utc_now(),
         "project_dir": str(project_dir),
         "status": status,
         "checks": checks,
+        "spec_coverage": spec_coverage,
     }
     return status, report
 
@@ -517,6 +576,127 @@ def classify_artifact_scope(target: str) -> str | None:
     if name.startswith("design_"):
         return "design"
     return None
+
+
+def _glob_files(project_dir: Path, patterns: list[str]) -> list[Path]:
+    out: list[Path] = []
+    seen: set[str] = set()
+    for pat in patterns:
+        for p in sorted(project_dir.glob(pat)):
+            if not p.is_file():
+                continue
+            rel = str(p.relative_to(project_dir))
+            if rel in seen:
+                continue
+            seen.add(rel)
+            out.append(p)
+    return out
+
+
+def load_spec_registry(project_dir: Path) -> tuple[dict[str, Any] | None, str | None]:
+    path = project_dir / ".cortex" / "spec_registry_v0.json"
+    if not path.exists():
+        return None, "missing spec registry (.cortex/spec_registry_v0.json)"
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return None, f"invalid spec registry json: {exc}"
+    if not isinstance(obj, dict):
+        return None, "invalid spec registry shape: expected object"
+    domains = obj.get("domains")
+    if not isinstance(domains, list):
+        return None, "invalid spec registry shape: domains must be array"
+    return obj, None
+
+
+def compute_spec_coverage(project_dir: Path) -> dict[str, Any]:
+    registry, err = load_spec_registry(project_dir)
+    if err is not None:
+        return {
+            "status": "warn",
+            "registry_loaded": False,
+            "warnings": [err],
+            "missing_required": [],
+            "stale": [],
+            "orphan": [],
+        }
+
+    domains = registry.get("domains", [])
+    missing_required: list[dict[str, Any]] = []
+    stale: list[dict[str, Any]] = []
+    orphan: list[dict[str, Any]] = []
+    warnings: list[str] = []
+
+    matched_spec_paths: set[str] = set()
+    blocking = False
+
+    for domain in domains:
+        if not isinstance(domain, dict):
+            continue
+        domain_id = str(domain.get("id", "unknown"))
+        severity = str(domain.get("severity", "warn"))
+        required = bool(domain.get("required", False))
+        spec_patterns = domain.get("spec_patterns", [])
+        source_patterns = domain.get("source_patterns", [])
+        if not isinstance(spec_patterns, list):
+            spec_patterns = []
+        if not isinstance(source_patterns, list):
+            source_patterns = []
+
+        spec_files = _glob_files(project_dir, [str(p) for p in spec_patterns])
+        source_files = _glob_files(project_dir, [str(p) for p in source_patterns])
+        for sf in spec_files:
+            matched_spec_paths.add(str(sf.relative_to(project_dir)))
+
+        if required and not spec_files:
+            item = {
+                "domain_id": domain_id,
+                "severity": severity,
+                "spec_patterns": spec_patterns,
+                "reason": "no spec files matched required domain",
+            }
+            missing_required.append(item)
+            if severity == "block":
+                blocking = True
+
+        if spec_files and source_files:
+            newest_spec = max(s.stat().st_mtime for s in spec_files)
+            newer_sources = [s for s in source_files if s.stat().st_mtime > newest_spec]
+            if newer_sources:
+                item = {
+                    "domain_id": domain_id,
+                    "severity": severity,
+                    "newer_source_count": len(newer_sources),
+                    "newer_source_examples": [str(s.relative_to(project_dir)) for s in newer_sources[:5]],
+                    "reason": "source files changed after latest mapped spec update",
+                }
+                stale.append(item)
+                if severity == "block":
+                    blocking = True
+
+    orphan_patterns = registry.get("orphan_spec_patterns", [])
+    if isinstance(orphan_patterns, list):
+        all_candidate_specs = _glob_files(project_dir, [str(p) for p in orphan_patterns])
+        for p in all_candidate_specs:
+            rel = str(p.relative_to(project_dir))
+            if rel not in matched_spec_paths:
+                orphan.append({"path": rel, "reason": "unmapped spec file"})
+
+    if blocking:
+        status = "fail"
+    elif missing_required or stale or orphan:
+        status = "warn"
+    else:
+        status = "pass"
+
+    return {
+        "status": status,
+        "registry_loaded": True,
+        "warnings": warnings,
+        "missing_required": missing_required,
+        "stale": stale,
+        "orphan": orphan[:50],
+    }
 
 
 def git_dirty_files(project_dir: Path) -> tuple[list[str], str | None]:
@@ -646,6 +826,60 @@ def apply_coach_actions(
 
         applied.append({"source": str(target), "draft": str(dst.relative_to(project_dir))})
     return applied, skipped
+
+
+def draft_missing_specs_from_coverage(
+    project_dir: Path,
+    coverage: dict[str, Any],
+    cycle_id: str,
+) -> list[dict[str, str]]:
+    drafted: list[dict[str, str]] = []
+    for item in coverage.get("missing_required", []):
+        if not isinstance(item, dict):
+            continue
+        domain_id = str(item.get("domain_id", "unknown"))
+        patterns = item.get("spec_patterns", [])
+        if not isinstance(patterns, list) or not patterns:
+            continue
+        target_rel = None
+        for pat in patterns:
+            if not isinstance(pat, str):
+                continue
+            if "*" in pat:
+                if pat.startswith(".cortex/artifacts/"):
+                    target_rel = pat.replace("*", f"{domain_id}_auto_v1")
+                elif pat.startswith("specs/"):
+                    target_rel = f"specs/{domain_id}_spec_v1.md"
+                else:
+                    target_rel = pat.replace("*", f"{domain_id}_auto_v1")
+            else:
+                target_rel = pat
+            if target_rel:
+                break
+        if not target_rel:
+            continue
+        target = project_dir / target_rel
+        if target.exists():
+            continue
+        if target.suffix != ".md":
+            continue
+        content = (
+            f"# {domain_id} Spec\n\n"
+            f"Version: v1\n"
+            f"Status: Draft\n"
+            f"GeneratedBy: cortex_project_coach_v0.py\n"
+            f"GeneratedCycle: {cycle_id}\n\n"
+            "## Purpose\n"
+            "- Define the required behavior for this domain.\n\n"
+            "## Scope\n"
+            "- In scope:\n"
+            "- Out of scope:\n\n"
+            "## Requirements\n"
+            "- Fill required constraints and invariants.\n"
+        )
+        atomic_write_text(target, content)
+        drafted.append({"domain_id": domain_id, "draft": str(target.relative_to(project_dir))})
+    return drafted
 
 
 def audit_needed_project(args: argparse.Namespace) -> int:
@@ -956,6 +1190,7 @@ def coach_project(args: argparse.Namespace) -> int:
     phases["lifecycle_audited"] = audit_status == "pass"
     incomplete_phases = [p for p in PHASE_ORDER if not phases.get(p, False)]
     failed_checks = [c for c in audit_report.get("checks", []) if c.get("status") == "fail"]
+    spec_coverage = audit_report.get("spec_coverage", {})
 
     cycle_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     try:
@@ -998,6 +1233,33 @@ def coach_project(args: argparse.Namespace) -> int:
             }
         )
 
+    spec_coverage_actions: list[dict[str, str]] = []
+    for item in spec_coverage.get("missing_required", []):
+        if not isinstance(item, dict):
+            continue
+        domain_id = str(item.get("domain_id", "unknown"))
+        patterns = item.get("spec_patterns", [])
+        target = patterns[0] if isinstance(patterns, list) and patterns else "specs/<domain>_spec_vN.md"
+        action = {
+            "step": f"Create missing required spec for domain: {domain_id}",
+            "target": str(target),
+            "instruction": "Create a versioned spec artifact matching domain patterns and rerun audit.",
+        }
+        actions.append(action)
+        spec_coverage_actions.append(action)
+
+    for item in spec_coverage.get("stale", []):
+        if not isinstance(item, dict):
+            continue
+        domain_id = str(item.get("domain_id", "unknown"))
+        action = {
+            "step": f"Update stale spec coverage for domain: {domain_id}",
+            "target": ".cortex/reports/lifecycle_audit_v0.json",
+            "instruction": "Refresh mapped specs after source changes and rerun audit.",
+        }
+        actions.append(action)
+        spec_coverage_actions.append(action)
+
     if not actions:
         actions.append(
             {
@@ -1009,8 +1271,10 @@ def coach_project(args: argparse.Namespace) -> int:
 
     applied_drafts: list[dict[str, str]] = []
     skipped_drafts: list[dict[str, str]] = []
+    drafted_specs: list[dict[str, str]] = []
     if args.apply:
         applied_drafts, skipped_drafts = apply_coach_actions(project_dir, actions, cycle_id, apply_scopes)
+        drafted_specs = draft_missing_specs_from_coverage(project_dir, spec_coverage, cycle_id)
 
     cycle_report = {
         "version": "v0",
@@ -1022,10 +1286,12 @@ def coach_project(args: argparse.Namespace) -> int:
         "incomplete_phases": incomplete_phases,
         "failed_checks": failed_checks,
         "actions": actions,
+        "spec_coverage_actions": spec_coverage_actions,
         "apply_mode": args.apply,
         "apply_scope": sorted(apply_scopes),
         "applied_drafts": applied_drafts,
         "skipped_drafts": skipped_drafts,
+        "drafted_specs": drafted_specs,
     }
 
     cycle_json = reports_dir / f"coach_cycle_{cycle_id}_v0.json"
@@ -1062,6 +1328,10 @@ def coach_project(args: argparse.Namespace) -> int:
             md_lines.extend(["", "## Skipped Drafts"])
             for item in skipped_drafts:
                 md_lines.append(f"- `{item['target']}` ({item['reason']})")
+        if drafted_specs:
+            md_lines.extend(["", "## Drafted Missing Specs"])
+            for item in drafted_specs:
+                md_lines.append(f"- `{item['domain_id']}` -> `{item['draft']}`")
     atomic_write_text(cycle_md, "\n".join(md_lines) + "\n")
 
     prompt_lines = [

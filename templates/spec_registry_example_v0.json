@@ -1,0 +1,54 @@
+{
+  "version": "v0",
+  "domains": [
+    {
+      "id": "direction",
+      "name": "Direction",
+      "required": true,
+      "severity": "block",
+      "spec_patterns": [
+        ".cortex/artifacts/direction_*.md"
+      ],
+      "source_patterns": []
+    },
+    {
+      "id": "governance",
+      "name": "Governance",
+      "required": true,
+      "severity": "block",
+      "spec_patterns": [
+        ".cortex/artifacts/governance_*.md"
+      ],
+      "source_patterns": []
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "required": true,
+      "severity": "warn",
+      "spec_patterns": [
+        ".cortex/artifacts/design_*.json",
+        ".cortex/artifacts/design_*.dsl"
+      ],
+      "source_patterns": []
+    },
+    {
+      "id": "project_specs",
+      "name": "Project Specs",
+      "required": false,
+      "severity": "warn",
+      "spec_patterns": [
+        "specs/*.md"
+      ],
+      "source_patterns": [
+        "src/**",
+        "app/**",
+        "api/**",
+        "server/**"
+      ]
+    }
+  ],
+  "orphan_spec_patterns": [
+    "specs/*.md"
+  ]
+}

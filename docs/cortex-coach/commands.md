@@ -33,6 +33,10 @@ cortex-coach audit \
 Output:
 
 - `.cortex/reports/lifecycle_audit_v0.json`
+- includes `spec_coverage` findings when `.cortex/spec_registry_v0.json` exists
+
+Spec coverage registry is bootstrapped by `init` at:
+- `.cortex/spec_registry_v0.json`
 
 ## `audit-needed`
 

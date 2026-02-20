@@ -119,14 +119,18 @@ Decoupling work should proceed only insofar as governance completeness is mainta
 
 - [x] Keep temporary wrapper commands in Cortex that call installed coach.
 - [x] Run parity checks between in-repo implementation and external coach.
-- [ ] Capture differences and fix until behavior is aligned.
-- [ ] Freeze in-repo coach feature development (bugfix-only mode).
+- [x] Capture differences and fix until behavior is aligned.
+- [x] Freeze in-repo coach feature development (bugfix-only mode).
 
 ### Acceptance Criteria
 
-- [ ] Parity test suite passes for key commands (`init`, `audit`, `coach`, `context-load`, decision commands).
-- [ ] No unresolved blocking behavior differences.
-- [ ] Cortex docs default to external coach usage.
+- [x] Parity test suite passes for key commands (`init`, `audit`, `coach`, `context-load`, decision commands).
+- [x] No unresolved blocking behavior differences.
+- [x] Cortex docs default to external coach usage.
+
+Phase 3 evidence:
+- `reports/phase3_parity_check_report_v0.md`
+- `policies/cortex_in_repo_coach_bugfix_only_mode_v0.md`
 
 ## Phase 4: Full Decoupling
 

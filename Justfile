@@ -72,6 +72,11 @@ coach-contract-check project_dir:
   uv run python3 scripts/cortex_project_coach_v0.py contract-check \
     --project-dir "{{project_dir}}"
 
+coach-contract-check-assets project_dir assets_dir:
+  uv run python3 scripts/cortex_project_coach_v0.py contract-check \
+    --project-dir "{{project_dir}}" \
+    --assets-dir "{{assets_dir}}"
+
 coach-decision-capture project_dir title decision="" rationale="" impact_scope="" linked_artifacts="":
   uv run python3 scripts/cortex_project_coach_v0.py decision-capture \
     --project-dir "{{project_dir}}" \

@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "captured_at": "2026-02-20T11:24:59Z",
+      "decision": "When implementation changes alter governance/process behavior, capture and promote a decision artifact before closeout.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_require_decision_reflection_for_operating_layer_changes_v1.md",
+      "decision_id": "dec_20260220T112459Z_require_decision_reflect",
+      "impact_scope": [
+        "governance",
+        "policy",
+        "workflow",
+        "tooling"
+      ],
+      "linked_artifacts": [
+        "policies/decision_reflection_policy_v0.md",
+        "scripts/cortex_project_coach_v0.py",
+        "docs/cortex-coach/commands.md",
+        "tests/test_coach_policy_enable.py"
+      ],
+      "promoted_at": "2026-02-20T11:25:02Z",
+      "rationale": "Prevents important operating decisions from being implicit in diffs and improves traceability across policy/runtime.",
+      "status": "promoted",
+      "title": "Require decision reflection for operating-layer changes"
+    },
+    {
+      "captured_at": "2026-02-20T11:26:23Z",
+      "decision": "Adopt a pinned dev dependency group in pyproject and require uv run --locked --group dev for quality-gate test execution.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_use_locked_dev_dependency_group_for_pytest_v1.md",
+      "decision_id": "dec_20260220T112623Z_use_locked_dev_dependenc",
+      "impact_scope": [
+        "governance",
+        "ci",
+        "tooling",
+        "quality-gate"
+      ],
+      "linked_artifacts": [
+        "pyproject.toml",
+        "uv.lock",
+        "scripts/quality_gate_v0.sh",
+        "scripts/quality_gate_ci_v0.sh",
+        "docs/cortex-coach/quality-gate.md"
+      ],
+      "promoted_at": "2026-02-20T11:26:26Z",
+      "rationale": "Ensures deterministic pytest/toolchain resolution across local and CI runs; avoids floating uv run --with pytest behavior.",
+      "status": "promoted",
+      "title": "Use locked dev dependency group for pytest"
+    }
+  ],
+  "updated_at": "2026-02-20T11:26:26Z",
+  "version": "v0"
+}

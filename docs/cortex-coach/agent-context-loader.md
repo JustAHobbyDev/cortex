@@ -16,7 +16,8 @@ cortex-coach context-load \
   --task "design drift" \
   --max-files 10 \
   --max-chars-per-file 2000 \
-  --fallback-mode priority
+  --fallback-mode priority \
+  --assets-dir /path/to/cortex-assets
 ```
 
 ## Script Usage

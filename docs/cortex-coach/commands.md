@@ -3,6 +3,9 @@
 Examples below use installed CLI form (`cortex-coach`).
 Fallback: `uv run python3 scripts/cortex_project_coach_v0.py ...`
 
+Common option:
+- `--assets-dir /path/to/cortex-assets` to load contract/schema/vocabulary assets from an external Cortex asset root.
+
 ## `init`
 
 Bootstrap `.cortex/` artifacts in a target project.
@@ -11,7 +14,8 @@ Bootstrap `.cortex/` artifacts in a target project.
 cortex-coach init \
   --project-dir /path/to/project \
   --project-id my_project \
-  --project-name "My Project"
+  --project-name "My Project" \
+  --assets-dir /path/to/cortex-assets
 ```
 
 Key options:
@@ -27,7 +31,8 @@ Validate lifecycle artifacts and emit a health report.
 
 ```bash
 cortex-coach audit \
-  --project-dir /path/to/project
+  --project-dir /path/to/project \
+  --assets-dir /path/to/cortex-assets
 ```
 
 Output:
@@ -86,7 +91,8 @@ Validate the target project against the coach asset contract.
 
 ```bash
 cortex-coach contract-check \
-  --project-dir /path/to/project
+  --project-dir /path/to/project \
+  --assets-dir /path/to/cortex-assets
 ```
 
 JSON output:
@@ -157,7 +163,8 @@ cortex-coach context-load \
   --task "design drift" \
   --max-files 10 \
   --max-chars-per-file 2000 \
-  --fallback-mode priority
+  --fallback-mode priority \
+  --assets-dir /path/to/cortex-assets
 ```
 
 Optional file output:
@@ -197,6 +204,17 @@ cortex-coach policy-enable \
 
 Default output path:
 - `.cortex/policies/cortex_coach_usage_decision_policy_v0.md`
+
+Also supported:
+
+```bash
+cortex-coach policy-enable \
+  --project-dir /path/to/project \
+  --policy decision-reflection
+```
+
+Default output path:
+- `.cortex/policies/cortex_coach_decision_reflection_policy_v0.md`
 
 Optional overwrite:
 

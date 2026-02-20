@@ -12,6 +12,11 @@ dependencies = [
   "jsonschema>=4.10.0",
 ]
 
+[dependency-groups]
+dev = [
+  "pytest==9.0.2",
+]
+
 [project.scripts]
 cortex-coach = "cortex_project_coach.cli:main"
 

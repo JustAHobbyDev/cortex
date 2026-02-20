@@ -4,6 +4,8 @@ Use two deterministic commands:
 - strict local maintainer gate
 - CI correctness gate
 
+Both gates run tests from the locked `dev` dependency group in `pyproject.toml` via `uv.lock`.
+
 ## Run
 
 Preferred:

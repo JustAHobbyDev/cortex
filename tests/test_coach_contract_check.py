@@ -21,3 +21,34 @@ def test_contract_check_fails_when_required_path_missing(initialized_project: Pa
     payload = json.loads(proc.stdout)
     assert payload["status"] == "fail"
     assert any(item["check"] == "required_path:.cortex/spec_registry_v0.json" for item in payload["checks"])
+
+
+def test_contract_check_fails_on_unsupported_contract_version(initialized_project: Path, tmp_path: Path) -> None:
+    contract_file = tmp_path / "coach_asset_contract_v0.json"
+    contract_file.write_text(
+        json.dumps(
+            {
+                "version": "v0",
+                "asset_contract_version": "v999",
+                "required_paths": [],
+                "required_manifest": {"version": "v0", "required_top_level_keys": []},
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    proc = run_coach(
+        initialized_project,
+        "contract-check",
+        "--contract-file",
+        str(contract_file),
+        "--format",
+        "json",
+        expect_code=1,
+    )
+    payload = json.loads(proc.stdout)
+    assert payload["status"] == "fail"
+    assert payload["checks"][0]["check"] == "contract_file"
+    assert "unsupported asset contract version" in payload["checks"][0]["detail"]

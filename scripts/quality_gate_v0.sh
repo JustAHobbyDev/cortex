@@ -17,6 +17,6 @@ echo "[quality-gate] 3/4 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
 echo "[quality-gate] 4/4 focused coach tests"
-uv run --with pytest pytest -q tests/test_coach_*.py
+uv run --locked --group dev pytest -q tests/test_coach_*.py
 
 echo "[quality-gate] PASS"

@@ -64,6 +64,10 @@ def parse_args() -> argparse.Namespace:
         default="priority",
         help="Fallback behavior when restricted loading fails (default: priority).",
     )
+    p.add_argument(
+        "--assets-dir",
+        help="Optional assets root for compatibility metadata (reserved for future asset-backed loading).",
+    )
     p.add_argument("--out-file", help="Optional output path; defaults to stdout")
     return p.parse_args()
 
@@ -198,6 +202,7 @@ def build_bundle(
     report = {
         "version": "v0",
         "project_dir": str(project_dir),
+        "assets_dir": None,
         "task": task,
         "task_key": task_key,
         "budget": {
@@ -237,6 +242,8 @@ def main() -> int:
         max_files=base_files,
         max_chars_per_file=base_chars,
     )
+    if args.assets_dir:
+        bundle["assets_dir"] = str(Path(args.assets_dir).resolve())
 
     attempts: list[dict[str, Any]] = [
         {

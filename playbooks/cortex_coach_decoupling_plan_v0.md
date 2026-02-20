@@ -76,18 +76,18 @@ Define how `cortex` and `cortex-coach` can be developed together while becoming 
 
 ### Tasks
 
-- [ ] Define `coach_asset_contract_v0` spec file in Cortex.
-- [ ] Add explicit asset-loader abstraction in coach runtime.
-- [ ] Remove hard-coded same-repo path assumptions where contract assets are consumed.
-- [ ] Add `coach contract-check` command for compatibility validation.
-- [ ] Add test fixtures for valid/invalid contract version scenarios.
+- [x] Define `coach_asset_contract_v0` spec file in Cortex.
+- [x] Add explicit asset-loader abstraction in coach runtime.
+- [x] Remove hard-coded same-repo path assumptions where contract assets are consumed.
+- [x] Add `coach contract-check` command for compatibility validation.
+- [x] Add test fixtures for valid/invalid contract version scenarios.
 
 ### Acceptance Criteria
 
-- [ ] Coach can run with default bundled assets.
-- [ ] Coach can run with override assets path (`--assets-dir` or equivalent).
-- [ ] Unsupported contract versions fail with clear errors.
-- [ ] CI includes contract compatibility tests.
+- [x] Coach can run with default bundled assets.
+- [x] Coach can run with override assets path (`--assets-dir` or equivalent).
+- [x] Unsupported contract versions fail with clear errors.
+- [x] CI includes contract compatibility tests.
 
 ## Phase 2: Standalone Coach Repository
 

@@ -683,6 +683,124 @@ def audit_needed_project(args: argparse.Namespace) -> int:
     return 0
 
 
+def context_load_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    repo_root = repo_root_from_script()
+    loader = repo_root / "scripts" / "agent_context_loader_v0.py"
+    if not loader.exists():
+        print(f"missing loader script: {loader}", file=sys.stderr)
+        return 1
+
+    cmd = [
+        sys.executable,
+        str(loader),
+        "--project-dir",
+        str(project_dir),
+        "--task",
+        args.task,
+        "--max-files",
+        str(args.max_files),
+        "--max-chars-per-file",
+        str(args.max_chars_per_file),
+        "--fallback-mode",
+        args.fallback_mode,
+    ]
+    if args.out_file:
+        cmd.extend(["--out-file", args.out_file])
+
+    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    if proc.stdout:
+        print(proc.stdout, end="")
+    if proc.returncode != 0:
+        if proc.stderr:
+            print(proc.stderr, file=sys.stderr, end="")
+        return proc.returncode
+    return 0
+
+
+def _repo_file_inventory(project_dir: Path) -> tuple[int, list[str]]:
+    files: list[str] = []
+    ignore_prefixes = (".git/", ".venv/", "venv/", "env/", "cortex_project_coach.egg-info/")
+    for p in project_dir.rglob("*"):
+        if not p.is_file():
+            continue
+        rel = str(p.relative_to(project_dir))
+        if rel.startswith(ignore_prefixes):
+            continue
+        files.append(rel)
+    return len(files), sorted(files)
+
+
+def context_policy_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    file_count, files = _repo_file_inventory(project_dir)
+
+    has_design = any(
+        f.startswith(("src/", "frontend/", "web/", "ui/")) or "/components/" in f
+        for f in files
+    )
+    has_backend = any(
+        f.startswith(("api/", "server/", "backend/")) or "/routes/" in f
+        for f in files
+    )
+    has_specs = any(f.startswith("specs/") for f in files)
+
+    if file_count > 2000:
+        max_files, max_chars = 8, 1400
+        size_tier = "large"
+    elif file_count > 700:
+        max_files, max_chars = 10, 1800
+        size_tier = "medium"
+    else:
+        max_files, max_chars = 14, 2600
+        size_tier = "small"
+
+    focus: list[str] = []
+    if has_design:
+        focus.append("design")
+    if has_backend:
+        focus.append("governance")
+    if has_specs:
+        focus.append("spec")
+    if not focus:
+        focus = ["default"]
+
+    policy = {
+        "version": "v0",
+        "run_at": utc_now(),
+        "project_dir": str(project_dir),
+        "size_tier": size_tier,
+        "repo_file_count": file_count,
+        "recommended_task_focus": focus,
+        "recommended_budget": {
+            "max_files": max_files,
+            "max_chars_per_file": max_chars,
+        },
+        "notes": [
+            "Control-plane files should always be loaded first.",
+            "Use task-focused loading after control-plane to avoid context overflow.",
+            "Recompute this policy when repository shape changes materially.",
+        ],
+    }
+
+    if args.format == "json":
+        print(json.dumps(policy, indent=2, sort_keys=True))
+    else:
+        print(f"size_tier: {policy['size_tier']}")
+        print(f"repo_file_count: {policy['repo_file_count']}")
+        print(f"recommended_task_focus: {','.join(policy['recommended_task_focus'])}")
+        b = policy["recommended_budget"]
+        print(f"recommended_budget: max_files={b['max_files']} max_chars_per_file={b['max_chars_per_file']}")
+
+    if args.out_file:
+        out = Path(args.out_file)
+        if not out.is_absolute():
+            out = project_dir / out
+        atomic_write_text(out, json.dumps(policy, indent=2, sort_keys=True) + "\n")
+
+    return 0
+
+
 def audit_project(args: argparse.Namespace) -> int:
     project_dir = Path(args.project_dir).resolve()
     cortex_dir = project_dir / ".cortex"
@@ -941,6 +1059,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Exit non-zero when audit_required=true.",
     )
     p_audit_needed.set_defaults(func=audit_needed_project)
+
+    p_context_load = sub.add_parser(
+        "context-load",
+        help="Build a bounded context bundle (control-plane first, then task slice).",
+    )
+    p_context_load.add_argument("--project-dir", required=True)
+    p_context_load.add_argument("--task", default="default")
+    p_context_load.add_argument("--max-files", type=int, default=12)
+    p_context_load.add_argument("--max-chars-per-file", type=int, default=2500)
+    p_context_load.add_argument(
+        "--fallback-mode",
+        choices=["none", "priority"],
+        default="priority",
+        help="Fallback behavior when restricted loading fails.",
+    )
+    p_context_load.add_argument("--out-file")
+    p_context_load.set_defaults(func=context_load_project)
+
+    p_context_policy = sub.add_parser(
+        "context-policy",
+        help="Analyze repository shape and emit recommended context loading policy.",
+    )
+    p_context_policy.add_argument("--project-dir", required=True)
+    p_context_policy.add_argument("--format", choices=["text", "json"], default="text")
+    p_context_policy.add_argument("--out-file")
+    p_context_policy.set_defaults(func=context_policy_project)
 
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
     p_coach.add_argument("--project-dir", required=True)

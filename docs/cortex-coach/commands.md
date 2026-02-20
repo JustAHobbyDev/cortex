@@ -101,3 +101,41 @@ cortex-coach coach \
   --apply \
   --apply-scope direction,design
 ```
+
+## `context-load`
+
+Generate a bounded context bundle for agent handoff.
+
+```bash
+cortex-coach context-load \
+  --project-dir /path/to/project \
+  --task "design drift" \
+  --max-files 10 \
+  --max-chars-per-file 2000 \
+  --fallback-mode priority
+```
+
+Optional file output:
+
+```bash
+cortex-coach context-load \
+  --project-dir /path/to/project \
+  --task "governance updates" \
+  --out-file .cortex/reports/agent_context_bundle_v0.json
+```
+
+`--fallback-mode priority` enables a fallback chain:
+1. restricted budget
+2. relaxed budget
+3. unrestricted (no file/char limits) if prior levels fail
+
+## `context-policy`
+
+Analyze repository shape and recommend task focus + context budgets.
+
+```bash
+cortex-coach context-policy \
+  --project-dir /path/to/project \
+  --format json \
+  --out-file .cortex/reports/context_policy_v0.json
+```

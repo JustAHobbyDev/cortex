@@ -8,6 +8,7 @@ CLI to bootstrap and audit `.cortex/` lifecycle artifacts in a target project.
 from __future__ import annotations
 
 import argparse
+from fnmatch import fnmatch
 import json
 import os
 import re
@@ -35,6 +36,24 @@ VALID_APPLY_SCOPES = {"direction", "governance", "design"}
 LOCK_FILE = ".lock"
 DEFAULT_LOCK_TIMEOUT_SECONDS = 10.0
 DEFAULT_LOCK_STALE_SECONDS = 300.0
+DEFAULT_HIGH_RISK_PATTERNS = [
+    ".cortex/manifest_v0.json",
+    ".cortex/artifacts/**",
+    "specs/**",
+    "policies/**",
+    "scripts/cortex_project_coach_v0.py",
+]
+DEFAULT_MEDIUM_RISK_PATTERNS = [
+    ".cortex/prompts/**",
+    "playbooks/**",
+    "templates/**",
+]
+DEFAULT_IGNORED_PATTERNS = [
+    ".cortex/.lock",
+    ".cortex/**/*.tmp",
+    ".cortex/**/*.bak",
+    ".cortex/**/*.swp",
+]
 
 
 def utc_now() -> str:
@@ -448,6 +467,42 @@ def classify_artifact_scope(target: str) -> str | None:
     return None
 
 
+def git_dirty_files(project_dir: Path) -> tuple[list[str], str | None]:
+    cmd = ["git", "-C", str(project_dir), "status", "--porcelain"]
+    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    if proc.returncode != 0:
+        msg = (proc.stderr or proc.stdout).strip() or "git status failed"
+        return [], msg
+
+    files: list[str] = []
+    for raw in proc.stdout.splitlines():
+        if len(raw) < 4:
+            continue
+        path = raw[3:]
+        if " -> " in path:
+            path = path.split(" -> ", 1)[1]
+        files.append(path.strip())
+    return files, None
+
+
+def _matches_any(path: str, patterns: list[str]) -> bool:
+    return any(fnmatch(path, pat) for pat in patterns)
+
+
+def classify_dirty_files(files: list[str]) -> dict[str, list[str]]:
+    out = {"high": [], "medium": [], "low": [], "ignored": []}
+    for path in files:
+        if _matches_any(path, DEFAULT_IGNORED_PATTERNS):
+            out["ignored"].append(path)
+        elif _matches_any(path, DEFAULT_HIGH_RISK_PATTERNS):
+            out["high"].append(path)
+        elif _matches_any(path, DEFAULT_MEDIUM_RISK_PATTERNS):
+            out["medium"].append(path)
+        else:
+            out["low"].append(path)
+    return out
+
+
 def apply_coach_actions(
     project_dir: Path,
     actions: list[dict[str, str]],
@@ -539,6 +594,93 @@ def apply_coach_actions(
 
         applied.append({"source": str(target), "draft": str(dst.relative_to(project_dir))})
     return applied, skipped
+
+
+def audit_needed_project(args: argparse.Namespace) -> int:
+    project_dir = Path(args.project_dir).resolve()
+    files, err = git_dirty_files(project_dir)
+
+    if err is not None:
+        report = {
+            "version": "v0",
+            "run_at": utc_now(),
+            "project_dir": str(project_dir),
+            "status": "unknown",
+            "audit_required": False,
+            "audit_recommended": True,
+            "reason": err,
+            "dirty_files": [],
+            "risk_buckets": {"high": [], "medium": [], "low": [], "ignored": []},
+            "recommended_action": "Ensure target is a git repository and rerun.",
+        }
+    else:
+        buckets = classify_dirty_files(files)
+        non_ignored = len(files) - len(buckets["ignored"])
+        if buckets["high"]:
+            status = "required"
+            required = True
+            recommended = True
+            action = "Run `cortex-coach audit --project-dir <path>` before merge/release."
+        elif buckets["medium"]:
+            status = "recommended"
+            required = False
+            recommended = True
+            action = "Run audit at milestone boundary or before release."
+        elif non_ignored > 0:
+            status = "not_needed"
+            required = False
+            recommended = False
+            action = "No immediate audit required; run audit before release."
+        else:
+            status = "not_needed"
+            required = False
+            recommended = False
+            action = "Working tree is clean."
+
+        report = {
+            "version": "v0",
+            "run_at": utc_now(),
+            "project_dir": str(project_dir),
+            "status": status,
+            "audit_required": required,
+            "audit_recommended": recommended,
+            "dirty_file_count": len(files),
+            "dirty_files": sorted(files),
+            "risk_buckets": {
+                "high": sorted(buckets["high"]),
+                "medium": sorted(buckets["medium"]),
+                "low": sorted(buckets["low"]),
+                "ignored": sorted(buckets["ignored"]),
+            },
+            "recommended_action": action,
+        }
+
+    if args.format == "json":
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"status: {report['status']}")
+        print(f"audit_required: {report['audit_required']}")
+        print(f"audit_recommended: {report['audit_recommended']}")
+        print(f"recommended_action: {report['recommended_action']}")
+        if report.get("risk_buckets"):
+            buckets = report["risk_buckets"]
+            print(
+                "risk_counts: "
+                f"high={len(buckets.get('high', []))} "
+                f"medium={len(buckets.get('medium', []))} "
+                f"low={len(buckets.get('low', []))} "
+                f"ignored={len(buckets.get('ignored', []))}"
+            )
+
+    if args.out_file:
+        out_path = Path(args.out_file)
+        if not out_path.is_absolute():
+            out_path = project_dir / out_path
+        atomic_write_text(out_path, json.dumps(report, indent=2, sort_keys=True) + "\n")
+
+    if args.fail_on_required and report.get("audit_required"):
+        return 1
+    return 0
 
 
 def audit_project(args: argparse.Namespace) -> int:
@@ -777,6 +919,28 @@ def build_parser() -> argparse.ArgumentParser:
     p_audit.add_argument("--project-dir", required=True)
     add_lock_args(p_audit)
     p_audit.set_defaults(func=audit_project)
+
+    p_audit_needed = sub.add_parser(
+        "audit-needed",
+        help="Evaluate whether an audit is required based on dirty git state risk tiers.",
+    )
+    p_audit_needed.add_argument("--project-dir", required=True)
+    p_audit_needed.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text).",
+    )
+    p_audit_needed.add_argument(
+        "--out-file",
+        help="Optional output report file path (absolute or project-relative).",
+    )
+    p_audit_needed.add_argument(
+        "--fail-on-required",
+        action="store_true",
+        help="Exit non-zero when audit_required=true.",
+    )
+    p_audit_needed.set_defaults(func=audit_needed_project)
 
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
     p_coach.add_argument("--project-dir", required=True)

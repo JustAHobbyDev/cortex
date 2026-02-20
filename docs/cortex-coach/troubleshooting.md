@@ -39,6 +39,22 @@ Error example:
 
 Use only supported values in `--apply-scope`.
 
+## `audit-needed` always says `required`
+
+This usually means high-risk files are dirty (for example `specs/`, `policies/`, `.cortex/manifest_v0.json`, or coach scripts).
+
+Inspect details:
+
+```bash
+cortex-coach audit-needed --project-dir /path/to/project --format json
+```
+
+If expected, run audit and continue:
+
+```bash
+cortex-coach audit --project-dir /path/to/project
+```
+
 ## `uv` permission/cache issues
 
 If `uv` fails in restricted environments, run directly with Python:

@@ -34,6 +34,32 @@ Output:
 
 - `.cortex/reports/lifecycle_audit_v0.json`
 
+## `audit-needed`
+
+Determine whether an audit should run now based on dirty-file risk tiers.
+
+```bash
+cortex-coach audit-needed \
+  --project-dir /path/to/project
+```
+
+JSON mode + CI-friendly fail behavior:
+
+```bash
+cortex-coach audit-needed \
+  --project-dir /path/to/project \
+  --format json \
+  --fail-on-required
+```
+
+Optional report output:
+
+```bash
+cortex-coach audit-needed \
+  --project-dir /path/to/project \
+  --out-file .cortex/reports/audit_needed_v0.json
+```
+
 ## `coach`
 
 Run one lifecycle guidance cycle.

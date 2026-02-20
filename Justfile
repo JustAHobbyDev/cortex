@@ -13,6 +13,10 @@ coach-audit project_dir:
   uv run python3 scripts/cortex_project_coach_v0.py audit \
     --project-dir "{{project_dir}}"
 
+coach-audit-needed project_dir:
+  uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
+    --project-dir "{{project_dir}}"
+
 coach-cycle project_dir:
   uv run python3 scripts/cortex_project_coach_v0.py coach \
     --project-dir "{{project_dir}}"

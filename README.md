@@ -69,4 +69,15 @@ Cortex is a long-term cognitive multiplier.
 
 ---
 
+## Tech Stack
+
+Cortex standardizes on:
+
+* `uv` for Python environment + command execution
+* `just` for task orchestration
+
+Primary operational entrypoints should be callable through `just` recipes that shell out via `uv`.
+
+---
+
 Artifact Admission Rules: [ARTIFACT_ADMISSION.md]

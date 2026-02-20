@@ -11,10 +11,16 @@ Operational guide for using the Project Coach application to:
 ### 1) Initialize a new project
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py init \
+uv run python3 scripts/cortex_project_coach_v0.py init \
   --project-dir /path/to/project \
   --project-id admin_dash \
   --project-name "Admin Dashboard"
+```
+
+Or:
+
+```bash
+just coach-init /path/to/project admin_dash "Admin Dashboard"
 ```
 
 Expected artifacts in target project:
@@ -28,8 +34,14 @@ Expected artifacts in target project:
 ### 2) Audit lifecycle health
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py audit \
+uv run python3 scripts/cortex_project_coach_v0.py audit \
   --project-dir /path/to/project
+```
+
+Or:
+
+```bash
+just coach-audit /path/to/project
 ```
 
 Expected report:
@@ -42,8 +54,14 @@ Return code:
 ### 3) Run one coaching cycle (AI handoff artifacts)
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py coach \
+uv run python3 scripts/cortex_project_coach_v0.py coach \
   --project-dir /path/to/project
+```
+
+Or:
+
+```bash
+just coach-cycle /path/to/project
 ```
 
 Expected outputs:
@@ -56,7 +74,7 @@ Use `--no-sync-phases` to avoid automatic manifest phase syncing.
 Auto-generate draft artifacts for actions:
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py coach \
+uv run python3 scripts/cortex_project_coach_v0.py coach \
   --project-dir /path/to/project \
   --apply
 ```
@@ -66,10 +84,16 @@ python3 scripts/cortex_project_coach_v0.py coach \
 Limit draft generation to specific artifact classes:
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py coach \
+uv run python3 scripts/cortex_project_coach_v0.py coach \
   --project-dir /path/to/project \
   --apply \
   --apply-scope direction,design
+```
+
+Or:
+
+```bash
+just coach-cycle-apply /path/to/project direction,design
 ```
 
 Valid scopes: `direction`, `governance`, `design`.
@@ -77,7 +101,7 @@ Valid scopes: `direction`, `governance`, `design`.
 ### 4) Optional re-bootstrap (force)
 
 ```bash
-python3 scripts/cortex_project_coach_v0.py init \
+uv run python3 scripts/cortex_project_coach_v0.py init \
   --project-dir /path/to/project \
   --project-id admin_dash \
   --project-name "Admin Dashboard" \
@@ -98,7 +122,7 @@ python3 scripts/cortex_project_coach_v0.py init \
   - edit `.cortex/artifacts/design_<project_id>_v0.dsl`
   - recompile through `init --force` or compile manually with:
     ```bash
-    python3 scripts/design_prompt_dsl_compile_v0.py \
+    uv run python3 scripts/design_prompt_dsl_compile_v0.py \
       --dsl-file /path/to/project/.cortex/artifacts/design_<project_id>_v0.dsl \
       --out-file /path/to/project/.cortex/artifacts/design_<project_id>_v0.json
     ```

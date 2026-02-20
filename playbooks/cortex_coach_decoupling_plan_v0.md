@@ -4,6 +4,13 @@
 
 Define how `cortex` and `cortex-coach` can be developed together while becoming separate projects with clear implementation boundaries.
 
+## Priority Order (Updated)
+
+1. Governance completeness and enforceability.
+2. Coach/Cortex decoupling execution.
+
+Decoupling work should proceed only insofar as governance completeness is maintained or improved.
+
 ## North Star
 
 `cortex` remains the cognitive governance source (principles/specs/policies/templates).  
@@ -93,18 +100,18 @@ Define how `cortex` and `cortex-coach` can be developed together while becoming 
 
 ### Tasks
 
-- [ ] Create `cortex-coach` repository with package + CLI + docs + CI.
-- [ ] Move runtime/test/docs assets from Cortex to new repo.
+- [x] Create `cortex-coach` repository with package + CLI + docs + CI.
+- [x] Move runtime/test/docs assets from Cortex to new repo.
 - [ ] Publish install instructions (`uv tool install` and pip fallback).
 - [ ] Add release tagging/versioning workflow for coach.
-- [ ] Add compatibility matrix doc (`coach_version` -> `asset_contract_version`).
+- [x] Add compatibility matrix doc (`coach_version` -> `asset_contract_version`).
 
 ### Acceptance Criteria
 
-- [ ] `cortex-coach` installs and runs without cloning Cortex.
-- [ ] New repo CI passes unit + contract tests.
+- [x] `cortex-coach` installs and runs without cloning Cortex.
+- [x] New repo CI passes unit + contract tests.
 - [ ] Versioned release artifact is published.
-- [ ] Compatibility matrix is documented and tested.
+- [x] Compatibility matrix is documented and tested.
 
 ## Phase 3: Dual-Path Stabilization
 
@@ -158,6 +165,30 @@ Use this minimal issue template in both repos:
 - Do not start Phase 4 until parity is proven in Phase 3.
 - Breaking contract changes require migration notes before merge.
 
+## Priority 0: Governance Completeness Enforcement
+
+Treat governance-completeness enforcement as the highest-priority track:
+
+- [x] Add `decision-gap-check` (or equivalent) to detect governance-impacting file changes without a corresponding new decision capture/promotion.
+- [x] Integrate that check into `quality-gate` and `quality-gate-ci`.
+- [ ] Keep decoupling milestones conditional on this enforcement path being active and passing.
+
+## Priority 0 Enforcement Rule (Measurable)
+
+Block advancing Phase 2+ checkboxes in this plan when either condition is true:
+
+- `quality-gate-ci` fails on `decision-gap-check` in the current branch, or
+- `decision-gap-check` exits non-zero for governance-impacting dirty files during maintainer review.
+
+Allow Phase 2+ advancement only when:
+
+- `decision-gap-check` is green, and
+- linked decision artifacts exist for governance-impacting changes.
+
+## Decoupling Dependency Rule
+
+- Phase 2+ decoupling tasks should not advance while Priority 0 enforcement is red.
+
 ## Status
 
-Draft v1 (execution-ready checklist).
+Active v1 (partially executed; Phase 2 in progress).

@@ -18,6 +18,7 @@ Balance speed during active work with strong governance enforcement at merge/rel
    - rerun `cortex-only` audit after significant lifecycle/policy/decision changes
 4. Before merge/release:
    - run `cortex-coach audit --project-dir . --audit-scope all`
+   - run `cortex-coach decision-gap-check --project-dir . --format json`
    - run CI quality gate (`just quality-gate-ci`)
 
 ## Decision Reflection Step
@@ -34,7 +35,7 @@ If yes:
 
 - Local default: `cortex-only` keeps feedback fast and focused.
 - Release/merge gate: `all` prevents governance drift across broader repo artifacts.
-- CI: should fail on gate violations.
+- CI: fails on governance violations, including `decision-gap-check`.
 
 ## Optional Future Automation
 

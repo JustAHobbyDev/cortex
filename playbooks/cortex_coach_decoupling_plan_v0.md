@@ -138,8 +138,8 @@ Phase 3 evidence:
 
 - [x] Convert `scripts/cortex_project_coach_v0.py` to thin external-first delegator (with temporary legacy fallback).
 - [ ] Remove in-repo coach runtime implementation from Cortex.
-- [ ] Keep thin wrappers + docs for external coach usage.
-- [ ] Archive migration notes for users transitioning from in-repo scripts.
+- [x] Keep thin wrappers + docs for external coach usage.
+- [x] Archive migration notes for users transitioning from in-repo scripts.
 - [ ] Update governance docs to reflect final ownership boundary.
 
 ### Acceptance Criteria

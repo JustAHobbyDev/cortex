@@ -1,0 +1,37 @@
+{
+  "audit_recommended": true,
+  "audit_required": true,
+  "dirty_file_count": 8,
+  "dirty_files": [
+    ".cortex/manifest_v0.json",
+    ".cortex/reports/lifecycle_audit_v0.json",
+    "Justfile",
+    "docs/cortex-coach/commands.md",
+    "docs/cortex-coach/troubleshooting.md",
+    "playbooks/cortex_coach_spec_coverage_plan_v0.md",
+    "playbooks/cortex_coach_stage1_steering_quality_plan_v0.md",
+    "scripts/cortex_project_coach_v0.py"
+  ],
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_action": "Run `cortex-coach audit --project-dir <path>` before merge/release.",
+  "risk_buckets": {
+    "high": [
+      ".cortex/manifest_v0.json",
+      "scripts/cortex_project_coach_v0.py"
+    ],
+    "ignored": [],
+    "low": [
+      ".cortex/reports/lifecycle_audit_v0.json",
+      "Justfile",
+      "docs/cortex-coach/commands.md",
+      "docs/cortex-coach/troubleshooting.md"
+    ],
+    "medium": [
+      "playbooks/cortex_coach_spec_coverage_plan_v0.md",
+      "playbooks/cortex_coach_stage1_steering_quality_plan_v0.md"
+    ]
+  },
+  "run_at": "2026-02-20T01:32:44Z",
+  "status": "required",
+  "version": "v0"
+}

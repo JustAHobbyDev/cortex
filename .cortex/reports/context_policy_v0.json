@@ -1,0 +1,19 @@
+{
+  "notes": [
+    "Control-plane files should always be loaded first.",
+    "Use task-focused loading after control-plane to avoid context overflow.",
+    "Recompute this policy when repository shape changes materially."
+  ],
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_budget": {
+    "max_chars_per_file": 2600,
+    "max_files": 14
+  },
+  "recommended_task_focus": [
+    "spec"
+  ],
+  "repo_file_count": 487,
+  "run_at": "2026-02-20T04:22:48Z",
+  "size_tier": "small",
+  "version": "v0"
+}

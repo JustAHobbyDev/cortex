@@ -107,3 +107,15 @@ quality-gate:
 
 quality-gate-ci:
   ./scripts/quality_gate_ci_v0.sh
+
+session-governance-check:
+  UV_CACHE_DIR=.uv-cache uv run python3 scripts/cortex_project_coach_v0.py audit-needed \
+    --project-dir . \
+    --format json
+  UV_CACHE_DIR=.uv-cache uv run python3 scripts/cortex_project_coach_v0.py audit \
+    --project-dir . \
+    --audit-scope cortex-only
+  UV_CACHE_DIR=.uv-cache uv run python3 scripts/cortex_project_coach_v0.py audit \
+    --project-dir . \
+    --audit-scope all
+  ./scripts/quality_gate_ci_v0.sh

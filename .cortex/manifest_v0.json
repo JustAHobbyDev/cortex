@@ -11,7 +11,7 @@
     "design_spec_compiled": true,
     "direction_defined": true,
     "governance_defined": true,
-    "lifecycle_audited": false
+    "lifecycle_audited": true
   },
   "policies": {
     "enabled": [
@@ -21,6 +21,6 @@
   },
   "project_id": "cortex_repo",
   "project_name": "Cortex Repository",
-  "updated_at": "2026-02-20T14:47:56Z",
+  "updated_at": "2026-02-20T15:01:41Z",
   "version": "v0"
 }

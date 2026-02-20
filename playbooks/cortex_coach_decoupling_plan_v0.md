@@ -136,7 +136,7 @@ Phase 3 evidence:
 
 ### Tasks
 
-- [x] Convert `scripts/cortex_project_coach_v0.py` to thin external-first delegator (with temporary legacy fallback).
+- [x] Convert `scripts/cortex_project_coach_v0.py` to thin external-only delegator.
 - [x] Remove in-repo coach runtime implementation from Cortex.
 - [x] Keep thin wrappers + docs for external coach usage.
 - [x] Archive migration notes for users transitioning from in-repo scripts.
@@ -181,7 +181,7 @@ Treat governance-completeness enforcement as the highest-priority track:
 
 - [x] Add `decision-gap-check` (or equivalent) to detect governance-impacting file changes without a corresponding new decision capture/promotion.
 - [x] Integrate that check into `quality-gate` and `quality-gate-ci`.
-- [ ] Keep decoupling milestones conditional on this enforcement path being active and passing.
+- [x] Keep decoupling milestones conditional on this enforcement path being active and passing.
 
 ## Priority 0 Enforcement Rule (Measurable)
 
@@ -199,6 +199,15 @@ Allow Phase 2+ advancement only when:
 
 - Phase 2+ decoupling tasks should not advance while Priority 0 enforcement is red.
 
+## Closeout Scope
+
+Functional decoupling (Phases 1, 3, 4) is complete.
+
+Phase 2 release-process follow-ups remain open and are tracked explicitly:
+- publish install instructions (`uv tool install` + pip fallback)
+- add release tagging/versioning workflow for coach
+- publish a versioned release artifact
+
 ## Status
 
-Closed v1 (Phases 1-4 completed; decoupling delivered).
+Active v1 (decoupling delivered; release-process follow-ups pending).

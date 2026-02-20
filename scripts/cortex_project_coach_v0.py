@@ -9,9 +9,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
+import time
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -28,17 +32,134 @@ PHASE_ORDER = [
     "lifecycle_audited",
 ]
 VALID_APPLY_SCOPES = {"direction", "governance", "design"}
+LOCK_FILE = ".lock"
+DEFAULT_LOCK_TIMEOUT_SECONDS = 10.0
+DEFAULT_LOCK_STALE_SECONDS = 300.0
 
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def atomic_write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.tmp.", dir=str(path.parent))
+    tmp_path = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, path)
+    finally:
+        try:
+            if tmp_path.exists():
+                tmp_path.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _pid_alive(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except OSError:
+        return True
+
+
+def _read_lock_metadata(lock_path: Path) -> dict[str, Any]:
+    try:
+        raw = lock_path.read_text(encoding="utf-8")
+        obj = json.loads(raw)
+        return obj if isinstance(obj, dict) else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _lock_stale_reason(lock_path: Path, stale_seconds: float) -> str | None:
+    meta = _read_lock_metadata(lock_path)
+    created = meta.get("created_epoch")
+    pid = meta.get("pid")
+    now = time.time()
+    if isinstance(created, (int, float)) and (now - float(created)) > stale_seconds:
+        return "age_exceeded"
+    if isinstance(pid, int) and not _pid_alive(pid):
+        return "owner_process_missing"
+    if not meta:
+        return "invalid_metadata"
+    return None
+
+
+@contextmanager
+def project_lock(
+    project_dir: Path,
+    lock_timeout_seconds: float,
+    lock_stale_seconds: float,
+    force_unlock: bool,
+    command_name: str,
+):
+    cortex_dir = project_dir / ".cortex"
+    cortex_dir.mkdir(parents=True, exist_ok=True)
+    lock_path = cortex_dir / LOCK_FILE
+
+    token = f"{os.getpid()}-{int(time.time() * 1000)}"
+    start = time.monotonic()
+    acquired = False
+
+    while not acquired:
+        try:
+            fd = os.open(lock_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
+            payload = {
+                "token": token,
+                "pid": os.getpid(),
+                "created_epoch": time.time(),
+                "created_at": utc_now(),
+                "command": command_name,
+            }
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump(payload, f, indent=2, sort_keys=True)
+                f.write("\n")
+                f.flush()
+                os.fsync(f.fileno())
+            acquired = True
+        except FileExistsError:
+            stale_reason = _lock_stale_reason(lock_path, lock_stale_seconds)
+            if stale_reason or force_unlock:
+                try:
+                    lock_path.unlink()
+                    continue
+                except FileNotFoundError:
+                    continue
+            if (time.monotonic() - start) >= lock_timeout_seconds:
+                owner = _read_lock_metadata(lock_path)
+                raise RuntimeError(
+                    "lock_timeout: unable to acquire .cortex lock; "
+                    f"owner={owner if owner else 'unknown'}"
+                )
+            time.sleep(0.1)
+
+    try:
+        yield
+    finally:
+        owner = _read_lock_metadata(lock_path)
+        if owner.get("token") == token:
+            try:
+                lock_path.unlink()
+            except FileNotFoundError:
+                pass
+
+
 def write_if_missing(path: Path, content: str, force: bool) -> bool:
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists() and not force:
         return False
-    path.write_text(content, encoding="utf-8")
+    atomic_write_text(path, content)
     return True
 
 
@@ -187,7 +308,7 @@ Tasks:
     manifest_obj["phases"]["direction_defined"] = True
     manifest_obj["phases"]["governance_defined"] = True
     manifest_obj["phases"]["design_spec_compiled"] = True
-    manifest_path.write_text(json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    atomic_write_text(manifest_path, json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n")
 
     print(f"initialized: {project_dir}")
     if args.force:
@@ -368,7 +489,7 @@ def apply_coach_actions(
                 "## Proposed Update\n"
                 + (content if content else "- Fill this artifact according to action instruction.\n")
             )
-            dst.write_text(draft, encoding="utf-8")
+            atomic_write_text(dst, draft)
         elif dst.suffix == ".dsl":
             lines = content.splitlines()
             out_lines: list[str] = [f"# Draft generated by coach cycle {cycle_id}"]
@@ -395,7 +516,7 @@ def apply_coach_actions(
                 m = re.search(r"_v(\d+)$", dst.stem)
                 next_ver = f"v{m.group(1)}" if m else "v1"
                 out_lines.insert(1, f"version {next_ver}")
-            dst.write_text("\n".join(out_lines).rstrip() + "\n", encoding="utf-8")
+            atomic_write_text(dst, "\n".join(out_lines).rstrip() + "\n")
         elif dst.suffix == ".json":
             if content.strip():
                 try:
@@ -411,7 +532,7 @@ def apply_coach_actions(
             obj["generated_cycle_id"] = cycle_id
             obj["action"] = step
             obj["instruction"] = instruction
-            dst.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            atomic_write_text(dst, json.dumps(obj, indent=2, sort_keys=True) + "\n")
         else:
             skipped.append({"target": str(target), "reason": f"unsupported extension: {dst.suffix}"})
             continue
@@ -429,7 +550,7 @@ def audit_project(args: argparse.Namespace) -> int:
     reports_dir = cortex_dir / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
     out_path = reports_dir / "lifecycle_audit_v0.json"
-    out_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    atomic_write_text(out_path, json.dumps(report, indent=2, sort_keys=True) + "\n")
 
     # Update manifest lifecycle flag if available.
     if manifest_path.exists():
@@ -438,7 +559,7 @@ def audit_project(args: argparse.Namespace) -> int:
             m["updated_at"] = utc_now()
             if "phases" in m and isinstance(m["phases"], dict):
                 m["phases"]["lifecycle_audited"] = status == "pass"
-            manifest_path.write_text(json.dumps(m, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            atomic_write_text(manifest_path, json.dumps(m, indent=2, sort_keys=True) + "\n")
         except Exception:
             pass
 
@@ -467,13 +588,13 @@ def coach_project(args: argparse.Namespace) -> int:
             if phase in inferred:
                 manifest_obj["phases"][phase] = inferred[phase]
         manifest_obj["updated_at"] = utc_now()
-        manifest_path.write_text(json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        atomic_write_text(manifest_path, json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n")
 
     audit_status, audit_report = compute_audit_report(project_dir)
     reports_dir = cortex_dir / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
     audit_out = reports_dir / "lifecycle_audit_v0.json"
-    audit_out.write_text(json.dumps(audit_report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    atomic_write_text(audit_out, json.dumps(audit_report, indent=2, sort_keys=True) + "\n")
 
     phases = dict(manifest_obj.get("phases", {}))
     phases["lifecycle_audited"] = audit_status == "pass"
@@ -557,7 +678,7 @@ def coach_project(args: argparse.Namespace) -> int:
     prompts_dir.mkdir(parents=True, exist_ok=True)
     cycle_prompt = prompts_dir / f"coach_cycle_prompt_{cycle_id}_v0.md"
 
-    cycle_json.write_text(json.dumps(cycle_report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    atomic_write_text(cycle_json, json.dumps(cycle_report, indent=2, sort_keys=True) + "\n")
 
     md_lines = [
         "# Coach Cycle Report v0",
@@ -585,7 +706,7 @@ def coach_project(args: argparse.Namespace) -> int:
             md_lines.extend(["", "## Skipped Drafts"])
             for item in skipped_drafts:
                 md_lines.append(f"- `{item['target']}` ({item['reason']})")
-    cycle_md.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
+    atomic_write_text(cycle_md, "\n".join(md_lines) + "\n")
 
     prompt_lines = [
         f"# Coach Cycle Prompt ({cycle_id}) v0",
@@ -607,13 +728,13 @@ def coach_project(args: argparse.Namespace) -> int:
                 "4. Review generated draft artifacts and propose exact refinements.",
             ]
         )
-    cycle_prompt.write_text("\n".join(prompt_lines) + "\n", encoding="utf-8")
+    atomic_write_text(cycle_prompt, "\n".join(prompt_lines) + "\n")
 
     if args.sync_phases:
         manifest_obj.setdefault("phases", {})
         manifest_obj["phases"]["lifecycle_audited"] = audit_status == "pass"
         manifest_obj["updated_at"] = utc_now()
-        manifest_path.write_text(json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        atomic_write_text(manifest_path, json.dumps(manifest_obj, indent=2, sort_keys=True) + "\n")
 
     print(str(cycle_json))
     print(str(cycle_md))
@@ -625,15 +746,36 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Cortex Project Coach v0")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    def add_lock_args(p: argparse.ArgumentParser) -> None:
+        p.add_argument(
+            "--lock-timeout-seconds",
+            type=float,
+            default=DEFAULT_LOCK_TIMEOUT_SECONDS,
+            help=f"Max time to wait for .cortex lock (default: {DEFAULT_LOCK_TIMEOUT_SECONDS}).",
+        )
+        p.add_argument(
+            "--lock-stale-seconds",
+            type=float,
+            default=DEFAULT_LOCK_STALE_SECONDS,
+            help=f"Lock age threshold for stale recovery (default: {DEFAULT_LOCK_STALE_SECONDS}).",
+        )
+        p.add_argument(
+            "--force-unlock",
+            action="store_true",
+            help="Force lock takeover if a lock file exists.",
+        )
+
     p_init = sub.add_parser("init", help="Bootstrap .cortex artifacts for a project.")
     p_init.add_argument("--project-dir", required=True)
     p_init.add_argument("--project-id", required=True)
     p_init.add_argument("--project-name", required=True)
     p_init.add_argument("--force", action="store_true")
+    add_lock_args(p_init)
     p_init.set_defaults(func=init_project)
 
     p_audit = sub.add_parser("audit", help="Audit .cortex lifecycle artifact health.")
     p_audit.add_argument("--project-dir", required=True)
+    add_lock_args(p_audit)
     p_audit.set_defaults(func=audit_project)
 
     p_coach = sub.add_parser("coach", help="Run one AI-guided lifecycle coaching cycle.")
@@ -645,6 +787,7 @@ def build_parser() -> argparse.ArgumentParser:
         default="direction,governance,design",
         help="Comma-separated scopes for --apply: direction,governance,design",
     )
+    add_lock_args(p_coach)
     p_coach.set_defaults(sync_phases=True)
     p_coach.set_defaults(func=coach_project)
 
@@ -654,6 +797,20 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+    if args.cmd in {"init", "audit", "coach"}:
+        project_dir = Path(args.project_dir).resolve()
+        try:
+            with project_lock(
+                project_dir=project_dir,
+                lock_timeout_seconds=args.lock_timeout_seconds,
+                lock_stale_seconds=args.lock_stale_seconds,
+                force_unlock=args.force_unlock,
+                command_name=args.cmd,
+            ):
+                return args.func(args)
+        except RuntimeError as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
     return args.func(args)
 
 

@@ -23,6 +23,11 @@ Or:
 just coach-init /path/to/project admin_dash "Admin Dashboard"
 ```
 
+Lock controls (optional):
+- `--lock-timeout-seconds <n>`
+- `--lock-stale-seconds <n>`
+- `--force-unlock`
+
 Expected artifacts in target project:
 - `.cortex/manifest_v0.json`
 - `.cortex/artifacts/direction_<project_id>_v0.md`
@@ -98,7 +103,13 @@ just coach-cycle-apply /path/to/project direction,design
 
 Valid scopes: `direction`, `governance`, `design`.
 
-### 4) Optional re-bootstrap (force)
+### 4) Sequential maintainer flow (fail-fast)
+
+```bash
+just coach-maintainer-sequence /path/to/project admin_dash "Admin Dashboard"
+```
+
+### 5) Optional re-bootstrap (force)
 
 ```bash
 uv run python3 scripts/cortex_project_coach_v0.py init \

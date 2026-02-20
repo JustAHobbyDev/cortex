@@ -23,6 +23,16 @@ coach-cycle-apply project_dir apply_scope="direction,governance,design":
     --apply \
     --apply-scope "{{apply_scope}}"
 
+coach-maintainer-sequence project_dir project_id project_name:
+  uv run python3 scripts/cortex_project_coach_v0.py init \
+    --project-dir "{{project_dir}}" \
+    --project-id "{{project_id}}" \
+    --project-name "{{project_name}}"
+  uv run python3 scripts/cortex_project_coach_v0.py coach \
+    --project-dir "{{project_dir}}"
+  uv run python3 scripts/cortex_project_coach_v0.py audit \
+    --project-dir "{{project_dir}}"
+
 design-dsl-compile dsl_file out_file:
   uv run python3 scripts/design_prompt_dsl_compile_v0.py \
     --dsl-file "{{dsl_file}}" \

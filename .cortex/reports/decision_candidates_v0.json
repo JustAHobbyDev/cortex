@@ -89,8 +89,28 @@
       "rationale": "Phase 3 parity is complete and standalone coach is operational; retaining internal runtime risks boundary drift.",
       "status": "promoted",
       "title": "Complete phase 4 external-only coach delegation"
+    },
+    {
+      "captured_at": "2026-02-20T15:16:40Z",
+      "decision": "Adopt assistant-neutral reflect->abstract->generalize->encode->validate loop and encode outputs in operating artifacts.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_require_agent_agnostic_reflection_loop_for_governance_learning_v1.md",
+      "decision_id": "dec_20260220T151640Z_require_agent_agnostic_r",
+      "impact_scope": [
+        "governance",
+        "policy",
+        "workflow"
+      ],
+      "linked_artifacts": [
+        "policies/decision_reflection_policy_v0.md",
+        ".cortex/policies/cortex_coach_decision_reflection_policy_v0.md",
+        "playbooks/claude_meta_compare_and_agent_agnostic_reflection_plan_v0.md"
+      ],
+      "promoted_at": "2026-02-20T15:16:46Z",
+      "rationale": "Ensure reflection governance portability across agents and keep durable repo-based memory.",
+      "status": "promoted",
+      "title": "Require agent-agnostic reflection loop for governance learning"
     }
   ],
-  "updated_at": "2026-02-20T14:40:56Z",
+  "updated_at": "2026-02-20T15:16:46Z",
   "version": "v0"
 }

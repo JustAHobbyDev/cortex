@@ -20,6 +20,30 @@ Before closing substantial work, run a decision reflection check:
 3. If no:
    - explicitly record that no operating-layer decision was introduced
 
+## Agent-Agnostic Reflection Loop (Required)
+
+This loop is mandatory for governance-relevant mistakes and applies to any coding assistant.
+
+1. Reflect:
+   - describe the concrete failure and why it happened
+2. Abstract:
+   - extract the recurring pattern behind the instance
+3. Generalize:
+   - define a reusable rule with boundary conditions
+4. Encode:
+   - write or update durable artifacts in this order:
+     - decision artifact in `.cortex/artifacts/decisions/`
+     - policy/playbook updates in `policies/` or `playbooks/` as needed
+     - prompt/context guidance in `.cortex/prompts/` only when execution behavior must change
+5. Validate:
+   - run governance checks (`decision-gap-check` and relevant audits) before closeout
+
+## Portability Constraint
+
+- The loop must not depend on assistant-specific files or branding.
+- Do not require `CLAUDE.md`, `AGENTS.md`, or any single-agent document as the system of record.
+- Canonical operating memory remains repository artifacts under `.cortex/`, `policies/`, `playbooks/`, and related tracked outputs.
+
 ## Trigger Examples
 
 - quality gate behavior changes

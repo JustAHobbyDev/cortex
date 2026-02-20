@@ -21,6 +21,30 @@ Before closing a substantial task, run a decision reflection step:
    - proceed without capture
    - note that no operating-layer decision was introduced
 
+## Agent-Agnostic Reflection Contract
+
+This contract is required for governance-relevant learning and is assistant-neutral.
+
+1. Reflect:
+   - identify the concrete failure in the attempted change
+2. Abstract:
+   - derive the recurring pattern
+3. Generalize:
+   - define the reusable directive and limits
+4. Encode:
+   - persist changes in repository operating artifacts in this order:
+     - `.cortex/artifacts/decisions/`
+     - `policies/` or `playbooks/` when broader behavior changes
+     - `.cortex/prompts/` only when execution prompting must change
+5. Validate:
+   - run `cortex-coach decision-gap-check` and project audit checks before closeout
+
+## Portability Constraint
+
+- This policy must work with Codex, Claude, and other assistants.
+- Reflection outputs must be auditable from checked-in artifacts, not chat memory.
+- Do not make assistant-specific docs the canonical governance memory.
+
 ## Trigger Examples
 
 Treat these as likely requiring decision capture:

@@ -60,6 +60,38 @@ Balance speed during active work with strong governance enforcement at merge/rel
 
 Escalation to stricter levels should follow policy versioning and release notes.
 
+## Enforcement Ladder Mapping Matrix (PH0-005)
+
+| Level | Semantics | Local Behavior | CI/Release Behavior | Escalation Rule |
+|---|---|---|---|---|
+| Level 0 (`advisory`) | Signals only; no closure block. | Surface warnings and recommended remediation steps. | No CI block from ladder alone. | Escalate to Level 1 after repeated governance-impacting misses in active work. |
+| Level 1 (`local_blocking`) | Governance-impacting closeout is blocked locally on required-gap failures. | Block local closeout until `decision-gap-check` and `reflection-completeness-check` pass. | CI remains non-blocking for these checks unless separately required. | Escalate to Level 2 when misses reach release boundary or recur across cycles. |
+| Level 2 (`ci_blocking`) | Required governance checks are merge/release gates. | Local flow mirrors CI-required checks before push. | Block protected branch/release on failed required checks. | Downgrade only through explicit policy change and release-note documentation. |
+
+## Release Boundary Required Check Mapping (PH0-005)
+
+Required checks at merge/release boundary:
+
+1. `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all`
+2. `python3 scripts/cortex_project_coach_v0.py decision-gap-check --project-dir .`
+3. `python3 scripts/cortex_project_coach_v0.py reflection-completeness-check --project-dir .`
+4. `./scripts/quality_gate_ci_v0.sh`
+
+Operational mapping:
+
+- `audit --audit-scope all`: lifecycle governance conformance and drift checks.
+- `decision-gap-check`: governance-impacting dirty-file linkage enforcement.
+- `reflection-completeness-check`: reflection to decision linkage completeness enforcement.
+- `quality_gate_ci_v0.sh`: integrity checks plus focused coach tests and docs/json validation.
+
+## Policy Change Process for Ladder Levels (PH0-005)
+
+1. Propose level change with rationale, scope, and expected impact.
+2. Link proposal to decision/reflection artifacts and affected policy/spec files.
+3. Obtain `Maintainer Council` approval before applying change to release gates.
+4. Publish versioned release notes describing old level, new level, and effective date.
+5. Run one stabilization cycle and record observed effects before any further level increase.
+
 ## Tactical and Adapter Safeguards
 
 - Tactical records must follow data-class policy (no secrets/PII).

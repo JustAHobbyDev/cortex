@@ -21,7 +21,7 @@
       },
       {
         "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json', 'cortex/reports/lifecycle_audit_v0.json', 'cortex/reports/audit_needed_v0.json'])",
+        "detail": "references missing project paths (examples=['cortex/manifest_v0.json', 'cortex/reports/lifecycle_audit_v0.json', 'cortex/reports/audit_needed_v0.json', 'cortex/reports/decision_candidates_v0.json'])",
         "path": "specs/agent_context_loader_spec_v0.md",
         "severity": "warn"
       },
@@ -183,7 +183,7 @@
       },
       {
         "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/reports/'])",
+        "detail": "references missing project paths (examples=['cortex/'])",
         "path": "playbooks/cortex_vision_master_roadmap_v1.md",
         "severity": "warn"
       },
@@ -332,7 +332,7 @@
         "severity": "warn"
       }
     ],
-    "scanned_files": 71,
+    "scanned_files": 74,
     "status": "warn"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
@@ -370,7 +370,7 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=71, findings=55",
+      "detail": "scanned=74, findings=55",
       "status": "warn"
     },
     {
@@ -386,7 +386,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-21T13:48:53Z",
+  "run_at": "2026-02-21T22:46:36Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],

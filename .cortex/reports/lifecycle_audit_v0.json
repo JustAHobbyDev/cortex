@@ -329,7 +329,7 @@
     "scanned_files": 70,
     "status": "warn"
   },
-  "assets_dir": "/home/d/codex/cortex-coach/cortex_coach/data/assets",
+  "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
   "audit_scope": "all",
   "checks": [
     {
@@ -380,7 +380,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-20T21:18:38Z",
+  "run_at": "2026-02-21T02:53:59Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],

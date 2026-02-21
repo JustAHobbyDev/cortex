@@ -65,6 +65,11 @@ Exit Criteria:
 Goal: improve automatic governance conformance in AI-assisted workflows.
 
 Deliverables:
+- Add first-class preflight command (for example `cortex-coach preflight`) that:
+  - verifies required policies are enabled
+  - builds governance-first agent context bundle
+  - emits a concise run contract for the active agent/session
+  - optionally fails closed when required governance artifacts are missing
 - Standardized agent prompt/runbook snippets for minimal and full modes.
 - Reflection trigger policy template (repeat-mistake and gate-failure scenarios).
 - Hand-off bundle standard for agent context loading in active tasks.
@@ -72,6 +77,7 @@ Deliverables:
 Exit Criteria:
 - Agents consistently invoke governance flow without manual reminder loops.
 - Reflection-to-decision closure rates trend upward.
+- Preflight runs as a default startup step in maintainer workflows.
 
 ### Phase 4: Governance Completeness Hardening
 
@@ -136,4 +142,5 @@ Exit Criteria:
 
 1. Implement Phase 1 flow command design proposal.
 2. Draft Phase 2 adapter contract spec in `cortex`.
-3. Add a tracking board section in playbooks for phase-level progress and dates.
+3. Design `preflight` command contract and startup integration points.
+4. Add a tracking board section in playbooks for phase-level progress and dates.

@@ -68,6 +68,14 @@ Define a deterministic retrieval policy so agents unfamiliar with both project a
 - Output must include `selected_by` and source class (`control_plane`, `task`, `tactical`, `adapter`).
 - Adapter-derived fields must include adapter identifier and freshness metadata.
 
+### Adapter Safety Contract Rule
+
+- Adapter ingestion is opt-in and read-only; loader must not mutate governance artifacts from adapter payloads.
+- Adapter calls must use bounded timeouts; on timeout/error, loader must still return governance + task slices.
+- Adapter failures/timeouts must not block mandatory governance retrieval behavior.
+- Adapter payload metadata must include `adapter_id`, `adapter_fetched_at`, and `source_updated_at` when available.
+- Loader must emit derived freshness (`staleness_seconds`) and warning metadata for stale or missing freshness inputs.
+
 ### Safety Rule
 
 - Tactical/adapter payloads must be sanitized for prohibited content classes before inclusion.
@@ -77,13 +85,14 @@ Define a deterministic retrieval policy so agents unfamiliar with both project a
 
 - Adapter failures/timeouts must degrade to governance-only + task slices.
 - Degradation must be explicit in warnings and fallback metadata.
+- Degradation behavior must preserve deterministic output generation without adapter-dependent hard-fail paths.
 
 ## Failure Modes
 
 - Over-selection causing token overflow.
 - Under-selection causing missing task-critical artifacts.
 - Non-deterministic ordering due to unsorted enumeration.
-- Adapter stall inflates latency and blocks context generation.
+- Adapter stall inflates latency and risks delayed context generation if timeout/degradation controls regress.
 - Tactical/adapter payload introduces unsafe content.
 - Excessive tactical inclusion dilutes governance signal.
 

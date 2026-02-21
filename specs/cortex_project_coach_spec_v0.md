@@ -81,8 +81,12 @@ Validation requirements:
 ### External Adapter Policy
 
 - Adapters are optional and read-only by default.
+- Adapter integrations MUST NOT write or directly mutate canonical governance artifacts.
 - Adapter failures/timeouts must degrade to governance-only behavior.
+- Adapter failures/timeouts MUST NOT block mandatory governance checks (`audit`, `decision-gap-check`, `reflection-completeness-check`).
 - Adapter data must carry provenance metadata.
+- Adapter data must carry freshness metadata (`adapter_fetched_at`, `source_updated_at`, `staleness_seconds`).
+- If freshness metadata is missing or stale beyond threshold, runtime must warn and treat adapter signals as advisory only.
 
 ### Enforcement Ladder
 

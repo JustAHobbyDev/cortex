@@ -183,6 +183,12 @@
       },
       {
         "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/'])",
+        "path": "playbooks/cortex_vision_master_roadmap_v1.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
         "detail": "references missing project paths (examples=['templates/design_ontology_*.json'])",
         "path": "playbooks/design_ontology_validation_runbook_v0.md",
         "severity": "warn"
@@ -326,7 +332,7 @@
         "severity": "warn"
       }
     ],
-    "scanned_files": 70,
+    "scanned_files": 71,
     "status": "warn"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
@@ -364,7 +370,7 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=70, findings=54",
+      "detail": "scanned=71, findings=55",
       "status": "warn"
     },
     {
@@ -380,7 +386,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-21T02:53:59Z",
+  "run_at": "2026-02-21T13:48:53Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],

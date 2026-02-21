@@ -13,6 +13,12 @@ In this repository, `just coach-*` recipes now route through
 Common option:
 - `--assets-dir /path/to/cortex-assets` to load contract/schema/vocabulary assets from an external Cortex asset root.
 
+Output format contract:
+- Non-interactive commands should be runnable in both text and JSON modes (`--format text|json`).
+- Until standalone runtime parity is complete for every command, use the delegator entrypoint for universal JSON support:
+  - `python3 scripts/cortex_project_coach_v0.py <command> ... --format json`
+- Native standalone JSON support exists for a subset of commands (`audit-needed`, `context-policy`, decision/reflection commands, `contract-check`).
+
 ## `init`
 
 Bootstrap `.cortex/` artifacts in a target project.
@@ -54,6 +60,15 @@ Output:
 - `.cortex/reports/lifecycle_audit_v0.json`
 - includes `spec_coverage` findings when `.cortex/spec_registry_v0.json` exists
 - includes `artifact_conformance` findings (for example foreign project scope references)
+
+JSON output (delegator compatibility path):
+
+```bash
+python3 scripts/cortex_project_coach_v0.py audit \
+  --project-dir /path/to/project \
+  --audit-scope all \
+  --format json
+```
 
 Spec coverage registry is bootstrapped by `init` at:
 - `.cortex/spec_registry_v0.json`
@@ -192,6 +207,15 @@ cortex-coach context-load \
   --out-file .cortex/reports/agent_context_bundle_v0.json
 ```
 
+JSON mode with explicit format flag (delegator compatibility path):
+
+```bash
+python3 scripts/cortex_project_coach_v0.py context-load \
+  --project-dir /path/to/project \
+  --task "governance updates" \
+  --format json
+```
+
 `--fallback-mode priority` enables a fallback chain:
 1. restricted budget
 2. relaxed budget
@@ -239,6 +263,15 @@ cortex-coach policy-enable \
   --project-dir /path/to/project \
   --policy usage-decision \
   --force
+```
+
+JSON output (delegator compatibility path):
+
+```bash
+python3 scripts/cortex_project_coach_v0.py policy-enable \
+  --project-dir /path/to/project \
+  --policy usage-decision \
+  --format json
 ```
 
 ## `decision-capture`

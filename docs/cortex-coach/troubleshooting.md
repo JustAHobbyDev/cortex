@@ -55,6 +55,25 @@ If expected, run audit and continue:
 cortex-coach audit --project-dir /path/to/project
 ```
 
+## `unrecognized arguments: --format json` on some commands
+
+Some standalone `cortex-coach` subcommands still have partial native format coverage.
+
+Use the delegator entrypoint for universal JSON support:
+
+```bash
+python3 scripts/cortex_project_coach_v0.py <command> ... --format json
+```
+
+Example:
+
+```bash
+python3 scripts/cortex_project_coach_v0.py audit \
+  --project-dir /path/to/project \
+  --audit-scope all \
+  --format json
+```
+
 ## `uv` permission/cache issues
 
 If `uv` fails in restricted environments, run directly with Python (temporary fallback):

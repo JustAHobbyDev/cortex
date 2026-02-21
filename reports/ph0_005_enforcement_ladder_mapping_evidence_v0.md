@@ -21,10 +21,13 @@ Primary artifacts:
   - `Enforcement Ladder Mapping Matrix (PH0-005)`
   - `Release Boundary Required Check Mapping (PH0-005)`
   - `Policy Change Process for Ladder Levels (PH0-005)`
+- `policies/cortex_coach_cli_output_contract_policy_v0.md`
+  - universal non-interactive `--format text|json` governance rule
+  - explicit integration-boundary shim constraints for current runtime parity gap
 - `scripts/quality_gate_ci_v0.sh`
   - CI gate includes decision-gap check, docs/json integrity, and focused coach tests.
 - `specs/cortex_project_coach_spec_v0.md`
-  - Enforcement ladder levels and governance checks context.
+  - Enforcement ladder levels, governance checks context, and CLI output contract requirements.
 
 ## CI/Runtime Linkage Evidence
 
@@ -36,19 +39,27 @@ Executed on 2026-02-21:
   - `run_at=2026-02-21T22:49:56Z`
 2. `python3 scripts/cortex_project_coach_v0.py decision-gap-check --project-dir . --format json`
   - Result: `status=pass`
-  - `run_at=2026-02-21T22:50:41Z`
+  - `run_at=2026-02-21T23:03:40Z`
 3. `python3 scripts/cortex_project_coach_v0.py reflection-completeness-check --project-dir . --format json`
   - Result: `status=pass`
-  - `run_at=2026-02-21T22:50:41Z`
+  - `run_at=2026-02-21T23:03:40Z`
 4. `./scripts/quality_gate_ci_v0.sh`
   - Result: `PASS`
-  - Focused tests: `24 passed in 33.84s`
+  - Focused tests: `29 passed in 39.19s`
 
 ## Acceptance Criteria Mapping
 
 - Criterion 1 satisfied via matrix rows for Level 0/1/2 semantics and escalation behavior.
 - Criterion 2 satisfied via explicit release-boundary command list and operational mapping notes.
 - Criterion 3 satisfied via five-step policy change process requiring maintainer approval and release notes.
+- Output contract governance strengthened via dedicated policy + spec linkage for deterministic JSON-mode automation.
+
+## Decision Tracking Evidence
+
+- Decision captured and promoted:
+  - `decision_id`: `dec_20260221T230319Z_require_universal_json_f`
+  - Artifact: `.cortex/artifacts/decisions/decision_require_universal_json_format_contract_for_non_interactive_coach_commands_v1.md`
+  - Linked to governance, spec, docs, tests, and implementation artifacts for this PH0-005 scope expansion.
 
 ## Decision
 

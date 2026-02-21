@@ -8,6 +8,7 @@ Inputs:
 - `specs/spec_spec_v0.md` governance and spec structure
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
 - `contracts/promotion_contract_schema_v0.json` promotion contract schema
+- `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/tactical_data_policy_v0.md` tactical data policy
 - `scripts/design_prompt_dsl_compile_v0.py` DSL compiler
 - `scripts/design_ontology_validate_v0.py` ontology validator
@@ -94,6 +95,13 @@ Validation requirements:
 - Level 1: local blocking for governance-impacting gaps
 - Level 2: CI blocking for required governance checks
 - Level changes require policy update and versioned release notes
+
+### CLI Output Contract
+
+- Non-interactive commands must support `--format text|json`.
+- Omitted `--format` must preserve historical text behavior.
+- JSON mode must emit parseable command payloads for automation.
+- Integration shim support is allowed only for output normalization and must not alter governance logic.
 
 ### Boundary Discipline
 

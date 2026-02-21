@@ -136,8 +136,37 @@
       "rationale": "Prevents ModuleNotFoundError from broken local script shadowing and aligns execution with external-only coach ownership.",
       "status": "promoted",
       "title": "Fix decoupled coach entrypoint shadowing in CI and scripts"
+    },
+    {
+      "captured_at": "2026-02-21T23:03:19Z",
+      "decision": "All non-interactive coach commands must support --format text|json with default text preserved; temporary delegator output shims are allowed until standalone parity is complete.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_require_universal_json_format_contract_for_non_interactive_coach_commands_v1.md",
+      "decision_id": "dec_20260221T230319Z_require_universal_json_f",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "ci",
+        "tooling"
+      ],
+      "linked_artifacts": [
+        "policies/cortex_coach_cli_output_contract_policy_v0.md",
+        "scripts/cortex_project_coach_v0.py",
+        "specs/cortex_project_coach_spec_v0.md",
+        "playbooks/session_governance_hybrid_plan_v0.md",
+        "docs/cortex-coach/commands.md",
+        "docs/cortex-coach/troubleshooting.md",
+        "tests/test_coach_format_contract.py",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+        "reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md"
+      ],
+      "promoted_at": "2026-02-21T23:03:31Z",
+      "rationale": "Automation and governance checks require deterministic machine-parseable outputs, and backward compatibility prevents breaking existing text-mode workflows.",
+      "reflection_id": null,
+      "reflection_report": null,
+      "status": "promoted",
+      "title": "Require universal JSON format contract for non-interactive coach commands"
     }
   ],
-  "updated_at": "2026-02-20T21:17:21Z",
+  "updated_at": "2026-02-21T23:03:31Z",
   "version": "v0"
 }

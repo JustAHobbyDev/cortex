@@ -47,6 +47,9 @@ Balance speed during active work with strong governance enforcement at merge/rel
 - run `cortex-coach reflection-completeness-check --project-dir . --format json`
 - run CI quality gate (`just quality-gate-ci`)
 
+Output-contract note:
+- For deterministic machine parsing across all commands in this repo, use the delegator entrypoint (`python3 scripts/cortex_project_coach_v0.py`) with `--format json` where needed.
+
 ## Enforcement Ladder in Session Operations
 
 1. Advisory mode

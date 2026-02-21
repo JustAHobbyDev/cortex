@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define the remaining end-to-end path from current state to a friction-reduced, project-agnostic governance operating layer.
+Define the end-to-end path from current state to a friction-reduced, project-agnostic governance operating layer that can safely incorporate tactical runtime memory and work-graph context.
 
 ## Current Baseline
 
@@ -20,101 +20,144 @@ Define the remaining end-to-end path from current state to a friction-reduced, p
 4. Low operational overhead (minimal command burden)
 5. Durable learning across sessions and agents
 
-## Guiding Constraints
+## Vision Expansion: Dual-Plane Model
 
-- Governance enforcement must remain artifact-based, not chat-memory-based.
+### Governance Plane (authoritative)
+
+- Canonical artifacts in `.cortex/` and governance directories remain the only source of truth for policy/spec/decision authority.
+- Release and merge gates evaluate governance plane artifacts only.
+
+### Tactical Plane (non-authoritative by default)
+
+- Runtime may capture fast tactical memory/work context to improve execution speed.
+- Tactical outputs are advisory until promoted through governance rules.
+
+### Promotion Plane (bridge contract)
+
+- Tactical insights become canonical only through explicit promotion with evidence and linked artifacts.
+- Governance-impacting changes must not close without decision/reflection linkage.
+
+## Non-Negotiable Constraints
+
+- Governance enforcement remains artifact-based, not chat-memory-based.
 - Runtime behavior belongs in `cortex-coach`; governance model belongs in `cortex`.
-- Project-specific checks must be configurable adapters, not hardcoded assumptions.
+- Project-specific checks remain adapter-based, not hardcoded.
+- Tactical plane cannot bypass governance gates.
+- External adapters are optional and must fail-open to governance-only mode.
 
 ## Roadmap Phases
 
-### Phase 1: Workflow Compression
+### Phase 0: Governance Lock-In
 
-Goal: reduce operator command complexity.
-
-Deliverables:
-- Add single-entry flow command in coach (for example `cortex-coach flow`).
-- Support `--mode minimal|full` to route minimal vs full governance workflow.
-- Ensure flow emits deterministic reports under `.cortex/reports/`.
-
-Exit Criteria:
-- New user can reach first green quality gate with one primary command path.
-- Existing checks still enforce decision/reflection/audit integrity.
-
-### Phase 2: Project-Agnostic Gate Framework
-
-Goal: replace one-off gate scripts with portable framework + adapters.
+Goal: codify dual-plane authority, promotion contracts, and stop-rules.
 
 Deliverables:
-- Define gate core contract:
-  - governance checks (required)
-  - adapter checks (configurable)
-- Add adapter model (examples):
-  - `python-pytest`
-  - `node-test`
-  - `cargo-test`
-  - `custom-command`
-- Add scaffold command to generate project gate config and scripts.
+- Policy/spec updates for canonical authority and promotion requirements.
+- Tactical data policy (content class limits, retention, redaction, prohibitions).
+- Adapter safety policy (read-only, timeout, degradation behavior).
+- Rollback/kill-switch rules and ownership matrix.
 
 Exit Criteria:
-- New projects can bootstrap gates without manual script authoring.
-- Repo-specific assumptions are moved behind adapter config.
+- Cross-repo boundary and governance responsibilities are unambiguous.
+- Stop-rules and emergency controls are documented and approved.
 
-### Phase 3: Agent-Oriented Operating Defaults
+### Phase 1: Tactical Memory Foundation
 
-Goal: improve automatic governance conformance in AI-assisted workflows.
+Goal: add fast tactical capture and retrieval behind experimental controls.
 
 Deliverables:
-- Add first-class preflight command (for example `cortex-coach preflight`) that:
-  - verifies required policies are enabled
-  - builds governance-first agent context bundle
-  - emits a concise run contract for the active agent/session
-  - optionally fails closed when required governance artifacts are missing
-- Standardized agent prompt/runbook snippets for minimal and full modes.
-- Reflection trigger policy template (repeat-mistake and gate-failure scenarios).
-- Hand-off bundle standard for agent context loading in active tasks.
+- Runtime tactical commands and schemas.
+- Setup/onboarding integrations for supported agent environments.
+- Deterministic tactical storage and mutation guardrails.
 
 Exit Criteria:
-- Agents consistently invoke governance flow without manual reminder loops.
-- Reflection-to-decision closure rates trend upward.
-- Preflight runs as a default startup step in maintainer workflows.
+- Tactical commands are deterministic and bounded.
+- Governance checks show no regression.
 
-### Phase 4: Governance Completeness Hardening
+### Phase 2: Retrieval and Context Quality
 
-Goal: tighten enforcement from “good practice” to “reliable guarantees.”
+Goal: improve context relevance under strict budgets.
 
 Deliverables:
-- Optional stricter mode:
-  - require promoted decisions for reflection closure in CI (`promoted` mode)
-- Add completeness dashboard report:
-  - reflections created
-  - reflections mapped to decisions
-  - uncovered governance-impact changes
-- Add policy for escalation when completeness drops below threshold.
+- Ranked retrieval and deterministic tie-breakers.
+- Tactical compaction/pruning policy.
+- Source provenance and confidence annotations in context bundles.
 
 Exit Criteria:
-- Completeness checks are measurable and auditable over time.
-- Governance regression is detectable within one CI cycle.
+- Relevance improves without context-budget or latency regressions.
 
-### Phase 5: Adoption + Migration Program
+### Phase 3: External Work-Graph Adapter
 
-Goal: make rollout repeatable across projects.
+Goal: support optional ingestion of tactical execution signals (for example Beads).
 
 Deliverables:
-- Migration guide: legacy scripts -> adapter-based framework.
-- Templates for greenfield project onboarding.
-- Reference implementations for at least 3 different stacks.
+- Read-only adapter contract and implementation.
+- Timeout/circuit-breaker behavior with governance-only fallback.
+- Adapter health and provenance reporting.
 
 Exit Criteria:
-- At least 3 heterogeneous projects onboarded with passing gates.
-- Time-to-first-green reduced versus current baseline.
+- Adapter outages cannot block governance operations.
+- No hidden dependency on external system for mandatory gates.
+
+### Phase 4: Promotion and Enforcement Hardening
+
+Goal: convert tactical learning into durable governance assets with strict linkage.
+
+Deliverables:
+- Promotion assistant and evidence scoring flow.
+- Enforcement ladder integration for decision/reflection completeness.
+- Governance debt visibility (ready/blocked governance actions).
+
+Exit Criteria:
+- Governance coverage metrics improve or hold steady.
+- Unlinked governance-impacting closures are blocked.
+
+### Phase 5: Rollout and Migration
+
+Goal: move from experimental to default operation safely.
+
+Deliverables:
+- Rollout modes: `off`, `experimental`, `default`.
+- Migration playbooks and operator guides.
+- Cross-project reference implementations.
+
+Exit Criteria:
+- SLO and gate reliability thresholds pass for two consecutive cycles.
+- Adoption targets are met without governance regression.
 
 ## Milestones and Sequencing
 
-1. Phase 1 (workflow compression) before broad adoption push.
-2. Phase 2 (adapter framework) before claiming project-agnostic portability.
-3. Phase 3 and 4 can run in parallel once Phase 2 baseline lands.
-4. Phase 5 starts after Phase 2 minimum viability.
+1. Phase 0 completes before any tactical feature is default-on.
+2. Phase 1 and 2 complete before external adapter default use.
+3. Phase 3 must pass degradation tests before broader adoption.
+4. Phase 4 must pass governance linkage checks before default-on promotion.
+5. Phase 5 begins only after prior gate stability.
+
+## Release Gates and Stop-Rules
+
+### Required Gates
+
+- Decision-gap and reflection completeness checks pass at release boundary.
+- Audit (`--audit-scope all`) passes at release boundary.
+
+### Stop-Rules (rollout pause triggers)
+
+- `context-load` p95 exceeds target for two consecutive cycles.
+- CI mandatory governance runtime increase exceeds threshold for two consecutive cycles.
+- Any adapter incident causes governance gate false pass/fail behavior.
+- Reflection/decision coverage trend drops below threshold.
+
+### Recovery
+
+- Force `off` or `experimental` mode via kill switch.
+- Run stabilization cycle (no new tactical capability activation).
+- Resume rollout only after incident postmortem and threshold recovery.
+
+## Capacity-Aware Sequencing (Codex Plus)
+
+- Plan work in 5-hour session windows, not fixed weekly tokens.
+- Respect weekly review gates and dashboard `/status` usage signals.
+- If weekly usage pressure is high by mid-week, defer feature expansion and run validation-only tasks.
 
 ## Success Metrics
 
@@ -128,19 +171,23 @@ Exit Criteria:
   - number of projects/stacks running adapter-based gates
 - Operator overhead:
   - median commands executed per feature/change closeout
+- Stability:
+  - rollout stop-rule triggers per quarter
 
 ## Risks and Mitigations
 
-- Risk: framework over-design slows delivery.
-  - Mitigation: ship adapter model with 2-3 concrete adapters first.
-- Risk: strict governance creates contributor friction.
-  - Mitigation: minimal mode + progressive hardening.
+- Risk: tactical plane dilutes governance rigor.
+  - Mitigation: canonical-authority rule + promotion-only durability.
+- Risk: external adapters increase runtime fragility.
+  - Mitigation: read-only adapter policy + fail-open governance-only fallback.
+- Risk: rollout outpaces account capacity.
+  - Mitigation: capacity-aware sequencing tied to live usage signals.
 - Risk: drift between `cortex` contract and `cortex-coach` runtime.
-  - Mitigation: contract tests and paired change discipline.
+  - Mitigation: paired contract/runtime updates and contract tests.
 
 ## Immediate Next Actions
 
-1. Implement Phase 1 flow command design proposal.
-2. Draft Phase 2 adapter contract spec in `cortex`.
-3. Design `preflight` command contract and startup integration points.
-4. Add a tracking board section in playbooks for phase-level progress and dates.
+1. Land Phase 0 policy/spec updates in `cortex`.
+2. Publish promotion contract schema and enforcement ladder contract.
+3. Define adapter interface spec and degradation tests.
+4. Add capacity governance cadence to session playbook.

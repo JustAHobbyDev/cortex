@@ -95,3 +95,4 @@ Artifact Admission Rules: [ARTIFACT_ADMISSION.md]
 ## Footnotes
 
 [1] Reflection-loop pattern inspiration: [`aviadr1/claude-meta`](https://github.com/aviadr1/claude-meta)
+[2] Comparative research reference and credited project: [`jayminwest/mulch`](https://github.com/jayminwest/mulch) (report: `reports/mulch_comparative_research_report_v0.md`)

@@ -30,6 +30,20 @@ This charter makes role labels actionable by specifying:
 3. If owner and reviewer disagree on a blocking issue for more than one working day, escalate to `Maintainer Council`.
 4. Evidence links are required before a ticket can move to `done`.
 
+## Interim Solo-Maintainer Exception (Phase 0 Only)
+
+Effective window:
+- 2026-02-21 through 2026-03-08 (Phase 0 target window)
+
+Exception:
+- A single maintainer may temporarily hold owner and reviewer roles where a second maintainer is not yet assigned.
+
+Compensating controls:
+1. Ticket cannot move to `done` without explicit evidence links in the execution board.
+2. Ticket must pass local governance gate checks before `done` (`audit --audit-scope all`, gap checks, quality gate command).
+3. Ticket should remain at `review` for at least one working session before `done`.
+4. Phase 1 gate elevation is blocked until `Maintainer Council` has at least two named maintainers.
+
 ## Role Charters
 
 | Role | Mandate | Primary Tickets | Decision Rights | Required Evidence | Escalation |

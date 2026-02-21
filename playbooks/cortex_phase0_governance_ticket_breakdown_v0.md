@@ -36,6 +36,7 @@ Update cadence:
 - Update board at least once per working day.
 - Run weekly checkpoint at end of week before scheduling next week.
 - Fill role-to-individual mapping before moving any ticket to `in_progress`.
+- If solo-maintainer exception is active, follow compensating controls in `playbooks/cortex_phase0_role_charters_v0.md`.
 
 Suggested role labels:
 - `Governance Policy Lead`
@@ -66,13 +67,13 @@ Map role labels to specific people/accounts before execution begins.
 | Conformance QA Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | Program Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | CI/Gate Owner | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
-| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | tbd | Expand to at least two maintainers before Phase 1 gate elevation. |
+| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | tbd | Solo-maintainer exception expires 2026-03-08; expand to at least two maintainers before Phase 1 gate elevation. |
 
 | Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| PH0-001 | Canonical Authority and Dual-Plane Policy Lock-In | todo | Governance Policy Lead | Maintainer Council | Week 1 | 2026-02-27 | - | tbd | |
-| PH0-002 | Promotion Contract Schema v0 | todo | Contract/Schema Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | tbd | |
-| PH0-003 | Tactical Data Policy v0 | todo | Security & Data Policy Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | tbd | |
+| PH0-001 | Canonical Authority and Dual-Plane Policy Lock-In | in_progress | Governance Policy Lead | Maintainer Council | Week 1 | 2026-02-27 | - | policies/cortex_coach_final_ownership_boundary_v0.md;playbooks/cortex_vision_master_roadmap_v1.md | authority wording hardened; pending council review |
+| PH0-002 | Promotion Contract Schema v0 | in_progress | Contract/Schema Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | contracts/promotion_contract_schema_v0.json;specs/cortex_project_coach_spec_v0.md | schema drafted in parallel; closure gated on PH0-001 |
+| PH0-003 | Tactical Data Policy v0 | in_progress | Security & Data Policy Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | policies/tactical_data_policy_v0.md;specs/cortex_project_coach_spec_v0.md;playbooks/session_governance_hybrid_plan_v0.md | policy drafted in parallel; closure gated on PH0-001 |
 | PH0-004 | External Adapter Safety Contract v0 | todo | Adapter Safety Lead | Runtime Reliability Lead | Week 1 | 2026-02-27 | PH0-001 | tbd | |
 | PH0-005 | Enforcement Ladder Contract and CI Mapping | todo | Governance Enforcement Lead | CI/Gate Owner | Week 2 | 2026-03-06 | PH0-002,PH0-004 | tbd | |
 | PH0-006 | Kill-Switch and Rollback Governance Controls | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
@@ -116,7 +117,7 @@ Objective:
 
 Primary artifacts:
 - `specs/cortex_project_coach_spec_v0.md`
-- `contracts/` (new promotion contract artifact file expected in implementation)
+- `contracts/promotion_contract_schema_v0.json`
 
 Acceptance criteria:
 - Required fields defined:
@@ -136,7 +137,8 @@ Objective:
 
 Primary artifacts:
 - `specs/cortex_project_coach_spec_v0.md`
-- `policies/` (new tactical data policy file expected in implementation)
+- `policies/tactical_data_policy_v0.md`
+- `playbooks/session_governance_hybrid_plan_v0.md`
 
 Acceptance criteria:
 - Explicit prohibited classes (secrets/credentials/PII) documented.

@@ -7,6 +7,8 @@ Inputs:
 - `philosophy/ontology_architecture_map_v0.md` layer model
 - `specs/spec_spec_v0.md` governance and spec structure
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
+- `contracts/promotion_contract_schema_v0.json` promotion contract schema
+- `policies/tactical_data_policy_v0.md` tactical data policy
 - `scripts/design_prompt_dsl_compile_v0.py` DSL compiler
 - `scripts/design_ontology_validate_v0.py` ontology validator
 
@@ -60,11 +62,21 @@ Any governance-impacting tactical closure must provide:
 3. rationale/evidence summary
 4. promotion trace entry in deterministic report outputs
 
+Canonical schema:
+- `contracts/promotion_contract_schema_v0.json`
+
+Validation requirements:
+- Missing decision/reflection linkage is invalid.
+- Empty impacted artifact linkage is invalid.
+- Missing rationale/evidence summary is invalid.
+- Missing promotion trace metadata is invalid.
+
 ### Tactical Data Policy
 
 - Tactical storage must prohibit secrets/credentials/PII by policy.
 - Tactical records must support TTL/pruning/compaction.
 - Redaction controls must be available for non-compliant tactical payloads.
+- Canonical policy source: `policies/tactical_data_policy_v0.md`.
 
 ### External Adapter Policy
 
@@ -118,4 +130,4 @@ Any governance-impacting tactical closure must provide:
 
 ## Immediate Next Step
 
-Add explicit promotion contract schema and enforcement-level policy bindings to runtime reports and CI checks.
+Wire promotion schema and tactical data policy validation into runtime reports and CI checks.

@@ -7,12 +7,12 @@ Scope: cross-repo operating boundary
 ## Authority Model
 
 1. Governance Plane Authority
-- Canonical governance authority lives in `cortex` artifacts and policies.
-- Tactical runtime outputs are non-authoritative unless promoted via governance contracts.
+- Canonical governance authority MUST live in `cortex` artifacts and policies.
+- Tactical runtime outputs MUST be treated as non-authoritative unless promoted via governance contracts.
 
 2. Tactical Plane Authority
 - Tactical capture/retrieval/adapters live in `cortex-coach` runtime implementation.
-- Tactical runtime state must not directly redefine governance policy/spec authority.
+- Tactical runtime state MUST NOT directly redefine governance policy/spec authority.
 
 ## Cortex Owns
 
@@ -42,6 +42,7 @@ Scope: cross-repo operating boundary
 2. Canonical authority rule
 - No tactical feature or adapter may bypass decision/reflection/audit governance requirements.
 - Promotion is required for tactical content to become canonical.
+- Adapter or tactical signals MUST NOT be accepted as sole closure evidence for governance-impacting work.
 
 3. Adapter rule
 - External adapters must be optional, read-only by default, and fail-open to governance-only mode.
@@ -52,6 +53,7 @@ Scope: cross-repo operating boundary
 
 ## Override and Escalation Ownership
 
-- Policy and contract override approval: `cortex` maintainers.
+- Policy and contract override approval: `cortex` maintainers (`Maintainer Council` during Phase 0 execution).
 - Runtime emergency disable execution: `cortex-coach` maintainers.
 - Post-incident governance requirement changes: `cortex` maintainers.
+- All override decisions MUST be linked to decision/reflection artifacts in canonical governance records.

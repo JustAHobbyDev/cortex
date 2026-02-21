@@ -63,8 +63,10 @@ Escalation to stricter levels should follow policy versioning and release notes.
 ## Tactical and Adapter Safeguards
 
 - Tactical records must follow data-class policy (no secrets/PII).
+- Tactical data policy source: `policies/tactical_data_policy_v0.md`.
 - Adapter integrations are read-only and optional.
 - Adapter failure must degrade to governance-only behavior, never hard-block governance commands.
+- Sanitization failure on tactical payloads must fail closed for that payload and continue governance-only execution.
 
 ## Kill-Switch and Rollback
 

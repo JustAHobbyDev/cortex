@@ -24,18 +24,19 @@ Define the end-to-end path from current state to a friction-reduced, project-agn
 
 ### Governance Plane (authoritative)
 
-- Canonical artifacts in `.cortex/` and governance directories remain the only source of truth for policy/spec/decision authority.
-- Release and merge gates evaluate governance plane artifacts only.
+- Canonical artifacts in `.cortex/` and governance directories are the only source of truth for policy/spec/decision authority.
+- Release and merge gates MUST evaluate governance plane artifacts as the authoritative closure source.
 
 ### Tactical Plane (non-authoritative by default)
 
 - Runtime may capture fast tactical memory/work context to improve execution speed.
-- Tactical outputs are advisory until promoted through governance rules.
+- Tactical outputs are advisory until promoted through governance rules and MUST NOT close governance-impacting work alone.
 
 ### Promotion Plane (bridge contract)
 
 - Tactical insights become canonical only through explicit promotion with evidence and linked artifacts.
 - Governance-impacting changes must not close without decision/reflection linkage.
+- Promotion schema is defined in `contracts/promotion_contract_schema_v0.json`.
 
 ## Non-Negotiable Constraints
 
@@ -53,7 +54,8 @@ Goal: codify dual-plane authority, promotion contracts, and stop-rules.
 
 Deliverables:
 - Policy/spec updates for canonical authority and promotion requirements.
-- Tactical data policy (content class limits, retention, redaction, prohibitions).
+- Tactical data policy (content class limits, retention, redaction, prohibitions) in `policies/tactical_data_policy_v0.md`.
+- Promotion contract schema in `contracts/promotion_contract_schema_v0.json`.
 - Adapter safety policy (read-only, timeout, degradation behavior).
 - Rollback/kill-switch rules and ownership matrix.
 
@@ -188,6 +190,6 @@ Exit Criteria:
 ## Immediate Next Actions
 
 1. Land Phase 0 policy/spec updates in `cortex`.
-2. Publish promotion contract schema and enforcement ladder contract.
+2. Wire runtime and CI checks to promotion schema and tactical data policy.
 3. Define adapter interface spec and degradation tests.
-4. Add capacity governance cadence to session playbook.
+4. Validate enforcement ladder mapping against current quality gates.

@@ -2,6 +2,60 @@
 
 Assumption: `cortex-coach` is installed and on your `PATH`.
 
+## Minimal Workflow (Recommended First Run)
+
+Use this path to get first success quickly with minimal ceremony.
+
+### 1) Install
+
+```bash
+uv tool install \
+  git+https://github.com/JustAHobbyDev/cortex-coach.git@main
+```
+
+### 2) Initialize
+
+```bash
+cd /path/to/your/project
+```
+
+```bash
+cortex-coach \
+  init \
+  --project-dir . \
+  --project-id my_project \
+  --project-name "My Project"
+```
+
+### 3) Risk Check
+
+```bash
+cortex-coach \
+  audit-needed \
+  --project-dir . \
+  --format json
+```
+
+If `audit_required=true`, run:
+
+```bash
+cortex-coach \
+  coach \
+  --project-dir .
+```
+
+```bash
+cortex-coach \
+  audit \
+  --project-dir .
+```
+
+### 4) Pre-Merge Gate
+
+```bash
+./scripts/quality_gate_v0.sh
+```
+
 ## External Project Example (Copy/Paste)
 
 ```bash
@@ -64,6 +118,143 @@ cortex-coach coach \
   --apply \
   --apply-scope direction,governance
 ```
+
+## Complete Workflow (Governance + Reflection)
+
+Use this when running full governance discipline, not just minimal onboarding.
+
+### 1) Install cortex-coach
+
+```bash
+uv tool install \
+  git+https://github.com/JustAHobbyDev/cortex-coach.git@main
+```
+
+### 2) Initialize your project
+
+```bash
+cd /path/to/your/project
+```
+
+```bash
+cortex-coach \
+  init \
+  --project-dir . \
+  --project-id my_project \
+  --project-name "My Project"
+```
+
+### 3) Start work with a quick risk check
+
+```bash
+cortex-coach \
+  audit-needed \
+  --project-dir . \
+  --format json
+```
+
+If `audit_required=true`, run:
+
+```bash
+cortex-coach \
+  coach \
+  --project-dir .
+```
+
+```bash
+cortex-coach \
+  audit \
+  --project-dir .
+```
+
+### 4) Make changes normally (code/docs/policies/etc.)
+
+### 5) Capture governance decisions when they happen
+
+```bash
+cortex-coach \
+  decision-capture \
+  --project-dir . \
+  --title "..." \
+  --decision "..." \
+  --rationale "..." \
+  --impact-scope governance,docs \
+  --linked-artifacts path1,path2
+```
+
+```bash
+cortex-coach \
+  decision-promote \
+  --project-dir . \
+  --decision-id <decision_id>
+```
+
+### 6) When a mistake repeats, run reflection loop
+
+```bash
+cortex-coach \
+  reflection-scaffold \
+  --project-dir . \
+  --title "..." \
+  --mistake "..." \
+  --pattern "..." \
+  --rule "..." \
+  --format json
+```
+
+Use scaffold output to run `decision-capture` with `--reflection-id` and `--reflection-report`.
+
+### 7) Run completeness checks before merge
+
+```bash
+cortex-coach \
+  decision-gap-check \
+  --project-dir . \
+  --format json
+```
+
+```bash
+cortex-coach \
+  reflection-completeness-check \
+  --project-dir . \
+  --required-decision-status candidate \
+  --format json
+```
+
+```bash
+cortex-coach \
+  audit \
+  --project-dir . \
+  --audit-scope cortex-only
+```
+
+Optional full-scope:
+
+```bash
+cortex-coach \
+  audit \
+  --project-dir . \
+  --audit-scope all
+```
+
+### 8) Run quality gate
+
+```bash
+./scripts/quality_gate_v0.sh
+```
+
+CI uses:
+
+```bash
+./scripts/quality_gate_ci_v0.sh
+```
+
+### 9) Merge/release only when gates are green
+
+- No uncovered decision gaps
+- Reflection completeness passes
+- Audit passes
+- Tests pass
 
 ## If `cortex-coach` Is Not Installed (Temporary Migration Fallback)
 

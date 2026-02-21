@@ -6,6 +6,7 @@ This documentation is for users running `cortex-coach` in their own projects.
 
 1. [Install](install.md)
 2. [Quickstart](quickstart.md)
+   - Includes Minimal Workflow and Complete Workflow paths
 3. [Commands](commands.md)
 4. [Maintainer Mode](maintainer-mode.md)
 5. [Agent Context Loader](agent-context-loader.md)

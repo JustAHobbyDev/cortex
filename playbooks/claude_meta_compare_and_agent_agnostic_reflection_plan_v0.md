@@ -82,6 +82,14 @@
 - During reviews: if "same mistake twice" occurs, invoke reflection contract immediately.
 - During closeout: verify reflection outputs are integrated before final plan closure.
 
+### Phase E: Project-Agnostic Gate Framework + Project Adapters
+- Define a portable gate framework in `cortex-coach` with:
+  - stable governance core checks (`audit-needed`, `decision-gap-check`, `reflection-completeness-check`, `audit`)
+  - pluggable project adapters for toolchain checks (for example `pytest`, `npm`, `cargo`, custom scripts)
+- Treat generated gate scripts as project-scaffold outputs, not universal hardcoded policy.
+- Prefer executable gates over instructions-only prompts for enforcement-critical checks.
+- Keep project-specific checks configurable by manifest/config contract rather than embedded assumptions.
+
 ## Minimal Prompt Template (Agent-Agnostic)
 - "Reflect on this mistake. Abstract the underlying pattern. Generalize a reusable rule. Encode the rule into cortex operating artifacts (decision first, then policy/playbook updates as needed), and run governance checks."
 

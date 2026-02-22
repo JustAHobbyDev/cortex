@@ -18,18 +18,24 @@ run_quiet() {
   rm -f "$log_file"
 }
 
-echo "[quality-gate-ci] 1/7 coach smoke checks"
+echo "[quality-gate-ci] 1/8 quality gate sync check"
+run_quiet "quality_gate_sync_check_v0.py" python3 scripts/quality_gate_sync_check_v0.py \
+  --ci-script scripts/quality_gate_ci_v0.sh \
+  --local-script scripts/quality_gate_v0.sh \
+  --format json
+
+echo "[quality-gate-ci] 2/8 coach smoke checks"
 run_quiet "coach help" python3 scripts/cortex_project_coach_v0.py --help
 run_quiet "audit-needed smoke" python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 2/7 decision gap check"
+echo "[quality-gate-ci] 3/8 decision gap check"
 run_quiet "decision-gap-check" python3 scripts/cortex_project_coach_v0.py decision-gap-check \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 3/7 reflection enforcement gate"
+echo "[quality-gate-ci] 4/8 reflection enforcement gate"
 run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforcement_gate_v0.py \
   --project-dir . \
   --required-decision-status promoted \
@@ -37,20 +43,20 @@ run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforce
   --min-required-status-mappings 1 \
   --format json
 
-echo "[quality-gate-ci] 4/7 project-state boundary gate"
+echo "[quality-gate-ci] 5/8 project-state boundary gate"
 run_quiet "project_state_boundary_gate_v0.py" python3 scripts/project_state_boundary_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 5/7 temporal playbook release-surface gate"
+echo "[quality-gate-ci] 6/8 temporal playbook release-surface gate"
 run_quiet "temporal_playbook_release_gate_v0.py" python3 scripts/temporal_playbook_release_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 6/7 docs and json integrity"
+echo "[quality-gate-ci] 7/8 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
-echo "[quality-gate-ci] 7/7 focused coach tests"
+echo "[quality-gate-ci] 8/8 focused coach tests"
 uv run --locked --group dev pytest -q tests/test_coach_*.py
 
 echo "[quality-gate-ci] PASS"

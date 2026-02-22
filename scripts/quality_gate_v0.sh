@@ -18,24 +18,30 @@ run_quiet() {
   rm -f "$log_file"
 }
 
-echo "[quality-gate] 1/8 audit-needed"
+echo "[quality-gate] 1/9 quality gate sync check"
+run_quiet "quality_gate_sync_check_v0.py" python3 scripts/quality_gate_sync_check_v0.py \
+  --ci-script scripts/quality_gate_ci_v0.sh \
+  --local-script scripts/quality_gate_v0.sh \
+  --format json
+
+echo "[quality-gate] 2/9 audit-needed"
 run_quiet "audit-needed --fail-on-required" python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json \
   --fail-on-required
 
-echo "[quality-gate] 2/8 coach smoke checks"
+echo "[quality-gate] 3/9 coach smoke checks"
 run_quiet "coach help" python3 scripts/cortex_project_coach_v0.py --help
 run_quiet "audit-needed smoke" python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 3/8 decision gap check"
+echo "[quality-gate] 4/9 decision gap check"
 run_quiet "decision-gap-check" python3 scripts/cortex_project_coach_v0.py decision-gap-check \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 4/8 reflection enforcement gate"
+echo "[quality-gate] 5/9 reflection enforcement gate"
 run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforcement_gate_v0.py \
   --project-dir . \
   --required-decision-status promoted \
@@ -43,20 +49,20 @@ run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforce
   --min-required-status-mappings 1 \
   --format json
 
-echo "[quality-gate] 5/8 project-state boundary gate"
+echo "[quality-gate] 6/9 project-state boundary gate"
 run_quiet "project_state_boundary_gate_v0.py" python3 scripts/project_state_boundary_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 6/8 temporal playbook release-surface gate"
+echo "[quality-gate] 7/9 temporal playbook release-surface gate"
 run_quiet "temporal_playbook_release_gate_v0.py" python3 scripts/temporal_playbook_release_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 7/8 docs and json integrity"
+echo "[quality-gate] 8/9 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
-echo "[quality-gate] 8/8 focused coach tests"
+echo "[quality-gate] 9/9 focused coach tests"
 uv run --locked --group dev pytest -q tests/test_coach_*.py
 
 echo "[quality-gate] PASS"

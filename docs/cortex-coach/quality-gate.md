@@ -37,32 +37,34 @@ Fallback:
 
 `quality-gate` (strict local):
 
-1. `audit-needed` with fail-on-required behavior
-2. `cortex-coach` smoke commands
-3. `decision-gap-check` for governance-impacting dirty files
-4. `reflection_enforcement_gate_v0.py` fail-closed checks:
+1. `quality_gate_sync_check_v0.py` (fail if local/CI shared gate bundle drifts)
+2. `audit-needed` with fail-on-required behavior
+3. `cortex-coach` smoke commands
+4. `decision-gap-check` for governance-impacting dirty files
+5. `reflection_enforcement_gate_v0.py` fail-closed checks:
    - no vacuous reflection pass (`min_scaffold_reports >= 1`)
    - required promoted mappings (`min_required_status_mappings >= 1`)
    - governance-impact decision matches must carry valid `reflection_id` + `reflection_report`
-5. `project_state_boundary_gate_v0.py` fail-closed check:
+6. `project_state_boundary_gate_v0.py` fail-closed check:
    - project-state files are forbidden outside `.cortex/` (`reports/` root blocked by default)
    - expired active waivers are blocking
-6. `temporal_playbook_release_gate_v0.py` fail-closed check:
+7. `temporal_playbook_release_gate_v0.py` fail-closed check:
    - unmanaged `playbooks/cortex_*.md` candidates are blocking
    - expired active temporal entries are blocking
    - retired residue in `playbooks/` is blocking
-7. docs local-link + JSON integrity
-8. focused `cortex-coach` pytest suite
+8. docs local-link + JSON integrity
+9. focused `cortex-coach` pytest suite
 
 `quality-gate-ci`:
 
-1. `cortex-coach` smoke commands
-2. `decision-gap-check` for governance-impacting dirty files
-3. `reflection_enforcement_gate_v0.py` with promoted-status thresholds
-4. `project_state_boundary_gate_v0.py` with contract-driven path checks
-5. `temporal_playbook_release_gate_v0.py` with contract-driven release-surface checks
-6. docs local-link + JSON integrity
-7. focused `cortex-coach` pytest suite
+1. `quality_gate_sync_check_v0.py` (fail if local/CI shared gate bundle drifts)
+2. `cortex-coach` smoke commands
+3. `decision-gap-check` for governance-impacting dirty files
+4. `reflection_enforcement_gate_v0.py` with promoted-status thresholds
+5. `project_state_boundary_gate_v0.py` with contract-driven path checks
+6. `temporal_playbook_release_gate_v0.py` with contract-driven release-surface checks
+7. docs local-link + JSON integrity
+8. focused `cortex-coach` pytest suite
 
 ## When to Run
 

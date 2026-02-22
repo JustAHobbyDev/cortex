@@ -24,7 +24,9 @@ jobs:
 
       - name: Install standalone cortex-coach
         run: |
-          uv tool install --force git+https://github.com/JustAHobbyDev/cortex-coach.git@v0.1.0
+          # Pin a standalone coach revision that includes reflection-completeness-check,
+          # which is required by scripts/reflection_enforcement_gate_v0.py.
+          uv tool install --force git+https://github.com/JustAHobbyDev/cortex-coach.git@bc737f0462fbae5d1e568f5e6854c388f6eccf6c
 
       - name: Run CI quality gate
         run: |

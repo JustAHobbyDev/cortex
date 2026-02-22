@@ -1,0 +1,68 @@
+{
+  "classification_globs": [
+    "playbooks/cortex_*.md"
+  ],
+  "durable_allowlist": [
+    "playbooks/cortex_project_coach_runbook_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "temporal_playbooks": [
+    {
+      "expires_on": "2026-04-30",
+      "owner": "Governance Enforcement Lead",
+      "path": "playbooks/cortex_coach_concurrency_hardening_plan_v0.md",
+      "reason": "Temporal implementation hardening plan for in-flight coach runtime work.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-04-30",
+      "owner": "Governance Enforcement Lead",
+      "path": "playbooks/cortex_coach_decoupling_plan_v0.md",
+      "reason": "Temporal migration plan specific to current decoupling milestone.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-04-30",
+      "owner": "Conformance QA Lead",
+      "path": "playbooks/cortex_coach_spec_coverage_plan_v0.md",
+      "reason": "Temporal scope-closure playbook for current spec coverage campaign.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-04-30",
+      "owner": "Conformance QA Lead",
+      "path": "playbooks/cortex_coach_stage1_steering_quality_plan_v0.md",
+      "reason": "Temporal quality-steering artifact for stage-specific execution.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-03-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_adoption_delta_plan_v0.md",
+      "reason": "Temporal adoption-delta tracking during early governance rollout.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-03-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+      "reason": "Phase-scoped execution board that should retire after Phase 0 closeout.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-03-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase0_role_charters_v0.md",
+      "reason": "Phase-scoped role mapping artifact under solo-maintainer exception.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    }
+  ],
+  "version": "v0"
+}

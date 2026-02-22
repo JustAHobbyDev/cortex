@@ -1,7 +1,7 @@
 {
   "artifact_conformance": {
     "findings": [],
-    "scanned_files": 78,
+    "scanned_files": 79,
     "status": "pass"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
@@ -39,12 +39,12 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=78, findings=0",
+      "detail": "scanned=79, findings=0",
       "status": "pass"
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=10, findings=0",
+      "detail": "promoted=11, findings=0",
       "status": "pass"
     }
   ],
@@ -55,7 +55,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-22T13:38:39Z",
+  "run_at": "2026-02-22T14:54:16Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -67,7 +67,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 10,
+    "promoted_decision_count": 11,
     "status": "pass"
   },
   "version": "v0"

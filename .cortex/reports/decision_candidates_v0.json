@@ -287,8 +287,35 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_012_context_hydration_baseline_v0.json",
       "status": "promoted",
       "title": "Establish context hydration contract and policy baseline"
+    },
+    {
+      "captured_at": "2026-02-22T14:48:50Z",
+      "decision": "Mistake observed: Temporal Cortex-development playbooks lacked explicit lifecycle metadata and deterministic release-surface enforcement. Recurring pattern: Project-scoped playbooks drift into durable release surface when temporal status and expiry are not contract-bound. Adopt reusable rule: Require contract-managed lifecycle metadata for cortex_* playbooks and fail closed on unmanaged, expired, or disposition-violating entries.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_enforce_temporal_playbook_retirement_and_release_surface_gating_v1.md",
+      "decision_id": "dec_20260222T144850Z_enforce_temporal_playboo",
+      "impact_scope": [
+        "governance",
+        "policy",
+        "workflow",
+        "ci",
+        "tooling"
+      ],
+      "linked_artifacts": [
+        "contracts/temporal_playbook_release_surface_contract_v0.json",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+        "policies/temporal_playbook_release_surface_policy_v0.md",
+        "scripts/quality_gate_ci_v0.sh",
+        "scripts/quality_gate_v0.sh",
+        "scripts/temporal_playbook_release_gate_v0.py"
+      ],
+      "promoted_at": "2026-02-22T14:48:53Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260222T144843Z_enforce_temporal_playboo",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260222T144843Z_enforce_temporal_playboo_v0.json",
+      "status": "promoted",
+      "title": "Enforce temporal playbook retirement and release-surface gating"
     }
   ],
-  "updated_at": "2026-02-22T13:12:59Z",
+  "updated_at": "2026-02-22T14:48:53Z",
   "version": "v0"
 }

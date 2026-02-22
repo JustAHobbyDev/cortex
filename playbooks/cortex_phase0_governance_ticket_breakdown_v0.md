@@ -19,7 +19,7 @@ Provide an executable Phase 0 ticket set derived from:
 ## Execution Order
 
 1. `PH0-001` through `PH0-004` (authority + contracts)
-2. `PH0-005`, `PH0-006`, `PH0-010`, `PH0-011`, and `PH0-012` (enforcement + controls + boundary + swarm GDD + hydration baseline)
+2. `PH0-005`, `PH0-006`, `PH0-010`, `PH0-011`, `PH0-012`, and `PH0-013` (enforcement + controls + boundary + swarm GDD + hydration + release-surface hygiene)
 3. `PH0-007` and `PH0-008` (capacity governance + verification)
 4. `PH0-009` (closeout package)
 
@@ -81,7 +81,8 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-007 | Capacity Governance Cadence (Codex Plus) | todo | Delivery Operations Lead | Runtime Reliability Lead | Week 2 | 2026-03-06 | - | tbd | ready after PH0-001 closeout |
 | PH0-011 | Swarm Governance Driven Development Baseline | todo | Governance Enforcement Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-001,PH0-005,PH0-006,PH0-010 | playbooks/cortex_vision_master_roadmap_v1.md;playbooks/cortex_phase0_governance_ticket_breakdown_v0.md;scripts/quality_gate_ci_v0.sh;scripts/reflection_enforcement_gate_v0.py | formalize Swarm-GDD gates and exit criteria before broader swarm adoption |
 | PH0-012 | Context Hydration Contract + Preflight Policy Baseline | done | Governance Enforcement Lead | Governance Policy Lead | Week 1 | 2026-02-22 | - | .cortex/reports/project_state/ph0_012_context_hydration_baseline_closeout_v0.md;contracts/context_hydration_receipt_schema_v0.json;policies/context_hydration_policy_v0.md;specs/cortex_project_coach_spec_v0.md | phase-0 baseline landed; runtime command-level enforcement rollout remains follow-on work |
-| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012 | tbd | |
+| PH0-013 | Temporal Playbook Retirement + Release Surface Gate | done | Conformance QA Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-010 | .cortex/reports/project_state/ph0_013_temporal_playbook_release_surface_closeout_v0.md;contracts/temporal_playbook_release_surface_contract_v0.json;policies/temporal_playbook_release_surface_policy_v0.md;scripts/temporal_playbook_release_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/artifacts/decisions/decision_enforce_temporal_playbook_retirement_and_release_surface_gating_v1.md | temporal classification contract + fail-closed release-surface gate implemented with promoted decision linkage |
+| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012,PH0-013 | tbd | |
 | PH0-009 | Maintainer Closeout and Handoff Package | todo | Program Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-008 | tbd | |
 
 ## Weekly Checkpoint Template (Fillable)
@@ -292,6 +293,29 @@ Acceptance criteria:
 Evidence:
 - Policy + contract + spec diffs and closeout report committed.
 
+### PH0-013: Temporal Playbook Retirement + Release Surface Gate
+
+Objective:
+- Prevent shipping temporal/project-specific Cortex-development playbooks in the distributable Cortex release surface.
+
+Primary artifacts:
+- `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md`
+- `contracts/temporal_playbook_release_surface_contract_v0.json`
+- `policies/temporal_playbook_release_surface_policy_v0.md`
+- `scripts/temporal_playbook_release_gate_v0.py`
+- `scripts/quality_gate_ci_v0.sh`
+- `scripts/quality_gate_v0.sh`
+- .cortex/reports/project_state/ph0_013_temporal_playbook_release_surface_closeout_v0.md
+
+Acceptance criteria:
+- Temporal playbook classification rule is defined (including required status/expiry/disposition metadata).
+- Release-surface admission rule is defined: temporal/project-specific playbooks must be retired, archived under .cortex, or excluded from release packaging before release.
+- CI/release quality gate includes a deterministic check that fails on expired/unretired temporal playbooks in distributable surface.
+- Existing Cortex-development-specific playbooks have explicit disposition plans and owners.
+
+Evidence:
+- Policy/runbook/gate diffs and closeout report committed.
+
 ### PH0-008: Phase 0 Conformance Verification Pack
 
 Objective:
@@ -344,6 +368,6 @@ If weekly usage pressure exceeds threshold before Thursday:
 
 Phase 0 is complete when:
 
-1. `PH0-001` through `PH0-012` are marked complete with evidence links.
+1. `PH0-001` through `PH0-013` are marked complete with evidence links.
 2. Gate A conditions from .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md are met.
 3. Maintainers confirm Phase 1 can start without unresolved governance authority questions.

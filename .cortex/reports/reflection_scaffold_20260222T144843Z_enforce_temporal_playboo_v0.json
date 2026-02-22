@@ -1,0 +1,57 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "policies/temporal_playbook_release_surface_policy_v0.md",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "contracts/temporal_playbook_release_surface_contract_v0.json",
+    "policies/temporal_playbook_release_surface_policy_v0.md",
+    "scripts/temporal_playbook_release_gate_v0.py",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "policy",
+    "workflow",
+    "ci",
+    "tooling"
+  ],
+  "mistake": "Temporal Cortex-development playbooks lacked explicit lifecycle metadata and deterministic release-surface enforcement.",
+  "pattern": "Project-scoped playbooks drift into durable release surface when temporal status and expiry are not contract-bound.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Enforce temporal playbook retirement and release-surface gating\" --decision \"Mistake observed: Temporal Cortex-development playbooks lacked explicit lifecycle metadata and deterministic release-surface enforcement. Recurring pattern: Project-scoped playbooks drift into durable release surface when temporal status and expiry are not contract-bound. Adopt reusable rule: Require contract-managed lifecycle metadata for cortex_* playbooks and fail closed on unmanaged, expired, or disposition-violating entries.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,policy,workflow,ci,tooling --reflection-id ref_20260222T144843Z_enforce_temporal_playboo --reflection-report .cortex/reports/reflection_scaffold_20260222T144843Z_enforce_temporal_playboo_v0.json --linked-artifacts contracts/temporal_playbook_release_surface_contract_v0.json,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,policies/temporal_playbook_release_surface_policy_v0.md,scripts/quality_gate_ci_v0.sh,scripts/quality_gate_v0.sh,scripts/temporal_playbook_release_gate_v0.py",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260222T144843Z_enforce_temporal_playboo",
+  "report_file": ".cortex/reports/reflection_scaffold_20260222T144843Z_enforce_temporal_playboo_v0.json",
+  "rule": "Require contract-managed lifecycle metadata for cortex_* playbooks and fail closed on unmanaged, expired, or disposition-violating entries.",
+  "run_at": "2026-02-22T14:48:43Z",
+  "suggested_decision": "Mistake observed: Temporal Cortex-development playbooks lacked explicit lifecycle metadata and deterministic release-surface enforcement. Recurring pattern: Project-scoped playbooks drift into durable release surface when temporal status and expiry are not contract-bound. Adopt reusable rule: Require contract-managed lifecycle metadata for cortex_* playbooks and fail closed on unmanaged, expired, or disposition-violating entries.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_enforce_temporal_playbook_retirement_and_release_surface_gating_v1.md",
+  "suggested_linked_artifacts": [
+    "contracts/temporal_playbook_release_surface_contract_v0.json",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "policies/temporal_playbook_release_surface_policy_v0.md",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh",
+    "scripts/temporal_playbook_release_gate_v0.py"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Enforce temporal playbook retirement and release-surface gating",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

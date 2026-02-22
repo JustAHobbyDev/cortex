@@ -1,8 +1,8 @@
 # PH0-005 Enforcement Ladder Mapping Evidence v0
 
 Version: v0  
-Status: Evidence Complete (pending blocker clear)  
-Date: 2026-02-21  
+Status: Accepted  
+Date: 2026-02-22  
 Scope: Phase 0 ticket PH0-005 evidence and CI/policy linkage
 
 ## Objective
@@ -31,21 +31,21 @@ Primary artifacts:
 
 ## CI/Runtime Linkage Evidence
 
-Executed on 2026-02-21:
+Executed on 2026-02-22:
 
 1. `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all`
   - Output artifact: `.cortex/reports/lifecycle_audit_v0.json`
   - Result: `status=pass`, `audit_scope=all`
-  - `run_at=2026-02-21T22:49:56Z`
+  - `run_at=2026-02-22T20:20:03Z`
 2. `python3 scripts/cortex_project_coach_v0.py decision-gap-check --project-dir . --format json`
-  - Result: `status=pass`
-  - `run_at=2026-02-21T23:03:40Z`
-3. `python3 scripts/cortex_project_coach_v0.py reflection-completeness-check --project-dir . --format json`
-  - Result: `status=pass`
-  - `run_at=2026-02-21T23:03:40Z`
+  - Result: `status=pass`, `uncovered_files=0`
+  - `run_at=2026-02-22T20:19:34Z`
+3. `python3 scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
+  - Result: `status=pass`, `findings=0`
+  - `run_at=2026-02-22T20:19:35Z`
 4. `./scripts/quality_gate_ci_v0.sh`
   - Result: `PASS`
-  - Focused tests: `29 passed in 39.19s`
+  - Focused tests: `35 passed in 52.21s`
 
 ## Acceptance Criteria Mapping
 
@@ -63,6 +63,4 @@ Executed on 2026-02-21:
 
 ## Decision
 
-PH0-005 evidence is complete and aligned to CI/runtime checks.
-
-Ticket remains `in_progress` pending blocker clearance (`PH0-002`), then can move to `review`/`done`.
+PH0-005 is closed as `done`; blocker (`PH0-002`) is already cleared and enforcement mapping acceptance criteria are satisfied.

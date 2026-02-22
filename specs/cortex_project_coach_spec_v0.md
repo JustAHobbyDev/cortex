@@ -8,8 +8,10 @@ Inputs:
 - `specs/spec_spec_v0.md` governance and spec structure
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
 - `contracts/promotion_contract_schema_v0.json` promotion contract schema
+- `contracts/context_hydration_receipt_schema_v0.json` context hydration receipt contract schema
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
+- `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/tactical_data_policy_v0.md` tactical data policy
 - `scripts/design_prompt_dsl_compile_v0.py` DSL compiler
 - `scripts/design_ontology_validate_v0.py` ontology validator
@@ -38,6 +40,8 @@ Define an application that guides project creation with AI assistance, maintains
 - `Governance Plane`: canonical artifacts/policies that define authoritative project governance.
 - `Tactical Plane`: fast runtime memory/work context used for execution acceleration.
 - `Promotion Contract`: required evidence and linkage to convert tactical signals into canonical artifacts.
+- `Context Hydration`: deterministic preflight loading of required governance capsule artifacts for a fresh runtime window.
+- `Hydration Receipt`: machine-readable proof that required governance capsule artifacts were loaded and validated recently.
 - `External Adapter`: optional runtime integration that reads tactical signals from external systems.
 
 ## Determinism and Drift Tests
@@ -103,6 +107,15 @@ Validation requirements:
 - Omitted `--format` must preserve historical text behavior.
 - JSON mode must emit parseable command payloads for automation.
 - Integration shim support is allowed only for output normalization and must not alter governance logic.
+
+### Context Hydration Enforcement
+
+- Runtime must support issuing hydration receipts and validating freshness before governance-impacting mutation/closeout paths.
+- Receipt payload contract source: `contracts/context_hydration_receipt_schema_v0.json`.
+- Policy source of trigger events, freshness thresholds, and override semantics: `policies/context_hydration_policy_v0.md`.
+- Freshness validation must include governance capsule hash checks and git HEAD drift checks.
+- `advisory`/`warn`/`block` rollout is allowed, but `block` mode is required at governance-impacting closeout boundaries.
+- Missing or stale hydration receipt must fail closed for governance-impacting mutation/closeout commands unless an explicit override is logged.
 
 ### Boundary Discipline
 

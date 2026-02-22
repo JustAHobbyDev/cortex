@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex.local/contracts/context_hydration_receipt_schema_v0.json",
+  "title": "Cortex Context Hydration Receipt v0",
+  "description": "Machine-readable receipt proving governance capsule hydration freshness for a runtime context window.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "receipt_id",
+    "event",
+    "enforcement_mode",
+    "hydrated_at",
+    "fresh_until",
+    "project_dir",
+    "cortex_root",
+    "git_head",
+    "governance_capsule"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "v0"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "event": {
+      "type": "string",
+      "enum": [
+        "new_session",
+        "window_rollover",
+        "pre_mutation",
+        "pre_closeout"
+      ]
+    },
+    "enforcement_mode": {
+      "type": "string",
+      "enum": [
+        "advisory",
+        "warn",
+        "block"
+      ]
+    },
+    "hydrated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fresh_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "project_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cortex_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "git_head": {
+      "type": "string",
+      "minLength": 7
+    },
+    "governance_capsule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_path",
+        "manifest_sha256",
+        "audit_path",
+        "audit_sha256",
+        "decision_candidates_path",
+        "decision_candidates_sha256",
+        "authority_policy_path",
+        "authority_policy_sha256",
+        "boundary_policy_path",
+        "boundary_policy_sha256",
+        "roadmap_path",
+        "roadmap_sha256"
+      ],
+      "properties": {
+        "manifest_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "audit_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audit_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "decision_candidates_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_candidates_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "authority_policy_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_policy_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "boundary_policy_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundary_policy_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "roadmap_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "roadmap_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "hydration_inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "turn_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

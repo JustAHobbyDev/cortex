@@ -4,7 +4,7 @@ Canonical: false
 
 Version: v0
 Status: Draft
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 Enforcement default: Level 2 (track-only)
 
 ## Purpose
@@ -45,7 +45,7 @@ This spec defines orchestration behavior only. It does not replace canonical sce
 
 ## Non-Interference Rule (Kalshi scoped gate)
 - Swarm runner must not mutate:
-  - `project/kalshi_15m_btc_pipeline`
+  - `project_id:kalshi_15m_btc_pipeline`
   - `scenes/kalshi_15m_btc_pipeline.scene.json`
   while Kalshi gate is blocked.
 - Gate status source of record:

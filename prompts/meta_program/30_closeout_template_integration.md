@@ -4,7 +4,7 @@ Status: Experimental
 Inputs:
 - `templates/` existing closeout/session templates
 - `README.md` or repo index convention
-- `meta/` and `operations/` artifacts
+- .cortex/meta/ and .cortex/operations/ artifacts
 
 Task:
 - Integrate closeout-template references into the meta workflow index.

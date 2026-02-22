@@ -12,7 +12,7 @@ Specify deterministic checks that keep project-instance state inside a configura
 
 - `policies/project_state_boundary_policy_v0.md`
 - `contracts/project_state_boundary_contract_v0.json`
-- `.cortex/policies/project_state_boundary_waivers_v0.json` (optional)
+- .cortex/policies/project_state_boundary_waivers_v0.json (optional)
 
 ## Core Definitions
 
@@ -22,8 +22,8 @@ Specify deterministic checks that keep project-instance state inside a configura
 
 ## Boundary Contract (v0)
 
-1. `project_state_root` defines the canonical project-state root and defaults to `.cortex/`.
-2. `reports/` is a forbidden root outside configured `project_state_root`.
+1. `project_state_root` defines the canonical project-state root and defaults to .cortex/.
+2. reports/ is a forbidden root outside configured `project_state_root`.
 3. Waivers are temporary and date-bounded.
 
 ## Deterministic Enforcement Behavior
@@ -46,6 +46,6 @@ Specify deterministic checks that keep project-instance state inside a configura
 
 ## Success Criteria (v0)
 
-- Quality gates fail closed when `reports/*` files appear outside configured `project_state_root`.
-- Existing project reports are migrated under `<project_state_root>/reports/`.
+- Quality gates fail closed when reports/* files appear outside configured `project_state_root`.
+- Existing project reports are migrated under <project_state_root>/reports/.
 - Waiver lifecycle is explicit and time-bounded.

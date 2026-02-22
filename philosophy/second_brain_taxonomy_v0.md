@@ -14,7 +14,7 @@ Source Scenes:
 ## Hierarchical Taxonomy
 
 ```text
-Second Brain (project/dan_personal_cognitive_infrastructure)
+Second Brain (project_id:dan_personal_cognitive_infrastructure)
 ├── 1. Direction
 │   ├── North Star
 │   │   └── Durable AI-native knowledge system with compounding intelligence
@@ -75,16 +75,16 @@ Second Brain (project/dan_personal_cognitive_infrastructure)
 - Project direction (North Star + Design Charter) is the root governance context for all patterns and tool choices.
 
 ## Canonical Project ID Policy
-- Primary canonical project ID: `project/dan_personal_cognitive_infrastructure`
-- Deprecated project alias: `project/second_brain_build`
-- Alias relation: `project/second_brain_build` -> `project/dan_personal_cognitive_infrastructure`
+- Primary canonical project ID: `project_id:dan_personal_cognitive_infrastructure`
+- Deprecated project alias: `project_id:second_brain_build`
+- Alias relation: `project_id:second_brain_build` -> `project_id:dan_personal_cognitive_infrastructure`
 
 ### Alias Map (v0)
 ```json
 {
-  "project/second_brain_build": "project/dan_personal_cognitive_infrastructure"
+  "project_id:second_brain_build": "project_id:dan_personal_cognitive_infrastructure"
 }
 ```
 
 - Legacy scenes/artifacts remain unchanged for historical truth.
-- New links should use `project/dan_personal_cognitive_infrastructure`.
+- New links should use `project_id:dan_personal_cognitive_infrastructure`.

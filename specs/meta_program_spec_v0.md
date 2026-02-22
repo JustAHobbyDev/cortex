@@ -3,11 +3,11 @@
 Version: v0
 Status: Experimental
 Inputs:
-- `operations/` operation specs
+- .cortex/operations/ operation specs
 - `prompts/meta_program/` ordered prompt artifacts
-- `scenes/*.scene.json` project scenes and histories
-- `scenes/_schemas/*.schema.json` schema contracts
-- `profiles/*.md` operating model templates
+- .cortex/scenes/*.scene.json project scenes and histories
+- .cortex/scenes/_schemas/*.schema.json schema contracts
+- .cortex/profiles/*.md operating model templates
 
 ## Purpose
 Define a deterministic, prompt-file workflow for Meta Program execution across EPIC A/B/C with schema-backed outputs and explicit governance controls.

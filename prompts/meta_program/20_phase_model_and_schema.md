@@ -2,14 +2,14 @@ Meta Program Prompt 20: Phase Model and Schema
 Version: v0
 Status: Experimental
 Inputs:
-- `operations/generate_project_history_v0.md`
-- Existing scene naming conventions in `scenes/`
+- .cortex/operations/generate_project_history_v0.md
+- Existing scene naming conventions in .cortex/scenes/
 
 Task:
 Create:
-- `scenes/_schemas/phase_event_v0.schema.json`
-- `scenes/_schemas/phase_history_v0.schema.json`
-- `scenes/kalshi_phase_history.scene.json` starter instance
+- .cortex/scenes/_schemas/phase_event_v0.schema.json
+- .cortex/scenes/_schemas/phase_history_v0.schema.json
+- .cortex/scenes/kalshi_phase_history.scene.json starter instance
 
 Requirements:
 - Use valid JSON Schema (draft-07+).

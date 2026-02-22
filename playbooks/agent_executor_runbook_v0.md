@@ -2,11 +2,11 @@
 
 Canonical: false
 
-Purpose: run project/agent_executor_v0 tasks deterministically with Level 2 track-only quality checks.
+Purpose: run project_id:agent_executor_v0 tasks deterministically with Level 2 track-only quality checks.
 
 ## Scope
-- Project scope: project/agent_executor_v0
-- Parent scope: project/dan_personal_cognitive_infrastructure
+- Project scope: project_id:agent_executor_v0
+- Parent scope: project_id:dan_personal_cognitive_infrastructure
 - Enforcement: track-only, non-blocking
 
 ## Required State

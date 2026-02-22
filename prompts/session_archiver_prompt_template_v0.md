@@ -7,7 +7,7 @@ produce a valid JSON session artifact following this schema:
   "artifact_id": "artifact/{llm}_{YYYY_MM_DD}_{kebab-case-3-to-6-word-slug}",
   "session_date": "YYYY-MM-DD",
   "llm_used": "[codex | o1 | chatgpt | claude | gemini | etc.]",
-  "project_links": ["project/..."],
+  "project_links": ["project_id:example"],
   "principle_links": ["principle/..."],
   "pattern_links": ["pattern/..."],
   "tool_links": ["tool/..."],
@@ -22,7 +22,7 @@ produce a valid JSON session artifact following this schema:
     {"role": "user", "summary": "Refine trading pipeline schema..."}
   ],
   "resumption_score": 7,
-  "resumption_notes": "Needs fresh context from project/dan_cognitive_infra + principle/prompt_lineage_v0"
+  "resumption_notes": "Needs fresh context from project_id:dan_cognitive_infra + principle/prompt_lineage_v0"
 }
 
 Fill in all appropriate fields based on the work we just did.

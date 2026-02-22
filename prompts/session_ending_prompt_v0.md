@@ -8,7 +8,7 @@ Output ONLY valid JSON, no markdown, no explanations, no extra text outside the 
   "artifact_id": "artifact/[llm_lowercase]_[YYYY_MM_DD]_[kebab-case-3-to-6-word-slug]",
   "session_date": "YYYY-MM-DD",
   "llm_used": "[codex | o1 | chatgpt | claude | gemini | etc.]",
-  "project_links": ["project/..."],
+  "project_links": ["project_id:example"],
   "principle_links": ["principle/..."],
   "pattern_links": ["pattern/..."],
   "tool_links": ["tool/..."],

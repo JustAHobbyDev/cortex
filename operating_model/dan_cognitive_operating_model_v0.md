@@ -3,10 +3,10 @@
 Version: v0
 Status: Experimental
 Inputs:
-- `sessions/` structured session artifacts
-- `scenes/` project and phase-history artifacts
-- `operations/` governance and operation specs
-- `meta/` cross-epic constraints
+- .cortex/sessions/ structured session artifacts
+- .cortex/scenes/ project and phase-history artifacts
+- .cortex/operations/ governance and operation specs
+- .cortex/meta/ cross-epic constraints
 
 Disclaimer: No psych claims; operational signals only.
 

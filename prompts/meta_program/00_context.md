@@ -3,7 +3,7 @@ Version: v0
 Status: Experimental
 Inputs:
 - Repository root structure and existing conventions
-- `meta/`, `operations/`, `scenes/`, `profiles/`, `templates/`, `README.md`
+- .cortex/meta/, .cortex/operations/, .cortex/scenes/, .cortex/profiles/, `templates/`, `README.md`
 
 Global constraints:
 - Make minimal, additive edits.

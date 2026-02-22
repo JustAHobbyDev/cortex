@@ -136,8 +136,8 @@ uv run python3 scripts/cortex_project_coach_v0.py init \
   - recompile through `init --force` or compile manually with:
     ```bash
     uv run python3 scripts/design_prompt_dsl_compile_v0.py \
-      --dsl-file /path/to/project/.cortex/artifacts/design_<project_id>_v0.dsl \
-      --out-file /path/to/project/.cortex/artifacts/design_<project_id>_v0.json
+      --dsl-file /path/to/project_id:.cortex/artifacts/design_<project_id>_v0.dsl \
+      --out-file /path/to/project_id:.cortex/artifacts/design_<project_id>_v0.json
     ```
   - rerun `audit`
 

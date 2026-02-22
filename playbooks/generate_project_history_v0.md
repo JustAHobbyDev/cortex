@@ -13,7 +13,7 @@ Inputs:
 `generate_project_history(scene_id, date_range?, abstraction_level?)`
 
 ## Parameters
-- `scene_id` (required, string): canonical project/scene identifier.
+- `scene_id` (required, string): canonical project_id:scene identifier.
 - `date_range` (optional, object): `{ "start": "YYYY-MM-DD", "end": "YYYY-MM-DD" }`.
 - `abstraction_level` (optional, enum): `"low" | "medium" | "high"` (default `"medium"`).
 

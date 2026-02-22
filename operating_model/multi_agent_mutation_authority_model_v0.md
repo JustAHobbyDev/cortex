@@ -4,7 +4,7 @@ Canonical: false
 
 Version: v0
 Status: Draft
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 Enforcement default: Level 2 (track-only)
 
 ## Purpose
@@ -138,7 +138,7 @@ Rule:
 - Gates may only block mutations within their scope.
 
 Example alignment:
-- gate/kalshi_data_gate_v0 blocks project/kalshi_15m_btc outputs only.
+- gate/kalshi_data_gate_v0 blocks project_id:kalshi_15m_btc outputs only.
 
 ## Activation and Change Control
 

@@ -22,7 +22,7 @@ Purpose: operationalize agent/project_manager_v0 as a steady planning and consul
 
 ## Guardrails
 - Track-only behavior only.
-- Scoped to project/dan_personal_cognitive_infrastructure.
+- Scoped to project_id:dan_personal_cognitive_infrastructure.
 - Respect scenes/kalshi_data_gate_v0.scene.json blocked state for Kalshi pipeline.
 - Role mode is delegator/planner by default, not executor.
 - Any direct execution rights require an explicit temporary authority tuple (issuer, expiry, reason).

@@ -4,7 +4,7 @@ Canonical: false
 
 Version: v0
 Status: Draft
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 Enforcement default: Level 2 (track-only)
 
 ## Purpose
@@ -51,7 +51,7 @@ Define a human-in-the-loop project manager agent that continuously:
 5. Queue Proposal (non-mutating)
 
 ## Non-Goals
-- No direct mutation of project/kalshi_15m_btc_pipeline while blocked.
+- No direct mutation of project_id:kalshi_15m_btc_pipeline while blocked.
 - No global hard-gate creation.
 - No auto-activation of specs.
 - No default execution authority on domain artifacts.

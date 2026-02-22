@@ -4,10 +4,10 @@ Version: v0
 Status: Experimental
 Inputs:
 - `prompts/` base prompt artifacts
-- `scenes/*.scene.json` ontology and workflow scenes
-- `meta/*.md` governance and ontology specs
-- `operations/*.md` prompt generation and integration operations
-- `meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md` layered semantic context
+- .cortex/scenes/*.scene.json ontology and workflow scenes
+- .cortex/meta/*.md governance and ontology specs
+- .cortex/operations/*.md prompt generation and integration operations
+- .cortex/meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md layered semantic context
 
 ## Purpose
 Define canonical ontology entities and relations for representing prompt evolution from reusable base templates to context-specific concretions.
@@ -22,7 +22,7 @@ Define canonical ontology entities and relations for representing prompt evoluti
   - Automatic semantic merging of conflicting deltas
 
 ## Layer Placement
-- This spec primarily inhabits **Layer L3 (Ontology)** from `meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md`.
+- This spec primarily inhabits **Layer L3 (Ontology)** from .cortex/meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md.
 - Serialization rules referenced here must defer to L4 schemas (e.g., prompt lineage artifact schemas) and cite them explicitly when required.
 - Governance references (L1) such as “no in-place mutation” inherit from `SPEC_SPEC_v0` and related governance specs; changes that alter governance intent must be codified there first.
 
@@ -50,9 +50,9 @@ Define canonical ontology entities and relations for representing prompt evoluti
 - `supersedes` (`PromptArtifact|PromptDelta -> PromptArtifact|PromptDelta`)
 
 ## Identity and Naming
-- Prompt IDs should be stable and semantic: `prompt/<domain>_<purpose>_vN`.
-- Delta IDs should encode order and intent: `prompt_delta/<base>_<order>_<intent>_vN`.
-- Materialized prompt IDs should include variant key: `prompt/<base>__<variant>_vN`.
+- Prompt IDs should be stable and semantic: .cortex/prompt/<domain>_<purpose>_vN.
+- Delta IDs should encode order and intent: .cortex/prompt_delta/<base>_<order>_<intent>_vN.
+- Materialized prompt IDs should include variant key: .cortex/prompt/<base>__<variant>_vN.
 
 ## Deterministic Materialization Rules
 - Delta application order: ascending numeric `order`; tie-break by delta `id` lexical order.
@@ -84,4 +84,4 @@ Define canonical ontology entities and relations for representing prompt evoluti
 - Drift tests pass for repeat-run and permutation scenarios.
 
 ## Immediate Next Step
-Define a minimal prompt-delta artifact schema and add one lineage example for `prompts/session_archiver_prompt_template.md`.
+Define a minimal prompt-delta artifact schema and add one lineage example for .cortex/prompts/session_archiver_prompt_template.md.

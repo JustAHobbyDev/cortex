@@ -43,7 +43,7 @@ Current `cortex-coach` validates lifecycle structure and design schema integrity
 
 1. Add registry schema + example registry artifact.
 2. Implement audit collector for registry-aware coverage checks.
-3. Emit structured coverage report in `.cortex/reports/lifecycle_audit_v0.json`.
+3. Emit structured coverage report in .cortex/reports/lifecycle_audit_v0.json.
 4. Add coverage-driven coach action generation.
 5. Add scoped draft generation for missing specs.
 6. Update docs and runbook with coverage workflow.

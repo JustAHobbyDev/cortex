@@ -3,15 +3,15 @@
 Version: v0
 Status: Track-only
 Inputs:
-- `scene/authority/registry_v0.json`
-- `scene/merge_queue/queue_v0.json`
+- .cortex/scene/authority/registry_v0.json
+- .cortex/scene/merge_queue/queue_v0.json
 - `specs/beads_integration_boundary_v0.md`
 
 ## Purpose
 Validate two minimal Beads hardening controls:
 
 1. Authority registry churn guardrail for Beads-scoped tuples.
-2. Runtime proposal materialization into `scenes/` before canonical recognition.
+2. Runtime proposal materialization into .cortex/scenes/ before canonical recognition.
 
 ## Operation Signature
 `run_beads_boundary_audit(repo_root?, registry_file?, merge_queue_file?, out_file?)`

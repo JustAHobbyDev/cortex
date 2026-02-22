@@ -1,12 +1,12 @@
 # Claude-Meta Comparison + Agent-Agnostic Reflection Integration Plan v0
 
 ## Purpose
-- Compare `aviadr1/claude-meta` with `cortex + cortex-coach`.
+- Compare .cortex/aviadr1/claude-meta with `cortex + cortex-coach`.
 - Define how to adopt the useful reflection loop pattern without coupling it to a specific agent.
 
 ## Sources
 - https://github.com/aviadr1/claude-meta
-- Local repo governance/runtime artifacts under `.cortex/`, `policies/`, `playbooks/`, and `scripts/`.
+- Local repo governance/runtime artifacts under .cortex/, `policies/`, `playbooks/`, and `scripts/`.
 
 ## Executive Summary
 - `claude-meta` optimizes for lightweight, in-session self-improvement through a markdown-first loop: reflect -> abstract -> generalize -> write rule.
@@ -49,9 +49,9 @@
 2. Abstract: identify the recurring pattern, not just the instance.
 3. Generalize: define a reusable directive and boundary condition.
 4. Encode: write/update operating-layer artifacts in this order:
-   - Decision artifact under `.cortex/artifacts/decisions/`
+   - Decision artifact under .cortex/artifacts/decisions/
    - Policy/playbook update in `policies/` or `playbooks/` when needed
-   - Prompt/context update under `.cortex/prompts/` only if execution guidance must change
+   - Prompt/context update under .cortex/prompts/ only if execution guidance must change
 5. Validate: run decision/audit checks and confirm no new governance gap.
 
 ### Normative Requirements
@@ -63,7 +63,7 @@
 
 ### Phase A: Prompt + Policy Normalization
 - Add an explicit "Agent-Agnostic Reflection Loop" section to `policies/decision_reflection_policy_v0.md`.
-- Add a reusable prompt template in `.cortex/prompts/` that uses neutral language (`assistant` or `agent`).
+- Add a reusable prompt template in .cortex/prompts/ that uses neutral language (`assistant` or `agent`).
 
 ### Phase B: Coach Runtime Support
 - Add a coach command (or option) that scaffolds reflection outputs:

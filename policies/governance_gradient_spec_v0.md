@@ -6,9 +6,9 @@ Define a restrained governance gradient that reduces entropy without introducing
 ## Core Policy
 - Binary governance target at stable state: 100% contract adherence for gated flows.
 - Audits propose; audits do not auto-mutate project state.
-- Ingest only traversable knowledge into graph exports; non-traversable guidance remains in `meta/`.
+- Ingest only traversable knowledge into graph exports; non-traversable guidance remains in .cortex/meta/.
 - Cross-repo edits are human-gated by default.
-- Primary audit surfaces are git history and `reports/checkpoints/*`.
+- Primary audit surfaces are git history and .cortex/reports/checkpoints/*.
 - Session closeout artifacts are legacy and non-primary in this repository.
 
 ## Cross-Repo Edit Gate
@@ -26,16 +26,16 @@ Each invariant must map to one primary enforcement mechanism.
 
 | Invariant | Primary Mechanism | Level | Notes |
 |---|---|---|---|
-| Checkpoint provenance continuity | `.githooks/pre-commit` + checkpoint-report runner + git history | 1 (hook gate) | Primary audit surface for mutation provenance. |
-| Vision alignment drift | vision-alignment audit runner + `operations/vision_alignment_audit_v0.md` | 2 (audit/track) | Proposes remediation only. |
-| KPI rollups and health trends | KPI compute runner + `scenes/kpi-dashboard.scene.json` | 2 (track-only) | No direct mutations. |
-| Terminology consistency | `meta/TERMINOLOGY_STANDARD_v0.md` + terminology scan runner | 2 (audit/track) | Escalate to level 3 only if repeated failures. |
+| Checkpoint provenance continuity | .cortex/.githooks/pre-commit + checkpoint-report runner + git history | 1 (hook gate) | Primary audit surface for mutation provenance. |
+| Vision alignment drift | vision-alignment audit runner + .cortex/operations/vision_alignment_audit_v0.md | 2 (audit/track) | Proposes remediation only. |
+| KPI rollups and health trends | KPI compute runner + .cortex/scenes/kpi-dashboard.scene.json | 2 (track-only) | No direct mutations. |
+| Terminology consistency | .cortex/meta/TERMINOLOGY_STANDARD_v0.md + terminology scan runner | 2 (audit/track) | Escalate to level 3 only if repeated failures. |
 | Graph derivation integrity | graph ingest runner | 1 (hard gate on ingest run) | Scenes remain source of truth. |
 
 ## Entropy Guard
 Ingest rule:
 - Add to graph only if the data improves traversal/query utility.
-- Keep process docs, governance policy, and non-traversable prose in `meta/`.
+- Keep process docs, governance policy, and non-traversable prose in .cortex/meta/.
 
 Practical filter:
 - Traversable: scene nodes/edges, canonical IDs, artifact pointers used by workflows.

@@ -24,7 +24,7 @@ Define the end-to-end path from current state to a friction-reduced, project-agn
 
 ### Governance Plane (authoritative)
 
-- Canonical artifacts in `.cortex/` and governance directories are the only source of truth for policy/spec/decision authority.
+- Canonical artifacts in .cortex/ and governance directories are the only source of truth for policy/spec/decision authority.
 - Release and merge gates MUST evaluate governance plane artifacts as the authoritative closure source.
 
 ### Tactical Plane (non-authoritative by default)

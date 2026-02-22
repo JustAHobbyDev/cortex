@@ -3,17 +3,17 @@
 Version: v0
 Status: Experimental
 Inputs:
-- Included folders: `scenes/`, `graph/`, `meta/`, `operations/`, `tools/`
-- Excluded folders: `.git/`, `misc/`, temporary files
+- Included folders: .cortex/scenes/, .cortex/graph/, .cortex/meta/, .cortex/operations/, .cortex/tools/
+- Excluded folders: .git/, .cortex/misc/, temporary files
 - Artifact classes: scene JSON artifacts, graph store, integration specs
-- Source-of-truth policy: `scenes/*.scene.json` are canonical; `graph/graph.json` is an optional derived export
+- Source-of-truth policy: .cortex/scenes/*.scene.json are canonical; .cortex/graph/graph.json is an optional derived export
 
 ## Operation Signature
 `incorporate_scene_into_graph(scene_path, graph_path?, mode?)`
 
 ## Parameters
 - `scene_path` (required, string): path to one scene file or directory containing scene files.
-- `graph_path` (optional, string): defaults to `graph/graph.json`.
+- `graph_path` (optional, string): defaults to .cortex/graph/graph.json.
 - `mode` (optional, enum): `"apply" | "dry_run"` (default `"dry_run"`).
 
 ## Scene Classification Rules
@@ -27,8 +27,8 @@ Inputs:
 - `graph_native`:
   - Use `nodes` and `edges` directly after field validation.
 - `phase_history`:
-  - Emit project node id `project/<project_id>`.
-  - Emit one phase event node per event id `phase_event/<project_id>/<entered_on>/<phase>`.
+  - Emit project node id .cortex/project/<project_id>.
+  - Emit one phase event node per event id .cortex/phase_event/<project_id>/<entered_on>/<phase>.
   - Emit edges `project/<project_id> --has_phase_event--> phase_event/...`.
 - `custom_object`:
   - Emit source node from top-level object preserving deterministic fields.
@@ -55,7 +55,7 @@ Inputs:
 
 ## Drift Tests
 - Repeat-run stability:
-  - Run operation twice with unchanged inputs; resulting `graph/graph.json` hash must match.
+  - Run operation twice with unchanged inputs; resulting .cortex/graph/graph.json hash must match.
 - Discovery-order invariance:
   - Ingest the same file set in randomized invocation order; output must match canonical run.
 - Collision stability:

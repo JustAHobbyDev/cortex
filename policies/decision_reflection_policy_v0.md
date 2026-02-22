@@ -32,9 +32,9 @@ This loop is mandatory for governance-relevant mistakes and applies to any codin
    - define a reusable rule with boundary conditions
 4. Encode:
    - write or update durable artifacts in this order:
-     - decision artifact in `.cortex/artifacts/decisions/`
+     - decision artifact in .cortex/artifacts/decisions/
      - policy/playbook updates in `policies/` or `playbooks/` as needed
-     - prompt/context guidance in `.cortex/prompts/` only when execution behavior must change
+     - prompt/context guidance in .cortex/prompts/ only when execution behavior must change
 5. Validate:
    - run governance checks (`decision-gap-check`, `reflection_enforcement_gate_v0.py`, and relevant audits) before closeout
 
@@ -42,7 +42,7 @@ This loop is mandatory for governance-relevant mistakes and applies to any codin
 
 - The loop must not depend on assistant-specific files or branding.
 - Do not require `CLAUDE.md`, `AGENTS.md`, or any single-agent document as the system of record.
-- Canonical operating memory remains repository artifacts under `.cortex/`, `policies/`, `playbooks/`, and related tracked outputs.
+- Canonical operating memory remains repository artifacts under .cortex/, `policies/`, `playbooks/`, and related tracked outputs.
 
 ## Trigger Examples
 

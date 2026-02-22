@@ -3,8 +3,8 @@
 Version: v0
 Status: Experimental
 Inputs:
-- `sessions/*/*.json` session artifacts (legacy; may be sparse as tracking is externalized)
-- `scenes/*.scene.json` canonical principle IDs
+- .cortex/sessions/*/*.json session artifacts (legacy; may be sparse as tracking is externalized)
+- .cortex/scenes/*.scene.json canonical principle IDs
 
 ## Purpose
 Compute and persist the first vision-alignment KPI:
@@ -14,17 +14,17 @@ Compute and persist the first vision-alignment KPI:
 `run_vision_alignment_audit(sessions_dir?, out_file?, mutate?, trigger_out_file?)`
 
 ## Parameters
-- `sessions_dir` (optional, default `sessions/`): session artifact root.
-- `out_file` (optional, default `reports/vision_alignment_audit_v0.json`): JSON output path.
+- `sessions_dir` (optional, default .cortex/sessions/): session artifact root.
+- `out_file` (optional, default .cortex/reports/vision_alignment_audit_v0.json): JSON output path.
 - `mutate` (optional, default `no`): `no` = propose only, `yes` = emit remediation trigger file.
-- `trigger_out_file` (optional, default `reports/vision_alignment_audit_trigger_v0.json`): output path for proposed remediation trigger.
+- `trigger_out_file` (optional, default .cortex/reports/vision_alignment_audit_trigger_v0.json): output path for proposed remediation trigger.
 
 ## KPI Definition (v0)
 - `principle_linked_artifact_pct = 100 * artifacts_with_principle_link / eligible_artifacts`
 - Eligible artifacts:
   - Non-empty summary
   - At least one decision or next step
-- Principle link counts only if linked principle IDs are canonical IDs found in `scenes/`.
+- Principle link counts only if linked principle IDs are canonical IDs found in .cortex/scenes/.
 
 ## Targets
 - Pass: `>=75%`

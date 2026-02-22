@@ -2,11 +2,11 @@ Meta Program Prompt 10: Generate Project History Spec
 Version: v0
 Status: Experimental
 Inputs:
-- `meta/META_PROGRAM_SPEC_v0.md`
+- .cortex/meta/META_PROGRAM_SPEC_v0.md
 - Repository artifact folders used for history extraction
 
 Task:
-Create or update `operations/generate_project_history_v0.md` with:
+Create or update .cortex/operations/generate_project_history_v0.md with:
 - Operation signature: `generate_project_history(scene_id, date_range?, abstraction_level?)`
 - Included/excluded folders and artifact classes
 - Temporal precedence rule: content timestamp > metadata > filename

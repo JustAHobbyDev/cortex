@@ -16,7 +16,7 @@ Continuously audit embedded Python heredoc usage inside bash scripts so extracti
 ## Parameters
 
 - `repo_root` (optional, default repo root): repository root path.
-- `out_file` (optional, default `reports/shell_embedding_audit_v0.json`): JSON output path.
+- `out_file` (optional, default .cortex/reports/shell_embedding_audit_v0.json): JSON output path.
 
 ## Metrics (v0)
 

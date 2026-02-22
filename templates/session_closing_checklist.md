@@ -2,7 +2,7 @@
 
 Canonical: false
 
-Status: Legacy (deprecated default in `project/second-brain`)
+Status: Legacy (deprecated default in `project_id:second-brain`)
 
 This checklist is for controlled migration/backfill only.
 

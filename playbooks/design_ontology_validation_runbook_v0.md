@@ -15,13 +15,13 @@ Provide a deterministic validation loop for design ontology artifacts so new spe
 
 - `templates/design_ontology_v0.schema.json`
 - One or more instance files matching pattern:
-  - `templates/design_ontology_*.json`
+  - .cortex/templates/design_ontology_*.json
   - Excluding `templates/design_ontology_v0.schema.json`
 
 ## Output Artifacts
 
-- `.cortex/reports/design_ontology_validation_v0.json`
-- `.cortex/reports/design_ontology_validation_v0.md`
+- .cortex/reports/design_ontology_validation_v0.json
+- .cortex/reports/design_ontology_validation_v0.md
 
 ## Preconditions
 

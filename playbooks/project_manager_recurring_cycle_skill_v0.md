@@ -32,12 +32,12 @@ Any implementation is valid if it can:
 Define one adapter mapping from interface names to local resources before running cycles.
 
 Example mapping (reference implementation only):
-- `pm_status` -> `scene/agent/project_manager/status_v0.json`
-- `pm_ideas` -> `scene/agent/project_manager/ideas_v0.json`
-- `pm_consultation_queue` -> `scene/agent/project_manager/consultation_queue_v0.json`
-- `task_queue` -> `scene/task_queue/v0.json`
-- `authority_registry` -> `scene/authority/registry_v0.json`
-- `mutation_ledger` -> `scene/ledger/mutations_v0.jsonl`
+- `pm_status` -> .cortex/scene/agent/project_manager/status_v0.json
+- `pm_ideas` -> .cortex/scene/agent/project_manager/ideas_v0.json
+- `pm_consultation_queue` -> .cortex/scene/agent/project_manager/consultation_queue_v0.json
+- `task_queue` -> .cortex/scene/task_queue/v0.json
+- `authority_registry` -> .cortex/scene/authority/registry_v0.json
+- `mutation_ledger` -> .cortex/scene/ledger/mutations_v0.jsonl
 
 ## Trigger Boundaries
 

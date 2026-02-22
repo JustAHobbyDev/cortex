@@ -5,7 +5,7 @@ Canonical: false
 Status: Draft (PROPOSE-only, not activated)
 Owner (draft): agent/orchestrator_v0
 Prepared at: 2026-02-16T22:37:53Z
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 
 ## Purpose
 Define passive, machine-checkable invariant drift detection so the system can detect when observed structure no longer aligns with declared vision and invariant policy.
@@ -20,7 +20,7 @@ Define passive, machine-checkable invariant drift detection so the system can de
 - Level 2 track-only only
 - Passive monitoring only (no auto-mutation)
 - No global hard-gate changes
-- No blocking impact to project/kalshi_15m_btc_pipeline
+- No blocking impact to project_id:kalshi_15m_btc_pipeline
 
 ## Execution Model (v0)
 - Runner: agent/orchestrator_v0 (or delegated scoped maintainer with equivalent track-only authority)
@@ -77,7 +77,7 @@ insufficient_input and include a note describing the missing source field.
   "artifact_id": "artifact/invariant_drift_report_<date>_v0",
   "schema_version": "0.1",
   "generated_at": "<timestamp>",
-  "scope": "project/dan_personal_cognitive_infrastructure",
+  "scope": "project_id:dan_personal_cognitive_infrastructure",
   "source_artifacts": [
     "reports/kpi_dashboard_metrics_v0.json",
     "graph/graph.json"

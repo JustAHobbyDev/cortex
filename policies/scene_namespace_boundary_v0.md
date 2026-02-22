@@ -4,7 +4,7 @@ Canonical: false
 
 Version: v0
 Status: Draft
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 Enforcement default: Level 2 (track-only) until explicitly activated
 
 ## Purpose

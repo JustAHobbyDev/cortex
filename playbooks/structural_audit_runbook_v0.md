@@ -24,36 +24,36 @@ Operational checklist for running the Agent Structural Legibility Benchmark (ASL
    - Default `prompt_set_version = "v0"` (see Section 5 for text).
    - If editing prompts, version them and store diff alongside run output.
 5. **Output location**
-   - Create run folder: `operations/aslb_runs/YYYY-MM-DD-slug/` (mkdir if needed).
-   - Pre-create `inputs/`, `raw/`, `results/` subfolders for organization.
+   - Create run folder: .cortex/operations/aslb_runs/YYYY-MM-DD-slug/ (mkdir if needed).
+   - Pre-create .cortex/inputs/, .cortex/raw/, .cortex/results/ subfolders for organization.
 
 ---
 
 ## 3. Execution Flow
-1. **Kickoff log** (`results/run_log.md`)
+1. **Kickoff log** (.cortex/results/run_log.md)
    - Record timestamp (ISO-8601), operator, reason for run (drift check, refactor gate, etc.).
 2. **Prompt evaluations** (per tier)
    - Use Section 5 prompts.
    - Provide corpus context: repo summary, key files, or zipped snapshots if external agent.
-   - Save model responses verbatim in `raw/tier_<n>_<model>.json` (or `.md`).
+   - Save model responses verbatim in .cortex/raw/tier_<n>_<model>.json (or `.md`).
 3. **Score derivation**
    - Operator reads responses and scores each tier 0–5 per spec.
-   - Note evidence paths + rationale in `results/tier_scores.yaml` to keep structured.
+   - Note evidence paths + rationale in .cortex/results/tier_scores.yaml to keep structured.
 4. **Aggregate computation**
    - Calculate aggregate = sum of tier scores.
    - Assign aggregate band (Fragmented / Structured / Agent-comprehensible / Self-reflective) per spec.
 5. **Deterministic Record**
-   - Fill JSON contract from spec and save to `results/aslb_result.json`.
+   - Fill JSON contract from spec and save to .cortex/results/aslb_result.json.
    - Include additional fields: `prompt_hashes`, `model_params`, `operator` if helpful.
 6. **Diff + Drift analysis**
-   - Compare to previous run (if exists) via script or manual diff, capture insights in `results/drift_notes.md`.
+   - Compare to previous run (if exists) via script or manual diff, capture insights in .cortex/results/drift_notes.md.
 
 ---
 
 ## 4. Scoring Guidance Snapshot
 - Never up-score on uncertainty; instead, add `confidence: low`.
 - If two operators disagree, log both scores + rationale, then reconcile.
-- Maintain `results/evidence/` with snippets or hashes for every major claim so future agents can audit.
+- Maintain .cortex/results/evidence/ with snippets or hashes for every major claim so future agents can audit.
 
 ---
 

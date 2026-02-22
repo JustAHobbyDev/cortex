@@ -2,11 +2,11 @@
 
 Version: v0
 Status: Draft
-Scope: project/dan_personal_cognitive_infrastructure
+Scope: project_id:dan_personal_cognitive_infrastructure
 Enforcement default: Level 2 (track-only)
 
 ## Purpose
-Adapt selected Overstory coordination patterns into `project/second-brain` without violating:
+Adapt selected Overstory coordination patterns into `project_id:second-brain` without violating:
 
 - inv/scenes_source_of_truth
 - inv/agents_resume_cold

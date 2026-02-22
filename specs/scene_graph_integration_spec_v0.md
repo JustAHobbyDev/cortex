@@ -3,10 +3,10 @@
 Version: v0
 Status: Experimental
 Inputs:
-- `scenes/*.scene.json` source scene artifacts
-- `scenes/_schemas/*.schema.json` scene and graph schema contracts
-- `graph/graph.json` optional derived graph export
-- `operations/incorporate_scene_into_graph_v0.md` executable operation contract
+- .cortex/scenes/*.scene.json source scene artifacts
+- .cortex/scenes/_schemas/*.schema.json scene and graph schema contracts
+- .cortex/graph/graph.json optional derived graph export
+- .cortex/operations/incorporate_scene_into_graph_v0.md executable operation contract
 
 ## Purpose
 Define deterministic incorporation of scene artifacts into an optional derived graph export so heterogeneous scene formats can be queried without replacing scene-level source truth.

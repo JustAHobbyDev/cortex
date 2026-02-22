@@ -22,7 +22,7 @@ Current Stage 1 is scaffolded through templates, but lacks interactive quality g
 ## Planned Deliverables
 
 1. Stage 1 intake contract
-- Machine-readable file in `.cortex/artifacts/` for:
+- Machine-readable file in .cortex/artifacts/ for:
   - outcome statements
   - constraints
   - priority ranking

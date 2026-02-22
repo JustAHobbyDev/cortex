@@ -21,7 +21,7 @@ jq -r '.initial_agents[]' scene/authority/registry_v0.json
 ```
 
 ## Default Behavior
-- Scope: `project/dan_personal_cognitive_infrastructure`
+- Scope: `project_id:dan_personal_cognitive_infrastructure`
 - Enforcement: Level 2 track-only
 - Role mode: `delegator_planner_non_executor`
 - No global hard-gate changes
@@ -36,7 +36,7 @@ jq -r '.initial_agents[]' scene/authority/registry_v0.json
 ```bash
 <agent-deploy-runner> \
   --agent-id agent/research_planner_v0 \
-  --project-scope project/dan_personal_cognitive_infrastructure \
+  --project-scope project_id:dan_personal_cognitive_infrastructure \
   --issued-by agent/orchestrator_v0 \
   --role-mode delegator_planner_non_executor
 ```

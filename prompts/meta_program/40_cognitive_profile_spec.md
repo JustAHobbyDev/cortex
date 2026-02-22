@@ -2,11 +2,11 @@ Meta Program Prompt 40: Cognitive Profile Template
 Version: v0
 Status: Experimental
 Inputs:
-- `meta/META_PROGRAM_SPEC_v0.md`
-- Operational event artifacts in `sessions/` and `scenes/`
+- .cortex/meta/META_PROGRAM_SPEC_v0.md
+- Operational event artifacts in .cortex/sessions/ and .cortex/scenes/
 
 Task:
-Create `profiles/dan_cognitive_operating_model_v0.md` as a TEMPLATE ONLY.
+Create .cortex/profiles/dan_cognitive_operating_model_v0.md as a TEMPLATE ONLY.
 Required sections:
 - Signals to extract
 - Hypothesis axes

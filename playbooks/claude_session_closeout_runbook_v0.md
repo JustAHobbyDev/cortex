@@ -6,7 +6,7 @@ Status: Legacy (deprecated default)
 
 Purpose: deterministically capture a Claude session artifact, register it in the index, checkpoint the repo state, and commit the change set so downstream automations discoverable the new session.
 
-Note: session writes under `sessions/` are deprecated by default in `project/second-brain`.
+Note: session writes under `sessions/` are deprecated by default in `project_id:second-brain`.
 Use this runbook only for controlled migration/backfill workflows.
 
 ## Preconditions

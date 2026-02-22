@@ -22,7 +22,7 @@ Detect mutating tools that are missing required namespace-boundary declarations:
 ## Parameters
 
 - `repo_root` (optional, default repo root): repository root path.
-- `out_file` (optional, default `reports/namespace_boundary_audit_v0.json`): JSON output path.
+- `out_file` (optional, default .cortex/reports/namespace_boundary_audit_v0.json): JSON output path.
 
 ## Metrics (v0)
 

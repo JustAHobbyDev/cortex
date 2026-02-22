@@ -3,10 +3,10 @@
 Version: v0  
 Status: Experimental (Governance-Amended)  
 Inputs:
-- `.cortex/manifest_v0.json` lifecycle control artifact
-- `.cortex/reports/lifecycle_audit_v0.json` latest health status
-- `.cortex/reports/audit_needed_v0.json` optional dirty-state risk signal
-- `.cortex/reports/decision_candidates_v0.json` decision linkage state
+- .cortex/manifest_v0.json lifecycle control artifact
+- .cortex/reports/lifecycle_audit_v0.json latest health status
+- .cortex/reports/audit_needed_v0.json optional dirty-state risk signal
+- .cortex/reports/decision_candidates_v0.json decision linkage state
 - `specs/spec_spec_v0.md` repository spec governance contract
 - `philosophy/ontology_architecture_map_v0.md` layered architecture alignment
 - `scripts/agent_context_loader_v0.py` deterministic loader implementation

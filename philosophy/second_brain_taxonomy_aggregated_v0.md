@@ -30,7 +30,7 @@ ROOT
 │   │   ├── Phase History: Discovery → Implementation → Stabilization
 │   │   └── Grounding Order: README → PLAN → OPEN_QUESTIONS → AGENTS → Checkpoint
 │   └── Second Brain Build (Deprecated Alias)
-│       └── Alias of: project/dan_personal_cognitive_infrastructure
+│       └── Alias of: project_id:dan_personal_cognitive_infrastructure
 │
 ├── PRINCIPLES
 │   ├── Architectural
@@ -208,16 +208,16 @@ ROOT
 - Covers all 20 scene files in the `scenes/` directory.
 
 ## Canonical Project ID Policy
-- Primary canonical project ID: `project/dan_personal_cognitive_infrastructure`
-- Deprecated project alias: `project/second_brain_build`
-- Alias relation: `project/second_brain_build` -> `project/dan_personal_cognitive_infrastructure`
+- Primary canonical project ID: `project_id:dan_personal_cognitive_infrastructure`
+- Deprecated project alias: `project_id:second_brain_build`
+- Alias relation: `project_id:second_brain_build` -> `project_id:dan_personal_cognitive_infrastructure`
 
 ### Alias Map (v0)
 ```json
 {
-  "project/second_brain_build": "project/dan_personal_cognitive_infrastructure"
+  "project_id:second_brain_build": "project_id:dan_personal_cognitive_infrastructure"
 }
 ```
 
 - Legacy scenes/artifacts remain unchanged for historical truth.
-- New links should use `project/dan_personal_cognitive_infrastructure`.
+- New links should use `project_id:dan_personal_cognitive_infrastructure`.

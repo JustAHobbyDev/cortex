@@ -4,7 +4,7 @@ Canonical: false
 
 Version: v0
 Status: Draft
-Scope: project/agent_executor_v0 (scoped worker under project/dan_personal_cognitive_infrastructure)
+Scope: project_id:agent_executor_v0 (scoped worker under project_id:dan_personal_cognitive_infrastructure)
 Enforcement default: Level 2 (track-only)
 
 ## Purpose

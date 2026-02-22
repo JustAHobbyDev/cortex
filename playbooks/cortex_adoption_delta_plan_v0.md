@@ -19,9 +19,9 @@ Add a minimal GitHub Actions workflow that enforces core repository integrity ch
 
 ### Changes
 
-1. Add `.github/workflows/cortex-validation.yml` with jobs:
+1. Add .github/workflows/cortex-validation.yml with jobs:
 - `markdown-link-check` for `README.md`, `docs/`, `playbooks/`, `specs/`
-- `json-parse-check` for `templates/*.json`, `.cortex/*.json` (if present)
+- `json-parse-check` for .cortex/templates/*.json, .cortex/*.json (if present)
 - `coach-smoke-check`:
   - `python3 scripts/cortex_project_coach_v0.py --help`
   - `python3 scripts/cortex_project_coach_v0.py audit-needed --project-dir . --format json`

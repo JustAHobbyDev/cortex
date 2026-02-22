@@ -33,7 +33,7 @@ Define an application that guides project creation with AI assistance, maintains
 
 ## Core Definitions
 
-- `Project Coach`: CLI application that initializes and audits `.cortex/` artifacts in a target project.
+- `Project Coach`: CLI application that initializes and audits .cortex/ artifacts in a target project.
 - `Lifecycle Manifest`: machine-readable contract for project metadata and phase completion.
 - `Governance Plane`: canonical artifacts/policies that define authoritative project governance.
 - `Tactical Plane`: fast runtime memory/work context used for execution acceleration.
@@ -106,9 +106,9 @@ Validation requirements:
 
 ### Boundary Discipline
 
-- Project Coach mutates only `.cortex/` paths in target projects unless an explicit policy-governed exception is added.
-- Existing user files outside `.cortex/` are never rewritten by default behavior.
-- Project-specific operational artifacts are expected under `.cortex/`; forbidden outside roots are defined by `contracts/project_state_boundary_contract_v0.json`.
+- Project Coach mutates only .cortex/ paths in target projects unless an explicit policy-governed exception is added.
+- Existing user files outside .cortex/ are never rewritten by default behavior.
+- Project-specific operational artifacts are expected under .cortex/; forbidden outside roots are defined by `contracts/project_state_boundary_contract_v0.json`.
 
 ### Rollback/Kill-Switch
 
@@ -122,7 +122,7 @@ Validation requirements:
 
 ## Failure Modes
 
-- Target project lacks write permissions for `.cortex/`.
+- Target project lacks write permissions for .cortex/.
 - Design DSL compiles but generated JSON fails schema constraints.
 - Lifecycle manifest exists but version mismatches required format.
 - Tactical plane stores prohibited content and redaction fails.
@@ -133,11 +133,11 @@ Validation requirements:
 ## Success Criteria (v0)
 
 - CLI exists at `scripts/cortex_project_coach_v0.py`.
-- `init` command scaffolds `.cortex/` with required files.
-- `audit` command emits `.cortex/reports/lifecycle_audit_v0.json`.
+- `init` command scaffolds .cortex/ with required files.
+- `audit` command emits .cortex/reports/lifecycle_audit_v0.json.
 - Audit includes design ontology schema validation result.
 - `coach` command emits cycle action artifacts (`.json`, `.md`, AI prompt) for iterative maintenance.
-- `coach --apply` generates deterministic draft `vN+1` artifacts for eligible action targets under `.cortex/artifacts/` and logs applied/skipped outcomes.
+- `coach --apply` generates deterministic draft `vN+1` artifacts for eligible action targets under .cortex/artifacts/ and logs applied/skipped outcomes.
 - `coach --apply-scope` constrains draft generation by artifact class (`direction`, `governance`, `design`) with fail-closed validation on unknown scopes.
 - Tactical features (if enabled) never bypass decision/reflection/audit governance checks.
 - Adapter outages do not block governance-only operation paths.

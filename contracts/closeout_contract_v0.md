@@ -12,7 +12,7 @@ Inputs:
 ## Purpose
 Define the legacy session-closeout contract for controlled migration/backfill runs.
 
-Session tracking is deprecated by default in `project/second-brain`.
+Session tracking is deprecated by default in `project_id:second-brain`.
 Primary audit surfaces are git history and `reports/checkpoints/*`.
 
 ## Required Top-Level Keys

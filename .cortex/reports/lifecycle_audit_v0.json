@@ -1,66 +1,11 @@
 {
   "artifact_conformance": {
-    "findings": [
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['github/workflows/cortex-validation.yml'])",
-        "path": ".cortex/artifacts/decisions/decision_fix_decoupled_coach_entrypoint_shadowing_in_ci_and_scripts_v1.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/policies/cortex_coach_decision_reflection_policy_v0.md'])",
-        "path": ".cortex/artifacts/decisions/decision_require_agent_agnostic_reflection_loop_for_governance_learning_v1.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['home/d/codex/cortex', 'cortex/artifacts/decisions/', 'cortex/prompts/'])",
-        "path": ".cortex/policies/cortex_coach_decision_reflection_policy_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['home/d/codex/cortex'])",
-        "path": ".cortex/policies/cortex_coach_usage_decision_policy_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json', 'cortex/reports/lifecycle_audit_v0.json', 'cortex/reports/coach_cycle_20260220T003748Z_v0.json'])",
-        "path": ".cortex/prompts/coach_cycle_prompt_20260220T003748Z_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json', 'cortex/reports/lifecycle_audit_v0.json', 'cortex/reports/coach_cycle_20260221T134846Z_v0.json'])",
-        "path": ".cortex/prompts/coach_cycle_prompt_20260221T134846Z_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json', 'cortex/artifacts/*'])",
-        "path": ".cortex/prompts/project_coach_prompt_cortex_repo_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json'])",
-        "path": ".cortex/reports/coach_cycle_20260220T003748Z_v0.md",
-        "severity": "warn"
-      },
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/manifest_v0.json'])",
-        "path": ".cortex/reports/coach_cycle_20260221T134846Z_v0.md",
-        "severity": "warn"
-      }
-    ],
-    "scanned_files": 15,
-    "status": "warn"
+    "findings": [],
+    "scanned_files": 77,
+    "status": "pass"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
-  "audit_scope": "cortex-only",
+  "audit_scope": "all",
   "checks": [
     {
       "check": "exists:.cortex/manifest_v0.json",
@@ -94,12 +39,12 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=15, findings=9",
-      "status": "warn"
+      "detail": "scanned=77, findings=0",
+      "status": "pass"
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=6, findings=0",
+      "detail": "promoted=9, findings=0",
       "status": "pass"
     }
   ],
@@ -110,7 +55,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-21T23:01:09Z",
+  "run_at": "2026-02-22T08:28:04Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -122,7 +67,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 6,
+    "promoted_decision_count": 9,
     "status": "pass"
   },
   "version": "v0"

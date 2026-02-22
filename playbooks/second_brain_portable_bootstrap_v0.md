@@ -4,7 +4,7 @@ Canonical: false
 
 ## Purpose
 
-Make `project/second-brain` runnable from any machine with deterministic startup checks.
+Make `project_id:second-brain` runnable from any machine with deterministic startup checks.
 
 ## Scope
 

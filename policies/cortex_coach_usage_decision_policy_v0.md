@@ -2,7 +2,7 @@
 
 Version: v0
 Status: Active
-Scope: This repository (`/home/d/codex/cortex`)
+Scope: This repository root
 
 ## Purpose
 

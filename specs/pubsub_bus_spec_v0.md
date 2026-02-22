@@ -17,9 +17,9 @@ Define a minimal file-native pub/sub pattern that keeps coordination determinist
 - No hard-gate behavior in v0
 
 ## Canonical Storage
-- `events_file`: `state/pubsub/events_v0.ndjson`
-- `offsets_dir`: `state/pubsub/offsets/`
-- `offset_file_pattern`: `state/pubsub/offsets/<consumer>.json`
+- `events_file`: .cortex/state/pubsub/events_v0.ndjson
+- `offsets_dir`: .cortex/state/pubsub/offsets/
+- `offset_file_pattern`: .cortex/state/pubsub/offsets/<consumer>.json
 
 ## Event Contract (required fields)
 Each line in `events_v0.ndjson` is one JSON object.

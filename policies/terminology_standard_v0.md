@@ -14,7 +14,7 @@ This document standardizes usage of:
 - Domain Model
 
 Agents and humans must use these terms consistently.
-Enforcement anchors: `meta/CLOSEOUT_CONTRACT_v0.md`, `operations/vision_alignment_audit_v0.md`, and the configured vision-alignment audit runner.
+Enforcement anchors: .cortex/meta/CLOSEOUT_CONTRACT_v0.md, .cortex/operations/vision_alignment_audit_v0.md, and the configured vision-alignment audit runner.
 Audit KPI hook: track terminology-fidelity trend in session summaries, target 100% no-conflation in reviewed artifacts.
 If ambiguity arises, this document is authoritative.
 
@@ -30,7 +30,7 @@ Characteristics:
 - No relationship semantics beyond hierarchy
 
 Example:
-- `meta/SECOND_BRAIN_TAXONOMY_v0.md`
+- .cortex/meta/SECOND_BRAIN_TAXONOMY_v0.md
 
 Non-example:
 - A scene with cross-links between principles and artifacts (that is graph structure, not taxonomy).
@@ -45,7 +45,7 @@ Characteristics:
 - Supports inference-like reasoning over links and future query primitives (for example: "all artifacts implementing principle/X")
 
 Example:
-- `meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md`
+- .cortex/meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md
 
 Non-example:
 - Raw JSON with fields but no semantic model.
@@ -60,7 +60,7 @@ Characteristics:
 - Narrowly scoped to a structure, not full semantics
 
 Example:
-- `scenes/_schemas/graph_scene_v0.schema.json`
+- .cortex/scenes/_schemas/graph_scene_v0.schema.json
 
 Non-example:
 - A free-form README section.
@@ -75,7 +75,7 @@ Characteristics:
 - Tool-agnostic
 
 Example:
-- `meta/META_PROGRAM_SPEC_v0.md`
+- .cortex/meta/META_PROGRAM_SPEC_v0.md
 
 Non-example:
 - A single concrete scene file.
@@ -90,7 +90,7 @@ Characteristics:
 - Evolves via ingest pipeline
 
 Example:
-- `graph/canonical.jsonl` (derived)
+- .cortex/graph/canonical.jsonl (derived)
 - graph ingest runner (builder)
 
 Non-example:
@@ -100,13 +100,13 @@ Non-example:
 A **structured, immutable snapshot** of session output capturing decisions, links, and resumable state.
 
 Characteristics:
-- Canonical ID format (for example: `artifact/<llm>_YYYY_MM_DD_slug`)
+- Canonical ID format (for example: .cortex/artifact/<llm>_YYYY_MM_DD_slug)
 - Link-rich
 - Includes resumability fields
 - Stored as durable JSON output
 
 Example:
-- `sessions/codex/2026-02-15-agent-owned-vision-audit-loop.json`
+- .cortex/sessions/codex/2026-02-15-agent-owned-vision-audit-loop.json
 
 Non-example:
 - Raw chat transcript without contract fields.
@@ -121,7 +121,7 @@ Characteristics:
 - References models/schemas where relevant
 
 Example:
-- `meta/CLOSEOUT_CONTRACT_v0.md`
+- .cortex/meta/CLOSEOUT_CONTRACT_v0.md
 
 Non-example:
 - Informal brainstorming notes in `OPEN_QUESTIONS.md`.
@@ -136,7 +136,7 @@ Characteristics:
 - Evolves with system maturity
 
 Example:
-- `scenes/dan_personal_cognitive_infrastructure.scene.json`
+- .cortex/scenes/dan_personal_cognitive_infrastructure.scene.json
 
 Non-example:
 - Generic diagram with no repository-specific semantics.
@@ -152,14 +152,14 @@ Before closing a meaningful session, self-check terminology:
 ## Quick Differentiation Table
 | Term | Primary Focus | Validation Surface | Repo Anchor |
 |---|---|---|---|
-| Taxonomy | Hierarchical classification | Naming and parent-child structure | `meta/SECOND_BRAIN_TAXONOMY_v0.md` |
-| Ontology | Semantic relationships and constraints | Link semantics and model coherence | `meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md` |
-| Schema | Data structure and field constraints | Parser/schema validation | `scenes/_schemas/graph_scene_v0.schema.json` |
-| Meta-Model | How models are defined and evolved | Workflow/process contracts | `meta/META_PROGRAM_SPEC_v0.md` |
-| Knowledge Graph | Connected knowledge network | Ingest/traversal integrity | `graph/canonical.jsonl` |
-| Artifact | Session state snapshot | Closeout contract checks | `meta/CLOSEOUT_CONTRACT_v0.md` |
-| Spec | Executable process contract | Audits, tests, scripted gates | `operations/vision_alignment_audit_v0.md` |
-| Domain Model | Problem-space conceptual model | Cross-scene coherence | `scenes/dan_personal_cognitive_infrastructure.scene.json` |
+| Taxonomy | Hierarchical classification | Naming and parent-child structure | .cortex/meta/SECOND_BRAIN_TAXONOMY_v0.md |
+| Ontology | Semantic relationships and constraints | Link semantics and model coherence | .cortex/meta/ONTOLOGY_ARCHITECTURE_MAP_v0.md |
+| Schema | Data structure and field constraints | Parser/schema validation | .cortex/scenes/_schemas/graph_scene_v0.schema.json |
+| Meta-Model | How models are defined and evolved | Workflow/process contracts | .cortex/meta/META_PROGRAM_SPEC_v0.md |
+| Knowledge Graph | Connected knowledge network | Ingest/traversal integrity | .cortex/graph/canonical.jsonl |
+| Artifact | Session state snapshot | Closeout contract checks | .cortex/meta/CLOSEOUT_CONTRACT_v0.md |
+| Spec | Executable process contract | Audits, tests, scripted gates | .cortex/operations/vision_alignment_audit_v0.md |
+| Domain Model | Problem-space conceptual model | Cross-scene coherence | .cortex/scenes/dan_personal_cognitive_infrastructure.scene.json |
 
 ## Change Log
 - v0 (2026-02-15): Initial standard with definitions, non-examples, usage ritual, and differentiation table.

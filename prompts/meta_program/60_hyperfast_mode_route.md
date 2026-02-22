@@ -1,7 +1,7 @@
 Hyperfast mode route is active.
 
 Execution contract:
-1. Load scene: `scenes/hyperfast-agent-closeout.scene.json`.
+1. Load scene: .cortex/scenes/hyperfast-agent-closeout.scene.json.
 2. Use protocol `hyperfast_agent_protocol` as the runtime execution route.
 3. Constrain session loops to hyperfast bounds (3-5 iterations max unless explicit override).
 4. Enforce closeout via the configured closeout runner and include scene fold suggestions in output.
@@ -10,6 +10,6 @@ Execution contract:
 Output requirement:
 - Emit concise execution summary with:
   - `hyperfast_mode`: true
-  - `route_scene`: `scene/hyperfast-agent-closeout_v0`
+  - `route_scene`: .cortex/scene/hyperfast-agent-closeout_v0
   - `closeout_status`: pass/fail
   - `remediation_actions` (if fail)

@@ -14,7 +14,7 @@ Provide an executable Phase 0 ticket set derived from:
 - `specs/agent_context_loader_spec_v0.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
 - `playbooks/cortex_phase0_role_charters_v0.md`
-- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
+- .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md
 
 ## Execution Order
 
@@ -76,7 +76,7 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-003 | Tactical Data Policy v0 | in_progress | Security & Data Policy Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | policies/tactical_data_policy_v0.md;specs/cortex_project_coach_spec_v0.md;playbooks/session_governance_hybrid_plan_v0.md | policy drafted in parallel; closure gated on PH0-001 |
 | PH0-004 | External Adapter Safety Contract v0 | done | Adapter Safety Lead | Runtime Reliability Lead | Week 1 | 2026-02-27 | PH0-001 | .cortex/reports/project_state/ph0_004_adapter_safety_reviewer_pass_v0.md;specs/cortex_project_coach_spec_v0.md;specs/agent_context_loader_spec_v0.md | done after required one-session review hold |
 | PH0-005 | Enforcement Ladder Contract and CI Mapping | in_progress | Governance Enforcement Lead | CI/Gate Owner | Week 2 | 2026-03-06 | PH0-002 | .cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md;.cortex/artifacts/decisions/decision_require_universal_json_format_contract_for_non_interactive_coach_commands_v1.md;playbooks/session_governance_hybrid_plan_v0.md;policies/cortex_coach_cli_output_contract_policy_v0.md;scripts/quality_gate_ci_v0.sh;specs/cortex_project_coach_spec_v0.md | evidence expanded with universal output contract governance + promoted decision; pending PH0-002 closure before final review/done |
-| PH0-010 | Project-State Boundary Root Config + Enforcement | done | Governance Enforcement Lead | Maintainer Council | Week 1 | 2026-02-22 | PH0-001 | contracts/project_state_boundary_contract_v0.json;policies/project_state_boundary_policy_v0.md;specs/project_state_boundary_spec_v0.md;scripts/project_state_boundary_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/reports/project_state_boundary_migration_v0.md;.cortex/artifacts/decisions/decision_enforce_project_state_boundary_under_cortex_v1.md | implemented configurable `project_state_root` (default `.cortex/`) and fail-closed gate; migrated legacy top-level project-state reports under `.cortex/reports/` |
+| PH0-010 | Project-State Boundary Root Config + Enforcement | done | Governance Enforcement Lead | Maintainer Council | Week 1 | 2026-02-22 | PH0-001 | contracts/project_state_boundary_contract_v0.json;policies/project_state_boundary_policy_v0.md;specs/project_state_boundary_spec_v0.md;scripts/project_state_boundary_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/reports/project_state_boundary_migration_v0.md;.cortex/artifacts/decisions/decision_enforce_project_state_boundary_under_cortex_v1.md | implemented configurable `project_state_root` (default .cortex/) and fail-closed gate; migrated legacy top-level project-state reports under .cortex/reports/ |
 | PH0-006 | Kill-Switch and Rollback Governance Controls | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
 | PH0-007 | Capacity Governance Cadence (Codex Plus) | todo | Delivery Operations Lead | Runtime Reliability Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
 | PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010 | tbd | |
@@ -190,7 +190,7 @@ Evidence:
 ### PH0-010: Project-State Boundary Root Config + Enforcement
 
 Objective:
-- Enforce a configurable project-state boundary root with `.cortex/` as the default.
+- Enforce a configurable project-state boundary root with .cortex/ as the default.
 
 Primary artifacts:
 - `contracts/project_state_boundary_contract_v0.json`
@@ -199,14 +199,14 @@ Primary artifacts:
 - `scripts/project_state_boundary_gate_v0.py`
 - `scripts/quality_gate_v0.sh`
 - `scripts/quality_gate_ci_v0.sh`
-- `.cortex/reports/project_state_boundary_migration_v0.md`
+- .cortex/reports/project_state_boundary_migration_v0.md
 
 Acceptance criteria:
 - Boundary root is contract-defined via `project_state_root`.
-- Default boundary root is `.cortex/` unless policy-governed override is applied.
+- Default boundary root is .cortex/ unless policy-governed override is applied.
 - Local and CI quality gates fail on forbidden project-state paths outside configured boundary root.
 - Waiver exceptions are explicit and time-bounded with expiry enforcement.
-- Legacy top-level project-state reports are migrated under `<project_state_root>/reports/`.
+- Legacy top-level project-state reports are migrated under .cortex/reports/.
 
 Evidence:
 - Boundary policy/spec/contract and gate merged with migration report and linked promoted decision artifact.
@@ -235,7 +235,7 @@ Objective:
 - Formalize weekly usage review cadence and workload throttling rules.
 
 Primary artifacts:
-- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
+- .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md
 - `playbooks/session_governance_hybrid_plan_v0.md`
 
 Acceptance criteria:
@@ -253,7 +253,7 @@ Objective:
 
 Primary artifacts:
 - `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md`
-- `.cortex/reports/project_state/` (new Phase 0 verification report expected in implementation)
+- .cortex/reports/project_state/ (new Phase 0 verification report expected in implementation)
 
 Acceptance criteria:
 - Checklist includes all PH0 tickets with pass/fail status.
@@ -261,7 +261,7 @@ Acceptance criteria:
 - Outstanding gaps are listed with owner and target date.
 
 Evidence:
-- Published verification report under `.cortex/reports/project_state/`.
+- Published verification report under .cortex/reports/project_state/.
 
 ### PH0-009: Maintainer Closeout and Handoff Package
 
@@ -271,7 +271,7 @@ Objective:
 Primary artifacts:
 - `playbooks/cortex_vision_master_roadmap_v1.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
-- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
+- .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md
 
 Acceptance criteria:
 - Phase 1 entry conditions are explicitly listed.
@@ -279,7 +279,7 @@ Acceptance criteria:
 - Handoff summary includes “what is fixed policy vs what is implementation choice.”
 
 Evidence:
-- Final Phase 0 closeout note committed in `.cortex/reports/project_state/`.
+- Final Phase 0 closeout note committed in .cortex/reports/project_state/.
 
 ## Capacity-Aware Scheduling (Option B Default)
 
@@ -299,5 +299,5 @@ If weekly usage pressure exceeds threshold before Thursday:
 Phase 0 is complete when:
 
 1. `PH0-001` through `PH0-009` are marked complete with evidence links.
-2. Gate A conditions from `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md` are met.
+2. Gate A conditions from .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md are met.
 3. Maintainers confirm Phase 1 can start without unresolved governance authority questions.

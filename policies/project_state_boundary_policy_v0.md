@@ -10,16 +10,18 @@ Prevent project-instance state from polluting distributable Cortex product surfa
 
 ## Default Rule (Normative)
 
-1. Project-specific operational artifacts MUST live under `.cortex/`.
-2. Project-specific operational artifacts MUST NOT be created or committed outside `.cortex/` by default.
-3. Repository-level product artifacts outside `.cortex/` MUST remain reusable and distribution-safe.
+1. Project boundary root is configurable via `contracts/project_state_boundary_contract_v0.json` (`project_state_root`).
+2. Default project boundary root MUST be `.cortex/` unless explicitly set otherwise by policy-governed contract update.
+3. Project-specific operational artifacts MUST live under the configured project boundary root.
+4. Project-specific operational artifacts MUST NOT be created or committed outside the configured boundary root by default.
+5. Repository-level product artifacts outside the configured boundary root MUST remain reusable and distribution-safe.
 
 ## Forbidden Root Rule (v0)
 
-Under the repository root, `reports/` is treated as project-state-only and is forbidden outside `.cortex/`.
+Under the repository root, `reports/` is treated as project-state-only and is forbidden outside the configured project boundary root.
 
 Canonical location for project-state reports is:
-- `.cortex/reports/`
+- `<project_state_root>/reports/`
 
 ## Exception (Waiver) Rule
 
@@ -41,7 +43,7 @@ Expired active waivers are blocking.
 `scripts/project_state_boundary_gate_v0.py` is mandatory in local and CI quality gates.
 
 The gate must fail when:
-- any forbidden-root file exists outside `.cortex/` without an active waiver
+- any forbidden-root file exists outside configured `project_state_root` without an active waiver
 - any active waiver is expired
 
 ## Migration Rule

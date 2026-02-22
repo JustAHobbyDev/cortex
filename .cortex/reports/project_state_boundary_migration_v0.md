@@ -25,3 +25,4 @@ Moved legacy project-state reports from top-level `reports/` into `.cortex/repor
 
 - Boundary gate is now mandatory in local/CI quality gates.
 - New exceptions require explicit waiver records in `.cortex/policies/project_state_boundary_waivers_v0.json`.
+- Boundary root remains configurable via `contracts/project_state_boundary_contract_v0.json` with default `.cortex/`.

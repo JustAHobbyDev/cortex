@@ -54,7 +54,10 @@ Cortex is a reasoning layer, not an activity log.
 
 ## Project State Boundary
 
-Project-instance operational state belongs in `.cortex/` by default.
+Project-instance operational state belongs in a configurable boundary root.
+
+- Default boundary root is `.cortex/`.
+- Boundary root may be changed only through policy-governed contract update.
 
 - Policy: `policies/project_state_boundary_policy_v0.md`
 - Spec: `specs/project_state_boundary_spec_v0.md`

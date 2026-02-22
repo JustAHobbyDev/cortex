@@ -382,9 +382,13 @@ python3 scripts/project_state_boundary_gate_v0.py \
 ```
 
 Checks include:
-- forbidden outside-`.cortex` roots from `contracts/project_state_boundary_contract_v0.json`
+- forbidden outside-boundary roots from `contracts/project_state_boundary_contract_v0.json`
 - waiver controls from `.cortex/policies/project_state_boundary_waivers_v0.json`
 - expired active waivers are blocking
+
+Notes:
+- boundary root comes from `project_state_root` in the contract
+- default boundary root is `.cortex/` unless contract-governed override is applied
 
 ## `just quality-gate`
 

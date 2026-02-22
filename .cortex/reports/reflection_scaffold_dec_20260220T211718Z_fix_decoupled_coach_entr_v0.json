@@ -1,0 +1,55 @@
+{
+  "auto_linked_governance_files": [],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "pyproject.toml",
+    ".github/workflows/cortex-validation.yml",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh",
+    "scripts/cortex_coach_wrapper_v0.sh",
+    "docs/cortex-coach/commands.md",
+    "docs/cortex-coach/faq.md",
+    "docs/cortex-coach/install.md",
+    "docs/cortex-coach/quickstart.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Promoted governance decision 'Fix decoupled coach entrypoint shadowing in CI and scripts' was not linked to a reflection scaffold at capture time.",
+  "pattern": "Governance-impacting decisions were promoted before reflection metadata enforcement was active.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"dec_20260220T211718Z_fix_decoupled_coach_entr backfill reflection\" --decision \"Mistake observed: Promoted governance decision 'Fix decoupled coach entrypoint shadowing in CI and scripts' was not linked to a reflection scaffold at capture time. Recurring pattern: Governance-impacting decisions were promoted before reflection metadata enforcement was active. Adopt reusable rule: Every governance-impacting promoted decision must include reflection_id and reflection_report before closeout.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260221T233017Z_dec_20260220t211718z_fix --reflection-report .cortex/reports/reflection_scaffold_dec_20260220T211718Z_fix_decoupled_coach_entr_v0.json --linked-artifacts .github/workflows/cortex-validation.yml,docs/cortex-coach/commands.md,docs/cortex-coach/faq.md,docs/cortex-coach/install.md,docs/cortex-coach/quickstart.md,pyproject.toml,scripts/cortex_coach_wrapper_v0.sh,scripts/quality_gate_ci_v0.sh,scripts/quality_gate_v0.sh",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260221T233017Z_dec_20260220t211718z_fix",
+  "report_file": ".cortex/reports/reflection_scaffold_dec_20260220T211718Z_fix_decoupled_coach_entr_v0.json",
+  "rule": "Every governance-impacting promoted decision must include reflection_id and reflection_report before closeout.",
+  "run_at": "2026-02-21T23:30:17Z",
+  "suggested_decision": "Mistake observed: Promoted governance decision 'Fix decoupled coach entrypoint shadowing in CI and scripts' was not linked to a reflection scaffold at capture time. Recurring pattern: Governance-impacting decisions were promoted before reflection metadata enforcement was active. Adopt reusable rule: Every governance-impacting promoted decision must include reflection_id and reflection_report before closeout.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_dec_20260220t211718z_fix_decoupled_coach_entr_backfill_reflection_v1.md",
+  "suggested_linked_artifacts": [
+    ".github/workflows/cortex-validation.yml",
+    "docs/cortex-coach/commands.md",
+    "docs/cortex-coach/faq.md",
+    "docs/cortex-coach/install.md",
+    "docs/cortex-coach/quickstart.md",
+    "pyproject.toml",
+    "scripts/cortex_coach_wrapper_v0.sh",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "dec_20260220T211718Z_fix_decoupled_coach_entr backfill reflection",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

@@ -352,6 +352,25 @@ Writes:
 Audit behavior:
 - `audit` fails `unsynced_decisions` when promoted decisions have `impact_scope` but no `linked_artifacts`.
 
+## `reflection_enforcement_gate_v0.py`
+
+Fail-closed reflection enforcement used by local and CI quality gates.
+
+```bash
+python3 scripts/reflection_enforcement_gate_v0.py \
+  --project-dir /path/to/project \
+  --required-decision-status promoted \
+  --min-scaffold-reports 1 \
+  --min-required-status-mappings 1 \
+  --format json
+```
+
+Checks include:
+- `decision-gap-check` must pass
+- `reflection-completeness-check` must pass
+- matched governance-impact decisions must include valid `reflection_id` and `reflection_report`
+- reflection coverage must be non-vacuous (configured minimum scaffold reports/mappings)
+
 ## `just quality-gate`
 
 Run the unified maintainer quality gate for local/CI parity.

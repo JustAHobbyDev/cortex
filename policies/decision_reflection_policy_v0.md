@@ -36,7 +36,7 @@ This loop is mandatory for governance-relevant mistakes and applies to any codin
      - policy/playbook updates in `policies/` or `playbooks/` as needed
      - prompt/context guidance in `.cortex/prompts/` only when execution behavior must change
 5. Validate:
-   - run governance checks (`decision-gap-check` and relevant audits) before closeout
+   - run governance checks (`decision-gap-check`, `reflection_enforcement_gate_v0.py`, and relevant audits) before closeout
 
 ## Portability Constraint
 

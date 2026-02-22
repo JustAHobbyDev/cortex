@@ -40,15 +40,20 @@ Fallback:
 1. `audit-needed` with fail-on-required behavior
 2. `cortex-coach` smoke commands
 3. `decision-gap-check` for governance-impacting dirty files
-4. docs local-link + JSON integrity
-5. focused `cortex-coach` pytest suite
+4. `reflection_enforcement_gate_v0.py` fail-closed checks:
+   - no vacuous reflection pass (`min_scaffold_reports >= 1`)
+   - required promoted mappings (`min_required_status_mappings >= 1`)
+   - governance-impact decision matches must carry valid `reflection_id` + `reflection_report`
+5. docs local-link + JSON integrity
+6. focused `cortex-coach` pytest suite
 
 `quality-gate-ci`:
 
 1. `cortex-coach` smoke commands
 2. `decision-gap-check` for governance-impacting dirty files
-3. docs local-link + JSON integrity
-4. focused `cortex-coach` pytest suite
+3. `reflection_enforcement_gate_v0.py` with promoted-status thresholds
+4. docs local-link + JSON integrity
+5. focused `cortex-coach` pytest suite
 
 ## When to Run
 

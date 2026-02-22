@@ -222,6 +222,15 @@ cortex-coach \
 ```
 
 ```bash
+python3 scripts/reflection_enforcement_gate_v0.py \
+  --project-dir . \
+  --required-decision-status promoted \
+  --min-scaffold-reports 1 \
+  --min-required-status-mappings 1 \
+  --format json
+```
+
+```bash
 cortex-coach \
   audit \
   --project-dir . \

@@ -19,6 +19,8 @@
       ],
       "promoted_at": "2026-02-20T11:25:02Z",
       "rationale": "Prevents important operating decisions from being implicit in diffs and improves traceability across policy/runtime.",
+      "reflection_id": "ref_20260221T233015Z_dec_20260220t112459z_req",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T112459Z_require_decision_reflect_v0.json",
       "status": "promoted",
       "title": "Require decision reflection for operating-layer changes"
     },
@@ -42,6 +44,8 @@
       ],
       "promoted_at": "2026-02-20T11:26:26Z",
       "rationale": "Ensures deterministic pytest/toolchain resolution across local and CI runs; avoids floating uv run --with pytest behavior.",
+      "reflection_id": "ref_20260221T233016Z_dec_20260220t112623z_use",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T112623Z_use_locked_dev_dependenc_v0.json",
       "status": "promoted",
       "title": "Use locked dev dependency group for pytest"
     },
@@ -64,6 +68,8 @@
       ],
       "promoted_at": "2026-02-20T12:02:31Z",
       "rationale": "Recent misses showed that integrity checks pass even when decision capture completeness is incomplete; priority must shift to close this governance gap first.",
+      "reflection_id": "ref_20260221T233016Z_dec_20260220t120228z_pri",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T120228Z_prioritize_governance_co_v0.json",
       "status": "promoted",
       "title": "Prioritize governance completeness over decoupling"
     },
@@ -87,6 +93,8 @@
       ],
       "promoted_at": "2026-02-20T14:40:56Z",
       "rationale": "Phase 3 parity is complete and standalone coach is operational; retaining internal runtime risks boundary drift.",
+      "reflection_id": "ref_20260221T233017Z_dec_20260220t144052z_com",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T144052Z_complete_phase_4_externa_v0.json",
       "status": "promoted",
       "title": "Complete phase 4 external-only coach delegation"
     },
@@ -107,6 +115,8 @@
       ],
       "promoted_at": "2026-02-20T15:16:46Z",
       "rationale": "Ensure reflection governance portability across agents and keep durable repo-based memory.",
+      "reflection_id": "ref_20260221T233017Z_dec_20260220t151640z_req",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T151640Z_require_agent_agnostic_r_v0.json",
       "status": "promoted",
       "title": "Require agent-agnostic reflection loop for governance learning"
     },
@@ -134,6 +144,8 @@
       ],
       "promoted_at": "2026-02-20T21:17:21Z",
       "rationale": "Prevents ModuleNotFoundError from broken local script shadowing and aligns execution with external-only coach ownership.",
+      "reflection_id": "ref_20260221T233017Z_dec_20260220t211718z_fix",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260220T211718Z_fix_decoupled_coach_entr_v0.json",
       "status": "promoted",
       "title": "Fix decoupled coach entrypoint shadowing in CI and scripts"
     },
@@ -161,12 +173,12 @@
       ],
       "promoted_at": "2026-02-21T23:03:31Z",
       "rationale": "Automation and governance checks require deterministic machine-parseable outputs, and backward compatibility prevents breaking existing text-mode workflows.",
-      "reflection_id": null,
-      "reflection_report": null,
+      "reflection_id": "ref_20260221T233016Z_dec_20260221t230319z_req",
+      "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260221T230319Z_require_universal_json_f_v0.json",
       "status": "promoted",
       "title": "Require universal JSON format contract for non-interactive coach commands"
     }
   ],
-  "updated_at": "2026-02-21T23:03:31Z",
+  "updated_at": "2026-02-21T23:30:16Z",
   "version": "v0"
 }

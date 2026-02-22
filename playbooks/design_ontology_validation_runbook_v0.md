@@ -20,8 +20,8 @@ Provide a deterministic validation loop for design ontology artifacts so new spe
 
 ## Output Artifacts
 
-- `reports/design_ontology_validation_v0.json`
-- `reports/design_ontology_validation_v0.md`
+- `.cortex/reports/design_ontology_validation_v0.json`
+- `.cortex/reports/design_ontology_validation_v0.md`
 
 ## Preconditions
 
@@ -124,5 +124,5 @@ Provide a deterministic validation loop for design ontology artifacts so new spe
 - [ ] All target instances parsed by `jq`.
 - [ ] All target instances validated against schema.
 - [ ] Required descriptive fields passed quality lint.
-- [ ] Both report files generated under `reports/`.
+- [ ] Both report files generated under `.cortex/reports/`.
 - [ ] Any failures include actionable field-level reasons.

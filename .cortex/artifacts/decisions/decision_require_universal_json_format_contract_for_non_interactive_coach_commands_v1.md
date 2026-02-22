@@ -15,7 +15,7 @@ LinkedArtifacts:
 - `docs/cortex-coach/troubleshooting.md`
 - `tests/test_coach_format_contract.py`
 - `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md`
-- `reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md`
+- `.cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md`
 
 ## Context
 - Captured via `cortex-coach decision-capture`.

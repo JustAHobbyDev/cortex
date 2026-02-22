@@ -52,6 +52,15 @@ Git history is sufficient provenance.
 
 Cortex is a reasoning layer, not an activity log.
 
+## Project State Boundary
+
+Project-instance operational state belongs in `.cortex/` by default.
+
+- Policy: `policies/project_state_boundary_policy_v0.md`
+- Spec: `specs/project_state_boundary_spec_v0.md`
+- Contract: `contracts/project_state_boundary_contract_v0.json`
+- Enforcement gate: `scripts/project_state_boundary_gate_v0.py`
+
 ---
 
 ## Design Philosophy
@@ -95,4 +104,4 @@ Artifact Admission Rules: [ARTIFACT_ADMISSION.md]
 ## Footnotes
 
 [1] Reflection-loop pattern inspiration: [`aviadr1/claude-meta`](https://github.com/aviadr1/claude-meta)
-[2] Comparative research reference and credited project: [`jayminwest/mulch`](https://github.com/jayminwest/mulch) (report: `reports/mulch_comparative_research_report_v0.md`)
+[2] Comparative research reference and credited project: [`jayminwest/mulch`](https://github.com/jayminwest/mulch) (report: `.cortex/reports/project_state/mulch_comparative_research_report_v0.md`)

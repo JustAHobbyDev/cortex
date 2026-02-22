@@ -8,6 +8,7 @@ Inputs:
 - `specs/spec_spec_v0.md` governance and spec structure
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
 - `contracts/promotion_contract_schema_v0.json` promotion contract schema
+- `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/tactical_data_policy_v0.md` tactical data policy
 - `scripts/design_prompt_dsl_compile_v0.py` DSL compiler
@@ -107,6 +108,7 @@ Validation requirements:
 
 - Project Coach mutates only `.cortex/` paths in target projects unless an explicit policy-governed exception is added.
 - Existing user files outside `.cortex/` are never rewritten by default behavior.
+- Project-specific operational artifacts are expected under `.cortex/`; forbidden outside roots are defined by `contracts/project_state_boundary_contract_v0.json`.
 
 ### Rollback/Kill-Switch
 

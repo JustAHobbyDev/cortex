@@ -9,7 +9,7 @@ Define how to incorporate high-value ideas identified in the Mulch comparison wh
 
 ## Source Artifact
 
-- Primary source: `reports/mulch_comparative_research_report_v0.md`
+- Primary source: `.cortex/reports/project_state/mulch_comparative_research_report_v0.md`
 
 ## Strategic Conclusion
 
@@ -138,4 +138,3 @@ Add guardrail:
 - `specs/cortex_project_coach_spec_v0.md`
 - `specs/agent_context_loader_spec_v0.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
-

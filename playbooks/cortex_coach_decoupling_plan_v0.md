@@ -129,7 +129,7 @@ Decoupling work should proceed only insofar as governance completeness is mainta
 - [x] Cortex docs default to external coach usage.
 
 Phase 3 evidence:
-- `reports/phase3_parity_check_report_v0.md`
+- `.cortex/reports/project_state/phase3_parity_check_report_v0.md`
 - `policies/cortex_in_repo_coach_bugfix_only_mode_v0.md`
 
 ## Phase 4: Full Decoupling

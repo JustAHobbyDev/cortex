@@ -1,0 +1,8 @@
+{
+  "forbidden_outside_project_state_roots": [
+    "reports"
+  ],
+  "project_state_root": ".cortex",
+  "version": "v0",
+  "waiver_file": ".cortex/policies/project_state_boundary_waivers_v0.json"
+}

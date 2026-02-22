@@ -14,7 +14,7 @@ Provide an executable Phase 0 ticket set derived from:
 - `specs/agent_context_loader_spec_v0.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
 - `playbooks/cortex_phase0_role_charters_v0.md`
-- `reports/mulch_beads_synthesized_plan_proposal_v0.md`
+- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
 
 ## Execution Order
 
@@ -74,8 +74,8 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-001 | Canonical Authority and Dual-Plane Policy Lock-In | in_progress | Governance Policy Lead | Maintainer Council | Week 1 | 2026-02-27 | - | policies/cortex_coach_final_ownership_boundary_v0.md;playbooks/cortex_vision_master_roadmap_v1.md | authority wording hardened; pending council review |
 | PH0-002 | Promotion Contract Schema v0 | in_progress | Contract/Schema Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | contracts/promotion_contract_schema_v0.json;specs/cortex_project_coach_spec_v0.md | schema drafted in parallel; closure gated on PH0-001 |
 | PH0-003 | Tactical Data Policy v0 | in_progress | Security & Data Policy Lead | Governance Policy Lead | Week 1 | 2026-02-27 | PH0-001 | policies/tactical_data_policy_v0.md;specs/cortex_project_coach_spec_v0.md;playbooks/session_governance_hybrid_plan_v0.md | policy drafted in parallel; closure gated on PH0-001 |
-| PH0-004 | External Adapter Safety Contract v0 | done | Adapter Safety Lead | Runtime Reliability Lead | Week 1 | 2026-02-27 | PH0-001 | reports/ph0_004_adapter_safety_reviewer_pass_v0.md;specs/cortex_project_coach_spec_v0.md;specs/agent_context_loader_spec_v0.md | done after required one-session review hold |
-| PH0-005 | Enforcement Ladder Contract and CI Mapping | in_progress | Governance Enforcement Lead | CI/Gate Owner | Week 2 | 2026-03-06 | PH0-002 | reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md;.cortex/artifacts/decisions/decision_require_universal_json_format_contract_for_non_interactive_coach_commands_v1.md;playbooks/session_governance_hybrid_plan_v0.md;policies/cortex_coach_cli_output_contract_policy_v0.md;scripts/quality_gate_ci_v0.sh;specs/cortex_project_coach_spec_v0.md | evidence expanded with universal output contract governance + promoted decision; pending PH0-002 closure before final review/done |
+| PH0-004 | External Adapter Safety Contract v0 | done | Adapter Safety Lead | Runtime Reliability Lead | Week 1 | 2026-02-27 | PH0-001 | .cortex/reports/project_state/ph0_004_adapter_safety_reviewer_pass_v0.md;specs/cortex_project_coach_spec_v0.md;specs/agent_context_loader_spec_v0.md | done after required one-session review hold |
+| PH0-005 | Enforcement Ladder Contract and CI Mapping | in_progress | Governance Enforcement Lead | CI/Gate Owner | Week 2 | 2026-03-06 | PH0-002 | .cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md;.cortex/artifacts/decisions/decision_require_universal_json_format_contract_for_non_interactive_coach_commands_v1.md;playbooks/session_governance_hybrid_plan_v0.md;policies/cortex_coach_cli_output_contract_policy_v0.md;scripts/quality_gate_ci_v0.sh;specs/cortex_project_coach_spec_v0.md | evidence expanded with universal output contract governance + promoted decision; pending PH0-002 closure before final review/done |
 | PH0-006 | Kill-Switch and Rollback Governance Controls | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
 | PH0-007 | Capacity Governance Cadence (Codex Plus) | todo | Delivery Operations Lead | Runtime Reliability Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
 | PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007 | tbd | |
@@ -210,7 +210,7 @@ Objective:
 - Formalize weekly usage review cadence and workload throttling rules.
 
 Primary artifacts:
-- `reports/mulch_beads_synthesized_plan_proposal_v0.md`
+- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
 
 Acceptance criteria:
@@ -246,7 +246,7 @@ Objective:
 Primary artifacts:
 - `playbooks/cortex_vision_master_roadmap_v1.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
-- `reports/mulch_beads_synthesized_plan_proposal_v0.md`
+- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
 
 Acceptance criteria:
 - Phase 1 entry conditions are explicitly listed.
@@ -274,5 +274,5 @@ If weekly usage pressure exceeds threshold before Thursday:
 Phase 0 is complete when:
 
 1. `PH0-001` through `PH0-009` are marked complete with evidence links.
-2. Gate A conditions from `reports/mulch_beads_synthesized_plan_proposal_v0.md` are met.
+2. Gate A conditions from `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md` are met.
 3. Maintainers confirm Phase 1 can start without unresolved governance authority questions.

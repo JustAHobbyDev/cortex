@@ -371,6 +371,21 @@ Checks include:
 - matched governance-impact decisions must include valid `reflection_id` and `reflection_report`
 - reflection coverage must be non-vacuous (configured minimum scaffold reports/mappings)
 
+## `project_state_boundary_gate_v0.py`
+
+Fail-closed boundary enforcement to keep project-instance state under `.cortex/`.
+
+```bash
+python3 scripts/project_state_boundary_gate_v0.py \
+  --project-dir /path/to/project \
+  --format json
+```
+
+Checks include:
+- forbidden outside-`.cortex` roots from `contracts/project_state_boundary_contract_v0.json`
+- waiver controls from `.cortex/policies/project_state_boundary_waivers_v0.json`
+- expired active waivers are blocking
+
 ## `just quality-gate`
 
 Run the unified maintainer quality gate for local/CI parity.

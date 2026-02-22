@@ -32,7 +32,7 @@ Decoupling objective is complete:
 ## Evidence Artifacts
 
 - `playbooks/cortex_coach_decoupling_plan_v0.md`
-- `reports/phase3_parity_check_report_v0.md`
+- `.cortex/reports/project_state/phase3_parity_check_report_v0.md`
 - `docs/cortex-coach/migration_to_standalone_v0.md`
 - `policies/cortex_coach_final_ownership_boundary_v0.md`
 

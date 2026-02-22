@@ -18,6 +18,7 @@ Scope: cross-repo operating boundary
 
 - governance model and policy definitions
 - contract definitions and contract evolution decisions
+- project-state boundary policy/contracts that define where non-distributable project artifacts may live
 - canonical asset/schema/template source artifacts
 - promotion contract requirements (evidence, linkage, approval expectations)
 - enforcement policy levels (advisory vs blocking, local vs CI)

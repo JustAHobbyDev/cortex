@@ -231,6 +231,12 @@ python3 scripts/reflection_enforcement_gate_v0.py \
 ```
 
 ```bash
+python3 scripts/project_state_boundary_gate_v0.py \
+  --project-dir . \
+  --format json
+```
+
+```bash
 cortex-coach \
   audit \
   --project-dir . \

@@ -10,7 +10,7 @@
     "docs/cortex-coach/troubleshooting.md",
     "tests/test_coach_format_contract.py",
     "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
-    "reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md"
+    ".cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md"
   ],
   "impact_scope": [
     "governance",
@@ -20,7 +20,7 @@
   "pattern": "Governance-impacting decisions were promoted before reflection metadata enforcement was active.",
   "project_dir": "/home/d/codex/cortex",
   "recommended_commands": [
-    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"dec_20260221T230319Z_require_universal_json_f backfill reflection\" --decision \"Mistake observed: Promoted governance decision 'Require universal JSON format contract for non-interactive coach commands' was not linked to a reflection scaffold at capture time. Recurring pattern: Governance-impacting decisions were promoted before reflection metadata enforcement was active. Adopt reusable rule: Every governance-impacting promoted decision must include reflection_id and reflection_report before closeout.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260221T233016Z_dec_20260221t230319z_req --reflection-report .cortex/reports/reflection_scaffold_dec_20260221T230319Z_require_universal_json_f_v0.json --linked-artifacts docs/cortex-coach/commands.md,docs/cortex-coach/troubleshooting.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/session_governance_hybrid_plan_v0.md,policies/cortex_coach_cli_output_contract_policy_v0.md,reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md,scripts/cortex_project_coach_v0.py,specs/cortex_project_coach_spec_v0.md,tests/test_coach_format_contract.py",
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"dec_20260221T230319Z_require_universal_json_f backfill reflection\" --decision \"Mistake observed: Promoted governance decision 'Require universal JSON format contract for non-interactive coach commands' was not linked to a reflection scaffold at capture time. Recurring pattern: Governance-impacting decisions were promoted before reflection metadata enforcement was active. Adopt reusable rule: Every governance-impacting promoted decision must include reflection_id and reflection_report before closeout.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260221T233016Z_dec_20260221t230319z_req --reflection-report .cortex/reports/reflection_scaffold_dec_20260221T230319Z_require_universal_json_f_v0.json --linked-artifacts docs/cortex-coach/commands.md,docs/cortex-coach/troubleshooting.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/session_governance_hybrid_plan_v0.md,policies/cortex_coach_cli_output_contract_policy_v0.md,.cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md,scripts/cortex_project_coach_v0.py,specs/cortex_project_coach_spec_v0.md,tests/test_coach_format_contract.py",
     "cortex-coach decision-list --project-dir <path> --status candidate",
     "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
     "cortex-coach decision-gap-check --project-dir <path>",
@@ -38,7 +38,7 @@
     "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
     "playbooks/session_governance_hybrid_plan_v0.md",
     "policies/cortex_coach_cli_output_contract_policy_v0.md",
-    "reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md",
+    ".cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md",
     "scripts/cortex_project_coach_v0.py",
     "specs/cortex_project_coach_spec_v0.md",
     "tests/test_coach_format_contract.py"

@@ -10,9 +10,9 @@ Define one actionable implementation proposal that synthesizes Mulch and Beads r
 
 ## Source Inputs
 
-- `reports/mulch_comparative_research_report_v0.md`
-- `reports/mulch_integration_strategy_report_v0.md`
-- `reports/beads_comparative_research_report_v0.md`
+- `.cortex/reports/project_state/mulch_comparative_research_report_v0.md`
+- `.cortex/reports/project_state/mulch_integration_strategy_report_v0.md`
+- `.cortex/reports/project_state/beads_comparative_research_report_v0.md`
 - `playbooks/cortex_vision_master_roadmap_v1.md`
 - `policies/cortex_coach_final_ownership_boundary_v0.md`
 

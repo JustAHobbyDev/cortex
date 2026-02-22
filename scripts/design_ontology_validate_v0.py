@@ -17,8 +17,8 @@ import jsonschema
 
 DEFAULT_SCHEMA = Path("templates/design_ontology_v0.schema.json")
 DEFAULT_GLOB = "templates/design_ontology_*.json"
-DEFAULT_JSON_REPORT = Path("reports/design_ontology_validation_v0.json")
-DEFAULT_MD_REPORT = Path("reports/design_ontology_validation_v0.md")
+DEFAULT_JSON_REPORT = Path(".cortex/reports/design_ontology_validation_v0.json")
+DEFAULT_MD_REPORT = Path(".cortex/reports/design_ontology_validation_v0.md")
 VAGUE_TERMS = {"modern", "clean", "nice", "good", "cool", "sleek", "beautiful"}
 REQUIRED_LANGUAGE_PATHS = [
     "layout.grid",

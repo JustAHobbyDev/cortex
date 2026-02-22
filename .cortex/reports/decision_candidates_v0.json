@@ -169,7 +169,7 @@
         "docs/cortex-coach/troubleshooting.md",
         "tests/test_coach_format_contract.py",
         "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
-        "reports/ph0_005_enforcement_ladder_mapping_evidence_v0.md"
+        ".cortex/reports/project_state/ph0_005_enforcement_ladder_mapping_evidence_v0.md"
       ],
       "promoted_at": "2026-02-21T23:03:31Z",
       "rationale": "Automation and governance checks require deterministic machine-parseable outputs, and backward compatibility prevents breaking existing text-mode workflows.",
@@ -177,8 +177,44 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_dec_20260221T230319Z_require_universal_json_f_v0.json",
       "status": "promoted",
       "title": "Require universal JSON format contract for non-interactive coach commands"
+    },
+    {
+      "captured_at": "2026-02-22T06:31:36Z",
+      "decision": "Project-specific operational artifacts must live under .cortex by default, with fail-closed boundary checks and time-bounded waiver exceptions.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_enforce_project_state_boundary_under_cortex_v1.md",
+      "decision_id": "dec_20260222T063136Z_enforce_project_state_bo",
+      "impact_scope": [
+        "governance",
+        "policy",
+        "workflow",
+        "ci",
+        "tooling",
+        "docs"
+      ],
+      "linked_artifacts": [
+        ".cortex/policies/project_state_boundary_waivers_v0.json",
+        ".cortex/reports/project_state_boundary_migration_v0.md",
+        "contracts/project_state_boundary_contract_v0.json",
+        "policies/project_state_boundary_policy_v0.md",
+        "specs/project_state_boundary_spec_v0.md",
+        "specs/cortex_project_coach_spec_v0.md",
+        "scripts/project_state_boundary_gate_v0.py",
+        "scripts/quality_gate_v0.sh",
+        "scripts/quality_gate_ci_v0.sh",
+        "docs/cortex-coach/quality-gate.md",
+        "docs/cortex-coach/commands.md",
+        "docs/cortex-coach/quickstart.md",
+        "playbooks/design_ontology_validation_runbook_v0.md",
+        "README.md"
+      ],
+      "promoted_at": "2026-02-22T06:31:41Z",
+      "rationale": "Protect distribution surfaces from project-state drift and keep repository authority boundaries deterministic for maintainers and downstream adopters.",
+      "reflection_id": "ref_20260222T063124Z_enforce_project_state_bo",
+      "reflection_report": ".cortex/reports/reflection_scaffold_project_state_boundary_enforcement_v0.json",
+      "status": "promoted",
+      "title": "Enforce project-state boundary under .cortex"
     }
   ],
-  "updated_at": "2026-02-21T23:30:16Z",
+  "updated_at": "2026-02-22T06:31:41Z",
   "version": "v0"
 }

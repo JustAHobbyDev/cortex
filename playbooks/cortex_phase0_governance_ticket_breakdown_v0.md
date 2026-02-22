@@ -19,7 +19,7 @@ Provide an executable Phase 0 ticket set derived from:
 ## Execution Order
 
 1. `PH0-001` through `PH0-004` (authority + contracts)
-2. `PH0-005`, `PH0-006`, `PH0-010`, `PH0-011`, `PH0-012`, and `PH0-013` (enforcement + controls + boundary + swarm GDD + hydration + release-surface hygiene)
+2. `PH0-005`, `PH0-006`, `PH0-010`, `PH0-011`, `PH0-012`, `PH0-013`, and `PH0-014` (enforcement + controls + boundary + swarm GDD + hydration + release-surface + mistake-provenance hygiene)
 3. `PH0-007` and `PH0-008` (capacity governance + verification)
 4. `PH0-009` (closeout package)
 
@@ -82,7 +82,8 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-011 | Swarm Governance Driven Development Baseline | todo | Governance Enforcement Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-001,PH0-005,PH0-006,PH0-010 | playbooks/cortex_vision_master_roadmap_v1.md;playbooks/cortex_phase0_governance_ticket_breakdown_v0.md;scripts/quality_gate_ci_v0.sh;scripts/reflection_enforcement_gate_v0.py | formalize Swarm-GDD gates and exit criteria before broader swarm adoption |
 | PH0-012 | Context Hydration Contract + Preflight Policy Baseline | done | Governance Enforcement Lead | Governance Policy Lead | Week 1 | 2026-02-22 | - | .cortex/reports/project_state/ph0_012_context_hydration_baseline_closeout_v0.md;contracts/context_hydration_receipt_schema_v0.json;policies/context_hydration_policy_v0.md;specs/cortex_project_coach_spec_v0.md | phase-0 baseline landed; runtime command-level enforcement rollout remains follow-on work |
 | PH0-013 | Temporal Playbook Retirement + Release Surface Gate | done | Conformance QA Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-010 | .cortex/reports/project_state/ph0_013_temporal_playbook_release_surface_closeout_v0.md;contracts/temporal_playbook_release_surface_contract_v0.json;policies/temporal_playbook_release_surface_policy_v0.md;scripts/temporal_playbook_release_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/artifacts/decisions/decision_enforce_temporal_playbook_retirement_and_release_surface_gating_v1.md | temporal classification contract + fail-closed release-surface gate implemented with promoted decision linkage |
-| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012,PH0-013 | tbd | |
+| PH0-014 | Machine-Caught Mistake Provenance Contract + Gate | todo | Governance Enforcement Lead | Conformance QA Lead | Week 2 | 2026-03-06 | PH0-005 | tbd | formalize machine-verifiable mistake detection provenance and prevent ungrounded agent-caught claims |
+| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012,PH0-013,PH0-014 | tbd | |
 | PH0-009 | Maintainer Closeout and Handoff Package | todo | Program Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-008 | tbd | |
 
 ## Weekly Checkpoint Template (Fillable)
@@ -316,6 +317,30 @@ Acceptance criteria:
 Evidence:
 - Policy/runbook/gate diffs and closeout report committed.
 
+### PH0-014: Machine-Caught Mistake Provenance Contract + Gate
+
+Objective:
+- Make mistake detection claims machine-verifiable by enforcing explicit provenance, detector evidence, and confidence/status semantics.
+
+Primary artifacts:
+- `contracts/mistake_candidate_schema_v0.json`
+- `policies/mistake_detection_provenance_policy_v0.md`
+- `specs/cortex_project_coach_spec_v0.md`
+- `scripts/mistake_candidate_gate_v0.py`
+- `scripts/quality_gate_ci_v0.sh`
+- `scripts/quality_gate_v0.sh`
+- `.cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md`
+
+Acceptance criteria:
+- A versioned mistake-candidate schema defines required provenance fields (`detected_by`, `detector`, `evidence_refs`, `rule_violated`, `confidence`, `status`).
+- Policy forbids reporting/claiming agent-caught mistakes without machine-recorded provenance meeting schema requirements.
+- Deterministic gate fails when machine-caught claims are missing required provenance/evidence or use unsupported confidence/status values.
+- Local and CI quality gates include the provenance gate before release-boundary checks complete.
+- Existing mistake/reflection artifacts have migration/backfill guidance with explicit handling for unknown legacy provenance.
+
+Evidence:
+- Schema/policy/spec/gate diffs and closeout report committed.
+
 ### PH0-008: Phase 0 Conformance Verification Pack
 
 Objective:
@@ -368,6 +393,6 @@ If weekly usage pressure exceeds threshold before Thursday:
 
 Phase 0 is complete when:
 
-1. `PH0-001` through `PH0-013` are marked complete with evidence links.
+1. `PH0-001` through `PH0-014` are marked complete with evidence links.
 2. Gate A conditions from .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md are met.
 3. Maintainers confirm Phase 1 can start without unresolved governance authority questions.

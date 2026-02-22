@@ -46,6 +46,37 @@ Define the end-to-end path from current state to a friction-reduced, project-agn
 - Tactical plane cannot bypass governance gates.
 - External adapters are optional and must fail-open to governance-only mode.
 
+## Governance Driven Development for Swarms (Normative)
+
+Swarm execution is a tactical acceleration layer, not an authority layer. Cortex MUST enforce governance closure semantics even when multi-agent runtimes are active.
+
+### Swarm-GDD Rules
+
+1. Governance-impacting closure requires linked decision and reflection artifacts.
+2. Swarm runtime outputs are non-authoritative until promoted through governance plane artifacts.
+3. Swarm mutation rights are capability-scoped and least-privilege by default.
+4. Swarm failures must degrade safely (`swarm -> single-agent -> governance-only`).
+5. Canonical release/merge closure is blocked unless required governance gates pass.
+
+### Required Swarm Gate Bundle
+
+At release boundary and governance-impact merge boundaries, all checks below MUST pass:
+
+1. `cortex-coach decision-gap-check --project-dir . --format json`
+2. `cortex-coach reflection-completeness-check --project-dir . --required-decision-status promoted --format json`
+3. `cortex-coach audit --project-dir . --audit-scope all --format json`
+4. `scripts/project_state_boundary_gate_v0.py --project-dir . --format json`
+5. `scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
+
+### Swarm-GDD Exit Criteria
+
+Swarm governance readiness is achieved only when:
+
+1. Swarm authority, closeout, and degradation rules are codified in policy/spec artifacts.
+2. Required Swarm Gate Bundle is mapped into local + CI quality execution paths.
+3. Kill-switch ownership and stabilization-cycle workflow are documented and tested.
+4. At least one end-to-end swarm-governed change closes with full decision/reflection/audit linkage and no gate bypass.
+
 ## Roadmap Phases
 
 ### Phase 0: Governance Lock-In
@@ -134,6 +165,7 @@ Exit Criteria:
 3. Phase 3 must pass degradation tests before broader adoption.
 4. Phase 4 must pass governance linkage checks before default-on promotion.
 5. Phase 5 begins only after prior gate stability.
+6. Swarm runtime adoption beyond experimental is blocked until Swarm-GDD Exit Criteria are met.
 
 ## Release Gates and Stop-Rules
 
@@ -141,6 +173,8 @@ Exit Criteria:
 
 - Decision-gap and reflection completeness checks pass at release boundary.
 - Audit (`--audit-scope all`) passes at release boundary.
+- Project-state boundary gate passes at release boundary.
+- Reflection enforcement gate passes at release boundary.
 
 ### Stop-Rules (rollout pause triggers)
 

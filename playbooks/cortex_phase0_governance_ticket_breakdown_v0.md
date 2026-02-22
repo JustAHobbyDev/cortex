@@ -19,7 +19,7 @@ Provide an executable Phase 0 ticket set derived from:
 ## Execution Order
 
 1. `PH0-001` through `PH0-004` (authority + contracts)
-2. `PH0-005`, `PH0-006`, and `PH0-010` (enforcement + controls + boundary)
+2. `PH0-005`, `PH0-006`, `PH0-010`, and `PH0-011` (enforcement + controls + boundary + swarm GDD baseline)
 3. `PH0-007` and `PH0-008` (capacity governance + verification)
 4. `PH0-009` (closeout package)
 
@@ -79,7 +79,8 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-010 | Project-State Boundary Root Config + Enforcement | done | Governance Enforcement Lead | Maintainer Council | Week 1 | 2026-02-22 | PH0-001 | contracts/project_state_boundary_contract_v0.json;policies/project_state_boundary_policy_v0.md;specs/project_state_boundary_spec_v0.md;scripts/project_state_boundary_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/reports/project_state_boundary_migration_v0.md;.cortex/artifacts/decisions/decision_enforce_project_state_boundary_under_cortex_v1.md | implemented configurable `project_state_root` (default .cortex/) and fail-closed gate; migrated legacy top-level project-state reports under .cortex/reports/ |
 | PH0-006 | Kill-Switch and Rollback Governance Controls | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
 | PH0-007 | Capacity Governance Cadence (Codex Plus) | todo | Delivery Operations Lead | Runtime Reliability Lead | Week 2 | 2026-03-06 | PH0-001 | tbd | |
-| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010 | tbd | |
+| PH0-011 | Swarm Governance Driven Development Baseline | todo | Governance Enforcement Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-001,PH0-005,PH0-006,PH0-010 | playbooks/cortex_vision_master_roadmap_v1.md;playbooks/cortex_phase0_governance_ticket_breakdown_v0.md;scripts/quality_gate_ci_v0.sh;scripts/reflection_enforcement_gate_v0.py | formalize Swarm-GDD gates and exit criteria before broader swarm adoption |
+| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011 | tbd | |
 | PH0-009 | Maintainer Closeout and Handoff Package | todo | Program Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-008 | tbd | |
 
 ## Weekly Checkpoint Template (Fillable)
@@ -246,6 +247,29 @@ Acceptance criteria:
 Evidence:
 - Capacity cadence section linked from session plan.
 
+### PH0-011: Swarm Governance Driven Development Baseline
+
+Objective:
+- Define and enforce the minimum governance contract required for multi-agent swarm execution.
+
+Primary artifacts:
+- `playbooks/cortex_vision_master_roadmap_v1.md`
+- `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md`
+- `scripts/quality_gate_ci_v0.sh`
+- `scripts/reflection_enforcement_gate_v0.py`
+
+Acceptance criteria:
+- Swarm governance rules are normative and explicit:
+  - governance-impact closures require decision + reflection linkage
+  - swarm outputs are non-authoritative until promoted
+  - kill-switch degradation path is explicit
+- Swarm gate bundle is explicitly listed and mapped to local + CI execution.
+- Swarm adoption stop-rule is explicit: no default-on/broader swarm rollout before Swarm-GDD exit criteria are met.
+- At least one verification note captures the intended end-to-end gate sequence for swarm-governed closeout.
+
+Evidence:
+- Roadmap and Phase 0 ticket board diffs with Swarm-GDD section and gate mapping.
+
 ### PH0-008: Phase 0 Conformance Verification Pack
 
 Objective:
@@ -298,6 +322,6 @@ If weekly usage pressure exceeds threshold before Thursday:
 
 Phase 0 is complete when:
 
-1. `PH0-001` through `PH0-009` are marked complete with evidence links.
+1. `PH0-001` through `PH0-011` are marked complete with evidence links.
 2. Gate A conditions from .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md are met.
 3. Maintainers confirm Phase 1 can start without unresolved governance authority questions.

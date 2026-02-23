@@ -361,8 +361,33 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_007_capacity_governance_cadence_v0.json",
       "status": "promoted",
       "title": "Formalize Codex Plus capacity governance cadence for weekly execution"
+    },
+    {
+      "captured_at": "2026-02-23T05:18:31Z",
+      "decision": "Define PH0-011 Swarm-GDD baseline with normative swarm governance rules, explicit local/CI gate mapping, adoption stop-rule, and a verified end-to-end closeout sequence artifact.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_formalize_swarm_gdd_baseline_gates_and_adoption_stop_rule_v1.md",
+      "decision_id": "dec_20260223T051831Z_formalize_swarm_gdd_base",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "runtime"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_011_swarm_gdd_baseline_closeout_v0.md",
+        ".cortex/reports/project_state/ph0_011_swarm_gdd_gate_sequence_verification_note_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+        "scripts/quality_gate_ci_v0.sh",
+        "scripts/reflection_enforcement_gate_v0.py"
+      ],
+      "promoted_at": "2026-02-23T05:18:33Z",
+      "rationale": "This makes swarm adoption fail-closed, preserves governance-plane authority, and prevents premature default-on swarm rollout.",
+      "reflection_id": "ref_20260223T051824Z_formalize_swarm_gdd_base",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_011_swarm_gdd_baseline_v0.json",
+      "status": "promoted",
+      "title": "Formalize Swarm-GDD baseline gates and adoption stop-rule"
     }
   ],
-  "updated_at": "2026-02-23T05:02:59Z",
+  "updated_at": "2026-02-23T05:18:33Z",
   "version": "v0"
 }

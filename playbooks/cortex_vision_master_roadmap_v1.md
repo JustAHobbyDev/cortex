@@ -68,6 +68,18 @@ At release boundary and governance-impact merge boundaries, all checks below MUS
 4. `scripts/project_state_boundary_gate_v0.py --project-dir . --format json`
 5. `scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
 
+### Swarm Gate Execution Mapping (PH0-011)
+
+| Required Swarm Gate | Local execution path | CI/release execution path | Mapping note |
+|---|---|---|---|
+| `decision-gap-check` | `scripts/quality_gate_v0.sh` (step 4 of 9) | `scripts/quality_gate_ci_v0.sh` (step 3 of 8) | direct command execution in both gates |
+| `reflection-completeness-check` | `scripts/quality_gate_v0.sh` (step 5 of 9) via `scripts/reflection_enforcement_gate_v0.py` | `scripts/quality_gate_ci_v0.sh` (step 4 of 8) via `scripts/reflection_enforcement_gate_v0.py` | enforced through reflection gate wrapper (which runs completeness checks and linkage thresholds) |
+| `audit --audit-scope all` | pre-merge/release flow in `playbooks/session_governance_hybrid_plan_v0.md` | pre-merge/release flow in `playbooks/session_governance_hybrid_plan_v0.md` | required boundary check before running quality gate |
+| `project_state_boundary_gate_v0.py` | `scripts/quality_gate_v0.sh` (step 6 of 9) | `scripts/quality_gate_ci_v0.sh` (step 5 of 8) | direct fail-closed path boundary enforcement |
+| `reflection_enforcement_gate_v0.py` | `scripts/quality_gate_v0.sh` (step 5 of 9) | `scripts/quality_gate_ci_v0.sh` (step 4 of 8) | direct fail-closed enforcement of decision/reflection linkage |
+
+This mapping is the normative Swarm-GDD local/CI execution contract for Phase 0 baseline.
+
 ### Swarm-GDD Exit Criteria
 
 Swarm governance readiness is achieved only when:
@@ -189,6 +201,7 @@ Exit Criteria:
 - CI mandatory governance runtime increase exceeds threshold for two consecutive cycles.
 - Any adapter incident causes governance gate false pass/fail behavior.
 - Reflection/decision coverage trend drops below threshold.
+- Swarm rollout beyond `experimental` is blocked until Swarm-GDD Exit Criteria and at least one verified end-to-end gate-sequence note are present.
 
 ### Recovery
 

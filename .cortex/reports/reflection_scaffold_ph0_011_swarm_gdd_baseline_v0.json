@@ -1,0 +1,51 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_011_swarm_gdd_baseline_closeout_v0.md",
+    ".cortex/reports/project_state/ph0_011_swarm_gdd_gate_sequence_verification_note_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/reflection_enforcement_gate_v0.py"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Swarm governance requirements were partially documented but local/CI execution mapping and end-to-end verification sequence were not explicit enough for fail-closed adoption control.",
+  "pattern": "Without explicit gate mapping and sequence evidence, swarm adoption can outpace governance controls and create ambiguity around closure authority.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Formalize Swarm-GDD baseline gates and adoption stop-rule\" --decision \"Mistake observed: Swarm governance requirements were partially documented but local/CI execution mapping and end-to-end verification sequence were not explicit enough for fail-closed adoption control. Recurring pattern: Without explicit gate mapping and sequence evidence, swarm adoption can outpace governance controls and create ambiguity around closure authority. Adopt reusable rule: Require explicit Swarm-GDD rule set, local/CI gate mapping, adoption stop-rule, and at least one verification-sequence note before any broader swarm rollout.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260223T051824Z_formalize_swarm_gdd_base --reflection-report .cortex/reports/reflection_scaffold_ph0_011_swarm_gdd_baseline_v0.json --linked-artifacts .cortex/reports/project_state/ph0_011_swarm_gdd_baseline_closeout_v0.md,.cortex/reports/project_state/ph0_011_swarm_gdd_gate_sequence_verification_note_v0.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/cortex_vision_master_roadmap_v1.md,scripts/quality_gate_ci_v0.sh,scripts/reflection_enforcement_gate_v0.py",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T051824Z_formalize_swarm_gdd_base",
+  "report_file": ".cortex/reports/reflection_scaffold_ph0_011_swarm_gdd_baseline_v0.json",
+  "rule": "Require explicit Swarm-GDD rule set, local/CI gate mapping, adoption stop-rule, and at least one verification-sequence note before any broader swarm rollout.",
+  "run_at": "2026-02-23T05:18:24Z",
+  "suggested_decision": "Mistake observed: Swarm governance requirements were partially documented but local/CI execution mapping and end-to-end verification sequence were not explicit enough for fail-closed adoption control. Recurring pattern: Without explicit gate mapping and sequence evidence, swarm adoption can outpace governance controls and create ambiguity around closure authority. Adopt reusable rule: Require explicit Swarm-GDD rule set, local/CI gate mapping, adoption stop-rule, and at least one verification-sequence note before any broader swarm rollout.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_formalize_swarm_gdd_baseline_gates_and_adoption_stop_rule_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_011_swarm_gdd_baseline_closeout_v0.md",
+    ".cortex/reports/project_state/ph0_011_swarm_gdd_gate_sequence_verification_note_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/reflection_enforcement_gate_v0.py"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Formalize Swarm-GDD baseline gates and adoption stop-rule",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

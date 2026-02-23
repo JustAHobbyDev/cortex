@@ -19,6 +19,38 @@ Output format contract:
   - `python3 scripts/cortex_project_coach_v0.py <command> ... --format json`
 - Native standalone JSON support exists for a subset of commands (`audit-needed`, `context-policy`, decision/reflection commands, `contract-check`).
 
+## Phase 1 Tactical Memory Commands (Design Baseline)
+
+The following command family is a Phase 1 design contract baseline and is not fully implemented yet:
+
+| Command | Intended Role | Status |
+|---|---|---|
+| `memory-record` | capture tactical memory records | design baseline |
+| `memory-search` | retrieve ranked tactical records | design baseline |
+| `memory-prime` | produce bounded priming bundles | design baseline |
+| `memory-diff` | compare tactical record sets/snapshots | design baseline |
+| `memory-prune` | remove stale/non-compliant tactical records | design baseline |
+| `memory-promote` | bridge tactical evidence to canonical promotion flow | design baseline |
+
+Shared command-family expectations:
+- `--project-dir` is required.
+- `--format text|json` must be supported for non-interactive usage.
+- Omitting `--format` defaults to text output for backward compatibility.
+- Mutation-class commands (`memory-record`, `memory-prune`, `memory-promote`) must expose lock controls:
+  - `--lock-timeout-seconds`
+  - `--lock-stale-seconds`
+  - `--force-unlock`
+
+Baseline exit code contract:
+- `0`: success
+- `2`: invalid arguments/contract shape violation
+- `3`: policy violation
+- `4`: lock/state conflict
+- `5`: internal runtime failure
+
+Canonical source:
+- `contracts/tactical_memory_command_family_contract_v0.md`
+
 ## `init`
 
 Bootstrap `.cortex/` artifacts in a target project.

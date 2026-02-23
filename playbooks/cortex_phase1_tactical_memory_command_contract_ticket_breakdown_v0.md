@@ -13,6 +13,7 @@ Open a contract-first Phase 1 ticket set so tactical memory features can be impl
 
 - `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
 - `playbooks/cortex_vision_master_roadmap_v1.md`
+- `playbooks/cortex_phase1_measurement_plan_v0.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
 - `policies/cortex_coach_final_ownership_boundary_v0.md`
@@ -42,7 +43,7 @@ Status vocabulary:
 
 | Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| PH1-001 | Tactical Memory Command Family Contract Baseline | todo | Contract/Schema Lead | Governance Policy Lead | Week 2 | 2026-03-03 | PH0 complete | `tbd` | Defines shared CLI contract, error model, and output schemas. |
+| PH1-001 | Tactical Memory Command Family Contract Baseline | done | Contract/Schema Lead | Governance Policy Lead | Week 2 | 2026-03-03 | PH0 complete | `contracts/tactical_memory_command_family_contract_v0.md`;`specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md` | Shared CLI contract, error model, and output schemas baselined in canonical contract + spec/docs references. |
 | PH1-002 | `memory-record` Contract + Record Schema | todo | Contract/Schema Lead | Security & Data Policy Lead | Week 2 | 2026-03-05 | PH1-001 | `tbd` | Capture contract includes redaction/sanitization and provenance requirements. |
 | PH1-003 | `memory-search` Contract + Ranking Determinism | todo | Runtime Reliability Lead | Contract/Schema Lead | Week 2 | 2026-03-07 | PH1-001 | `tbd` | Retrieval semantics, deterministic tie-breakers, and confidence fields. |
 | PH1-004 | `memory-prime` Contract + Budget Enforcement | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 3 | 2026-03-10 | PH1-003 | `tbd` | Priming contract defines token/size budgets and truncation behavior. |
@@ -70,7 +71,9 @@ Acceptance criteria:
 - Exit code semantics are documented for deterministic automation.
 
 Evidence:
-- Contract matrix section committed and linked from spec/docs.
+- `contracts/tactical_memory_command_family_contract_v0.md`
+- `specs/cortex_project_coach_spec_v0.md`
+- `docs/cortex-coach/commands.md`
 
 ### PH1-002: `memory-record` Contract + Record Schema
 

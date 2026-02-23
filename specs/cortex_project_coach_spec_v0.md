@@ -11,6 +11,7 @@ Inputs:
 - `contracts/context_hydration_receipt_schema_v0.json` context hydration receipt contract schema
 - `contracts/mistake_candidate_schema_v0.json` mistake candidate provenance contract schema
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
+- `contracts/tactical_memory_command_family_contract_v0.md` tactical memory command family baseline contract
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -118,6 +119,32 @@ Validation requirements:
 - Omitted `--format` must preserve historical text behavior.
 - JSON mode must emit parseable command payloads for automation.
 - Integration shim support is allowed only for output normalization and must not alter governance logic.
+
+### Tactical Memory Command Family Baseline (Phase 1)
+
+Canonical baseline contract:
+- `contracts/tactical_memory_command_family_contract_v0.md`
+
+Required command set:
+- `memory-record`
+- `memory-search`
+- `memory-prime`
+- `memory-diff`
+- `memory-prune`
+- `memory-promote`
+
+Shared contract expectations:
+- `--project-dir` required for all commands.
+- `--format text|json` required for non-interactive automation compatibility.
+- Mutation commands must expose lock controls (`--lock-timeout-seconds`, `--lock-stale-seconds`, `--force-unlock`).
+- Identical inputs and repo state must produce deterministic normalized outputs (excluding timestamp fields).
+
+Baseline exit code semantics for command-family automation:
+- `0`: success
+- `2`: invalid arguments/contract shape violation
+- `3`: policy violation
+- `4`: lock/state conflict
+- `5`: internal runtime failure
 
 ### Context Hydration Enforcement
 

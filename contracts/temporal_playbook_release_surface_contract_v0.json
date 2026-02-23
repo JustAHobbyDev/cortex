@@ -62,6 +62,22 @@
       "reason": "Phase-scoped role mapping artifact under solo-maintainer exception.",
       "release_action": "exclude_from_release",
       "status": "active"
+    },
+    {
+      "expires_on": "2026-05-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase1_measurement_plan_v0.md",
+      "reason": "Phase 1-scoped measurement baseline for tactical memory implementation and Gate B readiness.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-05-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md",
+      "reason": "Phase 1-scoped command contract execution board used during tactical memory design/implementation.",
+      "release_action": "exclude_from_release",
+      "status": "active"
     }
   ],
   "version": "v0"

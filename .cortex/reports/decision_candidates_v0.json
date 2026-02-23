@@ -455,8 +455,33 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_009_handoff_entry_checklist_v0.json",
       "status": "promoted",
       "title": "Require mandatory Phase 1 entry checklist in Phase 0 handoff"
+    },
+    {
+      "captured_at": "2026-02-23T07:58:56Z",
+      "decision": "Mistake observed: Phase 1 implementation could start without a shared command-family contract baseline, causing inconsistent command semantics and weak automation guarantees. Recurring pattern: Feature design starts before a common CLI/output/exit-code contract exists, leading to drift across commands and reviews. Adopt reusable rule: Before implementing a new command family, publish a shared contract baseline and measurement gate criteria, then link them to execution tickets.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_establish_phase_1_tactical_memory_command_family_baseline_and_measurement_gate_v1.md",
+      "decision_id": "dec_20260223T075856Z_establish_phase_1_tactic",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "specs",
+        "docs"
+      ],
+      "linked_artifacts": [
+        "contracts/tactical_memory_command_family_contract_v0.md",
+        "docs/cortex-coach/commands.md",
+        "playbooks/cortex_phase1_measurement_plan_v0.md",
+        "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md",
+        "specs/cortex_project_coach_spec_v0.md"
+      ],
+      "promoted_at": "2026-02-23T07:59:02Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260223T075849Z_establish_phase_1_tactic",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph1_001_tactical_memory_command_family_baseline_v0.json",
+      "status": "promoted",
+      "title": "Establish Phase 1 tactical memory command-family baseline and measurement gate"
     }
   ],
-  "updated_at": "2026-02-23T07:20:17Z",
+  "updated_at": "2026-02-23T07:59:02Z",
   "version": "v0"
 }

@@ -1,0 +1,53 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/commands.md",
+    "playbooks/cortex_phase1_measurement_plan_v0.md",
+    "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase1_measurement_plan_v0.md",
+    "contracts/tactical_memory_command_family_contract_v0.md",
+    "specs/cortex_project_coach_spec_v0.md",
+    "docs/cortex-coach/commands.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow",
+    "specs",
+    "docs"
+  ],
+  "mistake": "Phase 1 implementation could start without a shared command-family contract baseline, causing inconsistent command semantics and weak automation guarantees.",
+  "pattern": "Feature design starts before a common CLI/output/exit-code contract exists, leading to drift across commands and reviews.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Establish Phase 1 tactical memory command-family baseline and measurement gate\" --decision \"Mistake observed: Phase 1 implementation could start without a shared command-family contract baseline, causing inconsistent command semantics and weak automation guarantees. Recurring pattern: Feature design starts before a common CLI/output/exit-code contract exists, leading to drift across commands and reviews. Adopt reusable rule: Before implementing a new command family, publish a shared contract baseline and measurement gate criteria, then link them to execution tickets.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow,specs,docs --reflection-id ref_20260223T075849Z_establish_phase_1_tactic --reflection-report .cortex/reports/reflection_scaffold_ph1_001_tactical_memory_command_family_baseline_v0.json --linked-artifacts contracts/tactical_memory_command_family_contract_v0.md,docs/cortex-coach/commands.md,playbooks/cortex_phase1_measurement_plan_v0.md,playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md,specs/cortex_project_coach_spec_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T075849Z_establish_phase_1_tactic",
+  "report_file": ".cortex/reports/reflection_scaffold_ph1_001_tactical_memory_command_family_baseline_v0.json",
+  "rule": "Before implementing a new command family, publish a shared contract baseline and measurement gate criteria, then link them to execution tickets.",
+  "run_at": "2026-02-23T07:58:49Z",
+  "suggested_decision": "Mistake observed: Phase 1 implementation could start without a shared command-family contract baseline, causing inconsistent command semantics and weak automation guarantees. Recurring pattern: Feature design starts before a common CLI/output/exit-code contract exists, leading to drift across commands and reviews. Adopt reusable rule: Before implementing a new command family, publish a shared contract baseline and measurement gate criteria, then link them to execution tickets.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_establish_phase_1_tactical_memory_command_family_baseline_and_measurement_gate_v1.md",
+  "suggested_linked_artifacts": [
+    "contracts/tactical_memory_command_family_contract_v0.md",
+    "docs/cortex-coach/commands.md",
+    "playbooks/cortex_phase1_measurement_plan_v0.md",
+    "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md",
+    "specs/cortex_project_coach_spec_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Establish Phase 1 tactical memory command-family baseline and measurement gate",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

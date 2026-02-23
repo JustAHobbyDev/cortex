@@ -45,7 +45,7 @@ Status vocabulary:
 |---|---|---|---|---|---|---|---|---|---|
 | PH1-001 | Tactical Memory Command Family Contract Baseline | done | Contract/Schema Lead | Governance Policy Lead | Week 2 | 2026-03-03 | PH0 complete | `contracts/tactical_memory_command_family_contract_v0.md`;`specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md` | Shared CLI contract, error model, and output schemas baselined in canonical contract + spec/docs references. |
 | PH1-002 | `memory-record` Contract + Record Schema | done | Contract/Schema Lead | Security & Data Policy Lead | Week 2 | 2026-03-05 | PH1-001 | `contracts/tactical_memory_record_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`policies/tactical_data_policy_v0.md` | Capture contract baseline includes required fields, sanitization/redaction semantics, deterministic unknown-field rejection, and write-lock expectations. |
-| PH1-003 | `memory-search` Contract + Ranking Determinism | todo | Runtime Reliability Lead | Contract/Schema Lead | Week 2 | 2026-03-07 | PH1-001 | `tbd` | Retrieval semantics, deterministic tie-breakers, and confidence fields. |
+| PH1-003 | `memory-search` Contract + Ranking Determinism | done | Runtime Reliability Lead | Contract/Schema Lead | Week 2 | 2026-03-07 | PH1-001 | `contracts/tactical_memory_search_result_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md` | Retrieval query/filter semantics, deterministic tie-breakers, provenance/confidence fields, and machine-readable no-match payload are defined. |
 | PH1-004 | `memory-prime` Contract + Budget Enforcement | todo | Runtime Reliability Lead | Governance Enforcement Lead | Week 3 | 2026-03-10 | PH1-003 | `tbd` | Priming contract defines token/size budgets and truncation behavior. |
 | PH1-005 | `memory-diff` + `memory-prune` Mutation Safety Contract | todo | Governance Enforcement Lead | Security & Data Policy Lead | Week 3 | 2026-03-12 | PH1-001,PH1-002 | `tbd` | Diff/prune rules must preserve provenance and policy compliance. |
 | PH1-006 | `memory-promote` Governance Bridge Contract | todo | Governance Enforcement Lead | Governance Policy Lead | Week 3 | 2026-03-14 | PH1-001,PH1-002,PH1-005 | `tbd` | Maps tactical clusters to decision/reflection/promotion contract fields. |
@@ -112,7 +112,8 @@ Acceptance criteria:
 - Empty/no-match behavior is deterministic and machine-readable.
 
 Evidence:
-- Search contract section and result schema committed.
+- `contracts/tactical_memory_search_result_schema_v0.json`
+- `specs/cortex_project_coach_spec_v0.md`
 
 ### PH1-004: `memory-prime` Contract + Budget Enforcement
 

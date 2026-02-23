@@ -13,6 +13,7 @@ Inputs:
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
 - `contracts/tactical_memory_command_family_contract_v0.md` tactical memory command family baseline contract
 - `contracts/tactical_memory_record_schema_v0.json` tactical memory record payload contract schema
+- `contracts/tactical_memory_search_result_schema_v0.json` tactical memory search result contract schema
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -149,6 +150,28 @@ Baseline exit code semantics for command-family automation:
 - `3`: policy violation
 - `4`: lock/state conflict
 - `5`: internal runtime failure
+
+### `memory-search` Contract Baseline (PH1-003)
+
+Canonical schema source:
+- `contracts/tactical_memory_search_result_schema_v0.json`
+
+Query input and filter semantics:
+- Query payload includes explicit raw and normalized query fields.
+- Filter payload must be machine-readable and deterministic (`content_classes_any`, `tags_any`, `tags_all`, optional capture-time bounds).
+- Empty/invalid query/filter combinations are represented in deterministic output payloads.
+
+Ranking and ordering determinism:
+- Result ranking must expose numeric `score` and bounded `confidence` fields per hit.
+- Deterministic tie-break order is fixed to:
+  - `score_desc`
+  - `captured_at_desc`
+  - `record_id_asc`
+- Search results must include provenance metadata (`source_kind`, `source_ref`, `source_refs`) for each returned record.
+
+No-match semantics:
+- No-match output must be machine-readable with `result_count=0`, empty `results`, and explicit `no_match` reason.
+- No-match output must preserve stable payload shape for automation parity.
 
 ### Context Hydration Enforcement
 

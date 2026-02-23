@@ -52,6 +52,24 @@ Scope: cross-repo operating boundary
 - Kill-switch semantics are defined in `cortex` policy.
 - Operational kill-switch execution is implemented and operated by `cortex-coach`.
 
+## Stop-Rule and Rollback Ownership Matrix (PH0-006)
+
+1. Stop-rule definition ownership
+- `cortex` policy/playbook artifacts define rollout pause triggers and recovery criteria.
+- Source of normative trigger set: `playbooks/cortex_vision_master_roadmap_v1.md` (`Release Gates and Stop-Rules`).
+
+2. Operational trigger evaluation and kill-switch execution
+- `cortex-coach` runtime/operators evaluate live stop-rule telemetry and initiate tactical/adapter disable actions.
+- Emergency runtime execution authority sits with `cortex-coach` maintainers; policy authority remains with `cortex` maintainers.
+
+3. Stabilization-cycle procedure ownership
+- Procedure contract source: `playbooks/session_governance_hybrid_plan_v0.md` (`Kill-Switch and Rollback`).
+- Stabilization cycle must run governance checks before any tactical capability re-enable decision.
+
+4. Recovery approval boundary
+- Recovery from kill-switch state requires incident review plus threshold recovery evidence.
+- Approval of post-incident governance changes remains with `cortex` maintainers and must be decision/reflection linked.
+
 ## Override and Escalation Ownership
 
 - Policy and contract override approval: `cortex` maintainers (`Maintainer Council` during Phase 0 execution).

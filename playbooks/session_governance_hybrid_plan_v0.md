@@ -107,9 +107,23 @@ Operational mapping:
 
 When stop-rules trigger:
 
-1. Disable tactical features and/or adapters via runtime kill switch.
-2. Run stabilization cycle (audit, checks, tests; no new tactical capability activation).
-3. Resume normal flow only after incident review and threshold recovery.
+1. Confirm trigger against normative stop-rule set in `playbooks/cortex_vision_master_roadmap_v1.md`.
+2. Disable tactical features and/or adapters via runtime kill switch.
+3. Run stabilization cycle (audit, checks, tests; no new tactical capability activation).
+4. Resume normal flow only after incident review and threshold recovery.
+
+Ownership split:
+
+- Policy authority: `cortex` maintainers define stop-rules and recovery criteria in policy/playbooks.
+- Runtime execution: `cortex-coach` maintainers/operators execute kill-switch actions and stabilization runs.
+- Boundary source: `policies/cortex_coach_final_ownership_boundary_v0.md`.
+
+Stabilization cycle checklist:
+
+1. `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all --format json`
+2. `python3 scripts/cortex_project_coach_v0.py decision-gap-check --project-dir . --format json`
+3. `python3 scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
+4. `./scripts/quality_gate_ci_v0.sh`
 
 ## Capacity Governance Cadence
 

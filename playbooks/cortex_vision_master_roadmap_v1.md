@@ -169,6 +169,13 @@ Exit Criteria:
 
 ## Release Gates and Stop-Rules
 
+### PH0-006 Ownership Split
+
+- `cortex` owns stop-rule definitions, rollback policy semantics, and recovery approval criteria.
+- `cortex-coach` owns runtime kill-switch operation and stabilization-cycle execution.
+- Canonical ownership boundary source: `policies/cortex_coach_final_ownership_boundary_v0.md`.
+- Operational procedure source: `playbooks/session_governance_hybrid_plan_v0.md`.
+
 ### Required Gates
 
 - Decision-gap and reflection completeness checks pass at release boundary.

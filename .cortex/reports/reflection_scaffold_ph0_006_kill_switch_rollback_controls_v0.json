@@ -1,0 +1,51 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/session_governance_hybrid_plan_v0.md",
+    "policies/cortex_coach_final_ownership_boundary_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_006_kill_switch_rollback_controls_closeout_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "policies/cortex_coach_final_ownership_boundary_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/session_governance_hybrid_plan_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Emergency stop-rule handling and ownership split were implied across artifacts rather than explicitly codified as a cross-referenced contract.",
+  "pattern": "When stop-rules and rollback ownership are implicit, operators can execute kill-switch actions inconsistently or without clear recovery authority boundaries.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Define kill-switch ownership split and stabilization rollback procedure\" --decision \"Mistake observed: Emergency stop-rule handling and ownership split were implied across artifacts rather than explicitly codified as a cross-referenced contract. Recurring pattern: When stop-rules and rollback ownership are implicit, operators can execute kill-switch actions inconsistently or without clear recovery authority boundaries. Adopt reusable rule: Codify stop-rule ownership, runtime execution authority, and stabilization-cycle checklist in policy + roadmap + session plan before Phase 0 closeout.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260223T045724Z_define_kill_switch_owner --reflection-report .cortex/reports/reflection_scaffold_ph0_006_kill_switch_rollback_controls_v0.json --linked-artifacts .cortex/reports/project_state/ph0_006_kill_switch_rollback_controls_closeout_v0.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/cortex_vision_master_roadmap_v1.md,playbooks/session_governance_hybrid_plan_v0.md,policies/cortex_coach_final_ownership_boundary_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T045724Z_define_kill_switch_owner",
+  "report_file": ".cortex/reports/reflection_scaffold_ph0_006_kill_switch_rollback_controls_v0.json",
+  "rule": "Codify stop-rule ownership, runtime execution authority, and stabilization-cycle checklist in policy + roadmap + session plan before Phase 0 closeout.",
+  "run_at": "2026-02-23T04:57:24Z",
+  "suggested_decision": "Mistake observed: Emergency stop-rule handling and ownership split were implied across artifacts rather than explicitly codified as a cross-referenced contract. Recurring pattern: When stop-rules and rollback ownership are implicit, operators can execute kill-switch actions inconsistently or without clear recovery authority boundaries. Adopt reusable rule: Codify stop-rule ownership, runtime execution authority, and stabilization-cycle checklist in policy + roadmap + session plan before Phase 0 closeout.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_define_kill_switch_ownership_split_and_stabilization_rollback_procedure_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_006_kill_switch_rollback_controls_closeout_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/session_governance_hybrid_plan_v0.md",
+    "policies/cortex_coach_final_ownership_boundary_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Define kill-switch ownership split and stabilization rollback procedure",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

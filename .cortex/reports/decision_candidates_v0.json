@@ -314,8 +314,32 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260222T144843Z_enforce_temporal_playboo_v0.json",
       "status": "promoted",
       "title": "Enforce temporal playbook retirement and release-surface gating"
+    },
+    {
+      "captured_at": "2026-02-23T04:57:29Z",
+      "decision": "Define PH0-006 governance controls so stop-rule ownership remains in cortex policy while kill-switch execution remains in cortex-coach operations, with explicit stabilization-cycle requirements.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_define_kill_switch_ownership_split_and_stabilization_rollback_procedure_v1.md",
+      "decision_id": "dec_20260223T045729Z_define_kill_switch_owner",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "runtime"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_006_kill_switch_rollback_controls_closeout_v0.md",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md",
+        "playbooks/session_governance_hybrid_plan_v0.md",
+        "policies/cortex_coach_final_ownership_boundary_v0.md"
+      ],
+      "promoted_at": "2026-02-23T04:57:38Z",
+      "rationale": "Explicit ownership and recovery flow reduce emergency-response ambiguity and prevent governance bypass during incident handling.",
+      "reflection_id": "ref_20260223T045724Z_define_kill_switch_owner",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_006_kill_switch_rollback_controls_v0.json",
+      "status": "promoted",
+      "title": "Define kill-switch ownership split and stabilization rollback procedure"
     }
   ],
-  "updated_at": "2026-02-22T14:48:53Z",
+  "updated_at": "2026-02-23T04:57:38Z",
   "version": "v0"
 }

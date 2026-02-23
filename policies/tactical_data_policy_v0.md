@@ -67,6 +67,18 @@ Canonical schema source:
 2. If prohibited content cannot be safely redacted, payload MUST be rejected with `sanitization.status=blocked` and no record persistence.
 3. Rejected/blocked events must include traceable incident metadata for review.
 
+### `memory-diff` and `memory-prune` Mutation Safety Baseline (PH1-005)
+
+Canonical schema sources:
+- `contracts/tactical_memory_diff_schema_v0.json`
+- `contracts/tactical_memory_prune_schema_v0.json`
+
+1. Diff outputs MUST use stable comparison keys and deterministic ordering.
+2. Diff and prune outputs MUST preserve provenance lineage references for every affected record.
+3. Prune eligibility MUST be policy-bound and machine-readable (TTL/age, retention class, policy-violation class).
+4. `memory-prune` MUST support deterministic dry-run behavior; dry-run MUST NOT mutate tactical records.
+5. Prune actions MUST include explicit decision (`prune` or `skip`) and reason code.
+
 ## Enforcement and Evidence
 
 Required evidence for policy conformance:

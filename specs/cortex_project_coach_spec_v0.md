@@ -15,6 +15,8 @@ Inputs:
 - `contracts/tactical_memory_record_schema_v0.json` tactical memory record payload contract schema
 - `contracts/tactical_memory_search_result_schema_v0.json` tactical memory search result contract schema
 - `contracts/tactical_memory_prime_bundle_schema_v0.json` tactical memory prime bundle contract schema
+- `contracts/tactical_memory_diff_schema_v0.json` tactical memory diff contract schema
+- `contracts/tactical_memory_prune_schema_v0.json` tactical memory prune contract schema
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -199,6 +201,25 @@ Truncation and overflow behavior:
   - dropped record ids
   - truncated record/char counts
 - Same inputs and budget parameters must produce stable truncation outcomes.
+
+### `memory-diff` and `memory-prune` Mutation Safety Baseline (PH1-005)
+
+Canonical schema sources:
+- `contracts/tactical_memory_diff_schema_v0.json`
+- `contracts/tactical_memory_prune_schema_v0.json`
+
+Diff semantics:
+- `memory-diff` uses stable comparison keys (`record_id`) and deterministic output ordering.
+- Diff output must provide machine-readable change classification (`added`, `removed`, `modified`, `unchanged`).
+- Diff entries must include provenance lineage references for traceability.
+
+Prune policy and dry-run semantics:
+- `memory-prune` eligibility must be explicit and machine-readable (age/TTL, retention class, policy-violation class).
+- `dry_run=true` must be deterministic and must not mutate records.
+- Prune outcomes must be machine-readable with deterministic action ordering and explicit reason codes.
+
+Provenance lineage retention:
+- Diff and prune outputs must preserve lineage references (`source_refs`, optional `ancestor_record_ids`) for each affected record.
 
 ### Context Hydration Enforcement
 

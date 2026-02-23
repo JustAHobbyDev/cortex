@@ -47,7 +47,7 @@ Status vocabulary:
 | PH1-002 | `memory-record` Contract + Record Schema | done | Contract/Schema Lead | Security & Data Policy Lead | Week 2 | 2026-03-05 | PH1-001 | `contracts/tactical_memory_record_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`policies/tactical_data_policy_v0.md` | Capture contract baseline includes required fields, sanitization/redaction semantics, deterministic unknown-field rejection, and write-lock expectations. |
 | PH1-003 | `memory-search` Contract + Ranking Determinism | done | Runtime Reliability Lead | Contract/Schema Lead | Week 2 | 2026-03-07 | PH1-001 | `contracts/tactical_memory_search_result_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md` | Retrieval query/filter semantics, deterministic tie-breakers, provenance/confidence fields, and machine-readable no-match payload are defined. |
 | PH1-004 | `memory-prime` Contract + Budget Enforcement | done | Runtime Reliability Lead | Governance Enforcement Lead | Week 3 | 2026-03-10 | PH1-003 | `contracts/tactical_memory_prime_bundle_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md` | Priming input/output contract, budget controls, and deterministic truncation/overflow semantics are defined. |
-| PH1-005 | `memory-diff` + `memory-prune` Mutation Safety Contract | todo | Governance Enforcement Lead | Security & Data Policy Lead | Week 3 | 2026-03-12 | PH1-001,PH1-002 | `tbd` | Diff/prune rules must preserve provenance and policy compliance. |
+| PH1-005 | `memory-diff` + `memory-prune` Mutation Safety Contract | done | Governance Enforcement Lead | Security & Data Policy Lead | Week 3 | 2026-03-12 | PH1-001,PH1-002 | `contracts/tactical_memory_diff_schema_v0.json`;`contracts/tactical_memory_prune_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`policies/tactical_data_policy_v0.md` | Stable diff keys/output, prune eligibility+dry-run semantics, deterministic machine-readable outcomes, and lineage preservation are defined. |
 | PH1-006 | `memory-promote` Governance Bridge Contract | todo | Governance Enforcement Lead | Governance Policy Lead | Week 3 | 2026-03-14 | PH1-001,PH1-002,PH1-005 | `tbd` | Maps tactical clusters to decision/reflection/promotion contract fields. |
 | PH1-007 | Tactical Storage + Locking Determinism Contract | todo | Runtime Reliability Lead | CI/Gate Owner | Week 4 | 2026-03-17 | PH1-002,PH1-005 | `tbd` | Locking, idempotency, conflict semantics, and failure behavior. |
 | PH1-008 | Gate B Readiness Validation Pack (Design Exit) | todo | Conformance QA Lead | Maintainer Council | Week 4 | 2026-03-21 | PH1-001,PH1-002,PH1-003,PH1-004,PH1-005,PH1-006,PH1-007 | `tbd` | Contract test plan, docs plan, and implementation-ready checklist. |
@@ -152,7 +152,10 @@ Acceptance criteria:
 - Provenance lineage is retained across diff/prune operations.
 
 Evidence:
-- Diff/prune contracts and policy linkage committed.
+- `contracts/tactical_memory_diff_schema_v0.json`
+- `contracts/tactical_memory_prune_schema_v0.json`
+- `specs/cortex_project_coach_spec_v0.md`
+- `policies/tactical_data_policy_v0.md`
 
 ### PH1-006: `memory-promote` Governance Bridge Contract
 

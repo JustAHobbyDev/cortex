@@ -1,0 +1,44 @@
+{
+  "auto_linked_governance_files": [],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md",
+    ".cortex/reports/project_state/ph1_runtime_implementation_handoff_for_cortex_coach_v0.md",
+    ".cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v1.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow",
+    "reports"
+  ],
+  "mistake": "Runtime closeout evidence can be merged without explicit backlink trace to canonical decision artifacts.",
+  "pattern": "Implementation completion updates can bypass reflection mapping when executed as administrative closeout work.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Record Phase 1 runtime implementation backlinks and handoff completion\" --decision \"Mistake observed: Runtime closeout evidence can be merged without explicit backlink trace to canonical decision artifacts. Recurring pattern: Implementation completion updates can bypass reflection mapping when executed as administrative closeout work. Adopt reusable rule: Every promoted closeout decision must include a reflection scaffold mapping in the same change set.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow,reports --reflection-id ref_20260223T225051Z_record_phase_1_runtime_i --reflection-report .cortex/reports/reflection_scaffold_20260223T225051Z_record_phase_1_runtime_i_v0.json --linked-artifacts .cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v1.md,.cortex/reports/project_state/ph1_runtime_implementation_handoff_for_cortex_coach_v0.md,.cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T225051Z_record_phase_1_runtime_i",
+  "report_file": ".cortex/reports/reflection_scaffold_20260223T225051Z_record_phase_1_runtime_i_v0.json",
+  "rule": "Every promoted closeout decision must include a reflection scaffold mapping in the same change set.",
+  "run_at": "2026-02-23T22:50:51Z",
+  "suggested_decision": "Mistake observed: Runtime closeout evidence can be merged without explicit backlink trace to canonical decision artifacts. Recurring pattern: Implementation completion updates can bypass reflection mapping when executed as administrative closeout work. Adopt reusable rule: Every promoted closeout decision must include a reflection scaffold mapping in the same change set.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v2.md",
+  "suggested_linked_artifacts": [
+    ".cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v1.md",
+    ".cortex/reports/project_state/ph1_runtime_implementation_handoff_for_cortex_coach_v0.md",
+    ".cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Record Phase 1 runtime implementation backlinks and handoff completion",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

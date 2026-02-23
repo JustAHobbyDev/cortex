@@ -12,6 +12,8 @@ LinkedArtifacts:
 - `playbooks/cortex_phase1_measurement_plan_v0.md`
 - `playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
+- `.cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md`
+- `.cortex/reports/project_state/phase1_gate_b_measurement_closeout_v0.md`
 
 ## Context
 - Captured via `cortex-coach decision-capture`.
@@ -21,3 +23,17 @@ Mistake observed: Phase 1 implementation could start without a shared command-fa
 
 ## Rationale
 Promote durable, auditable learning so repeated mistakes are prevented across sessions.
+
+## Runtime Implementation Backlink (2026-02-23)
+
+Runtime implementation landed in `cortex-coach` and was back-linked to this decision:
+
+1. `0debf84` (`memory-record`)
+2. `37c0c64` (`memory-search`)
+3. `4df9280` (`memory-prime`)
+4. `b579764` (`memory-diff`)
+5. `cf3c5b5` (`memory-prune`)
+6. `1af71d0` (`memory-promote`)
+
+Supporting backlink evidence:
+- `.cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md`

@@ -1,7 +1,7 @@
 # PH1 Runtime Implementation Handoff for cortex-coach v0
 
 Version: v0  
-Status: Ready for Transfer  
+Status: Completed  
 Date: 2026-02-23  
 Scope: Runtime implementation handoff from `cortex` governance/contracts to `cortex-coach` runtime owner
 
@@ -121,8 +121,41 @@ Phase 1 design board and Gate B package are complete:
 
 ## Transfer Checklist
 
-1. Open matching implementation tickets in `cortex-coach`.
-2. Link each runtime ticket back to the canonical contract paths above.
-3. Implement command-by-command in the required order.
-4. Run per-command + full regression gates after each merge.
-5. Back-link runtime implementation PRs to `cortex` decision artifacts where contracts/policies evolve.
+1. [x] Open matching implementation tickets in `cortex-coach`.
+2. [x] Link each runtime ticket back to the canonical contract paths above.
+3. [x] Implement command-by-command in the required order.
+4. [x] Run per-command + full regression gates after each merge.
+5. [x] Back-link runtime implementation PRs to `cortex` decision artifacts where contracts/policies evolve.
+
+## Completion Evidence (2026-02-23)
+
+### Runtime Implementation Sequence (cortex-coach main)
+
+1. `0debf84` - `memory-record`
+2. `37c0c64` - `memory-search`
+3. `4df9280` - `memory-prime`
+4. `b579764` - `memory-diff`
+5. `cf3c5b5` - `memory-prune`
+6. `1af71d0` - `memory-promote`
+
+Backlink artifact:
+- `.cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md`
+
+### Measurement and Governance Evidence
+
+Measurement artifacts populated:
+- `.cortex/reports/project_state/phase1_latency_baseline_v0.json`
+- `.cortex/reports/project_state/phase1_latency_tactical_v0.json`
+- `.cortex/reports/project_state/phase1_ci_overhead_report_v0.json`
+- `.cortex/reports/project_state/phase1_prime_budget_report_v0.json`
+- `.cortex/reports/project_state/phase1_determinism_report_v0.json`
+- `.cortex/reports/project_state/phase1_locking_report_v0.json`
+- `.cortex/reports/project_state/phase1_governance_regression_report_v0.md`
+- `.cortex/reports/project_state/phase1_gate_b_measurement_closeout_v0.md`
+
+Governance gate rerun evidence:
+- `decision-gap-check`: pass (`run_at=2026-02-23T22:44:18Z`)
+- `reflection_enforcement_gate_v0.py`: pass (`run_at=2026-02-23T22:44:28Z`)
+- `audit --audit-scope all`: pass (`run_at=2026-02-23T22:44:35Z`, `artifact_conformance=warn`)
+- `cortex` quality gate CI: `PASS` (`41 passed in 52.49s`)
+- `cortex-coach` quality gate CI: `PASS` (`60 passed in 95.51s`)

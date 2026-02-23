@@ -504,8 +504,31 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph1_002_memory_record_policy_linkage_v0.json",
       "status": "promoted",
       "title": "Require schema-bound memory-record policy invariants before Phase 1 implementation"
+    },
+    {
+      "captured_at": "2026-02-23T22:49:50Z",
+      "decision": "Back-link cortex-coach Phase 1 runtime commits into cortex governance artifacts and mark runtime handoff completed with explicit gate evidence.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v1.md",
+      "decision_id": "dec_20260223T224950Z_record_phase_1_runtime_i",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "reports"
+      ],
+      "linked_artifacts": [
+        ".cortex/artifacts/decisions/decision_establish_phase_1_tactical_memory_command_family_baseline_and_measurement_gate_v1.md",
+        ".cortex/artifacts/decisions/decision_record_phase_1_runtime_implementation_backlinks_and_handoff_completion_v1.md",
+        ".cortex/reports/project_state/ph1_runtime_implementation_handoff_for_cortex_coach_v0.md",
+        ".cortex/reports/project_state/phase1_runtime_backlink_evidence_v0.md"
+      ],
+      "promoted_at": "2026-02-23T22:50:03Z",
+      "rationale": "Preserves auditable traceability from contract decisions to runtime delivery and closeout evidence.",
+      "reflection_id": "ref_20260223T225051Z_record_phase_1_runtime_i",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260223T225051Z_record_phase_1_runtime_i_v0.json",
+      "status": "promoted",
+      "title": "Record Phase 1 runtime implementation backlinks and handoff completion"
     }
   ],
-  "updated_at": "2026-02-23T08:06:28Z",
+  "updated_at": "2026-02-23T22:51:30Z",
   "version": "v0"
 }

@@ -1,0 +1,53 @@
+{
+  "artifact": "phase1_determinism_report_v0",
+  "commands": [
+    {
+      "command": "memory-record",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "bc6de56797ce18a7578eacd1f43a7b71a881fcb9d9cb2137ee58e5c55721d4c2",
+      "unique_hash_count": 1
+    },
+    {
+      "command": "memory-search",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "e9cc3dd762c81dfcd4684cb80b110d10775ab20ccf681d33c615b8af158f2a94",
+      "unique_hash_count": 1
+    },
+    {
+      "command": "memory-prime",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "8eafaca4e63fe6f5ec65be73bb2fc2750e115cc67c26feb03e78c4f5535f3cfd",
+      "unique_hash_count": 1
+    },
+    {
+      "command": "memory-diff",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "22e25fd07fd6161b1c821c73c6f226f34f43a61fa9f64553a01f351f95bdf67f",
+      "unique_hash_count": 1
+    },
+    {
+      "command": "memory-prune",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "d10eb396b2e3996808e996a22401510e7c491be700d0e11b3c803256e9241733",
+      "unique_hash_count": 1
+    },
+    {
+      "command": "memory-promote",
+      "deterministic": true,
+      "runs": 20,
+      "sample_hash": "f68090d17de3b87a23ed0fb13399062723caa903948fe243157722377186e526",
+      "unique_hash_count": 1
+    }
+  ],
+  "deterministic_all": true,
+  "profile": "medium",
+  "run_at": "2026-02-23T22:31:39Z",
+  "runs_per_command": 20,
+  "target_met": true,
+  "version": "v0"
+}

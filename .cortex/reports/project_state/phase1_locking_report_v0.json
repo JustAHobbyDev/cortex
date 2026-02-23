@@ -1,0 +1,227 @@
+{
+  "artifact": "phase1_locking_report_v0",
+  "concurrent_stress": [
+    {
+      "allowed_exit_codes": [
+        0,
+        4
+      ],
+      "codes_per_round_sorted": [
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4
+        ]
+      ],
+      "command": "memory-record",
+      "rounds": 10
+    },
+    {
+      "allowed_exit_codes": [
+        0,
+        4
+      ],
+      "codes_per_round_sorted": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "command": "memory-prune",
+      "rounds": 10
+    },
+    {
+      "allowed_exit_codes": [
+        0,
+        4
+      ],
+      "codes_per_round_sorted": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "command": "memory-promote",
+      "rounds": 10
+    }
+  ],
+  "forced_conflict_checks": [
+    {
+      "command": "memory-record",
+      "error_code": "lock_conflict",
+      "exit_code": 4,
+      "status": "fail"
+    },
+    {
+      "command": "memory-prune",
+      "error_code": "lock_conflict",
+      "exit_code": 4,
+      "status": "fail"
+    },
+    {
+      "command": "memory-promote",
+      "error_code": "lock_conflict",
+      "exit_code": 4,
+      "status": "fail"
+    }
+  ],
+  "profile": "medium",
+  "run_at": "2026-02-23T22:32:32Z",
+  "stale_reclaim_checks": [
+    {
+      "command": "memory-record",
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "memory-prune",
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "memory-promote",
+      "exit_code": 0,
+      "status": "pass"
+    }
+  ],
+  "target_met": true,
+  "unexpected_exit_code_count": 0,
+  "version": "v0"
+}

@@ -1,0 +1,28 @@
+{
+  "artifact": "phase1_ci_overhead_report_v0",
+  "delta_percent": 113.68971136318355,
+  "measurement_mode": "emulated_mandatory_governance_pipeline",
+  "note": "Used identical command/test sequence for pre/post comparison to avoid offline dependency sync skew in detached pre-phase worktree.",
+  "post_phase_durations_seconds": [
+    99.04591572203208,
+    99.16945040697465,
+    99.29344077501446,
+    99.21618009801023,
+    99.52394098095829
+  ],
+  "post_phase_median_seconds": 99.21618009801023,
+  "post_phase_runs": 5,
+  "pre_phase_durations_seconds": [
+    46.00811751297442,
+    46.3309141859645,
+    46.43002204695949,
+    46.47474516701186,
+    46.99598889198387
+  ],
+  "pre_phase_median_seconds": 46.43002204695949,
+  "pre_phase_runs": 5,
+  "run_at": "2026-02-23T22:32:53Z",
+  "target_max_delta_percent": 10.0,
+  "target_met": false,
+  "version": "v0"
+}

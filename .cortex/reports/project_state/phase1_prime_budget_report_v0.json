@@ -1,0 +1,164 @@
+{
+  "artifact": "phase1_prime_budget_report_v0",
+  "checks": [
+    {
+      "failures": [],
+      "ok": true,
+      "run": 1
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 2
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 3
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 4
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 5
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 6
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 7
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 8
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 9
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 10
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 11
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 12
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 13
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 14
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 15
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 16
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 17
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 18
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 19
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 20
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 21
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 22
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 23
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 24
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 25
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 26
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 27
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 28
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 29
+    },
+    {
+      "failures": [],
+      "ok": true,
+      "run": 30
+    }
+  ],
+  "command": "memory-prime",
+  "compliance_rate": 1.0,
+  "pass_runs": 30,
+  "profile": "medium",
+  "run_at": "2026-02-23T22:31:27Z",
+  "runs": 30,
+  "target_compliance_rate": 1.0,
+  "target_met": true,
+  "version": "v0"
+}

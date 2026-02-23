@@ -15,7 +15,7 @@
       },
       {
         "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'contracts/tactical_memory_prime_bundle_schema_v0.json', 'contracts/tactical_memory_diff_schema_v0.json', 'contracts/tactical_memory_prune_schema_v0.json', 'cortex/reports/project_state/'])",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'contracts/tactical_memory_diff_schema_v0.json', 'contracts/tactical_memory_prune_schema_v0.json', 'cortex/reports/project_state/', 'cortex/reports/project_state/'])",
         "path": "playbooks/cortex_phase1_tactical_memory_command_contract_ticket_breakdown_v0.md",
         "severity": "warn"
       }
@@ -74,7 +74,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-23T08:12:35Z",
+  "run_at": "2026-02-23T08:19:56Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],

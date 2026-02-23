@@ -14,6 +14,7 @@ Inputs:
 - `contracts/tactical_memory_command_family_contract_v0.md` tactical memory command family baseline contract
 - `contracts/tactical_memory_record_schema_v0.json` tactical memory record payload contract schema
 - `contracts/tactical_memory_search_result_schema_v0.json` tactical memory search result contract schema
+- `contracts/tactical_memory_prime_bundle_schema_v0.json` tactical memory prime bundle contract schema
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -172,6 +173,32 @@ Ranking and ordering determinism:
 No-match semantics:
 - No-match output must be machine-readable with `result_count=0`, empty `results`, and explicit `no_match` reason.
 - No-match output must preserve stable payload shape for automation parity.
+
+### `memory-prime` Contract Baseline (PH1-004)
+
+Canonical schema source:
+- `contracts/tactical_memory_prime_bundle_schema_v0.json`
+
+Input and output bundle semantics:
+- Priming input must include explicit task/query references and requested result limit.
+- Priming output must include a deterministic bundle with stable entry order and per-entry provenance references.
+- Bundle entries must include source references for each selected tactical record.
+
+Budget enforcement requirements:
+- Budget controls are explicit and machine-readable:
+  - `max_records`
+  - `max_chars`
+  - `per_record_max_chars`
+- Output includes deterministic `selected_count` and `selected_char_count`.
+
+Truncation and overflow behavior:
+- Truncation behavior must be explicit and auditable in output payload.
+- Truncation metadata must include:
+  - whether truncation was applied
+  - truncation reason class
+  - dropped record ids
+  - truncated record/char counts
+- Same inputs and budget parameters must produce stable truncation outcomes.
 
 ### Context Hydration Enforcement
 

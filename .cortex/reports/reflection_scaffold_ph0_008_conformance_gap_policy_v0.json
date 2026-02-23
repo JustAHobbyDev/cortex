@@ -1,0 +1,43 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_008_phase0_conformance_verification_pack_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Phase verification criteria were ambiguous about whether zero residual gaps was required, which could block forward progress on non-critical unresolved items.",
+  "pattern": "Without explicit residual-gap policy, verification either over-blocks execution or allows untracked carry-forward risk.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Adopt owned-and-time-bounded residual-gap policy for PH0 verification\" --decision \"Mistake observed: Phase verification criteria were ambiguous about whether zero residual gaps was required, which could block forward progress on non-critical unresolved items. Recurring pattern: Without explicit residual-gap policy, verification either over-blocks execution or allows untracked carry-forward risk. Adopt reusable rule: Allow only explicitly-owned/time-bounded residual gaps with required metadata, and never treat authority/safety/release-gate failures as non-blocking.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260223T070100Z_adopt_owned_and_time_bou --reflection-report .cortex/reports/reflection_scaffold_ph0_008_conformance_gap_policy_v0.json --linked-artifacts .cortex/reports/project_state/ph0_008_phase0_conformance_verification_pack_v0.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T070100Z_adopt_owned_and_time_bou",
+  "report_file": ".cortex/reports/reflection_scaffold_ph0_008_conformance_gap_policy_v0.json",
+  "rule": "Allow only explicitly-owned/time-bounded residual gaps with required metadata, and never treat authority/safety/release-gate failures as non-blocking.",
+  "run_at": "2026-02-23T07:01:00Z",
+  "suggested_decision": "Mistake observed: Phase verification criteria were ambiguous about whether zero residual gaps was required, which could block forward progress on non-critical unresolved items. Recurring pattern: Without explicit residual-gap policy, verification either over-blocks execution or allows untracked carry-forward risk. Adopt reusable rule: Allow only explicitly-owned/time-bounded residual gaps with required metadata, and never treat authority/safety/release-gate failures as non-blocking.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_adopt_owned_and_time_bounded_residual_gap_policy_for_ph0_verification_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_008_phase0_conformance_verification_pack_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Adopt owned-and-time-bounded residual-gap policy for PH0 verification",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

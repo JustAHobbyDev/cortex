@@ -1,0 +1,45 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Phase 0 handoff could be interpreted as complete without a deterministic entry-condition checklist, increasing risk of ambiguous Phase 1 start criteria.",
+  "pattern": "Narrative handoff summaries without explicit pass/fail entry conditions make readiness judgments inconsistent across sessions and maintainers.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Require mandatory Phase 1 entry checklist in Phase 0 handoff\" --decision \"Mistake observed: Phase 0 handoff could be interpreted as complete without a deterministic entry-condition checklist, increasing risk of ambiguous Phase 1 start criteria. Recurring pattern: Narrative handoff summaries without explicit pass/fail entry conditions make readiness judgments inconsistent across sessions and maintainers. Adopt reusable rule: PH0 handoff must include a mandatory Phase 1 entry-condition checklist with pass/fail status and evidence links, plus owned open-question registry.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260223T071903Z_require_mandatory_phase_ --reflection-report .cortex/reports/reflection_scaffold_ph0_009_handoff_entry_checklist_v0.json --linked-artifacts .cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T071903Z_require_mandatory_phase_",
+  "report_file": ".cortex/reports/reflection_scaffold_ph0_009_handoff_entry_checklist_v0.json",
+  "rule": "PH0 handoff must include a mandatory Phase 1 entry-condition checklist with pass/fail status and evidence links, plus owned open-question registry.",
+  "run_at": "2026-02-23T07:19:03Z",
+  "suggested_decision": "Mistake observed: Phase 0 handoff could be interpreted as complete without a deterministic entry-condition checklist, increasing risk of ambiguous Phase 1 start criteria. Recurring pattern: Narrative handoff summaries without explicit pass/fail entry conditions make readiness judgments inconsistent across sessions and maintainers. Adopt reusable rule: PH0 handoff must include a mandatory Phase 1 entry-condition checklist with pass/fail status and evidence links, plus owned open-question registry.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_require_mandatory_phase_1_entry_checklist_in_phase_0_handoff_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Require mandatory Phase 1 entry checklist in Phase 0 handoff",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

@@ -414,8 +414,49 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_014_mistake_provenance_gate_v0.json",
       "status": "promoted",
       "title": "Enforce machine-verifiable mistake provenance for agent-caught claims"
+    },
+    {
+      "captured_at": "2026-02-23T07:01:08Z",
+      "decision": "Define PH0-008 verification policy to allow only explicitly-owned/time-bounded residual gaps with required metadata, while prohibiting authority/safety/release-gate failures from non-blocking treatment.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_adopt_owned_and_time_bounded_residual_gap_policy_for_ph0_verification_v1.md",
+      "decision_id": "dec_20260223T070108Z_adopt_owned_and_time_bou",
+      "impact_scope": [
+        "governance",
+        "workflow"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_008_phase0_conformance_verification_pack_v0.md",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+      ],
+      "promoted_at": "2026-02-23T07:01:10Z",
+      "rationale": "This preserves governance rigor while allowing controlled forward progress on non-critical unresolved items.",
+      "reflection_id": "ref_20260223T070100Z_adopt_owned_and_time_bou",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_008_conformance_gap_policy_v0.json",
+      "status": "promoted",
+      "title": "Adopt owned-and-time-bounded residual-gap policy for PH0 verification"
+    },
+    {
+      "captured_at": "2026-02-23T07:20:14Z",
+      "decision": "Mistake observed: Phase 0 handoff could be interpreted as complete without a deterministic entry-condition checklist, increasing risk of ambiguous Phase 1 start criteria. Recurring pattern: Narrative handoff summaries without explicit pass/fail entry conditions make readiness judgments inconsistent across sessions and maintainers. Adopt reusable rule: PH0 handoff must include a mandatory Phase 1 entry-condition checklist with pass/fail status and evidence links, plus owned open-question registry.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_require_mandatory_phase_1_entry_checklist_in_phase_0_handoff_v1.md",
+      "decision_id": "dec_20260223T072014Z_require_mandatory_phase_",
+      "impact_scope": [
+        "governance",
+        "workflow"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+        "playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md"
+      ],
+      "promoted_at": "2026-02-23T07:20:17Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260223T071903Z_require_mandatory_phase_",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_009_handoff_entry_checklist_v0.json",
+      "status": "promoted",
+      "title": "Require mandatory Phase 1 entry checklist in Phase 0 handoff"
     }
   ],
-  "updated_at": "2026-02-23T05:32:12Z",
+  "updated_at": "2026-02-23T07:20:17Z",
   "version": "v0"
 }

@@ -67,7 +67,7 @@ Map role labels to specific people/accounts before execution begins.
 | Conformance QA Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | Program Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | CI/Gate Owner | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
-| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | tbd | Solo-maintainer exception expires 2026-03-08; expand to at least two maintainers before Phase 1 gate elevation. |
+| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | none | No backup maintainer currently; accepted non-blocking governance risk. Solo-maintainer exception review date is 2026-03-08. |
 
 | Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|
@@ -83,8 +83,8 @@ Map role labels to specific people/accounts before execution begins.
 | PH0-012 | Context Hydration Contract + Preflight Policy Baseline | done | Governance Enforcement Lead | Governance Policy Lead | Week 1 | 2026-02-22 | - | .cortex/reports/project_state/ph0_012_context_hydration_baseline_closeout_v0.md;contracts/context_hydration_receipt_schema_v0.json;policies/context_hydration_policy_v0.md;specs/cortex_project_coach_spec_v0.md | phase-0 baseline landed; runtime command-level enforcement rollout remains follow-on work |
 | PH0-013 | Temporal Playbook Retirement + Release Surface Gate | done | Conformance QA Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-010 | .cortex/reports/project_state/ph0_013_temporal_playbook_release_surface_closeout_v0.md;contracts/temporal_playbook_release_surface_contract_v0.json;policies/temporal_playbook_release_surface_policy_v0.md;scripts/temporal_playbook_release_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;.cortex/artifacts/decisions/decision_enforce_temporal_playbook_retirement_and_release_surface_gating_v1.md | temporal classification contract + fail-closed release-surface gate implemented with promoted decision linkage |
 | PH0-014 | Machine-Caught Mistake Provenance Contract + Gate | done | Governance Enforcement Lead | Conformance QA Lead | Week 2 | 2026-03-06 | PH0-005 | .cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md;.cortex/artifacts/decisions/decision_enforce_machine_verifiable_mistake_provenance_for_agent_caught_claims_v1.md;.cortex/reports/reflection_scaffold_ph0_014_mistake_provenance_gate_v0.json;contracts/mistake_candidate_schema_v0.json;policies/mistake_detection_provenance_policy_v0.md;specs/cortex_project_coach_spec_v0.md;scripts/mistake_candidate_gate_v0.py;scripts/quality_gate_v0.sh;scripts/quality_gate_ci_v0.sh;docs/cortex-coach/quality-gate.md;.cortex/reports/mistake_candidates_v0.json | machine-caught claim provenance contract + gate + migration/backfill handling enforced |
-| PH0-008 | Phase 0 Conformance Verification Pack | todo | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012,PH0-013,PH0-014 | tbd | |
-| PH0-009 | Maintainer Closeout and Handoff Package | todo | Program Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-008 | tbd | |
+| PH0-008 | Phase 0 Conformance Verification Pack | done | Conformance QA Lead | Governance Policy Lead | Week 2 | 2026-03-06 | PH0-001,PH0-002,PH0-003,PH0-004,PH0-005,PH0-006,PH0-007,PH0-010,PH0-011,PH0-012,PH0-013,PH0-014 | .cortex/reports/project_state/ph0_008_phase0_conformance_verification_pack_v0.md | verification checklist published with explicit owned/time-bounded gap policy and non-blocking residual risks |
+| PH0-009 | Maintainer Closeout and Handoff Package | done | Program Lead | Maintainer Council | Week 2 | 2026-03-06 | PH0-008 | .cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md;playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md;playbooks/cortex_vision_master_roadmap_v1.md;playbooks/session_governance_hybrid_plan_v0.md | mandatory Phase 1 entry checklist and owned open-question registry captured |
 
 ## Weekly Checkpoint Template (Fillable)
 
@@ -354,6 +354,14 @@ Acceptance criteria:
 - Checklist includes all PH0 tickets with pass/fail status.
 - Evidence links for each ticket are recorded.
 - Outstanding gaps are listed with owner and target date.
+- Zero outstanding gaps are not required if residual items are explicitly owned and time-bounded.
+- Every residual gap must include: owner, due date, severity, blocker flag, mitigation, and decision/waiver linkage.
+- Authority/safety/release-gate failures cannot be treated as non-blocking residual gaps.
+- Verification report includes one accepted residual-gap example and one rejected example to make classification deterministic.
+
+Example guidance:
+- Accepted example: Maintainer backup assignment gap with explicit owner, due date, medium severity, `blocker=no`, and mitigation.
+- Rejected example: release-gate failure labeled `non-blocking`.
 
 Evidence:
 - Published verification report under .cortex/reports/project_state/.
@@ -371,6 +379,7 @@ Primary artifacts:
 
 Acceptance criteria:
 - Phase 1 entry conditions are explicitly listed.
+- Phase 1 entry conditions section is mandatory and checklist-based (`pass`/`fail` per condition with evidence links).
 - Open questions (if any) are enumerated with owner.
 - Handoff summary includes “what is fixed policy vs what is implementation choice.”
 - Matrix documentation includes pros/cons for both classes plus classification rule-of-thumb.

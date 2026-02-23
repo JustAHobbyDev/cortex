@@ -129,10 +129,13 @@ Stabilization cycle checklist:
 
 Weekly cadence:
 
-1. Review live usage status and weekly pressure signals.
-2. If pressure is high early in week, prioritize governance validation tasks.
-3. Avoid scheduling review-heavy milestones above planned weekly review limits.
-4. Carry unfinished implementation into next cycle instead of skipping governance gates.
+1. Start-of-week checkpoint (Monday): record Codex usage from `/status` and the Codex usage dashboard before scheduling session windows.
+2. Mid-week checkpoint (Wednesday): if weekly usage pressure reaches 80% or higher, downgrade the remainder of the week to validation-first workload (fewer implementation windows, no phase-expansion starts).
+3. Review-load guard: keep code-review scheduling under the planned weekly review cap and defer non-critical review-heavy work when pressure is rising.
+4. End-of-week checkpoint (Friday): update weekly capacity notes in `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md` and carry unfinished implementation into the next cycle instead of skipping governance gates.
+
+Budget source note:
+- Use the planning envelope and sequencing guidance from the Mulch+Beads synthesized plan proposal report as the default capacity baseline unless superseded by newer approved policy.
 
 ## Optional Future Automation
 

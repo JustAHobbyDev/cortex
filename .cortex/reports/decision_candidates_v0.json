@@ -338,8 +338,31 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_006_kill_switch_rollback_controls_v0.json",
       "status": "promoted",
       "title": "Define kill-switch ownership split and stabilization rollback procedure"
+    },
+    {
+      "captured_at": "2026-02-23T05:02:55Z",
+      "decision": "Define PH0-007 capacity governance cadence with explicit /status/dashboard checkpoints, mandatory mid-week pressure downgrade behavior, and review-load guardrails tied to the current planning baseline.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_formalize_codex_plus_capacity_governance_cadence_for_weekly_execution_v1.md",
+      "decision_id": "dec_20260223T050255Z_formalize_codex_plus_cap",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "operations"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_007_capacity_governance_cadence_closeout_v0.md",
+        ".cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md",
+        "playbooks/session_governance_hybrid_plan_v0.md",
+        "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md"
+      ],
+      "promoted_at": "2026-02-23T05:02:59Z",
+      "rationale": "Explicit cadence controls reduce limit-pressure regressions and protect governance gate discipline during multi-week execution.",
+      "reflection_id": "ref_20260223T050249Z_formalize_codex_plus_cap",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_007_capacity_governance_cadence_v0.json",
+      "status": "promoted",
+      "title": "Formalize Codex Plus capacity governance cadence for weekly execution"
     }
   ],
-  "updated_at": "2026-02-23T04:57:38Z",
+  "updated_at": "2026-02-23T05:02:59Z",
   "version": "v0"
 }

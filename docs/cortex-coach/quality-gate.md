@@ -75,3 +75,32 @@ Fallback:
 
 - `quality-gate` before merge/release in local maintainer flow
 - `quality-gate-ci` in GitHub Actions (and optional local CI parity checks)
+
+## Phase 1 Storage/Locking Checks (Design Baseline)
+
+Phase 1 requires deterministic storage/locking validation coverage for tactical mutation commands.
+These checks are design baseline requirements and should be implemented as focused contract tests.
+
+Required deterministic cases:
+
+1. Lock acquisition timeout behavior:
+- competing mutation request returns stable lock conflict class (`exit code 4`) after timeout.
+
+2. Stale-lock behavior:
+- stale lock reclaim path is deterministic and auditable using configured stale threshold.
+- non-stale locks are not reclaimed without explicit force-unlock.
+
+3. Concurrent mutation serialization:
+- only one mutation acquires writer lock.
+- other concurrent mutation attempts block/fail deterministically with no partial writes.
+
+4. Read visibility during mutation:
+- concurrent reads return last committed snapshot, never partial mutation state.
+
+5. Idempotent retry behavior:
+- re-running same mutation intent after uncertain completion does not duplicate writes.
+- retry outcome class is stable (`applied`, `no_op_idempotent`, or lock conflict).
+
+6. Failure recovery integrity:
+- simulated interruption does not corrupt tactical indexes.
+- subsequent mutation/read operations recover deterministically.

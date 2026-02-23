@@ -244,6 +244,31 @@ Non-governance separation requirements:
 - Non-governance tactical outputs must be explicitly marked and must not be treated as canonical governance closure.
 - Governance-impacting promotions must remain on canonical decision/reflection/promotion pathways.
 
+### Tactical Storage and Locking Determinism Baseline (PH1-007)
+
+Canonical design sources:
+- `specs/cortex_project_coach_spec_v0.md`
+- `docs/cortex-coach/quality-gate.md`
+
+Lock acquisition and stale-lock behavior:
+- Mutation commands must acquire a deterministic single-writer lock before mutation.
+- Lock acquisition timeout must return stable lock/state conflict class (`exit code 4`).
+- Stale lock reclaim is allowed only when staleness threshold is exceeded or explicit force-unlock is provided.
+
+Concurrent read/write expectations:
+- Concurrent reads may proceed from the most recent committed snapshot during active mutation.
+- Concurrent mutation requests must serialize through lock ownership (first lock owner proceeds; others block/fail deterministically).
+- Partial mutation visibility is disallowed.
+
+Idempotency and retry behavior:
+- Retried mutation requests with identical mutation intent must not produce duplicate records or duplicate prune actions.
+- Retry outcome classification must be deterministic (`applied`, `no_op_idempotent`, or stable lock conflict failure).
+
+Failure handling and deterministic recovery:
+- Mutation writes must be fail-safe (either fully committed or fully rolled back).
+- On interruption/failure, recovery path must preserve index integrity and deterministic subsequent behavior.
+- Recovery diagnostics must be machine-readable for post-incident analysis.
+
 ### Context Hydration Enforcement
 
 - Runtime must support issuing hydration receipts and validating freshness before governance-impacting mutation/closeout paths.

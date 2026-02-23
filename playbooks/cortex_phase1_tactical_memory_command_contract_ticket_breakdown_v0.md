@@ -49,7 +49,7 @@ Status vocabulary:
 | PH1-004 | `memory-prime` Contract + Budget Enforcement | done | Runtime Reliability Lead | Governance Enforcement Lead | Week 3 | 2026-03-10 | PH1-003 | `contracts/tactical_memory_prime_bundle_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md` | Priming input/output contract, budget controls, and deterministic truncation/overflow semantics are defined. |
 | PH1-005 | `memory-diff` + `memory-prune` Mutation Safety Contract | done | Governance Enforcement Lead | Security & Data Policy Lead | Week 3 | 2026-03-12 | PH1-001,PH1-002 | `contracts/tactical_memory_diff_schema_v0.json`;`contracts/tactical_memory_prune_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`policies/tactical_data_policy_v0.md` | Stable diff keys/output, prune eligibility+dry-run semantics, deterministic machine-readable outcomes, and lineage preservation are defined. |
 | PH1-006 | `memory-promote` Governance Bridge Contract | done | Governance Enforcement Lead | Governance Policy Lead | Week 3 | 2026-03-14 | PH1-001,PH1-002,PH1-005 | `contracts/promotion_contract_schema_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md` | Promotion output mapping, fail-closed bridge failure semantics, and non-governance separation are defined. |
-| PH1-007 | Tactical Storage + Locking Determinism Contract | todo | Runtime Reliability Lead | CI/Gate Owner | Week 4 | 2026-03-17 | PH1-002,PH1-005 | `tbd` | Locking, idempotency, conflict semantics, and failure behavior. |
+| PH1-007 | Tactical Storage + Locking Determinism Contract | done | Runtime Reliability Lead | CI/Gate Owner | Week 4 | 2026-03-17 | PH1-002,PH1-005 | `specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/quality-gate.md` | Lock acquisition/timeout/stale-lock behavior, concurrency expectations, idempotency semantics, and deterministic failure-recovery behavior are defined. |
 | PH1-008 | Gate B Readiness Validation Pack (Design Exit) | todo | Conformance QA Lead | Maintainer Council | Week 4 | 2026-03-21 | PH1-001,PH1-002,PH1-003,PH1-004,PH1-005,PH1-006,PH1-007 | `tbd` | Contract test plan, docs plan, and implementation-ready checklist. |
 
 ## Tickets
@@ -194,7 +194,8 @@ Acceptance criteria:
 - Failure handling preserves integrity and deterministic recovery behavior.
 
 Evidence:
-- Storage/locking contract section committed with deterministic examples.
+- `specs/cortex_project_coach_spec_v0.md`
+- `docs/cortex-coach/quality-gate.md`
 
 ### PH1-008: Gate B Readiness Validation Pack (Design Exit)
 

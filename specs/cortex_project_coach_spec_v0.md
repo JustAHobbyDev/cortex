@@ -12,6 +12,7 @@ Inputs:
 - `contracts/mistake_candidate_schema_v0.json` mistake candidate provenance contract schema
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
 - `contracts/tactical_memory_command_family_contract_v0.md` tactical memory command family baseline contract
+- `contracts/tactical_memory_record_schema_v0.json` tactical memory record payload contract schema
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -85,6 +86,9 @@ Validation requirements:
 - Tactical storage must prohibit secrets/credentials/PII by policy.
 - Tactical records must support TTL/pruning/compaction.
 - Redaction controls must be available for non-compliant tactical payloads.
+- `memory-record` payloads must validate against `contracts/tactical_memory_record_schema_v0.json` before persistence.
+- Unknown/additional payload fields are invalid under schema (`additionalProperties: false`) and must fail closed.
+- `memory-record` persistence requires explicit write-lock metadata; lock acquisition failure blocks persistence.
 - Canonical policy source: `policies/tactical_data_policy_v0.md`.
 
 ### Mistake Detection Provenance Policy

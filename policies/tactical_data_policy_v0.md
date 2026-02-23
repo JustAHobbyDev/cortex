@@ -43,6 +43,30 @@ The following classes MUST NOT be stored in tactical records:
 2. The failure event must be logged with enough metadata to support post-incident review.
 3. Repeated sanitization failures in one cycle trigger tactical-plane disable until incident review completes.
 
+### `memory-record` Contract Baseline (PH1-002)
+
+Canonical schema source:
+- `contracts/tactical_memory_record_schema_v0.json`
+
+1. Persisted tactical records from `memory-record` MUST validate against the canonical schema.
+2. Required record fields include record id, capture timestamp, source/provenance metadata, content class, and tags.
+3. Unknown/additional fields are invalid and MUST fail closed (`additionalProperties: false` contract discipline).
+4. Write operations MUST carry lock metadata (`lock_id`, `lock_acquired_at`, timeout values); lock failure blocks persistence.
+5. Allowed `content_class` values for `memory-record` are:
+   - `governance_context`
+   - `implementation_note`
+   - `decision_signal`
+   - `risk_note`
+   - `task_state`
+   - `reference_excerpt`
+   - `incident_note`
+
+### Redaction and Blocking Semantics for `memory-record`
+
+1. If prohibited content is detected and safe redaction is possible, payload may persist only with `sanitization.status=redacted` and explicit `redaction_actions`.
+2. If prohibited content cannot be safely redacted, payload MUST be rejected with `sanitization.status=blocked` and no record persistence.
+3. Rejected/blocked events must include traceable incident metadata for review.
+
 ## Enforcement and Evidence
 
 Required evidence for policy conformance:

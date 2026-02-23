@@ -1,0 +1,59 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/quality-gate.md",
+    "policies/mistake_detection_provenance_policy_v0.md",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md",
+    "contracts/mistake_candidate_schema_v0.json",
+    "policies/mistake_detection_provenance_policy_v0.md",
+    "specs/cortex_project_coach_spec_v0.md",
+    "scripts/mistake_candidate_gate_v0.py",
+    "scripts/quality_gate_v0.sh",
+    "scripts/quality_gate_ci_v0.sh",
+    ".cortex/reports/mistake_candidates_v0.json"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "The project could state that an agent caught a mistake without a deterministic provenance payload, making the claim unverified and difficult to audit.",
+  "pattern": "Narrative mistake claims drift from machine evidence unless a structured candidate contract and blocking gate enforce provenance fields and enum semantics.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Enforce machine-verifiable mistake provenance for agent-caught claims\" --decision \"Mistake observed: The project could state that an agent caught a mistake without a deterministic provenance payload, making the claim unverified and difficult to audit. Recurring pattern: Narrative mistake claims drift from machine evidence unless a structured candidate contract and blocking gate enforce provenance fields and enum semantics. Adopt reusable rule: Require all machine-caught claims to be recorded in schema-compliant mistake candidates and block release gates on missing provenance or unsupported confidence/status values.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260223T053157Z_enforce_machine_verifiab --reflection-report .cortex/reports/reflection_scaffold_ph0_014_mistake_provenance_gate_v0.json --linked-artifacts .cortex/reports/mistake_candidates_v0.json,.cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md,contracts/mistake_candidate_schema_v0.json,docs/cortex-coach/quality-gate.md,policies/mistake_detection_provenance_policy_v0.md,scripts/mistake_candidate_gate_v0.py,scripts/quality_gate_ci_v0.sh,scripts/quality_gate_v0.sh,specs/cortex_project_coach_spec_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260223T053157Z_enforce_machine_verifiab",
+  "report_file": ".cortex/reports/reflection_scaffold_ph0_014_mistake_provenance_gate_v0.json",
+  "rule": "Require all machine-caught claims to be recorded in schema-compliant mistake candidates and block release gates on missing provenance or unsupported confidence/status values.",
+  "run_at": "2026-02-23T05:31:57Z",
+  "suggested_decision": "Mistake observed: The project could state that an agent caught a mistake without a deterministic provenance payload, making the claim unverified and difficult to audit. Recurring pattern: Narrative mistake claims drift from machine evidence unless a structured candidate contract and blocking gate enforce provenance fields and enum semantics. Adopt reusable rule: Require all machine-caught claims to be recorded in schema-compliant mistake candidates and block release gates on missing provenance or unsupported confidence/status values.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_enforce_machine_verifiable_mistake_provenance_for_agent_caught_claims_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/mistake_candidates_v0.json",
+    ".cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md",
+    "contracts/mistake_candidate_schema_v0.json",
+    "docs/cortex-coach/quality-gate.md",
+    "policies/mistake_detection_provenance_policy_v0.md",
+    "scripts/mistake_candidate_gate_v0.py",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh",
+    "specs/cortex_project_coach_spec_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Enforce machine-verifiable mistake provenance for agent-caught claims",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

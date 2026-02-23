@@ -1,0 +1,26 @@
+{
+  "candidates": [
+    {
+      "backfill_due": "2026-03-31",
+      "candidate_id": "legacy_20260220_machine_claim_provenance_gap",
+      "confidence": "unknown_legacy",
+      "detected_by": "unknown_legacy",
+      "detector": {
+        "name": "unknown",
+        "run_ref": "legacy-unavailable",
+        "version": "unknown"
+      },
+      "evidence_refs": [
+        ".cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md"
+      ],
+      "legacy_reason": "Historical claim context predates PH0-014 schema enforcement.",
+      "migration_action": "backfill_or_reclassify_claim",
+      "owner": "Governance Enforcement Lead",
+      "rule_violated": "machine_provenance_required_for_agent_caught_claims",
+      "status": "unknown_legacy",
+      "summary": "Legacy machine-caught claim context lacks explicit detector provenance payload."
+    }
+  ],
+  "updated_at": "2026-02-23T00:00:00Z",
+  "version": "v0"
+}

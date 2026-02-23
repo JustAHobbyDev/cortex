@@ -1,15 +1,8 @@
 {
   "artifact_conformance": {
-    "findings": [
-      {
-        "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['contracts/mistake_candidate_schema_v0.json', 'policies/mistake_detection_provenance_policy_v0.md', 'scripts/mistake_candidate_gate_v0.py', 'cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md'])",
-        "path": "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
-        "severity": "warn"
-      }
-    ],
-    "scanned_files": 79,
-    "status": "warn"
+    "findings": [],
+    "scanned_files": 80,
+    "status": "pass"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
   "audit_scope": "all",
@@ -46,12 +39,12 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=79, findings=1",
-      "status": "warn"
+      "detail": "scanned=80, findings=0",
+      "status": "pass"
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=14, findings=0",
+      "detail": "promoted=15, findings=0",
       "status": "pass"
     }
   ],
@@ -62,7 +55,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-23T05:19:05Z",
+  "run_at": "2026-02-23T05:34:55Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -74,7 +67,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 14,
+    "promoted_decision_count": 15,
     "status": "pass"
   },
   "version": "v0"

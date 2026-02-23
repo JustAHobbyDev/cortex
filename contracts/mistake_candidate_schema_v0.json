@@ -1,0 +1,46 @@
+{
+  "allowed_confidence": [
+    "low",
+    "medium",
+    "high",
+    "unknown_legacy"
+  ],
+  "allowed_detected_by": [
+    "machine",
+    "human",
+    "unknown_legacy"
+  ],
+  "allowed_status": [
+    "candidate",
+    "confirmed",
+    "rejected",
+    "unknown_legacy"
+  ],
+  "candidate_file": ".cortex/reports/mistake_candidates_v0.json",
+  "legacy_backfill": {
+    "detected_by_value": "unknown_legacy",
+    "required_fields": [
+      "legacy_reason",
+      "migration_action",
+      "owner",
+      "backfill_due"
+    ]
+  },
+  "machine_requirements": {
+    "minimum_evidence_refs": 1,
+    "required_detector_fields": [
+      "name",
+      "version",
+      "run_ref"
+    ]
+  },
+  "required_provenance_fields": [
+    "detected_by",
+    "detector",
+    "evidence_refs",
+    "rule_violated",
+    "confidence",
+    "status"
+  ],
+  "version": "v0"
+}

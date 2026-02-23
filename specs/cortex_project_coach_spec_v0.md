@@ -9,9 +9,11 @@ Inputs:
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
 - `contracts/promotion_contract_schema_v0.json` promotion contract schema
 - `contracts/context_hydration_receipt_schema_v0.json` context hydration receipt contract schema
+- `contracts/mistake_candidate_schema_v0.json` mistake candidate provenance contract schema
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
+- `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
 - `policies/tactical_data_policy_v0.md` tactical data policy
 - `scripts/design_prompt_dsl_compile_v0.py` DSL compiler
 - `scripts/design_ontology_validate_v0.py` ontology validator
@@ -83,6 +85,15 @@ Validation requirements:
 - Tactical records must support TTL/pruning/compaction.
 - Redaction controls must be available for non-compliant tactical payloads.
 - Canonical policy source: `policies/tactical_data_policy_v0.md`.
+
+### Mistake Detection Provenance Policy
+
+- Machine-caught mistake claims must be recorded in structured candidate artifacts.
+- Candidate provenance fields must satisfy contract-required fields and enum semantics.
+- Unsupported confidence/status values are invalid.
+- Legacy unknown provenance is allowed only through explicit migration/backfill markers.
+- Canonical contract source: `contracts/mistake_candidate_schema_v0.json`.
+- Canonical policy source: `policies/mistake_detection_provenance_policy_v0.md`.
 
 ### External Adapter Policy
 

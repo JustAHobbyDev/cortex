@@ -45,15 +45,19 @@ Fallback:
    - no vacuous reflection pass (`min_scaffold_reports >= 1`)
    - required promoted mappings (`min_required_status_mappings >= 1`)
    - governance-impact decision matches must carry valid `reflection_id` + `reflection_report`
-6. `project_state_boundary_gate_v0.py` fail-closed check:
+6. `mistake_candidate_gate_v0.py` fail-closed check:
+   - machine-caught claims require schema-compliant provenance payloads
+   - unsupported confidence/status values are blocking
+   - legacy unknown provenance must carry migration metadata
+7. `project_state_boundary_gate_v0.py` fail-closed check:
    - project-state files are forbidden outside `.cortex/` (`reports/` root blocked by default)
    - expired active waivers are blocking
-7. `temporal_playbook_release_gate_v0.py` fail-closed check:
+8. `temporal_playbook_release_gate_v0.py` fail-closed check:
    - unmanaged `playbooks/cortex_*.md` candidates are blocking
    - expired active temporal entries are blocking
    - retired residue in `playbooks/` is blocking
-8. docs local-link + JSON integrity
-9. focused `cortex-coach` pytest suite
+9. docs local-link + JSON integrity
+10. focused `cortex-coach` pytest suite
 
 `quality-gate-ci`:
 
@@ -61,10 +65,11 @@ Fallback:
 2. `cortex-coach` smoke commands
 3. `decision-gap-check` for governance-impacting dirty files
 4. `reflection_enforcement_gate_v0.py` with promoted-status thresholds
-5. `project_state_boundary_gate_v0.py` with contract-driven path checks
-6. `temporal_playbook_release_gate_v0.py` with contract-driven release-surface checks
-7. docs local-link + JSON integrity
-8. focused `cortex-coach` pytest suite
+5. `mistake_candidate_gate_v0.py` with contract-driven provenance checks
+6. `project_state_boundary_gate_v0.py` with contract-driven path checks
+7. `temporal_playbook_release_gate_v0.py` with contract-driven release-surface checks
+8. docs local-link + JSON integrity
+9. focused `cortex-coach` pytest suite
 
 ## When to Run
 

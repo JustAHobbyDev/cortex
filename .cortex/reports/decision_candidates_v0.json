@@ -386,8 +386,36 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_ph0_011_swarm_gdd_baseline_v0.json",
       "status": "promoted",
       "title": "Formalize Swarm-GDD baseline gates and adoption stop-rule"
+    },
+    {
+      "captured_at": "2026-02-23T05:32:08Z",
+      "decision": "Define PH0-014 mistake provenance contract and policy, require schema-compliant candidate records for machine-caught claims, and enforce fail-closed provenance checks in local and CI quality gates.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_enforce_machine_verifiable_mistake_provenance_for_agent_caught_claims_v1.md",
+      "decision_id": "dec_20260223T053208Z_enforce_machine_verifiab",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "runtime"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/ph0_014_mistake_provenance_gate_closeout_v0.md",
+        "contracts/mistake_candidate_schema_v0.json",
+        "policies/mistake_detection_provenance_policy_v0.md",
+        "specs/cortex_project_coach_spec_v0.md",
+        "scripts/mistake_candidate_gate_v0.py",
+        "scripts/quality_gate_v0.sh",
+        "scripts/quality_gate_ci_v0.sh",
+        "docs/cortex-coach/quality-gate.md",
+        ".cortex/reports/mistake_candidates_v0.json"
+      ],
+      "promoted_at": "2026-02-23T05:32:12Z",
+      "rationale": "This removes ambiguity around agent-caught mistake claims and prevents ungrounded assertions from passing governance closeout.",
+      "reflection_id": "ref_20260223T053157Z_enforce_machine_verifiab",
+      "reflection_report": ".cortex/reports/reflection_scaffold_ph0_014_mistake_provenance_gate_v0.json",
+      "status": "promoted",
+      "title": "Enforce machine-verifiable mistake provenance for agent-caught claims"
     }
   ],
-  "updated_at": "2026-02-23T05:18:33Z",
+  "updated_at": "2026-02-23T05:32:12Z",
   "version": "v0"
 }

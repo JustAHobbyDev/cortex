@@ -51,6 +51,23 @@ Baseline exit code contract:
 Canonical source:
 - `contracts/tactical_memory_command_family_contract_v0.md`
 
+### `memory-promote` Bridge Mapping (PH1-006 Design Baseline)
+
+`memory-promote` is the tactical-to-governance bridge and must map output fields into
+`contracts/promotion_contract_schema_v0.json`:
+
+| `memory-promote` output | Promotion contract field |
+|---|---|
+| decision/reflection ids | `decision_reflection_linkage` |
+| impacted artifact summaries | `impacted_artifacts` |
+| rationale + evidence refs | `rationale_evidence_summary` |
+| source lineage + trace metadata | `promotion_trace_metadata` |
+
+Bridge expectations:
+- Governance-impacting promotion attempts fail closed if any required promotion contract section is missing.
+- Bridge trace metadata should set `bridge_command=memory-promote`.
+- Non-governance outputs must be explicitly marked so they are not interpreted as canonical governance closure.
+
 ## `init`
 
 Bootstrap `.cortex/` artifacts in a target project.

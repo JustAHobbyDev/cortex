@@ -157,6 +157,50 @@
               }
             }
           }
+        },
+        "bridge_command": {
+          "type": "string",
+          "enum": [
+            "memory-promote"
+          ]
+        },
+        "bridge_mode": {
+          "type": "string",
+          "enum": [
+            "governance_impacting",
+            "non_governance"
+          ]
+        },
+        "tactical_record_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^tmr_[a-z0-9][a-z0-9_-]{5,}$"
+          }
+        },
+        "bridge_validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_fields_complete",
+            "failure_mode"
+          ],
+          "properties": {
+            "required_fields_complete": {
+              "type": "boolean"
+            },
+            "failure_mode": {
+              "type": "string",
+              "enum": [
+                "none",
+                "missing_decision_reflection_linkage",
+                "missing_impacted_artifacts",
+                "missing_rationale_evidence_summary",
+                "missing_promotion_trace_metadata"
+              ]
+            }
+          }
         }
       }
     }

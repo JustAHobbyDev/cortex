@@ -221,6 +221,29 @@ Prune policy and dry-run semantics:
 Provenance lineage retention:
 - Diff and prune outputs must preserve lineage references (`source_refs`, optional `ancestor_record_ids`) for each affected record.
 
+### `memory-promote` Governance Bridge Baseline (PH1-006)
+
+Canonical contract sources:
+- `contracts/promotion_contract_schema_v0.json`
+- `docs/cortex-coach/commands.md`
+
+Output mapping requirements:
+- `memory-promote` must map tactical outputs to promotion-required fields:
+  - decision/reflection linkage -> `decision_reflection_linkage`
+  - impacted artifact linkage -> `impacted_artifacts`
+  - rationale and evidence references -> `rationale_evidence_summary`
+  - promotion trace and tactical lineage -> `promotion_trace_metadata`
+- Bridge metadata must identify `bridge_command=memory-promote` for bridge-produced promotions.
+
+Failure mode requirements (fail closed):
+- Missing any required promotion contract section must produce deterministic blocking failure.
+- Failure output must include stable failure class for missing linkage/evidence categories.
+- Governance-impacting bridge operations must not emit success output when required promotion fields are incomplete.
+
+Non-governance separation requirements:
+- Non-governance tactical outputs must be explicitly marked and must not be treated as canonical governance closure.
+- Governance-impacting promotions must remain on canonical decision/reflection/promotion pathways.
+
 ### Context Hydration Enforcement
 
 - Runtime must support issuing hydration receipts and validating freshness before governance-impacting mutation/closeout paths.

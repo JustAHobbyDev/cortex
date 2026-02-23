@@ -366,12 +366,14 @@ Objective:
 Primary artifacts:
 - `playbooks/cortex_vision_master_roadmap_v1.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
+- `playbooks/fixed_policy_vs_implementation_choice_matrix_v0.md`
 - .cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md
 
 Acceptance criteria:
 - Phase 1 entry conditions are explicitly listed.
 - Open questions (if any) are enumerated with owner.
 - Handoff summary includes “what is fixed policy vs what is implementation choice.”
+- Matrix documentation includes pros/cons for both classes plus classification rule-of-thumb.
 
 Evidence:
 - Final Phase 0 closeout note committed in .cortex/reports/project_state/.

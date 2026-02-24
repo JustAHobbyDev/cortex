@@ -142,6 +142,7 @@ Required command set:
 - `memory-diff`
 - `memory-prune`
 - `memory-promote`
+- `promotion-candidates` (Phase 4 promotion-assistant mapping path)
 
 Shared contract expectations:
 - `--project-dir` required for all commands.
@@ -342,7 +343,13 @@ Canonical contract sources:
 
 Promotion mapping and scoring requirements:
 - Promotion candidate outputs must map cleanly to promotion contract-required fields.
+- `promotion-candidates` must support frozen fixture payloads shaped as `tactical_candidates[]` or `governance_debt_items[]`.
 - Candidate ranking/scoring must remain deterministic with contract-defined tie-break ordering.
+- Tie-break ordering for promotion ranking must remain fixed to:
+  - `combined_score_desc`
+  - `evidence_coverage_desc`
+  - `governance_impact_priority_asc`
+  - `candidate_id_asc`
 - Score breakdown fields must be machine-readable and bounded for automation traceability.
 
 Enforcement requirements:

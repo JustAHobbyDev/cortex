@@ -1,0 +1,1054 @@
+{
+  "artifact": "phase4_promotion_candidate_quality_report_v0",
+  "candidate_limit": 8,
+  "cases": [
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 1,
+      "case_id": "small:s_small_linked_governance_closure:q_small_promote_linked_change",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_linked_governance_closure_v0.json",
+      "linked_candidate_count": 1,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "small",
+      "promotion_contract_fields_complete_count": 1,
+      "query_id": "q_small_promote_linked_change",
+      "query_text": "promote linked governance impacting change with evidence coverage",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_small_linked_001",
+          "combined_score": 0.666667,
+          "decision_refs": [
+            "dec_example_small_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Promote linked governance update"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_example_small_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.5,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promote linked governance update"
+        }
+      ],
+      "ranking_hash": "6ce6569e90384d390e50d1c607ca2b9060bba575cf94a8c733abe7b5b5eb40d1",
+      "scenario_id": "s_small_linked_governance_closure"
+    },
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 1,
+      "case_id": "small:s_small_linked_governance_closure:q_small_block_unlinked_change",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_linked_governance_closure_v0.json",
+      "linked_candidate_count": 1,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "small",
+      "promotion_contract_fields_complete_count": 1,
+      "query_id": "q_small_block_unlinked_change",
+      "query_text": "block unlinked governance impacting closure attempt",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_small_linked_001",
+          "combined_score": 0.6,
+          "decision_refs": [
+            "dec_example_small_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Promote linked governance update"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_example_small_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promote linked governance update"
+        }
+      ],
+      "ranking_hash": "e7a7b8fedbf180693e0007bf29280f2c28ad49fcdcac2a218bfded06fed95812",
+      "scenario_id": "s_small_linked_governance_closure"
+    },
+    {
+      "blocked_unlinked_count": 1,
+      "candidate_count": 1,
+      "case_id": "small:s_small_unlinked_governance_closure:q_small_promote_linked_change",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_unlinked_governance_closure_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "small",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_small_promote_linked_change",
+      "query_text": "promote linked governance impacting change with evidence coverage",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_small_unlinked_001",
+          "combined_score": 0.383333,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Attempt governance closeout without linkage"
+            }
+          ],
+          "linkage_complete": false,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Attempt governance closeout without linkage"
+        }
+      ],
+      "ranking_hash": "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43",
+      "scenario_id": "s_small_unlinked_governance_closure"
+    },
+    {
+      "blocked_unlinked_count": 1,
+      "candidate_count": 1,
+      "case_id": "small:s_small_unlinked_governance_closure:q_small_block_unlinked_change",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_unlinked_governance_closure_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "small",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_small_block_unlinked_change",
+      "query_text": "block unlinked governance impacting closure attempt",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_small_unlinked_001",
+          "combined_score": 0.383333,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Attempt governance closeout without linkage"
+            }
+          ],
+          "linkage_complete": false,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Attempt governance closeout without linkage"
+        }
+      ],
+      "ranking_hash": "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43",
+      "scenario_id": "s_small_unlinked_governance_closure"
+    },
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 2,
+      "case_id": "medium:s_medium_mixed_tactical_cluster:q_medium_candidate_ranking_quality",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_mixed_tactical_cluster_v0.json",
+      "linked_candidate_count": 2,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 2,
+      "payload_valid_rate": 1.0,
+      "profile_id": "medium",
+      "promotion_contract_fields_complete_count": 2,
+      "query_id": "q_medium_candidate_ranking_quality",
+      "query_text": "rank promotion candidates by evidence and governance impact deterministically",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_medium_mixed_001",
+          "combined_score": 0.783333,
+          "decision_refs": [
+            "dec_example_medium_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json",
+            ".cortex/reports/project_state/phase3_adapter_determinism_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: Promotion candidate with complete governance linkage"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_example_medium_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.666667,
+            "impact_score": 1.0,
+            "lexical_score": 0.5,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promotion candidate with complete governance linkage"
+        },
+        {
+          "candidate_id": "pc_medium_mixed_002",
+          "combined_score": 0.606667,
+          "decision_refs": [
+            "dec_example_medium_002"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_latency_report_v0.json"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Promotion candidate with medium evidence density"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 2,
+          "reflection_refs": [
+            "ref_example_medium_002"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.5,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promotion candidate with medium evidence density"
+        }
+      ],
+      "ranking_hash": "ffc999c3aa14354a4a3ba80bfd4046e6b4bdb0e0476183ee8d501d20376a6d57",
+      "scenario_id": "s_medium_mixed_tactical_cluster"
+    },
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 2,
+      "case_id": "medium:s_medium_mixed_tactical_cluster:q_medium_enforcement_linkage_blocking",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_mixed_tactical_cluster_v0.json",
+      "linked_candidate_count": 2,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 2,
+      "payload_valid_rate": 1.0,
+      "profile_id": "medium",
+      "promotion_contract_fields_complete_count": 2,
+      "query_id": "q_medium_enforcement_linkage_blocking",
+      "query_text": "enforcement check for missing reflection linkage on governance closure",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_medium_mixed_001",
+          "combined_score": 0.75,
+          "decision_refs": [
+            "dec_example_medium_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json",
+            ".cortex/reports/project_state/phase3_adapter_determinism_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: Promotion candidate with complete governance linkage"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_example_medium_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.666667,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promotion candidate with complete governance linkage"
+        },
+        {
+          "candidate_id": "pc_medium_mixed_002",
+          "combined_score": 0.506667,
+          "decision_refs": [
+            "dec_example_medium_002"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_latency_report_v0.json"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Promotion candidate with medium evidence density"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 2,
+          "reflection_refs": [
+            "ref_example_medium_002"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.0,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Promotion candidate with medium evidence density"
+        }
+      ],
+      "ranking_hash": "e2f88877b920a7cdb8b2be86f3c7893fb354cda86eff02e60d7be6a7d2a1e0c4",
+      "scenario_id": "s_medium_mixed_tactical_cluster"
+    },
+    {
+      "blocked_unlinked_count": 1,
+      "candidate_count": 1,
+      "case_id": "medium:s_medium_missing_reflection_linkage:q_medium_candidate_ranking_quality",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_missing_reflection_linkage_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "medium",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_medium_candidate_ranking_quality",
+      "query_text": "rank promotion candidates by evidence and governance impact deterministically",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_medium_missing_reflection_001",
+          "combined_score": 0.35,
+          "decision_refs": [
+            "dec_example_medium_missing_reflection_001"
+          ],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_vision_master_roadmap_v1.md",
+              "change_summary": "promotion candidate update 1: Candidate missing reflection linkage"
+            }
+          ],
+          "linkage_complete": false,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Candidate missing reflection linkage"
+        }
+      ],
+      "ranking_hash": "5f032b011c79a97d21986711a5e2e455b3b2240cbdac323dbd4c535ed3b22d7b",
+      "scenario_id": "s_medium_missing_reflection_linkage"
+    },
+    {
+      "blocked_unlinked_count": 1,
+      "candidate_count": 1,
+      "case_id": "medium:s_medium_missing_reflection_linkage:q_medium_enforcement_linkage_blocking",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_missing_reflection_linkage_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 1,
+      "payload_valid_rate": 1.0,
+      "profile_id": "medium",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_medium_enforcement_linkage_blocking",
+      "query_text": "enforcement check for missing reflection linkage on governance closure",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_medium_missing_reflection_001",
+          "combined_score": 0.416667,
+          "decision_refs": [
+            "dec_example_medium_missing_reflection_001"
+          ],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_vision_master_roadmap_v1.md",
+              "change_summary": "promotion candidate update 1: Candidate missing reflection linkage"
+            }
+          ],
+          "linkage_complete": false,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.5,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Candidate missing reflection linkage"
+        }
+      ],
+      "ranking_hash": "676de6211c53d7657bdb78985267210c28960e0e1272a62824dbe98a0a30b536",
+      "scenario_id": "s_medium_missing_reflection_linkage"
+    },
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 4,
+      "case_id": "large:s_large_high_cardinality_candidate_ranking:q_large_deterministic_promotion_order",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_high_cardinality_candidate_ranking_v0.json",
+      "linked_candidate_count": 4,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 4,
+      "payload_valid_rate": 1.0,
+      "profile_id": "large",
+      "promotion_contract_fields_complete_count": 4,
+      "query_id": "q_large_deterministic_promotion_order",
+      "query_text": "high cardinality promotion candidate ordering determinism",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_large_rank_004",
+          "combined_score": 0.633333,
+          "decision_refs": [
+            "dec_large_004"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/session_governance_hybrid_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Blocked dependency candidate"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_large_004"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 1.0
+          },
+          "state": "blocked",
+          "summary": "",
+          "title": "Blocked dependency candidate"
+        },
+        {
+          "candidate_id": "pc_large_rank_001",
+          "combined_score": 0.6,
+          "decision_refs": [
+            "dec_large_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_budget_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: High-priority linked governance closure"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 2,
+          "reflection_refs": [
+            "ref_large_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "High-priority linked governance closure"
+        },
+        {
+          "candidate_id": "pc_large_rank_002",
+          "combined_score": 0.6,
+          "decision_refs": [
+            "dec_large_002"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_ci_overhead_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: High-priority linked governance closure B"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 3,
+          "reflection_refs": [
+            "ref_large_002"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "High-priority linked governance closure B"
+        },
+        {
+          "candidate_id": "pc_large_rank_003",
+          "combined_score": 0.54,
+          "decision_refs": [
+            "dec_large_003"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: Medium-priority candidate"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 4,
+          "reflection_refs": [
+            "ref_large_003"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Medium-priority candidate"
+        }
+      ],
+      "ranking_hash": "68908bea2aba8ee16d4e51d7008d2e99f3b143346b205f0b20ab247dd2a87430",
+      "scenario_id": "s_large_high_cardinality_candidate_ranking"
+    },
+    {
+      "blocked_unlinked_count": 0,
+      "candidate_count": 4,
+      "case_id": "large:s_large_high_cardinality_candidate_ranking:q_large_governance_debt_visibility",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_high_cardinality_candidate_ranking_v0.json",
+      "linked_candidate_count": 4,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 4,
+      "payload_valid_rate": 1.0,
+      "profile_id": "large",
+      "promotion_contract_fields_complete_count": 4,
+      "query_id": "q_large_governance_debt_visibility",
+      "query_text": "governance debt visibility for ready blocked owner action backlog",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_large_rank_001",
+          "combined_score": 0.633333,
+          "decision_refs": [
+            "dec_large_001"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_budget_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: High-priority linked governance closure"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 1,
+          "reflection_refs": [
+            "ref_large_001"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "High-priority linked governance closure"
+        },
+        {
+          "candidate_id": "pc_large_rank_002",
+          "combined_score": 0.633333,
+          "decision_refs": [
+            "dec_large_002"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_ci_overhead_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+              "change_summary": "promotion candidate update 1: High-priority linked governance closure B"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 2,
+          "reflection_refs": [
+            "ref_large_002"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.333333,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "High-priority linked governance closure B"
+        },
+        {
+          "candidate_id": "pc_large_rank_004",
+          "combined_score": 0.6,
+          "decision_refs": [
+            "dec_large_004"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/session_governance_hybrid_plan_v0.md",
+              "change_summary": "promotion candidate update 1: Blocked dependency candidate"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 3,
+          "reflection_refs": [
+            "ref_large_004"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "blocked",
+          "summary": "",
+          "title": "Blocked dependency candidate"
+        },
+        {
+          "candidate_id": "pc_large_rank_003",
+          "combined_score": 0.54,
+          "decision_refs": [
+            "dec_large_003"
+          ],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [
+            {
+              "artifact_path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+              "change_summary": "promotion candidate update 1: Medium-priority candidate"
+            }
+          ],
+          "linkage_complete": true,
+          "next_action": "",
+          "owner": "",
+          "promotion_contract_fields_complete": true,
+          "rank": 4,
+          "reflection_refs": [
+            "ref_large_003"
+          ],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.166667,
+            "linkage_score": 1.0
+          },
+          "state": "ready",
+          "summary": "",
+          "title": "Medium-priority candidate"
+        }
+      ],
+      "ranking_hash": "ba59c11d713a5035168983832b310cd54b5987f7f344939d4bdd9c1ba48800c8",
+      "scenario_id": "s_large_high_cardinality_candidate_ranking"
+    },
+    {
+      "blocked_unlinked_count": 2,
+      "candidate_count": 3,
+      "case_id": "large:s_large_governance_debt_backlog:q_large_deterministic_promotion_order",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_governance_debt_backlog_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 3,
+      "payload_valid_rate": 1.0,
+      "profile_id": "large",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_large_deterministic_promotion_order",
+      "query_text": "high cardinality promotion candidate ordering determinism",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_gd_large_001",
+          "combined_score": 0.35,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            "ref_large_blocked_001"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Link reflection scaffold before closure.",
+          "owner": "Governance Enforcement Lead",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 0.0
+          },
+          "state": "blocked",
+          "summary": "Link reflection scaffold before closure.",
+          "title": "Governance debt gd_large_001"
+        },
+        {
+          "candidate_id": "pc_gd_large_003",
+          "combined_score": 0.35,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Re-run required governance gate bundle after linkage fixes.",
+          "owner": "CI/Gate Owner",
+          "promotion_contract_fields_complete": false,
+          "rank": 2,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.166667,
+            "linkage_score": 0.0
+          },
+          "state": "blocked",
+          "summary": "Re-run required governance gate bundle after linkage fixes.",
+          "title": "Governance debt gd_large_003"
+        },
+        {
+          "candidate_id": "pc_gd_large_002",
+          "combined_score": 0.29,
+          "decision_refs": [],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            "dec_large_ready_002"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Promote candidate with complete evidence mapping.",
+          "owner": "Runtime Reliability Lead",
+          "promotion_contract_fields_complete": false,
+          "rank": 3,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.166667,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "Promote candidate with complete evidence mapping.",
+          "title": "Governance debt gd_large_002"
+        }
+      ],
+      "ranking_hash": "d346098cd51af623a69142d47370762b8b9057aafec44a18801dfdce45ad28ab",
+      "scenario_id": "s_large_governance_debt_backlog"
+    },
+    {
+      "blocked_unlinked_count": 2,
+      "candidate_count": 3,
+      "case_id": "large:s_large_governance_debt_backlog:q_large_governance_debt_visibility",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_governance_debt_backlog_v0.json",
+      "linked_candidate_count": 0,
+      "linked_false_block_count": 0,
+      "payload_valid_count": 3,
+      "payload_valid_rate": 1.0,
+      "profile_id": "large",
+      "promotion_contract_fields_complete_count": 0,
+      "query_id": "q_large_governance_debt_visibility",
+      "query_text": "governance debt visibility for ready blocked owner action backlog",
+      "ranked_candidates": [
+        {
+          "candidate_id": "pc_gd_large_001",
+          "combined_score": 0.45,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            "ref_large_blocked_001"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Link reflection scaffold before closure.",
+          "owner": "Governance Enforcement Lead",
+          "promotion_contract_fields_complete": false,
+          "rank": 1,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.666667,
+            "linkage_score": 0.0
+          },
+          "state": "blocked",
+          "summary": "Link reflection scaffold before closure.",
+          "title": "Governance debt gd_large_001"
+        },
+        {
+          "candidate_id": "pc_gd_large_003",
+          "combined_score": 0.45,
+          "decision_refs": [],
+          "enforcement_recommendation": "block_unlinked_governance_closure",
+          "evidence_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "governance_impact": "high",
+          "governance_impact_priority": 1,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Re-run required governance gate bundle after linkage fixes.",
+          "owner": "CI/Gate Owner",
+          "promotion_contract_fields_complete": false,
+          "rank": 2,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 1.0,
+            "lexical_score": 0.666667,
+            "linkage_score": 0.0
+          },
+          "state": "blocked",
+          "summary": "Re-run required governance gate bundle after linkage fixes.",
+          "title": "Governance debt gd_large_003"
+        },
+        {
+          "candidate_id": "pc_gd_large_002",
+          "combined_score": 0.356667,
+          "decision_refs": [],
+          "enforcement_recommendation": "eligible_for_promotion",
+          "evidence_refs": [
+            "dec_large_ready_002"
+          ],
+          "governance_impact": "medium",
+          "governance_impact_priority": 2,
+          "impacted_artifacts": [],
+          "linkage_complete": false,
+          "next_action": "Promote candidate with complete evidence mapping.",
+          "owner": "Runtime Reliability Lead",
+          "promotion_contract_fields_complete": false,
+          "rank": 3,
+          "reflection_refs": [],
+          "score_breakdown": {
+            "evidence_coverage": 0.333333,
+            "impact_score": 0.7,
+            "lexical_score": 0.5,
+            "linkage_score": 0.0
+          },
+          "state": "ready",
+          "summary": "Promote candidate with complete evidence mapping.",
+          "title": "Governance debt gd_large_002"
+        }
+      ],
+      "ranking_hash": "a4a4d87866d623e6452a510a49ba0666c1193e476fdf27fe8c8c59f80513d4ac",
+      "scenario_id": "s_large_governance_debt_backlog"
+    }
+  ],
+  "fixture_hash": "be476c89cdbbadd30f9f3520de8323f5e7141a7361496530128016e7270421ee",
+  "fixture_source": ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-24T13:41:46Z",
+  "score_mode": "evidence_bias",
+  "status": "pass",
+  "summary": {
+    "blocked_unlinked_count": 8,
+    "candidate_count": 24,
+    "candidate_payload_valid_count": 24,
+    "candidate_payload_validity_rate": 1.0,
+    "case_count": 12,
+    "linked_candidate_count": 14,
+    "linked_false_block_count": 0,
+    "linked_false_block_rate": 0.0,
+    "promotion_contract_fields_complete_rate": 0.583333
+  },
+  "target_results": {
+    "linked_false_block_rate_met": true,
+    "promotion_contract_validity_rate_met": true
+  },
+  "targets": {
+    "linked_false_block_rate_max": 0.05,
+    "promotion_contract_validity_rate_target": 1.0
+  },
+  "tie_break_order": [
+    "combined_score_desc",
+    "evidence_coverage_desc",
+    "governance_impact_priority_asc",
+    "candidate_id_asc"
+  ],
+  "version": "v0"
+}

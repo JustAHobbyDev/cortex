@@ -1,0 +1,181 @@
+{
+  "artifact": "phase4_promotion_determinism_report_v0",
+  "candidate_limit": 8,
+  "cases": [
+    {
+      "case_id": "small:s_small_linked_governance_closure:q_small_promote_linked_change",
+      "determinism_runs": 30,
+      "hashes": [
+        "6ce6569e90384d390e50d1c607ca2b9060bba575cf94a8c733abe7b5b5eb40d1"
+      ],
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_promote_linked_change",
+      "scenario_id": "s_small_linked_governance_closure",
+      "stable_hash": "6ce6569e90384d390e50d1c607ca2b9060bba575cf94a8c733abe7b5b5eb40d1",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "small:s_small_linked_governance_closure:q_small_block_unlinked_change",
+      "determinism_runs": 30,
+      "hashes": [
+        "e7a7b8fedbf180693e0007bf29280f2c28ad49fcdcac2a218bfded06fed95812"
+      ],
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_block_unlinked_change",
+      "scenario_id": "s_small_linked_governance_closure",
+      "stable_hash": "e7a7b8fedbf180693e0007bf29280f2c28ad49fcdcac2a218bfded06fed95812",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "small:s_small_unlinked_governance_closure:q_small_promote_linked_change",
+      "determinism_runs": 30,
+      "hashes": [
+        "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43"
+      ],
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_promote_linked_change",
+      "scenario_id": "s_small_unlinked_governance_closure",
+      "stable_hash": "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "small:s_small_unlinked_governance_closure:q_small_block_unlinked_change",
+      "determinism_runs": 30,
+      "hashes": [
+        "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43"
+      ],
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_block_unlinked_change",
+      "scenario_id": "s_small_unlinked_governance_closure",
+      "stable_hash": "3ac17fa808ac29122d4f51a999f6280de0de477d52b0c941bc2c642351080d43",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "medium:s_medium_mixed_tactical_cluster:q_medium_candidate_ranking_quality",
+      "determinism_runs": 30,
+      "hashes": [
+        "ffc999c3aa14354a4a3ba80bfd4046e6b4bdb0e0476183ee8d501d20376a6d57"
+      ],
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_candidate_ranking_quality",
+      "scenario_id": "s_medium_mixed_tactical_cluster",
+      "stable_hash": "ffc999c3aa14354a4a3ba80bfd4046e6b4bdb0e0476183ee8d501d20376a6d57",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "medium:s_medium_mixed_tactical_cluster:q_medium_enforcement_linkage_blocking",
+      "determinism_runs": 30,
+      "hashes": [
+        "e2f88877b920a7cdb8b2be86f3c7893fb354cda86eff02e60d7be6a7d2a1e0c4"
+      ],
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_enforcement_linkage_blocking",
+      "scenario_id": "s_medium_mixed_tactical_cluster",
+      "stable_hash": "e2f88877b920a7cdb8b2be86f3c7893fb354cda86eff02e60d7be6a7d2a1e0c4",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "medium:s_medium_missing_reflection_linkage:q_medium_candidate_ranking_quality",
+      "determinism_runs": 30,
+      "hashes": [
+        "5f032b011c79a97d21986711a5e2e455b3b2240cbdac323dbd4c535ed3b22d7b"
+      ],
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_candidate_ranking_quality",
+      "scenario_id": "s_medium_missing_reflection_linkage",
+      "stable_hash": "5f032b011c79a97d21986711a5e2e455b3b2240cbdac323dbd4c535ed3b22d7b",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "medium:s_medium_missing_reflection_linkage:q_medium_enforcement_linkage_blocking",
+      "determinism_runs": 30,
+      "hashes": [
+        "676de6211c53d7657bdb78985267210c28960e0e1272a62824dbe98a0a30b536"
+      ],
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_enforcement_linkage_blocking",
+      "scenario_id": "s_medium_missing_reflection_linkage",
+      "stable_hash": "676de6211c53d7657bdb78985267210c28960e0e1272a62824dbe98a0a30b536",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "large:s_large_high_cardinality_candidate_ranking:q_large_deterministic_promotion_order",
+      "determinism_runs": 30,
+      "hashes": [
+        "68908bea2aba8ee16d4e51d7008d2e99f3b143346b205f0b20ab247dd2a87430"
+      ],
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_deterministic_promotion_order",
+      "scenario_id": "s_large_high_cardinality_candidate_ranking",
+      "stable_hash": "68908bea2aba8ee16d4e51d7008d2e99f3b143346b205f0b20ab247dd2a87430",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "large:s_large_high_cardinality_candidate_ranking:q_large_governance_debt_visibility",
+      "determinism_runs": 30,
+      "hashes": [
+        "ba59c11d713a5035168983832b310cd54b5987f7f344939d4bdd9c1ba48800c8"
+      ],
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_governance_debt_visibility",
+      "scenario_id": "s_large_high_cardinality_candidate_ranking",
+      "stable_hash": "ba59c11d713a5035168983832b310cd54b5987f7f344939d4bdd9c1ba48800c8",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "large:s_large_governance_debt_backlog:q_large_deterministic_promotion_order",
+      "determinism_runs": 30,
+      "hashes": [
+        "d346098cd51af623a69142d47370762b8b9057aafec44a18801dfdce45ad28ab"
+      ],
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_deterministic_promotion_order",
+      "scenario_id": "s_large_governance_debt_backlog",
+      "stable_hash": "d346098cd51af623a69142d47370762b8b9057aafec44a18801dfdce45ad28ab",
+      "unique_hash_count": 1
+    },
+    {
+      "case_id": "large:s_large_governance_debt_backlog:q_large_governance_debt_visibility",
+      "determinism_runs": 30,
+      "hashes": [
+        "a4a4d87866d623e6452a510a49ba0666c1193e476fdf27fe8c8c59f80513d4ac"
+      ],
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_governance_debt_visibility",
+      "scenario_id": "s_large_governance_debt_backlog",
+      "stable_hash": "a4a4d87866d623e6452a510a49ba0666c1193e476fdf27fe8c8c59f80513d4ac",
+      "unique_hash_count": 1
+    }
+  ],
+  "determinism_runs": 30,
+  "fixture_hash": "be476c89cdbbadd30f9f3520de8323f5e7141a7361496530128016e7270421ee",
+  "fixture_source": ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-24T13:41:46Z",
+  "score_mode": "evidence_bias",
+  "status": "pass",
+  "summary": {
+    "case_count": 12,
+    "deterministic_case_count": 12,
+    "ordering_consistency_rate": 1.0
+  },
+  "target_results": {
+    "ordering_consistency_rate_met": true
+  },
+  "targets": {
+    "ordering_consistency_rate_target": 1.0
+  },
+  "version": "v0"
+}

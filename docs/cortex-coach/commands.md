@@ -31,6 +31,7 @@ The following command family is a Phase 1 design contract baseline and is not fu
 | `memory-diff` | compare tactical record sets/snapshots | design baseline |
 | `memory-prune` | remove stale/non-compliant tactical records | design baseline |
 | `memory-promote` | bridge tactical evidence to canonical promotion flow | design baseline |
+| `promotion-candidates` | deterministic promotion-assistant candidate ranking from frozen fixtures | Phase 4 baseline |
 
 Shared command-family expectations:
 - `--project-dir` is required.
@@ -67,6 +68,31 @@ Bridge expectations:
 - Governance-impacting promotion attempts fail closed if any required promotion contract section is missing.
 - Bridge trace metadata should set `bridge_command=memory-promote`.
 - Non-governance outputs must be explicitly marked so they are not interpreted as canonical governance closure.
+
+### `promotion-candidates` (PH4-002/003 Baseline)
+
+Build deterministic promotion candidates from frozen Phase 4 fixtures and emit machine-readable ranking outputs.
+
+```bash
+cortex-coach promotion-candidates \
+  --project-dir /path/to/project \
+  --fixture-file .cortex/fixtures/phase4_promotion/medium_mixed_tactical_cluster_v0.json \
+  --query "governance linkage evidence" \
+  --score-mode evidence_bias \
+  --candidate-limit 8 \
+  --format json
+```
+
+Baseline expectations:
+- Supported fixture shapes: `tactical_candidates[]` and `governance_debt_items[]`.
+- Deterministic tie-break order:
+  1. `combined_score_desc`
+  2. `evidence_coverage_desc`
+  3. `governance_impact_priority_asc`
+  4. `candidate_id_asc`
+- Enforcement recommendation must be explicit per candidate:
+  - `eligible_for_promotion`
+  - `block_unlinked_governance_closure`
 
 ## `init`
 

@@ -81,7 +81,7 @@
       "adapter_mode": "beads_file",
       "adapter_status_expected": "degraded",
       "fixture_ref": ".cortex/fixtures/phase3_adapter/medium_adapter_invalid_json_v0.json",
-      "description": "Invalid adapter JSON must degrade deterministically."
+      "description": "Invalid-json-equivalent decode/shape fault must degrade deterministically."
     },
     {
       "scenario_id": "s_large_adapter_healthy_high_cardinality",

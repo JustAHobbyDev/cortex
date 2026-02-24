@@ -1,0 +1,367 @@
+{
+  "artifact": "phase3_adapter_determinism_report_v0",
+  "cases": [
+    {
+      "case_id": "small:s_small_adapter_healthy:q_small_adapter_blocker_resolution",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "9fd9f8b928f2ae6028435a8af65429e3a19de4989ae46adebf42522bef885da9",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "9fd9f8b928f2ae6028435a8af65429e3a19de4989ae46adebf42522bef885da9": 30
+      },
+      "profile_id": "small",
+      "query_id": "q_small_adapter_blocker_resolution",
+      "query_text": "blocked governance item owner and next unblock action",
+      "runs_per_case": 30,
+      "scenario_id": "s_small_adapter_healthy",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": []
+    },
+    {
+      "case_id": "small:s_small_adapter_healthy:q_small_adapter_ready_next_action",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "2675ede8014135a8413a991fb0465c554cdb5006feab120ddf2f184eaab2ada8",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "2675ede8014135a8413a991fb0465c554cdb5006feab120ddf2f184eaab2ada8": 30
+      },
+      "profile_id": "small",
+      "query_id": "q_small_adapter_ready_next_action",
+      "query_text": "ready item next action priority",
+      "runs_per_case": 30,
+      "scenario_id": "s_small_adapter_healthy",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": []
+    },
+    {
+      "case_id": "small:s_small_adapter_missing_file:q_small_adapter_blocker_resolution",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "55f9aa7458a79c690cd3df4baccc9cf4774f71df515c70464448db612ed0bdee",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "missing_file",
+      "hash_counts": {
+        "55f9aa7458a79c690cd3df4baccc9cf4774f71df515c70464448db612ed0bdee": 30
+      },
+      "profile_id": "small",
+      "query_id": "q_small_adapter_blocker_resolution",
+      "query_text": "blocked governance item owner and next unblock action",
+      "runs_per_case": 30,
+      "scenario_id": "s_small_adapter_missing_file",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:file_not_found"
+      ]
+    },
+    {
+      "case_id": "small:s_small_adapter_missing_file:q_small_adapter_ready_next_action",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "78556c7ae245cb2b51090db3d53a5ca668a56a05409507292374857e0adfc525",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "missing_file",
+      "hash_counts": {
+        "78556c7ae245cb2b51090db3d53a5ca668a56a05409507292374857e0adfc525": 30
+      },
+      "profile_id": "small",
+      "query_id": "q_small_adapter_ready_next_action",
+      "query_text": "ready item next action priority",
+      "runs_per_case": 30,
+      "scenario_id": "s_small_adapter_missing_file",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:file_not_found"
+      ]
+    },
+    {
+      "case_id": "medium:s_medium_adapter_healthy:q_medium_governance_blocker_and_owner",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "b553fbc0a07dc5a8306e9d678a973fa6feaa30ff06903555db97a1d9d25fac6c",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "b553fbc0a07dc5a8306e9d678a973fa6feaa30ff06903555db97a1d9d25fac6c": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_healthy",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": []
+    },
+    {
+      "case_id": "medium:s_medium_adapter_healthy:q_medium_ready_work_priority_order",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "059fd4bc0c84e0d742e19d07812aa945d405ee1d4f427a63446874e42d5c72a9",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "059fd4bc0c84e0d742e19d07812aa945d405ee1d4f427a63446874e42d5c72a9": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_healthy",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": []
+    },
+    {
+      "case_id": "medium:s_medium_adapter_stale_metadata:q_medium_governance_blocker_and_owner",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "c3062fa06c826fa9baed2f891f7dc13c96f8afc3546b1cb69eccd5024a9fc598",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "stale_metadata",
+      "hash_counts": {
+        "c3062fa06c826fa9baed2f891f7dc13c96f8afc3546b1cb69eccd5024a9fc598": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_stale_metadata",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_warning:stale_item"
+      ]
+    },
+    {
+      "case_id": "medium:s_medium_adapter_stale_metadata:q_medium_ready_work_priority_order",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "e70c6fe05f398e5dbe72375163d2016ee5507907fba87e922fc617cf90d8a8b7",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "stale_metadata",
+      "hash_counts": {
+        "e70c6fe05f398e5dbe72375163d2016ee5507907fba87e922fc617cf90d8a8b7": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_stale_metadata",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_warning:stale_item"
+      ]
+    },
+    {
+      "case_id": "medium:s_medium_adapter_invalid_json:q_medium_governance_blocker_and_owner",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "0fa5cc591f3713587e8ace0c7d88adee3fd0754f5d09f203acc11c141983afad",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "invalid_json",
+      "hash_counts": {
+        "0fa5cc591f3713587e8ace0c7d88adee3fd0754f5d09f203acc11c141983afad": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_invalid_json",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:items_not_list"
+      ]
+    },
+    {
+      "case_id": "medium:s_medium_adapter_invalid_json:q_medium_ready_work_priority_order",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "b483a77e753dbb2933476c0f578699ffc4d99db450d6cee6eb09d490b192c544",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "invalid_json",
+      "hash_counts": {
+        "b483a77e753dbb2933476c0f578699ffc4d99db450d6cee6eb09d490b192c544": 30
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs_per_case": 30,
+      "scenario_id": "s_medium_adapter_invalid_json",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:items_not_list"
+      ]
+    },
+    {
+      "case_id": "large:s_large_adapter_healthy_high_cardinality:q_large_noise_control_and_focus",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "528ed430824df48d3bbd596482fdd14b584d329dc694739737361632310f072c",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "528ed430824df48d3bbd596482fdd14b584d329dc694739737361632310f072c": 30
+      },
+      "profile_id": "large",
+      "query_id": "q_large_noise_control_and_focus",
+      "query_text": "high-cardinality adapter noise control focus list",
+      "runs_per_case": 30,
+      "scenario_id": "s_large_adapter_healthy_high_cardinality",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_warning:stale_item"
+      ]
+    },
+    {
+      "case_id": "large:s_large_adapter_healthy_high_cardinality:q_large_degradation_non_blocking_validation",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "21271773b9a9e4a4c1acd6157069ce29b80a5cf7e1853df8002d4e7005509ba3",
+      "errors": [],
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "hash_counts": {
+        "21271773b9a9e4a4c1acd6157069ce29b80a5cf7e1853df8002d4e7005509ba3": 30
+      },
+      "profile_id": "large",
+      "query_id": "q_large_degradation_non_blocking_validation",
+      "query_text": "adapter degradation non blocking governance checks",
+      "runs_per_case": 30,
+      "scenario_id": "s_large_adapter_healthy_high_cardinality",
+      "status_counts": {
+        "loaded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_warning:stale_item"
+      ]
+    },
+    {
+      "case_id": "large:s_large_adapter_timeout_simulated:q_large_noise_control_and_focus",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "c1afe6bd5a1be6c60d909fb6c15942a5ae7436bb0801a1ab3888657eb244bece",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "timeout_simulated",
+      "hash_counts": {
+        "c1afe6bd5a1be6c60d909fb6c15942a5ae7436bb0801a1ab3888657eb244bece": 30
+      },
+      "profile_id": "large",
+      "query_id": "q_large_noise_control_and_focus",
+      "query_text": "high-cardinality adapter noise control focus list",
+      "runs_per_case": 30,
+      "scenario_id": "s_large_adapter_timeout_simulated",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:items_not_list"
+      ]
+    },
+    {
+      "case_id": "large:s_large_adapter_timeout_simulated:q_large_degradation_non_blocking_validation",
+      "command_failure_count": 0,
+      "deterministic": true,
+      "deterministic_hash": "5c05104244c9149e93b0b8777bf17626632039a85b990785386c585c7a6e8ca6",
+      "errors": [],
+      "expected_adapter_status": "degraded",
+      "failure_mode": "timeout_simulated",
+      "hash_counts": {
+        "5c05104244c9149e93b0b8777bf17626632039a85b990785386c585c7a6e8ca6": 30
+      },
+      "profile_id": "large",
+      "query_id": "q_large_degradation_non_blocking_validation",
+      "query_text": "adapter degradation non blocking governance checks",
+      "runs_per_case": 30,
+      "scenario_id": "s_large_adapter_timeout_simulated",
+      "status_counts": {
+        "degraded": 30
+      },
+      "status_match_all_runs": true,
+      "unique_hash_count": 1,
+      "unique_warning_classes": [
+        "adapter_degraded:items_not_list"
+      ]
+    }
+  ],
+  "coach_command": [
+    "/tmp/cortex-coach/.venv/bin/python",
+    "/tmp/cortex-coach/scripts/cortex_project_coach_v0.py"
+  ],
+  "fixture_file": ".cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json",
+  "generated_at": "2026-02-24T10:15:21Z",
+  "summary": {
+    "case_count": 14,
+    "determinism_rate": 1.0,
+    "deterministic_case_count": 14,
+    "pass": true,
+    "runs_per_case": 30,
+    "total_duration_seconds": 184.031649,
+    "total_runs": 420
+  },
+  "target": {
+    "determinism_rate": 1.0,
+    "runs_per_case_min": 30
+  },
+  "version": "v0"
+}

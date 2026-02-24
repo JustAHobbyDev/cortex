@@ -1,0 +1,493 @@
+{
+  "artifact": "phase3_adapter_degradation_report_v0",
+  "cases": [
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/small_adapter_healthy_v0.json",
+      "case_id": "small:s_small_adapter_healthy:q_small_adapter_blocker_resolution",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_adapter_blocker_resolution",
+      "query_text": "blocked governance item owner and next unblock action",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.421331,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Happy-path adapter payload with valid freshness metadata.",
+      "scenario_id": "s_small_adapter_healthy"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/small_adapter_healthy_v0.json",
+      "case_id": "small:s_small_adapter_healthy:q_small_adapter_ready_next_action",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_adapter_ready_next_action",
+      "query_text": "ready item next action priority",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.481545,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Happy-path adapter payload with valid freshness metadata.",
+      "scenario_id": "s_small_adapter_healthy"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/missing_file.json",
+      "case_id": "small:s_small_adapter_missing_file:q_small_adapter_blocker_resolution",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "missing_file",
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_adapter_blocker_resolution",
+      "query_text": "blocked governance item owner and next unblock action",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.413579,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:file_not_found"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Missing adapter payload file must degrade to governance+task slices.",
+      "scenario_id": "s_small_adapter_missing_file"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/missing_file.json",
+      "case_id": "small:s_small_adapter_missing_file:q_small_adapter_ready_next_action",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "missing_file",
+      "pass": true,
+      "profile_id": "small",
+      "query_id": "q_small_adapter_ready_next_action",
+      "query_text": "ready item next action priority",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.445956,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:file_not_found"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Missing adapter payload file must degrade to governance+task slices.",
+      "scenario_id": "s_small_adapter_missing_file"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_healthy_v0.json",
+      "case_id": "medium:s_medium_adapter_healthy:q_medium_governance_blocker_and_owner",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.400813,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Mixed-state adapter payload with parseable freshness metadata.",
+      "scenario_id": "s_medium_adapter_healthy"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_healthy_v0.json",
+      "case_id": "medium:s_medium_adapter_healthy:q_medium_ready_work_priority_order",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.443055,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Mixed-state adapter payload with parseable freshness metadata.",
+      "scenario_id": "s_medium_adapter_healthy"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_stale_v0.json",
+      "case_id": "medium:s_medium_adapter_stale_metadata:q_medium_governance_blocker_and_owner",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "stale_metadata",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.40709,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": true,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_warning:stale_item"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Adapter payload with stale source timestamps; warnings required.",
+      "scenario_id": "s_medium_adapter_stale_metadata"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_stale_v0.json",
+      "case_id": "medium:s_medium_adapter_stale_metadata:q_medium_ready_work_priority_order",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "stale_metadata",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.463953,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": true,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_warning:stale_item"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Adapter payload with stale source timestamps; warnings required.",
+      "scenario_id": "s_medium_adapter_stale_metadata"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_invalid_json_v0.json",
+      "case_id": "medium:s_medium_adapter_invalid_json:q_medium_governance_blocker_and_owner",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "invalid_json",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "query_text": "governance blocker ownership and dependency",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.428969,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:items_not_list"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Invalid-json-equivalent decode/shape fault must degrade deterministically.",
+      "scenario_id": "s_medium_adapter_invalid_json"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/medium_adapter_invalid_json_v0.json",
+      "case_id": "medium:s_medium_adapter_invalid_json:q_medium_ready_work_priority_order",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "invalid_json",
+      "pass": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_ready_work_priority_order",
+      "query_text": "ready work order priority deterministic",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.437924,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:items_not_list"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Invalid-json-equivalent decode/shape fault must degrade deterministically.",
+      "scenario_id": "s_medium_adapter_invalid_json"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/large_adapter_healthy_v0.json",
+      "case_id": "large:s_large_adapter_healthy_high_cardinality:q_large_noise_control_and_focus",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_noise_control_and_focus",
+      "query_text": "high-cardinality adapter noise control focus list",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.436243,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": true,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_warning:stale_item"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "High-cardinality adapter payload; bounded adapter selection required.",
+      "scenario_id": "s_large_adapter_healthy_high_cardinality"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/large_adapter_healthy_v0.json",
+      "case_id": "large:s_large_adapter_healthy_high_cardinality:q_large_degradation_non_blocking_validation",
+      "expected_adapter_status": "loaded",
+      "failure_mode": "healthy",
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_degradation_non_blocking_validation",
+      "query_text": "adapter degradation non blocking governance checks",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": false,
+          "elapsed_seconds": 0.457474,
+          "error": null,
+          "expected_adapter_status": "loaded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "loaded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": true,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_warning:stale_item"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "High-cardinality adapter payload; bounded adapter selection required.",
+      "scenario_id": "s_large_adapter_healthy_high_cardinality"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/large_adapter_timeout_simulated_v0.json",
+      "case_id": "large:s_large_adapter_timeout_simulated:q_large_noise_control_and_focus",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "timeout_simulated",
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_noise_control_and_focus",
+      "query_text": "high-cardinality adapter noise control focus list",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.372493,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:items_not_list"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Timeout-equivalent degradation scenario; governance path must remain available.",
+      "scenario_id": "s_large_adapter_timeout_simulated"
+    },
+    {
+      "adapter_fixture": ".cortex/fixtures/phase3_adapter/large_adapter_timeout_simulated_v0.json",
+      "case_id": "large:s_large_adapter_timeout_simulated:q_large_degradation_non_blocking_validation",
+      "expected_adapter_status": "degraded",
+      "failure_mode": "timeout_simulated",
+      "pass": true,
+      "profile_id": "large",
+      "query_id": "q_large_degradation_non_blocking_validation",
+      "query_text": "adapter degradation non blocking governance checks",
+      "runs": [
+        {
+          "command_success": true,
+          "degraded_warning_present": true,
+          "elapsed_seconds": 0.427816,
+          "error": null,
+          "expected_adapter_status": "degraded",
+          "fail_open_success": true,
+          "has_control_plane": true,
+          "has_task_slice": true,
+          "observed_adapter_status": "degraded",
+          "pass": true,
+          "returncode": 0,
+          "run_index": 1,
+          "stale_warning_present": false,
+          "status_match": true,
+          "warning_classes": [
+            "adapter_degraded:items_not_list"
+          ],
+          "warning_expectation_met": true
+        }
+      ],
+      "scenario_description": "Timeout-equivalent degradation scenario; governance path must remain available.",
+      "scenario_id": "s_large_adapter_timeout_simulated"
+    }
+  ],
+  "coach_command": [
+    "/tmp/cortex-coach/.venv/bin/python",
+    "/tmp/cortex-coach/scripts/cortex_project_coach_v0.py"
+  ],
+  "fixture_file": ".cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json",
+  "generated_at": "2026-02-24T10:12:31Z",
+  "summary": {
+    "case_count": 14,
+    "failure_case_count": 8,
+    "failure_case_fail_open_rate": 1.0,
+    "failure_case_pass_count": 8,
+    "pass": true,
+    "run_count": 14,
+    "total_duration_seconds": 6.038241
+  },
+  "target": {
+    "degradation_runs_per_case": 1,
+    "failure_scenario_fail_open_rate": 1.0
+  },
+  "version": "v0"
+}

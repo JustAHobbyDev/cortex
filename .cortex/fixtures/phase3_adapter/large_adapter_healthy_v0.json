@@ -1,0 +1,158 @@
+{
+  "adapter_id": "beads",
+  "adapter_fetched_at": "2026-02-24T06:40:00Z",
+  "items": [
+    {
+      "id": "wk_large_blocked_001",
+      "priority": 1,
+      "source_updated_at": "2026-02-24T06:35:00Z",
+      "state": "blocked",
+      "summary": "Blocked governance gate with owner and non-blocking fallback plan.",
+      "tags": [
+        "governance",
+        "blocked",
+        "owner",
+        "non-blocking"
+      ],
+      "title": "Resolve gate dependency blocker"
+    },
+    {
+      "id": "wk_large_ready_001",
+      "priority": 1,
+      "source_updated_at": "2026-02-24T06:34:30Z",
+      "state": "ready",
+      "summary": "Ready focus item for bounded execution list generation.",
+      "tags": [
+        "ready",
+        "focus",
+        "bounded"
+      ],
+      "title": "Build bounded focus list"
+    },
+    {
+      "id": "wk_large_ready_002",
+      "priority": 1,
+      "source_updated_at": "2026-02-24T06:34:00Z",
+      "state": "ready",
+      "summary": "Ready focus item with identical priority to validate deterministic tie-break ordering.",
+      "tags": [
+        "ready",
+        "focus",
+        "deterministic"
+      ],
+      "title": "Validate tie-break ordering for ready items"
+    },
+    {
+      "id": "wk_large_priority_001",
+      "priority": 2,
+      "source_updated_at": "2026-02-24T06:33:30Z",
+      "state": "priority",
+      "summary": "Priority noise-control task that should remain visible in high-cardinality mode.",
+      "tags": [
+        "priority",
+        "noise-control",
+        "bounded"
+      ],
+      "title": "Prioritize noise control lane"
+    },
+    {
+      "id": "wk_large_ready_003",
+      "priority": 2,
+      "source_updated_at": "2026-02-24T06:33:00Z",
+      "state": "ready",
+      "summary": "Ready governance checks remain non-blocking even with adapter load.",
+      "tags": [
+        "governance",
+        "ready",
+        "non-blocking"
+      ],
+      "title": "Keep governance checks non-blocking"
+    },
+    {
+      "id": "wk_large_stale_001",
+      "priority": 3,
+      "source_updated_at": "2026-02-23T05:00:00Z",
+      "state": "stale",
+      "summary": "Older stale item retained as realistic noise in large payloads.",
+      "tags": [
+        "stale",
+        "noise"
+      ],
+      "title": "Stale noise candidate"
+    },
+    {
+      "id": "wk_large_ready_004",
+      "priority": 3,
+      "source_updated_at": "2026-02-24T06:32:30Z",
+      "state": "ready",
+      "summary": "Ready workload for focus shortlist ranking.",
+      "tags": [
+        "ready",
+        "focus"
+      ],
+      "title": "Rank shortlist candidate A"
+    },
+    {
+      "id": "wk_large_ready_005",
+      "priority": 3,
+      "source_updated_at": "2026-02-24T06:32:00Z",
+      "state": "ready",
+      "summary": "Ready workload for focus shortlist ranking.",
+      "tags": [
+        "ready",
+        "focus"
+      ],
+      "title": "Rank shortlist candidate B"
+    },
+    {
+      "id": "wk_large_unknown_001",
+      "priority": 5,
+      "source_updated_at": "2026-02-24T06:31:30Z",
+      "state": "unknown",
+      "summary": "Background unknown-state item included to increase cardinality.",
+      "tags": [
+        "background",
+        "noise"
+      ],
+      "title": "Background maintenance note"
+    },
+    {
+      "id": "wk_large_priority_002",
+      "priority": 4,
+      "source_updated_at": "2026-02-24T06:31:00Z",
+      "state": "priority",
+      "summary": "Priority governance readiness signal for deterministic ranking checks.",
+      "tags": [
+        "priority",
+        "governance",
+        "deterministic"
+      ],
+      "title": "Prioritize readiness signal"
+    },
+    {
+      "id": "wk_large_blocked_002",
+      "priority": 2,
+      "source_updated_at": "2026-02-24T06:30:30Z",
+      "state": "blocked",
+      "summary": "Blocked dependency requiring explicit owner escalation path.",
+      "tags": [
+        "blocked",
+        "owner",
+        "dependency"
+      ],
+      "title": "Escalate owner for dependency clearance"
+    },
+    {
+      "id": "wk_large_ready_006",
+      "priority": 4,
+      "source_updated_at": "2026-02-24T06:30:00Z",
+      "state": "ready",
+      "summary": "Ready bounded work item for final high-cardinality pass.",
+      "tags": [
+        "ready",
+        "bounded"
+      ],
+      "title": "Finalize bounded adapter shortlist"
+    }
+  ]
+}

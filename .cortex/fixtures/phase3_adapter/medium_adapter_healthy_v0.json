@@ -1,0 +1,70 @@
+{
+  "adapter_id": "beads",
+  "adapter_fetched_at": "2026-02-24T06:20:00Z",
+  "items": [
+    {
+      "id": "wk_medium_blocked_001",
+      "priority": 1,
+      "source_updated_at": "2026-02-24T06:15:00Z",
+      "state": "blocked",
+      "summary": "Blocked by governance dependency; owner is policy lead pending decision promotion.",
+      "tags": [
+        "governance",
+        "blocked",
+        "owner",
+        "dependency"
+      ],
+      "title": "Unblock governance dependency"
+    },
+    {
+      "id": "wk_medium_ready_001",
+      "priority": 2,
+      "source_updated_at": "2026-02-24T06:14:00Z",
+      "state": "ready",
+      "summary": "Ready work item for deterministic ordering validation and priority handoff.",
+      "tags": [
+        "ready",
+        "priority",
+        "deterministic"
+      ],
+      "title": "Validate deterministic ranking"
+    },
+    {
+      "id": "wk_medium_priority_001",
+      "priority": 3,
+      "source_updated_at": "2026-02-24T06:13:00Z",
+      "state": "priority",
+      "summary": "Priority runbook update covering governance operator guidance.",
+      "tags": [
+        "priority",
+        "governance"
+      ],
+      "title": "Refresh operator runbook guidance"
+    },
+    {
+      "id": "wk_medium_ready_002",
+      "priority": 4,
+      "source_updated_at": "2026-02-24T06:10:00Z",
+      "state": "ready",
+      "summary": "Ready failure drill with owner assignment and dependency checklist.",
+      "tags": [
+        "ready",
+        "owner",
+        "dependency"
+      ],
+      "title": "Run adapter failure drill"
+    },
+    {
+      "id": "wk_medium_unknown_001",
+      "priority": 7,
+      "source_updated_at": "2026-02-24T06:08:00Z",
+      "state": "unknown",
+      "summary": "Background item retained for medium-cardinality noise control.",
+      "tags": [
+        "background",
+        "noise"
+      ],
+      "title": "Background cleanup item"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "adapter_id": "beads",
+  "adapter_fetched_at": "2026-02-24T05:00:00Z",
+  "items": [
+    {
+      "id": "wk_small_blocked_001",
+      "priority": 1,
+      "source_updated_at": "2026-02-24T04:57:00Z",
+      "state": "blocked",
+      "summary": "Blocked on decision and reflection linkage before closeout.",
+      "tags": [
+        "governance",
+        "blocked"
+      ],
+      "title": "Resolve governance blocker"
+    },
+    {
+      "id": "wk_small_ready_001",
+      "priority": 2,
+      "source_updated_at": "2026-02-24T04:50:00Z",
+      "state": "ready",
+      "summary": "Ready implementation slice once blocker is cleared.",
+      "tags": [
+        "phase3",
+        "ready"
+      ],
+      "title": "Implement adapter fallback assertions"
+    }
+  ]
+}

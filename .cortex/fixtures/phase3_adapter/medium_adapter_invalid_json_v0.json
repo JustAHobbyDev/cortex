@@ -1,0 +1,8 @@
+{
+  "adapter_id": "beads",
+  "adapter_fetched_at": "2026-02-24T06:20:00Z",
+  "error": "invalid_json_simulated",
+  "items": {
+    "reason": "decode_or_shape_fault_simulation"
+  }
+}

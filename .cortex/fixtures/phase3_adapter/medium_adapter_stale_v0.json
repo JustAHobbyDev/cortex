@@ -1,0 +1,46 @@
+{
+  "adapter_id": "beads",
+  "adapter_fetched_at": "2026-02-24T06:20:00Z",
+  "items": [
+    {
+      "id": "wk_medium_stale_blocked_001",
+      "priority": 1,
+      "source_updated_at": "2026-02-21T05:00:00Z",
+      "state": "blocked",
+      "summary": "Stale blocked governance dependency with explicit owner still unresolved.",
+      "tags": [
+        "stale",
+        "governance",
+        "blocked",
+        "owner"
+      ],
+      "title": "Stale blocker needing owner action"
+    },
+    {
+      "id": "wk_medium_stale_ready_001",
+      "priority": 2,
+      "source_updated_at": "2026-02-21T05:30:00Z",
+      "state": "ready",
+      "summary": "Ready item flagged as stale for deterministic stale warning validation.",
+      "tags": [
+        "stale",
+        "ready",
+        "deterministic"
+      ],
+      "title": "Stale ready item for warning checks"
+    },
+    {
+      "id": "wk_medium_stale_priority_001",
+      "priority": 3,
+      "source_updated_at": "2026-02-21T06:00:00Z",
+      "state": "priority",
+      "summary": "Priority stale work used to validate freshness normalization.",
+      "tags": [
+        "stale",
+        "priority",
+        "freshness"
+      ],
+      "title": "Priority stale metadata validation item"
+    }
+  ]
+}

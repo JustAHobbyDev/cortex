@@ -270,6 +270,13 @@ python3 scripts/cortex_project_coach_v0.py context-load \
 2. relaxed budget
 3. unrestricted (no file/char limits) if prior levels fail
 
+Phase 2 contract baseline (`PH2-001`, implementation target):
+- Canonical contract source: `contracts/context_load_retrieval_contract_v0.md`
+- Ranked retrieval order is deterministic and includes explicit tie-break rules.
+- Weighting mode and retrieval profile are contract-bounded and default to backward-compatible deterministic behavior.
+- JSON output should carry score breakdown, provenance, and confidence metadata for selected entries.
+- Gate C evaluation uses frozen fixture/query set: `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
+
 ## `context-policy`
 
 Analyze repository shape and recommend task focus + context budgets.

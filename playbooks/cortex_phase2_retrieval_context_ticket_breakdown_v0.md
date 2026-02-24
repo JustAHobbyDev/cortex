@@ -47,7 +47,7 @@ Status vocabulary:
 
 | Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| PH2-001 | Retrieval Contract Baseline + Query Profile Freeze | todo | Contract/Schema Lead | Runtime Reliability Lead | Week 5 | 2026-03-24 | Gate B pass | `contracts/`;`specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md` | Define Phase 2 retrieval semantics and frozen evaluation profile contract before implementation changes. |
+| PH2-001 | Retrieval Contract Baseline + Query Profile Freeze | in_progress | Contract/Schema Lead | Runtime Reliability Lead | Week 5 | 2026-03-24 | Gate B pass | `contracts/context_load_retrieval_contract_v0.md`;`.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`;`specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md` | Define Phase 2 retrieval semantics and frozen evaluation profile contract before implementation changes. |
 | PH2-002 | `context-load` Ranked Retrieval + Deterministic Tie-Breaks | todo | Runtime Reliability Lead | Contract/Schema Lead | Week 5 | 2026-03-27 | PH2-001 | `specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md`;`cortex-coach` runtime/tests | Implement deterministic ranked retrieval path in runtime with explicit stable ordering logic. |
 | PH2-003 | Evidence/Outcome Weighting Option | todo | Runtime Reliability Lead | Governance Policy Lead | Week 5 | 2026-03-29 | PH2-001,PH2-002 | `specs/cortex_project_coach_spec_v0.md`;`docs/cortex-coach/commands.md`;`cortex-coach` runtime/tests | Add bounded weighting controls that improve relevance without introducing non-deterministic behavior. |
 | PH2-004 | Tactical Compaction + Stale-Pruning Policy Integration | todo | Security & Data Policy Lead | Governance Enforcement Lead | Week 6 | 2026-04-01 | PH2-001 | `policies/tactical_data_policy_v0.md`;`specs/cortex_project_coach_spec_v0.md`;`cortex-coach` runtime/tests | Introduce deterministic compaction/pruning semantics and explicit policy-aligned reason codes. |
@@ -64,9 +64,10 @@ Objective:
 - Define explicit Phase 2 retrieval semantics and freeze evaluation profiles before runtime changes.
 
 Primary artifacts:
+- `contracts/context_load_retrieval_contract_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
 - `docs/cortex-coach/commands.md`
-- `contracts/` (new or updated retrieval/eval contract artifacts)
+- `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
 
 Acceptance criteria:
 - `context-load` retrieval ranking strategy and tie-break order are explicit.
@@ -75,7 +76,10 @@ Acceptance criteria:
 - JSON output semantics and error classes remain machine-parsable.
 
 Evidence:
-- contract/spec/doc updates under paths above
+- `contracts/context_load_retrieval_contract_v0.md`
+- `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
+- `specs/cortex_project_coach_spec_v0.md`
+- `docs/cortex-coach/commands.md`
 
 ### PH2-002: `context-load` Ranked Retrieval + Deterministic Tie-Breaks
 

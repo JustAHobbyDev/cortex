@@ -1,0 +1,227 @@
+{
+  "artifact": "phase2_retrieval_eval_fixture_freeze_v0",
+  "version": "v0",
+  "status": "frozen",
+  "frozen_on": "2026-02-24",
+  "source_ticket": "PH2-001",
+  "source_playbooks": [
+    "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase2_measurement_plan_v0.md"
+  ],
+  "profiles": [
+    {
+      "profile_id": "small",
+      "description": "Low tactical history, narrow scope, governance-heavy queries.",
+      "query_ids": [
+        "q_small_decision_linkage_gap",
+        "q_small_recent_gate_failure",
+        "q_small_phase_handoff_checklist"
+      ]
+    },
+    {
+      "profile_id": "medium",
+      "description": "Representative active project profile with mixed governance and runtime context.",
+      "query_ids": [
+        "q_medium_context_rollover_enforcement",
+        "q_medium_ci_overhead_regression",
+        "q_medium_policy_vs_implementation_boundary"
+      ]
+    },
+    {
+      "profile_id": "large",
+      "description": "High-cardinality tactical history with stale/noise pressure and competing priorities.",
+      "query_ids": [
+        "q_large_stale_playbook_cleanup",
+        "q_large_retrieval_noise_control",
+        "q_large_phase_closeout_traceability"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "q_small_decision_linkage_gap",
+      "profile_id": "small",
+      "task": "identify missing decision linkage before closeout",
+      "query_text": "decision linkage required for governance-impacting changes",
+      "must_include_signals_any": [
+        "decision",
+        "reflection",
+        "promotion"
+      ],
+      "must_include_tags_any": [
+        "governance",
+        "decision"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_small_recent_gate_failure",
+      "profile_id": "small",
+      "task": "find latest required gate failure and remediation context",
+      "query_text": "latest reflection enforcement or quality gate failure",
+      "must_include_signals_any": [
+        "ci",
+        "gate",
+        "remediation"
+      ],
+      "must_include_tags_any": [
+        "quality-gate",
+        "reflection"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_small_phase_handoff_checklist",
+      "profile_id": "small",
+      "task": "verify phase handoff checklist and entry criteria",
+      "query_text": "phase handoff entry checklist pass fail evidence",
+      "must_include_signals_any": [
+        "handoff",
+        "checklist",
+        "entry-criteria"
+      ],
+      "must_include_tags_any": [
+        "phase0",
+        "phase1"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_medium_context_rollover_enforcement",
+      "profile_id": "medium",
+      "task": "assess context hydration enforcement behavior on rollover",
+      "query_text": "context hydration receipt enforcement rollover",
+      "must_include_signals_any": [
+        "hydration",
+        "receipt",
+        "enforcement"
+      ],
+      "must_include_tags_any": [
+        "context-hydration",
+        "policy"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_medium_ci_overhead_regression",
+      "profile_id": "medium",
+      "task": "compare ci overhead trend vs threshold",
+      "query_text": "ci runtime overhead threshold regression",
+      "must_include_signals_any": [
+        "ci-overhead",
+        "measurement",
+        "threshold"
+      ],
+      "must_include_tags_any": [
+        "phase1",
+        "gate-b"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_medium_policy_vs_implementation_boundary",
+      "profile_id": "medium",
+      "task": "retrieve boundary between fixed policy and implementation choices",
+      "query_text": "fixed policy vs implementation choice matrix rule of thumb",
+      "must_include_signals_any": [
+        "policy",
+        "implementation-choice",
+        "matrix"
+      ],
+      "must_include_tags_any": [
+        "governance",
+        "boundary"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_large_stale_playbook_cleanup",
+      "profile_id": "large",
+      "task": "identify temporally-scoped playbooks that should be retired",
+      "query_text": "temporal playbook retirement release surface",
+      "must_include_signals_any": [
+        "temporal",
+        "retirement",
+        "release-surface"
+      ],
+      "must_include_tags_any": [
+        "playbook",
+        "governance"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_large_retrieval_noise_control",
+      "profile_id": "large",
+      "task": "evaluate retrieval quality under high-cardinality tactical history",
+      "query_text": "retrieval relevance stale noise ratio",
+      "must_include_signals_any": [
+        "retrieval",
+        "relevance",
+        "stale-noise"
+      ],
+      "must_include_tags_any": [
+        "phase2",
+        "context-quality"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    },
+    {
+      "query_id": "q_large_phase_closeout_traceability",
+      "profile_id": "large",
+      "task": "trace phase closeout evidence and residual risk ownership",
+      "query_text": "phase closeout evidence residual risk owner due date",
+      "must_include_signals_any": [
+        "closeout",
+        "residual-risk",
+        "owner"
+      ],
+      "must_include_tags_any": [
+        "phase",
+        "governance"
+      ],
+      "must_exclude_tags_all": [
+        "secret",
+        "credential",
+        "pii"
+      ]
+    }
+  ],
+  "freeze_rules": {
+    "version_bump_required_on_query_or_profile_change": true,
+    "gate_c_baseline_reset_note_required_on_change": true,
+    "deterministic_query_order_required": true
+  }
+}

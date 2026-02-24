@@ -17,6 +17,7 @@ Inputs:
 - `contracts/tactical_memory_prime_bundle_schema_v0.json` tactical memory prime bundle contract schema
 - `contracts/tactical_memory_diff_schema_v0.json` tactical memory diff contract schema
 - `contracts/tactical_memory_prune_schema_v0.json` tactical memory prune contract schema
+- `contracts/context_load_retrieval_contract_v0.md` context-load retrieval/ranking contract baseline
 - `policies/cortex_coach_cli_output_contract_policy_v0.md` CLI output contract policy
 - `policies/context_hydration_policy_v0.md` context hydration policy
 - `policies/mistake_detection_provenance_policy_v0.md` mistake provenance policy
@@ -268,6 +269,42 @@ Failure handling and deterministic recovery:
 - Mutation writes must be fail-safe (either fully committed or fully rolled back).
 - On interruption/failure, recovery path must preserve index integrity and deterministic subsequent behavior.
 - Recovery diagnostics must be machine-readable for post-incident analysis.
+
+### `context-load` Retrieval and Context Quality Baseline (Phase 2 / PH2-001)
+
+Canonical contract sources:
+- `contracts/context_load_retrieval_contract_v0.md`
+- `playbooks/cortex_phase2_measurement_plan_v0.md`
+- `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
+
+Retrieval pipeline requirements:
+- `context-load` must use deterministic candidate assembly and ranking for identical input and repository state.
+- Ranking must expose component score breakdown and deterministic combined score ordering.
+- Ranking contract and score fields must remain machine-readable in JSON output for automation.
+
+Weighting and profile controls:
+- Retrieval weighting mode must be explicit and bounded by contract-defined presets.
+- Retrieval profile selection (`small`, `medium`, `large`) must map to frozen evaluation fixtures for Gate C comparability.
+- Omitted weighting/profile controls must preserve backward-compatible deterministic defaults.
+
+Deterministic tie-break requirements:
+- Tie-break chain must remain fixed and documented in canonical contract.
+- Equal-score candidates must never rely on runtime-randomized ordering.
+- Ordering behavior must remain stable across repeated runs and process restarts.
+
+Context budget and overflow behavior:
+- Ranked output must honor context budget limits and fallback sequence behavior.
+- Dropped/truncated candidates must emit deterministic machine-readable metadata.
+- Budget overflow must not silently discard provenance/confidence fields for selected entries.
+
+Provenance and confidence requirements:
+- Selected context entries must include stable provenance metadata for traceability.
+- Confidence values must be normalized and bounded for deterministic downstream scoring.
+- Retrieval output remains tactical (non-authoritative) until promoted through governance contracts.
+
+Fixture freeze requirements:
+- Gate C measurement and relevance comparisons must use the frozen fixture set at `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`.
+- Fixture changes require version bump and explicit baseline reset note in closeout artifacts.
 
 ### Context Hydration Enforcement
 

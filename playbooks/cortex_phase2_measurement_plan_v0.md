@@ -16,6 +16,8 @@ Define deterministic, budget-aware Gate C measurement criteria so retrieval rele
 - `playbooks/cortex_vision_master_roadmap_v1.md`
 - `playbooks/session_governance_hybrid_plan_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
+- `contracts/context_load_retrieval_contract_v0.md`
+- `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
 - `.cortex/reports/project_state/phase1_gate_b_measurement_closeout_v0.md`
 
 ## Scope
@@ -65,6 +67,7 @@ Fixture rules:
 - Freeze fixture corpus and labeled expected outputs before implementation comparison runs.
 - Include fixture version id and hash in each measurement artifact.
 - Do not change fixture set during a baseline-vs-post comparison cycle.
+- Canonical fixture source for Phase 2 Gate C: `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`.
 
 ## Baseline and Comparison Plan
 

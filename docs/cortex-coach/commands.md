@@ -241,6 +241,9 @@ Generate a bounded context bundle for agent handoff.
 cortex-coach context-load \
   --project-dir /path/to/project \
   --task "design drift" \
+  --retrieval-profile medium \
+  --weighting-mode uniform \
+  --adapter-mode off \
   --max-files 10 \
   --max-chars-per-file 2000 \
   --fallback-mode priority \
@@ -270,12 +273,34 @@ python3 scripts/cortex_project_coach_v0.py context-load \
 2. relaxed budget
 3. unrestricted (no file/char limits) if prior levels fail
 
+Phase 3 optional adapter enrichment (read-only, fail-open):
+
+```bash
+cortex-coach context-load \
+  --project-dir /path/to/project \
+  --task "governance blocker" \
+  --adapter-mode beads_file \
+  --adapter-file .cortex/reports/beads_adapter.json \
+  --adapter-max-items 4 \
+  --adapter-stale-seconds 86400
+```
+
+Adapter modes:
+- `off` (default)
+- `beads_file`
+
 Phase 2 contract baseline (`PH2-001`, implementation target):
 - Canonical contract source: `contracts/context_load_retrieval_contract_v0.md`
 - Ranked retrieval order is deterministic and includes explicit tie-break rules.
 - Weighting mode and retrieval profile are contract-bounded and default to backward-compatible deterministic behavior.
 - JSON output should carry score breakdown, provenance, and confidence metadata for selected entries.
 - Gate C evaluation uses frozen fixture/query set: `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`
+
+Phase 3 contract baseline (`PH3-001`, implementation target):
+- Canonical contract source: `contracts/context_load_work_graph_adapter_contract_v0.md`
+- Adapter entries remain non-authoritative and must emit `provenance.source_kind=adapter_signal`.
+- Adapter failures decode/availability/freshness issues degrade to governance+task slices with deterministic warnings.
+- Gate D evaluation uses frozen scenario fixture set: `.cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json`
 
 ## `context-policy`
 

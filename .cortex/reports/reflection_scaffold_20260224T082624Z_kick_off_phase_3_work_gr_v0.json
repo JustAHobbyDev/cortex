@@ -1,0 +1,58 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/agent-context-loader.md",
+    "docs/cortex-coach/commands.md",
+    "playbooks/cortex_phase3_measurement_plan_v0.md",
+    "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase3_measurement_plan_v0.md",
+    "contracts/context_load_work_graph_adapter_contract_v0.md",
+    ".cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json",
+    "specs/cortex_project_coach_spec_v0.md",
+    "docs/cortex-coach/commands.md",
+    "docs/cortex-coach/agent-context-loader.md",
+    "contracts/temporal_playbook_release_surface_contract_v0.json"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Phase 3 adapter kickoff changes touched governance-impacting docs/playbooks without fresh decision linkage.",
+  "pattern": "When starting a new phase, planning/spec artifacts can be added before a decision entry captures authority and scope boundaries.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Kick off Phase 3 work-graph adapter contract and implementation baseline\" --decision \"Mistake observed: Phase 3 adapter kickoff changes touched governance-impacting docs/playbooks without fresh decision linkage. Recurring pattern: When starting a new phase, planning/spec artifacts can be added before a decision entry captures authority and scope boundaries. Adopt reusable rule: When opening a new phase board or measurement plan, capture and promote a decision linking all governance-impacting kickoff artifacts in the same change.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260224T082624Z_kick_off_phase_3_work_gr --reflection-report .cortex/reports/reflection_scaffold_20260224T082624Z_kick_off_phase_3_work_gr_v0.json --linked-artifacts .cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json,contracts/context_load_work_graph_adapter_contract_v0.md,contracts/temporal_playbook_release_surface_contract_v0.json,docs/cortex-coach/agent-context-loader.md,docs/cortex-coach/commands.md,playbooks/cortex_phase3_measurement_plan_v0.md,playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md,specs/cortex_project_coach_spec_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260224T082624Z_kick_off_phase_3_work_gr",
+  "report_file": ".cortex/reports/reflection_scaffold_20260224T082624Z_kick_off_phase_3_work_gr_v0.json",
+  "rule": "When opening a new phase board or measurement plan, capture and promote a decision linking all governance-impacting kickoff artifacts in the same change.",
+  "run_at": "2026-02-24T08:26:24Z",
+  "suggested_decision": "Mistake observed: Phase 3 adapter kickoff changes touched governance-impacting docs/playbooks without fresh decision linkage. Recurring pattern: When starting a new phase, planning/spec artifacts can be added before a decision entry captures authority and scope boundaries. Adopt reusable rule: When opening a new phase board or measurement plan, capture and promote a decision linking all governance-impacting kickoff artifacts in the same change.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_kick_off_phase_3_work_graph_adapter_contract_and_implementation_baseline_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json",
+    "contracts/context_load_work_graph_adapter_contract_v0.md",
+    "contracts/temporal_playbook_release_surface_contract_v0.json",
+    "docs/cortex-coach/agent-context-loader.md",
+    "docs/cortex-coach/commands.md",
+    "playbooks/cortex_phase3_measurement_plan_v0.md",
+    "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+    "specs/cortex_project_coach_spec_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Kick off Phase 3 work-graph adapter contract and implementation baseline",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

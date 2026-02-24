@@ -1,0 +1,168 @@
+{
+  "artifact": "phase3_work_graph_eval_fixture_freeze_v0",
+  "version": "v0",
+  "status": "frozen",
+  "frozen_on": "2026-02-24",
+  "source_ticket": "PH3-001",
+  "source_playbooks": [
+    "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase3_measurement_plan_v0.md"
+  ],
+  "profiles": [
+    {
+      "profile_id": "small",
+      "description": "Low-cardinality adapter payload with one blocked and one ready item.",
+      "scenario_ids": [
+        "s_small_adapter_healthy",
+        "s_small_adapter_missing_file"
+      ],
+      "query_ids": [
+        "q_small_adapter_blocker_resolution",
+        "q_small_adapter_ready_next_action"
+      ]
+    },
+    {
+      "profile_id": "medium",
+      "description": "Representative active-project adapter payload with mixed ready/blocked/stale states.",
+      "scenario_ids": [
+        "s_medium_adapter_healthy",
+        "s_medium_adapter_stale_metadata",
+        "s_medium_adapter_invalid_json"
+      ],
+      "query_ids": [
+        "q_medium_governance_blocker_and_owner",
+        "q_medium_ready_work_priority_order"
+      ]
+    },
+    {
+      "profile_id": "large",
+      "description": "High-cardinality adapter payload requiring bounded selection and deterministic tie-breaks.",
+      "scenario_ids": [
+        "s_large_adapter_healthy_high_cardinality",
+        "s_large_adapter_timeout_simulated"
+      ],
+      "query_ids": [
+        "q_large_noise_control_and_focus",
+        "q_large_degradation_non_blocking_validation"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "s_small_adapter_healthy",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "loaded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/small_adapter_healthy_v0.json",
+      "description": "Happy-path adapter payload with valid freshness metadata."
+    },
+    {
+      "scenario_id": "s_small_adapter_missing_file",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "degraded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/missing_file.json",
+      "description": "Missing adapter payload file must degrade to governance+task slices."
+    },
+    {
+      "scenario_id": "s_medium_adapter_healthy",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "loaded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/medium_adapter_healthy_v0.json",
+      "description": "Mixed-state adapter payload with parseable freshness metadata."
+    },
+    {
+      "scenario_id": "s_medium_adapter_stale_metadata",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "loaded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/medium_adapter_stale_v0.json",
+      "description": "Adapter payload with stale source timestamps; warnings required."
+    },
+    {
+      "scenario_id": "s_medium_adapter_invalid_json",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "degraded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/medium_adapter_invalid_json_v0.json",
+      "description": "Invalid adapter JSON must degrade deterministically."
+    },
+    {
+      "scenario_id": "s_large_adapter_healthy_high_cardinality",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "loaded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/large_adapter_healthy_v0.json",
+      "description": "High-cardinality adapter payload; bounded adapter selection required."
+    },
+    {
+      "scenario_id": "s_large_adapter_timeout_simulated",
+      "adapter_mode": "beads_file",
+      "adapter_status_expected": "degraded",
+      "fixture_ref": ".cortex/fixtures/phase3_adapter/large_adapter_timeout_simulated_v0.json",
+      "description": "Timeout-equivalent degradation scenario; governance path must remain available."
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "q_small_adapter_blocker_resolution",
+      "profile_id": "small",
+      "query_text": "blocked governance item owner and next unblock action",
+      "must_include_signals_any": [
+        "blocked",
+        "owner",
+        "unblock"
+      ]
+    },
+    {
+      "query_id": "q_small_adapter_ready_next_action",
+      "profile_id": "small",
+      "query_text": "ready item next action priority",
+      "must_include_signals_any": [
+        "ready",
+        "priority",
+        "next action"
+      ]
+    },
+    {
+      "query_id": "q_medium_governance_blocker_and_owner",
+      "profile_id": "medium",
+      "query_text": "governance blocker ownership and dependency",
+      "must_include_signals_any": [
+        "blocked",
+        "owner",
+        "dependency"
+      ]
+    },
+    {
+      "query_id": "q_medium_ready_work_priority_order",
+      "profile_id": "medium",
+      "query_text": "ready work order priority deterministic",
+      "must_include_signals_any": [
+        "ready",
+        "priority",
+        "deterministic"
+      ]
+    },
+    {
+      "query_id": "q_large_noise_control_and_focus",
+      "profile_id": "large",
+      "query_text": "high-cardinality adapter noise control focus list",
+      "must_include_signals_any": [
+        "priority",
+        "focus",
+        "bounded"
+      ]
+    },
+    {
+      "query_id": "q_large_degradation_non_blocking_validation",
+      "profile_id": "large",
+      "query_text": "adapter degradation non blocking governance checks",
+      "must_include_signals_any": [
+        "degraded",
+        "governance",
+        "non-blocking"
+      ]
+    }
+  ],
+  "freeze_rules": {
+    "version_bump_required_on_query_or_scenario_change": true,
+    "gate_d_baseline_reset_note_required_on_change": true,
+    "deterministic_query_and_scenario_order_required": true
+  }
+}

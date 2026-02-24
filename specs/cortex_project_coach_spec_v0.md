@@ -306,6 +306,31 @@ Fixture freeze requirements:
 - Gate C measurement and relevance comparisons must use the frozen fixture set at `.cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json`.
 - Fixture changes require version bump and explicit baseline reset note in closeout artifacts.
 
+### `context-load` External Work-Graph Adapter Baseline (Phase 3 / PH3-001)
+
+Canonical contract sources:
+- `contracts/context_load_work_graph_adapter_contract_v0.md`
+- `playbooks/cortex_phase3_measurement_plan_v0.md`
+- `.cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json`
+
+Adapter safety and authority requirements:
+- Adapter ingestion is opt-in, read-only, and non-authoritative.
+- Adapter failures/timeouts/decode errors must fail open to governance + task slices.
+- Mandatory governance commands must not depend on adapter availability.
+- Adapter output must not mutate canonical governance artifacts.
+
+Adapter output and metadata requirements:
+- `context-load` output must include top-level adapter status metadata (`mode`, `status`, candidate/selected counts).
+- Adapter-selected entries must emit provenance metadata with `source_kind=adapter_signal`.
+- Adapter freshness metadata should include `adapter_fetched_at`, `source_updated_at`, and derived `staleness_seconds` when available.
+- Missing/invalid freshness fields must emit deterministic warning classes.
+
+Determinism and budget requirements:
+- Adapter candidate ordering/tie-break behavior must remain deterministic and contract-documented.
+- Adapter slice inclusion must remain bounded by context budget controls.
+- Adapter degradation behavior must preserve deterministic output shape for automation.
+- Gate D measurements must use the frozen fixture set at `.cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json`.
+
 ### Context Hydration Enforcement
 
 - Runtime must support issuing hydration receipts and validating freshness before governance-impacting mutation/closeout paths.

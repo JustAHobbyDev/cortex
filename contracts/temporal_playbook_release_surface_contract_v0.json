@@ -94,6 +94,22 @@
       "reason": "Phase 2-scoped execution board for ranked retrieval, weighting, and context quality implementation slices.",
       "release_action": "exclude_from_release",
       "status": "active"
+    },
+    {
+      "expires_on": "2026-07-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase3_measurement_plan_v0.md",
+      "reason": "Phase 3-scoped Gate D measurement baseline for optional work-graph adapter reliability and degradation validation.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-07-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+      "reason": "Phase 3-scoped execution board for adapter slice ingestion, degradation validation, and Gate D closeout.",
+      "release_action": "exclude_from_release",
+      "status": "active"
     }
   ],
   "version": "v0"

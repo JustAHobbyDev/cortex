@@ -571,8 +571,35 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260224T051736Z_maintain_split_ci_and_fu_v0.json",
       "status": "promoted",
       "title": "Maintain split CI and full-matrix quality gates for overhead control"
+    },
+    {
+      "captured_at": "2026-02-24T08:26:39Z",
+      "decision": "Mistake observed: Phase 3 adapter kickoff changes touched governance-impacting docs/playbooks without fresh decision linkage. Recurring pattern: When starting a new phase, planning/spec artifacts can be added before a decision entry captures authority and scope boundaries. Adopt reusable rule: When opening a new phase board or measurement plan, capture and promote a decision linking all governance-impacting kickoff artifacts in the same change.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_kick_off_phase_3_work_graph_adapter_contract_and_implementation_baseline_v1.md",
+      "decision_id": "dec_20260224T082639Z_kick_off_phase_3_work_gr",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "planning"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json",
+        "contracts/context_load_work_graph_adapter_contract_v0.md",
+        "contracts/temporal_playbook_release_surface_contract_v0.json",
+        "docs/cortex-coach/agent-context-loader.md",
+        "docs/cortex-coach/commands.md",
+        "playbooks/cortex_phase3_measurement_plan_v0.md",
+        "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+        "specs/cortex_project_coach_spec_v0.md"
+      ],
+      "promoted_at": "2026-02-24T08:26:43Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260224T082624Z_kick_off_phase_3_work_gr",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260224T082624Z_kick_off_phase_3_work_gr_v0.json",
+      "status": "promoted",
+      "title": "Kick off Phase 3 work-graph adapter contract and implementation baseline"
     }
   ],
-  "updated_at": "2026-02-24T05:18:04Z",
+  "updated_at": "2026-02-24T08:26:43Z",
   "version": "v0"
 }

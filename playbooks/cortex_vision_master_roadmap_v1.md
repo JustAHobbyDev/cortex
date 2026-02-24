@@ -243,7 +243,7 @@ Exit Criteria:
 
 ## Immediate Next Actions
 
-1. Land Phase 0 policy/spec updates in `cortex`.
-2. Wire runtime and CI checks to promotion schema and tactical data policy.
-3. Define adapter interface spec and degradation tests.
-4. Validate enforcement ladder mapping against current quality gates.
+1. Execute Phase 4 baseline artifacts (`playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md`, `playbooks/cortex_phase4_measurement_plan_v0.md`).
+2. Close Phase 3 residual-risk follow-ups captured in `.cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md`.
+3. Execute Phase 5 rollout/migration baseline artifacts (`playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md`, `playbooks/cortex_phase5_measurement_plan_v0.md`).
+4. Keep default mode at `experimental` until Gate F closeout is published and approved by `Maintainer Council`.

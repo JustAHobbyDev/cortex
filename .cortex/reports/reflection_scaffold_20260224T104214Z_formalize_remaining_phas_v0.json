@@ -1,0 +1,53 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Plan-level governance artifacts were changed without a linked promoted decision.",
+  "pattern": "Roadmap and ticket-board updates can drift from decision coverage when added quickly.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Formalize remaining Phase 4/5 execution plan artifacts\" --decision \"Mistake observed: Plan-level governance artifacts were changed without a linked promoted decision. Recurring pattern: Roadmap and ticket-board updates can drift from decision coverage when added quickly. Adopt reusable rule: When governance-impact playbooks or roadmap artifacts change, capture+promote a linked decision in the same change set.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260224T104214Z_formalize_remaining_phas --reflection-report .cortex/reports/reflection_scaffold_20260224T104214Z_formalize_remaining_phas_v0.json --linked-artifacts playbooks/cortex_phase4_measurement_plan_v0.md,playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md,playbooks/cortex_phase5_measurement_plan_v0.md,playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md,playbooks/cortex_vision_master_roadmap_v1.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260224T104214Z_formalize_remaining_phas",
+  "report_file": ".cortex/reports/reflection_scaffold_20260224T104214Z_formalize_remaining_phas_v0.json",
+  "rule": "When governance-impact playbooks or roadmap artifacts change, capture+promote a linked decision in the same change set.",
+  "run_at": "2026-02-24T10:42:14Z",
+  "suggested_decision": "Mistake observed: Plan-level governance artifacts were changed without a linked promoted decision. Recurring pattern: Roadmap and ticket-board updates can drift from decision coverage when added quickly. Adopt reusable rule: When governance-impact playbooks or roadmap artifacts change, capture+promote a linked decision in the same change set.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_formalize_remaining_phase_4_5_execution_plan_artifacts_v1.md",
+  "suggested_linked_artifacts": [
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Formalize remaining Phase 4/5 execution plan artifacts",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

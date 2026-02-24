@@ -598,8 +598,31 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260224T082624Z_kick_off_phase_3_work_gr_v0.json",
       "status": "promoted",
       "title": "Kick off Phase 3 work-graph adapter contract and implementation baseline"
+    },
+    {
+      "captured_at": "2026-02-24T10:42:25Z",
+      "decision": "Mistake observed: Plan-level governance artifacts were changed without a linked promoted decision. Recurring pattern: Roadmap and ticket-board updates can drift from decision coverage when added quickly. Adopt reusable rule: When governance-impact playbooks or roadmap artifacts change, capture+promote a linked decision in the same change set.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_formalize_remaining_phase_4_5_execution_plan_artifacts_v1.md",
+      "decision_id": "dec_20260224T104225Z_formalize_remaining_phas",
+      "impact_scope": [
+        "governance",
+        "workflow"
+      ],
+      "linked_artifacts": [
+        "playbooks/cortex_phase4_measurement_plan_v0.md",
+        "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+        "playbooks/cortex_phase5_measurement_plan_v0.md",
+        "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ],
+      "promoted_at": "2026-02-24T10:42:33Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260224T104214Z_formalize_remaining_phas",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260224T104214Z_formalize_remaining_phas_v0.json",
+      "status": "promoted",
+      "title": "Formalize remaining Phase 4/5 execution plan artifacts"
     }
   ],
-  "updated_at": "2026-02-24T08:26:43Z",
+  "updated_at": "2026-02-24T10:42:33Z",
   "version": "v0"
 }

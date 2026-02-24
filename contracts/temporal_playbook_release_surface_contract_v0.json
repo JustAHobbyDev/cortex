@@ -110,6 +110,38 @@
       "reason": "Phase 3-scoped execution board for adapter slice ingestion, degradation validation, and Gate D closeout.",
       "release_action": "exclude_from_release",
       "status": "active"
+    },
+    {
+      "expires_on": "2026-08-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+      "reason": "Phase 4-scoped Gate E measurement baseline for promotion-flow quality and enforcement hardening validation.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-08-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+      "reason": "Phase 4-scoped execution board for promotion assistance, enforcement integration, and Gate E closeout.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-09-30",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+      "reason": "Phase 5-scoped Gate F measurement baseline for two-cycle rollout reliability and adoption validation.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-09-30",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+      "reason": "Phase 5-scoped execution board for rollout controls, migration readiness, and Gate F closeout.",
+      "release_action": "exclude_from_release",
+      "status": "active"
     }
   ],
   "version": "v0"

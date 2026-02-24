@@ -9,13 +9,19 @@
       },
       {
         "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json'])",
+        "path": "contracts/context_load_work_graph_adapter_contract_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
         "detail": "references missing project paths (examples=['cortex/'])",
         "path": "contracts/tactical_memory_command_family_contract_v0.md",
         "severity": "warn"
       },
       {
         "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json'])",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json'])",
         "path": "specs/cortex_project_coach_spec_v0.md",
         "severity": "warn"
       },
@@ -42,9 +48,21 @@
         "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/phase1_gate_b_measurement_closeout_v0.md', 'cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'source_kind/source_ref/source_refs', 'cortex/reports/project_state/phase2_retrieval_relevance_report_v0.json'])",
         "path": "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
         "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/beads_comparative_research_report_v0.md', 'cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/phase2_gate_c_measurement_closeout_v0.md', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/'])",
+        "path": "playbooks/cortex_phase3_measurement_plan_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/beads_comparative_research_report_v0.md', 'cortex/reports/project_state/phase2_gate_c_measurement_closeout_v0.md', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_adapter_degradation_report_v0.json'])",
+        "path": "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
+        "severity": "warn"
       }
     ],
-    "scanned_files": 87,
+    "scanned_files": 90,
     "status": "warn"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
@@ -82,12 +100,12 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=87, findings=7",
+      "detail": "scanned=90, findings=10",
       "status": "warn"
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=22, findings=0",
+      "detail": "promoted=23, findings=0",
       "status": "pass"
     }
   ],
@@ -98,7 +116,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-24T05:26:03Z",
+  "run_at": "2026-02-24T10:18:06Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -110,7 +128,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 22,
+    "promoted_decision_count": 23,
     "status": "pass"
   },
   "version": "v0"

@@ -120,6 +120,21 @@ Command outputs:
 - `.cortex/reports/project_state/phase2_retrieval_relevance_report_v0.json`
 - `.cortex/reports/project_state/phase2_retrieval_determinism_report_v0.json`
 
+Performance/budget + governance non-regression pack command:
+
+```bash
+python3 scripts/phase2_performance_governance_pack_v0.py \
+  --project-dir . \
+  --coach-bin /tmp/cortex-coach/.venv/bin/cortex-coach \
+  --cortex-coach-repo /tmp/cortex-coach
+```
+
+Command outputs:
+- `.cortex/reports/project_state/phase2_latency_report_v0.json`
+- `.cortex/reports/project_state/phase2_context_budget_report_v0.json`
+- `.cortex/reports/project_state/phase2_ci_overhead_report_v0.json`
+- `.cortex/reports/project_state/phase2_governance_regression_report_v0.md`
+
 ## Ownership
 
 - Primary owner: Runtime Reliability Lead.

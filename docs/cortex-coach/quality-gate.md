@@ -3,6 +3,7 @@
 Use two deterministic commands:
 - strict local maintainer gate
 - CI correctness gate
+- release-grade full matrix gate
 
 Both gates run tests from the locked `dev` dependency group in `pyproject.toml` via `uv.lock`.
 Gate scripts set `UV_CACHE_DIR` to a repo-local `.uv-cache/` by default to avoid host-level cache permission issues.
@@ -33,6 +34,12 @@ Fallback:
 ./scripts/quality_gate_ci_v0.sh
 ```
 
+Release-grade full matrix mode:
+
+```bash
+./scripts/quality_gate_ci_full_v0.sh
+```
+
 ## What It Checks
 
 `quality-gate` (strict local):
@@ -57,7 +64,11 @@ Fallback:
    - expired active temporal entries are blocking
    - retired residue in `playbooks/` is blocking
 9. docs local-link + JSON integrity
-10. focused `cortex-coach` pytest suite
+10. focused `cortex-coach` pytest suite:
+   - `tests/test_coach_decision_gap_check.py`
+   - `tests/test_coach_reflection_enforcement_gate.py`
+   - `tests/test_coach_context_load.py`
+   - `tests/test_coach_quality_gate_sync_check.py`
 
 `quality-gate-ci`:
 
@@ -69,12 +80,22 @@ Fallback:
 6. `project_state_boundary_gate_v0.py` with contract-driven path checks
 7. `temporal_playbook_release_gate_v0.py` with contract-driven release-surface checks
 8. docs local-link + JSON integrity
-9. focused `cortex-coach` pytest suite
+9. focused `cortex-coach` pytest suite:
+   - `tests/test_coach_decision_gap_check.py`
+   - `tests/test_coach_reflection_enforcement_gate.py`
+   - `tests/test_coach_context_load.py`
+   - `tests/test_coach_quality_gate_sync_check.py`
+
+`quality-gate-ci-full`:
+
+1. executes `quality-gate-ci` (required checks)
+2. executes full coach matrix (`uv run --locked --group dev pytest -q tests/test_coach_*.py`)
 
 ## When to Run
 
 - `quality-gate` before merge/release in local maintainer flow
 - `quality-gate-ci` in GitHub Actions (and optional local CI parity checks)
+- `quality-gate-ci-full` for release-grade full test coverage
 
 ## Phase 1 Storage/Locking Checks (Design Baseline)
 

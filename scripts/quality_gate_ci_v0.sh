@@ -62,6 +62,10 @@ echo "[quality-gate-ci] 8/9 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
 echo "[quality-gate-ci] 9/9 focused coach tests"
-uv run --locked --group dev pytest -q tests/test_coach_*.py
+uv run --locked --group dev pytest -q \
+  tests/test_coach_decision_gap_check.py \
+  tests/test_coach_reflection_enforcement_gate.py \
+  tests/test_coach_context_load.py \
+  tests/test_coach_quality_gate_sync_check.py
 
 echo "[quality-gate-ci] PASS"

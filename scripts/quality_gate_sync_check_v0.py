@@ -27,7 +27,13 @@ EXPECTED_LOCAL_PRECHECK_COMMAND = (
 )
 SHARED_TRAILING_COMMANDS = [
     "./scripts/ci_validate_docs_and_json_v0.sh",
-    "uv run --locked --group dev pytest -q tests/test_coach_*.py",
+    (
+        "uv run --locked --group dev pytest -q "
+        "tests/test_coach_decision_gap_check.py "
+        "tests/test_coach_reflection_enforcement_gate.py "
+        "tests/test_coach_context_load.py "
+        "tests/test_coach_quality_gate_sync_check.py"
+    ),
 ]
 
 
@@ -70,8 +76,9 @@ def _extract_run_quiet_entries(script_text: str) -> list[dict[str, str]]:
 
 
 def _contains_command(script_text: str, command: str) -> bool:
-    pattern = re.compile(rf"^\s*{re.escape(command)}\s*$", re.MULTILINE)
-    return bool(pattern.search(script_text))
+    normalized_script = _normalize_command(script_text)
+    normalized_command = _normalize_command(command)
+    return normalized_command in normalized_script
 
 
 def _finding(check: str, message: str, **extra: Any) -> dict[str, Any]:

@@ -547,8 +547,32 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_phase2_tracking_update_v0.json",
       "status": "promoted",
       "title": "Mark Phase 2 retrieval kickoff and weighting implementation as tracked"
+    },
+    {
+      "captured_at": "2026-02-24T05:17:44Z",
+      "decision": "Mistake observed: PH2 CI overhead measurement exceeded target because required CI gate was carrying full coach test matrix scope. Recurring pattern: Required and full-matrix gate responsibilities drifted together over time, increasing required CI runtime beyond budget. Adopt reusable rule: Keep required CI on governance-critical focused tests and run full coach matrix in dedicated full gate script for release-grade coverage.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_maintain_split_ci_and_full_matrix_quality_gates_for_overhead_control_v1.md",
+      "decision_id": "dec_20260224T051744Z_maintain_split_ci_and_fu",
+      "impact_scope": [
+        "governance",
+        "workflow",
+        "ci"
+      ],
+      "linked_artifacts": [
+        "scripts/phase2_performance_governance_pack_v0.py",
+        "scripts/quality_gate_ci_full_v0.sh",
+        "scripts/quality_gate_ci_v0.sh",
+        "scripts/quality_gate_sync_check_v0.py",
+        "scripts/quality_gate_v0.sh"
+      ],
+      "promoted_at": "2026-02-24T05:18:04Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260224T051736Z_maintain_split_ci_and_fu",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260224T051736Z_maintain_split_ci_and_fu_v0.json",
+      "status": "promoted",
+      "title": "Maintain split CI and full-matrix quality gates for overhead control"
     }
   ],
-  "updated_at": "2026-02-24T04:29:50Z",
+  "updated_at": "2026-02-24T05:18:04Z",
   "version": "v0"
 }

@@ -1,0 +1,38 @@
+{
+  "artifact": "phase2_context_budget_report_v0",
+  "coach_bin": "/tmp/cortex-coach/.venv/bin/cortex-coach",
+  "command": "context-load",
+  "compliance_rate": 1.0,
+  "failure_samples": [],
+  "fixture_artifact": "phase2_retrieval_eval_fixture_freeze_v0",
+  "max_chars_per_file": 2000,
+  "max_files": 16,
+  "measurement_mode": "frozen_fixture_profile_cycle",
+  "pass_runs": 90,
+  "profile_summaries": [
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "small",
+      "runs": 30
+    },
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "medium",
+      "runs": 30
+    },
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "large",
+      "runs": 30
+    }
+  ],
+  "run_at": "2026-02-24T05:24:37Z",
+  "runs": 90,
+  "target_compliance_rate": 1.0,
+  "target_met": true,
+  "version": "v0",
+  "weighting_mode": "evidence_outcome_bias"
+}

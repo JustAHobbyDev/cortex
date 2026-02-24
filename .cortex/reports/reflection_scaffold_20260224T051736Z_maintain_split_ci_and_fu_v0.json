@@ -1,0 +1,51 @@
+{
+  "auto_linked_governance_files": [
+    "scripts/quality_gate_ci_full_v0.sh",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_v0.sh",
+    "scripts/quality_gate_ci_full_v0.sh",
+    "scripts/quality_gate_sync_check_v0.py",
+    "scripts/phase2_performance_governance_pack_v0.py"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "PH2 CI overhead measurement exceeded target because required CI gate was carrying full coach test matrix scope.",
+  "pattern": "Required and full-matrix gate responsibilities drifted together over time, increasing required CI runtime beyond budget.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Maintain split CI and full-matrix quality gates for overhead control\" --decision \"Mistake observed: PH2 CI overhead measurement exceeded target because required CI gate was carrying full coach test matrix scope. Recurring pattern: Required and full-matrix gate responsibilities drifted together over time, increasing required CI runtime beyond budget. Adopt reusable rule: Keep required CI on governance-critical focused tests and run full coach matrix in dedicated full gate script for release-grade coverage.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260224T051736Z_maintain_split_ci_and_fu --reflection-report .cortex/reports/reflection_scaffold_20260224T051736Z_maintain_split_ci_and_fu_v0.json --linked-artifacts scripts/phase2_performance_governance_pack_v0.py,scripts/quality_gate_ci_full_v0.sh,scripts/quality_gate_ci_v0.sh,scripts/quality_gate_sync_check_v0.py,scripts/quality_gate_v0.sh",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260224T051736Z_maintain_split_ci_and_fu",
+  "report_file": ".cortex/reports/reflection_scaffold_20260224T051736Z_maintain_split_ci_and_fu_v0.json",
+  "rule": "Keep required CI on governance-critical focused tests and run full coach matrix in dedicated full gate script for release-grade coverage.",
+  "run_at": "2026-02-24T05:17:36Z",
+  "suggested_decision": "Mistake observed: PH2 CI overhead measurement exceeded target because required CI gate was carrying full coach test matrix scope. Recurring pattern: Required and full-matrix gate responsibilities drifted together over time, increasing required CI runtime beyond budget. Adopt reusable rule: Keep required CI on governance-critical focused tests and run full coach matrix in dedicated full gate script for release-grade coverage.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_maintain_split_ci_and_full_matrix_quality_gates_for_overhead_control_v1.md",
+  "suggested_linked_artifacts": [
+    "scripts/phase2_performance_governance_pack_v0.py",
+    "scripts/quality_gate_ci_full_v0.sh",
+    "scripts/quality_gate_ci_v0.sh",
+    "scripts/quality_gate_sync_check_v0.py",
+    "scripts/quality_gate_v0.sh"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Maintain split CI and full-matrix quality gates for overhead control",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

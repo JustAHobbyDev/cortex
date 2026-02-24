@@ -30,7 +30,7 @@ Balance speed during active work with strong governance enforcement at merge/rel
 3. During implementation
 - use tactical capture/retrieval workflows only as non-authoritative working memory
 - rerun `cortex-only` audit after significant lifecycle/policy/decision changes
-- if external adapter is enabled and unhealthy, continue in governance-only mode
+- if external adapter is enabled and unhealthy, continue in governance-only mode and record degraded-warning evidence in `.cortex/reports/project_state/`
 
 4. Promotion checkpoint (before closing governance-impacting work)
 - ask:
@@ -46,6 +46,10 @@ Balance speed during active work with strong governance enforcement at merge/rel
 - run `cortex-coach decision-gap-check --project-dir . --format json`
 - run `cortex-coach reflection-completeness-check --project-dir . --format json`
 - run CI quality gate (`just quality-gate-ci`)
+- when adapter-enabled runtime paths changed in the cycle, run:
+  - `python3 scripts/phase3_adapter_degradation_harness_v0.py --project-dir . --coach-bin cortex-coach`
+  - `python3 scripts/phase3_governance_regression_harness_v0.py --project-dir . --coach-bin cortex-coach`
+  - `python3 scripts/phase3_adapter_performance_pack_v0.py --project-dir . --coach-bin cortex-coach`
 
 Output-contract note:
 - For deterministic machine parsing across all commands in this repo, use the delegator entrypoint (`python3 scripts/cortex_project_coach_v0.py`) with `--format json` where needed.
@@ -102,6 +106,14 @@ Operational mapping:
 - Adapter integrations are read-only and optional.
 - Adapter failure must degrade to governance-only behavior, never hard-block governance commands.
 - Sanitization failure on tactical payloads must fail closed for that payload and continue governance-only execution.
+
+## Adapter Degradation Procedure (PH3-007)
+
+1. Detect degradation via `context-load` warnings (`adapter_degraded:*` or `adapter_warning:stale_item`).
+2. Continue closeout in governance-only mode; adapter signals are informational only.
+3. Re-run required governance commands (`audit --all`, `decision-gap-check`, reflection gate) and require pass before release activity continues.
+4. Produce/update Phase 3 adapter artifacts in `.cortex/reports/project_state/`.
+5. Do not bypass release boundary checks because of adapter outages; release authority remains governance + quality-gate checks.
 
 ## Kill-Switch and Rollback
 

@@ -97,6 +97,25 @@ Release-grade full matrix mode:
 - `quality-gate-ci` in GitHub Actions (and optional local CI parity checks)
 - `quality-gate-ci-full` for release-grade full test coverage
 
+## Phase 3 Adapter Operational Add-On
+
+`quality-gate-ci` remains the merge/release boundary authority even when adapter enrichment is unhealthy.
+Adapter degradation must never be treated as a release-gate bypass condition.
+
+For adapter-enabled release candidates, run this deterministic validation pack in addition to `quality-gate-ci`:
+
+1. `python3 scripts/phase3_adapter_degradation_harness_v0.py --project-dir . --coach-bin cortex-coach`
+2. `python3 scripts/phase3_governance_regression_harness_v0.py --project-dir . --coach-bin cortex-coach`
+3. `python3 scripts/phase3_adapter_performance_pack_v0.py --project-dir . --coach-bin cortex-coach`
+
+Required artifact outcomes:
+- `.cortex/reports/project_state/phase3_adapter_degradation_report_v0.json`: `summary.pass=true`
+- `.cortex/reports/project_state/phase3_adapter_determinism_report_v0.json`: `summary.pass=true`
+- `.cortex/reports/project_state/phase3_governance_regression_report_v0.md`: `Status: Pass`
+- `.cortex/reports/project_state/phase3_adapter_latency_report_v0.json`: `target_met=true`
+- `.cortex/reports/project_state/phase3_adapter_budget_report_v0.json`: `target_met=true`
+- `.cortex/reports/project_state/phase3_ci_overhead_report_v0.json`: `target_met=true`
+
 ## Phase 1 Storage/Locking Checks (Design Baseline)
 
 Phase 1 requires deterministic storage/locking validation coverage for tactical mutation commands.

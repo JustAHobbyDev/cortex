@@ -302,6 +302,18 @@ Phase 3 contract baseline (`PH3-001`, implementation target):
 - Adapter failures decode/availability/freshness issues degrade to governance+task slices with deterministic warnings.
 - Gate D evaluation uses frozen scenario fixture set: `.cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json`
 
+Adapter operations runbook (`PH3-007`):
+1. If `warnings` include `adapter_degraded:*` or `adapter_warning:stale_item`, treat adapter as non-authoritative and continue in governance-only closeout mode.
+2. Confirm required governance commands remain green:
+   - `python3 scripts/cortex_project_coach_v0.py decision-gap-check --project-dir . --format json`
+   - `python3 scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
+   - `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all --format json`
+3. Reproduce Gate D adapter checks from frozen fixtures:
+   - `python3 scripts/phase3_adapter_degradation_harness_v0.py --project-dir . --coach-bin cortex-coach`
+   - `python3 scripts/phase3_governance_regression_harness_v0.py --project-dir . --coach-bin cortex-coach`
+   - `python3 scripts/phase3_adapter_performance_pack_v0.py --project-dir . --coach-bin cortex-coach`
+4. Review generated artifacts in `.cortex/reports/project_state/` before merge/release.
+
 ## `context-policy`
 
 Analyze repository shape and recommend task focus + context budgets.

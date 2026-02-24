@@ -1,7 +1,7 @@
 # Cortex Phase 3 Measurement Plan v0
 
 Version: v0  
-Status: Draft  
+Status: Baseline complete (Gate D pass recorded on 2026-02-24)  
 Date: 2026-02-24  
 Scope: Measurement and validation plan for Phase 3 external work-graph adapter integration
 
@@ -72,3 +72,9 @@ Gate D passes only when all conditions are true:
 5. Residual non-critical findings are owner-assigned and time-bounded in closeout.
 
 Gate D fails if any required metric misses threshold or any required governance gate regresses under adapter scenarios.
+
+## Gate D Baseline Outcome (2026-02-24)
+
+- Determination: `Pass`
+- Closeout artifact: `.cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md`
+- Ticket linkage: `PH3-008` in `playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md`

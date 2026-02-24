@@ -1,0 +1,53 @@
+{
+  "artifact": "phase3_ci_overhead_report_v0",
+  "delta_percent": -11.964017402621812,
+  "measurement_mode": "required_ci_gate_vs_phase2_baseline",
+  "phase2_baseline_source": ".cortex/reports/project_state/phase2_ci_overhead_report_v0.json",
+  "phase2_median_seconds": 18.610326240072027,
+  "phase3_durations_seconds": [
+    15.92338308005128,
+    16.055003359913826,
+    16.383783570025116,
+    16.484158900100738,
+    17.621694860048592
+  ],
+  "phase3_median_seconds": 16.383783570025116,
+  "phase3_required_gate": "scripts/quality_gate_ci_v0.sh",
+  "phase3_run_summaries": [
+    {
+      "duration_seconds": 15.92338308005128,
+      "returncode": 0,
+      "run": 1,
+      "summary": "[quality-gate-ci] PASS"
+    },
+    {
+      "duration_seconds": 16.055003359913826,
+      "returncode": 0,
+      "run": 2,
+      "summary": "[quality-gate-ci] PASS"
+    },
+    {
+      "duration_seconds": 16.383783570025116,
+      "returncode": 0,
+      "run": 3,
+      "summary": "[quality-gate-ci] PASS"
+    },
+    {
+      "duration_seconds": 16.484158900100738,
+      "returncode": 0,
+      "run": 4,
+      "summary": "[quality-gate-ci] PASS"
+    },
+    {
+      "duration_seconds": 17.621694860048592,
+      "returncode": 0,
+      "run": 5,
+      "summary": "[quality-gate-ci] PASS"
+    }
+  ],
+  "phase3_runs": 5,
+  "run_at": "2026-02-24T10:22:42Z",
+  "target_max_delta_percent": 10.0,
+  "target_met": true,
+  "version": "v0"
+}

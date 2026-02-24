@@ -1,0 +1,42 @@
+{
+  "adapter_max_items": 4,
+  "artifact": "phase3_adapter_budget_report_v0",
+  "coach_command": [
+    "/tmp/cortex-coach/.venv/bin/python",
+    "/tmp/cortex-coach/scripts/cortex_project_coach_v0.py"
+  ],
+  "compliance_rate": 1.0,
+  "failure_samples": [],
+  "fixture_artifact": "phase3_work_graph_eval_fixture_freeze_v0",
+  "max_chars_per_file": 1200,
+  "max_files": 24,
+  "measurement_mode": "frozen_fixture_profile_cycle_adapter_enabled",
+  "pass_runs": 90,
+  "profile_summaries": [
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "small",
+      "runs": 30
+    },
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "medium",
+      "runs": 30
+    },
+    {
+      "budget_failures": 0,
+      "compliance_rate": 1.0,
+      "profile_id": "large",
+      "runs": 30
+    }
+  ],
+  "run_at": "2026-02-24T10:21:26Z",
+  "runs": 90,
+  "target_compliance_rate": 1.0,
+  "target_met": true,
+  "target_min_runs": 50,
+  "version": "v0",
+  "weighting_mode": "evidence_outcome_bias"
+}

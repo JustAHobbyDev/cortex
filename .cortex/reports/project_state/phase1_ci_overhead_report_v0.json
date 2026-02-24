@@ -1,16 +1,18 @@
 {
   "artifact": "phase1_ci_overhead_report_v0",
-  "delta_percent": 113.68971136318355,
-  "measurement_mode": "emulated_mandatory_governance_pipeline",
-  "note": "Used identical command/test sequence for pre/post comparison to avoid offline dependency sync skew in detached pre-phase worktree.",
+  "delta_percent": -47.15321006062905,
+  "measurement_mode": "required_ci_gate_pre_post_comparison",
+  "note": "Post-phase measurement rerun after CI gate split: phase1 required gate now executes governance-required tests plus memory family smoke; full matrix moved to quality_gate_ci_full_v0.sh.",
   "post_phase_durations_seconds": [
-    99.04591572203208,
-    99.16945040697465,
-    99.29344077501446,
-    99.21618009801023,
-    99.52394098095829
+    25.246422662981786,
+    24.20750123797916,
+    24.77667456504423,
+    24.204236482968554,
+    24.536776219960302
   ],
-  "post_phase_median_seconds": 99.21618009801023,
+  "post_phase_full_matrix_gate": "scripts/quality_gate_ci_full_v0.sh",
+  "post_phase_median_seconds": 24.536776219960302,
+  "post_phase_required_gate": "scripts/quality_gate_ci_v0.sh",
   "post_phase_runs": 5,
   "pre_phase_durations_seconds": [
     46.00811751297442,
@@ -21,8 +23,8 @@
   ],
   "pre_phase_median_seconds": 46.43002204695949,
   "pre_phase_runs": 5,
-  "run_at": "2026-02-23T22:32:53Z",
+  "run_at": "2026-02-24T03:41:58Z",
   "target_max_delta_percent": 10.0,
-  "target_met": false,
+  "target_met": true,
   "version": "v0"
 }

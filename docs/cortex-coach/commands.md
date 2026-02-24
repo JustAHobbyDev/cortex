@@ -85,6 +85,7 @@ cortex-coach promotion-candidates \
 
 Baseline expectations:
 - Supported fixture shapes: `tactical_candidates[]` and `governance_debt_items[]`.
+- Governance debt fixtures must surface deterministic `ready`/`blocked` candidates with owner/next-action fields.
 - Deterministic tie-break order:
   1. `combined_score_desc`
   2. `evidence_coverage_desc`

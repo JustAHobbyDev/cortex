@@ -1,0 +1,74 @@
+{
+  "artifact": "phase4_governance_debt_visibility_report_v0",
+  "cases": [
+    {
+      "blocked_items": [
+        {
+          "debt_id": "gd_large_001",
+          "dependency_refs": [
+            "ref_large_blocked_001"
+          ],
+          "has_next_action": true,
+          "has_owner": true,
+          "next_action": "Link reflection scaffold before closure.",
+          "owner": "Governance Enforcement Lead",
+          "state": "blocked",
+          "visibility_complete": true
+        },
+        {
+          "debt_id": "gd_large_003",
+          "dependency_refs": [
+            ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+          ],
+          "has_next_action": true,
+          "has_owner": true,
+          "next_action": "Re-run required governance gate bundle after linkage fixes.",
+          "owner": "CI/Gate Owner",
+          "state": "blocked",
+          "visibility_complete": true
+        }
+      ],
+      "debt_item_count": 3,
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_governance_debt_backlog_v0.json",
+      "profile_id": "large",
+      "ready_items": [
+        {
+          "debt_id": "gd_large_002",
+          "dependency_refs": [
+            "dec_large_ready_002"
+          ],
+          "has_next_action": true,
+          "has_owner": true,
+          "next_action": "Promote candidate with complete evidence mapping.",
+          "owner": "Runtime Reliability Lead",
+          "state": "ready",
+          "visibility_complete": true
+        }
+      ],
+      "scenario_id": "s_large_governance_debt_backlog"
+    }
+  ],
+  "fixture_source": ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-24T15:58:10Z",
+  "status": "pass",
+  "summary": {
+    "blocked_count": 2,
+    "debt_item_count": 3,
+    "next_action_coverage_rate": 1.0,
+    "owner_coverage_rate": 1.0,
+    "ready_count": 1,
+    "required_visibility_coverage_rate": 1.0
+  },
+  "target_results": {
+    "next_action_coverage_rate_met": true,
+    "owner_coverage_rate_met": true,
+    "required_visibility_coverage_rate_met": true
+  },
+  "targets": {
+    "next_action_coverage_rate": 1.0,
+    "owner_coverage_rate": 1.0,
+    "required_visibility_coverage_rate": 1.0
+  },
+  "version": "v0"
+}

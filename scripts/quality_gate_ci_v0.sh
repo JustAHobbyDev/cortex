@@ -74,6 +74,7 @@ uv run --locked --group dev pytest -q \
   tests/test_coach_reflection_enforcement_gate.py \
   tests/test_coach_context_load.py \
   tests/test_coach_quality_gate_sync_check.py \
-  tests/test_phase4_enforcement_blocking_harness.py
+  tests/test_phase4_enforcement_blocking_harness.py \
+  tests/test_phase4_governance_debt_harness.py
 
 echo "[quality-gate-ci] PASS"

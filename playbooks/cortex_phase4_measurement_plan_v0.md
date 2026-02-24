@@ -79,6 +79,10 @@ Gate E passes only when all conditions are true:
 
 Gate E fails if any required metric misses threshold or if governance closure can proceed without required linkage.
 
+CI-overhead probe note:
+- `phase4_ci_overhead_report_v0.json` must explicitly declare measurement mode.
+- If network-restricted environments cannot resolve dev dependency wheels, probe mode may set `CORTEX_QG_SKIP_FOCUSED_TESTS=1` and must record that fact in report metadata.
+
 ## Planned Harness Commands
 
 Promotion candidate quality + determinism:

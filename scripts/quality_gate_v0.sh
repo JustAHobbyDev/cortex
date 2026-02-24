@@ -75,12 +75,16 @@ echo "[quality-gate] 10/11 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
 echo "[quality-gate] 11/11 focused coach tests"
-uv run --locked --group dev pytest -q \
-  tests/test_coach_decision_gap_check.py \
-  tests/test_coach_reflection_enforcement_gate.py \
-  tests/test_coach_context_load.py \
-  tests/test_coach_quality_gate_sync_check.py \
-  tests/test_phase4_enforcement_blocking_harness.py \
-  tests/test_phase4_governance_debt_harness.py
+if [[ "${CORTEX_QG_SKIP_FOCUSED_TESTS:-0}" == "1" ]]; then
+  echo "[quality-gate] focused coach tests skipped (CORTEX_QG_SKIP_FOCUSED_TESTS=1)"
+else
+  uv run --locked --group dev pytest -q \
+    tests/test_coach_decision_gap_check.py \
+    tests/test_coach_reflection_enforcement_gate.py \
+    tests/test_coach_context_load.py \
+    tests/test_coach_quality_gate_sync_check.py \
+    tests/test_phase4_enforcement_blocking_harness.py \
+    tests/test_phase4_governance_debt_harness.py
+fi
 
 echo "[quality-gate] PASS"

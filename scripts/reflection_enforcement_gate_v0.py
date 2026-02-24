@@ -82,6 +82,22 @@ def _finding(check: str, message: str, **extra: Any) -> dict[str, Any]:
     return item
 
 
+def _as_float(value: Any, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _phase4_enforcement_report_status(
+    project_dir: Path,
+    report_path_text: str,
+) -> tuple[dict[str, Any] | None, Path]:
+    resolved_path = _resolve_report_path(project_dir, report_path_text)
+    payload = _load_json_file(resolved_path)
+    return payload, resolved_path
+
+
 def _validate_reflection_linkage(
     entry: dict[str, Any],
     project_dir: Path,
@@ -228,6 +244,11 @@ def main() -> int:
     parser.add_argument("--required-decision-status", default="promoted", choices=("candidate", "promoted"))
     parser.add_argument("--min-scaffold-reports", type=int, default=1)
     parser.add_argument("--min-required-status-mappings", type=int, default=1)
+    parser.add_argument("--require-phase4-enforcement-report", action="store_true")
+    parser.add_argument(
+        "--phase4-enforcement-report",
+        default=".cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json",
+    )
     parser.add_argument("--strict-generated", action="store_true")
     parser.add_argument("--format", default="text", choices=("text", "json"))
     args = parser.parse_args()
@@ -377,12 +398,69 @@ def main() -> int:
             )
         )
 
+    phase4_enforcement_payload: dict[str, Any] | None = None
+    phase4_enforcement_resolved_path = _resolve_report_path(project_dir, args.phase4_enforcement_report)
+    if args.require_phase4_enforcement_report:
+        phase4_enforcement_payload, phase4_enforcement_resolved_path = _phase4_enforcement_report_status(
+            project_dir,
+            args.phase4_enforcement_report,
+        )
+        if phase4_enforcement_payload is None:
+            findings.append(
+                _finding(
+                    "missing_phase4_enforcement_report",
+                    "Phase 4 enforcement blocking report is missing or invalid JSON.",
+                    report_path=args.phase4_enforcement_report,
+                    resolved_path=str(phase4_enforcement_resolved_path),
+                )
+            )
+        else:
+            report_status = str(phase4_enforcement_payload.get("status", "unknown")).lower()
+            summary = phase4_enforcement_payload.get("summary", {})
+            if not isinstance(summary, dict):
+                summary = {}
+            block_rate = _as_float(summary.get("unlinked_closure_block_rate"), default=0.0)
+            false_block_rate = _as_float(summary.get("linked_closure_false_block_rate"), default=1.0)
+            if report_status != "pass":
+                findings.append(
+                    _finding(
+                        "phase4_enforcement_report_failed",
+                        "Phase 4 enforcement blocking report status is not pass.",
+                        report_status=report_status,
+                        report_path=args.phase4_enforcement_report,
+                        resolved_path=str(phase4_enforcement_resolved_path),
+                    )
+                )
+            if block_rate < 1.0:
+                findings.append(
+                    _finding(
+                        "phase4_enforcement_block_rate_below_target",
+                        "Phase 4 unlinked closure block rate is below 100%.",
+                        block_rate=block_rate,
+                        target=1.0,
+                        report_path=args.phase4_enforcement_report,
+                        resolved_path=str(phase4_enforcement_resolved_path),
+                    )
+                )
+            if false_block_rate > 0.05:
+                findings.append(
+                    _finding(
+                        "phase4_linked_false_block_rate_above_target",
+                        "Phase 4 linked closure false-block rate exceeds threshold.",
+                        linked_false_block_rate=false_block_rate,
+                        target_max=0.05,
+                        report_path=args.phase4_enforcement_report,
+                        resolved_path=str(phase4_enforcement_resolved_path),
+                    )
+                )
+
     payload: dict[str, Any] = {
         "version": "v0",
         "run_at": _now_iso(),
         "project_dir": str(project_dir),
         "status": "fail" if findings else "pass",
         "required_decision_status": args.required_decision_status,
+        "phase4_enforcement_report_required": args.require_phase4_enforcement_report,
         "thresholds": {
             "min_scaffold_reports": args.min_scaffold_reports,
             "min_required_status_mappings": args.min_required_status_mappings,
@@ -407,6 +485,16 @@ def main() -> int:
             "decision_entries_scanned": int(reflection_payload.get("decision_entries_scanned", 0) or 0),
             "mappings": mapping_items,
             "findings": reflection_payload.get("findings", []),
+        },
+        "phase4_enforcement": {
+            "report_path": args.phase4_enforcement_report,
+            "resolved_path": str(phase4_enforcement_resolved_path),
+            "status": phase4_enforcement_payload.get("status", "unknown")
+            if isinstance(phase4_enforcement_payload, dict)
+            else "missing",
+            "summary": phase4_enforcement_payload.get("summary", {})
+            if isinstance(phase4_enforcement_payload, dict)
+            else {},
         },
         "findings": findings,
     }

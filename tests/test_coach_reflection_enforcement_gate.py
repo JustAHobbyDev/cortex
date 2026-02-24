@@ -99,6 +99,28 @@ def test_reflection_enforcement_fails_when_matched_governance_decision_lacks_ref
 def test_reflection_enforcement_passes_with_scaffold_and_promoted_reflection_linkage(
     initialized_project: Path,
 ) -> None:
+    enforcement_report_path = (
+        initialized_project / ".cortex" / "reports" / "project_state" / "phase4_enforcement_blocking_report_v0.json"
+    )
+    enforcement_report_path.parent.mkdir(parents=True, exist_ok=True)
+    enforcement_report_path.write_text(
+        json.dumps(
+            {
+                "version": "v0",
+                "artifact": "phase4_enforcement_blocking_report_v0",
+                "status": "pass",
+                "summary": {
+                    "unlinked_closure_block_rate": 1.0,
+                    "linked_closure_false_block_rate": 0.0,
+                },
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
     report_path = ".cortex/reports/reflection_scaffold_manifest_guard_v0.json"
     scaffold = run_coach(
         initialized_project,
@@ -145,6 +167,31 @@ def test_reflection_enforcement_passes_with_scaffold_and_promoted_reflection_lin
     decision_id = json.loads(capture.stdout)["decision_id"]
     run_coach(initialized_project, "decision-promote", "--decision-id", decision_id, "--format", "json")
 
-    payload = run_reflection_gate(initialized_project)
+    payload = run_reflection_gate(
+        initialized_project,
+        "--require-phase4-enforcement-report",
+        "--phase4-enforcement-report",
+        str(enforcement_report_path.relative_to(initialized_project)),
+    )
     assert payload["status"] == "pass"
     assert payload["findings"] == []
+
+
+def test_reflection_enforcement_fails_when_required_phase4_report_is_missing(
+    initialized_project: Path,
+) -> None:
+    payload = run_reflection_gate(
+        initialized_project,
+        "--required-decision-status",
+        "candidate",
+        "--min-scaffold-reports",
+        "0",
+        "--min-required-status-mappings",
+        "0",
+        "--require-phase4-enforcement-report",
+        "--phase4-enforcement-report",
+        ".cortex/reports/project_state/missing_phase4_enforcement_report.json",
+        expect_code=1,
+    )
+    checks = {f["check"] for f in payload["findings"]}
+    assert "missing_phase4_enforcement_report" in checks

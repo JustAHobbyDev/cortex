@@ -1,0 +1,194 @@
+{
+  "artifact": "phase4_enforcement_blocking_report_v0",
+  "cases": [
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "candidate_id": "pc_small_linked_001",
+          "expected_block": false,
+          "governance_impact": "high",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_linked_governance_closure_v0.json",
+      "profile_id": "small",
+      "scenario_id": "s_small_linked_governance_closure"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "candidate_id": "pc_small_unlinked_001",
+          "expected_block": true,
+          "governance_impact": "high",
+          "linkage_complete": false,
+          "next_action": "",
+          "observed_block": true,
+          "observed_recommendation": "block_unlinked_governance_closure",
+          "owner": ""
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_unlinked_governance_closure_v0.json",
+      "profile_id": "small",
+      "scenario_id": "s_small_unlinked_governance_closure"
+    },
+    {
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "candidate_id": "pc_medium_mixed_001",
+          "expected_block": false,
+          "governance_impact": "high",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        },
+        {
+          "candidate_id": "pc_medium_mixed_002",
+          "expected_block": false,
+          "governance_impact": "medium",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_mixed_tactical_cluster_v0.json",
+      "profile_id": "medium",
+      "scenario_id": "s_medium_mixed_tactical_cluster"
+    },
+    {
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "candidate_id": "pc_medium_missing_reflection_001",
+          "expected_block": true,
+          "governance_impact": "high",
+          "linkage_complete": false,
+          "next_action": "",
+          "observed_block": true,
+          "observed_recommendation": "block_unlinked_governance_closure",
+          "owner": ""
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_missing_reflection_linkage_v0.json",
+      "profile_id": "medium",
+      "scenario_id": "s_medium_missing_reflection_linkage"
+    },
+    {
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "candidate_id": "pc_large_rank_001",
+          "expected_block": false,
+          "governance_impact": "high",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        },
+        {
+          "candidate_id": "pc_large_rank_002",
+          "expected_block": false,
+          "governance_impact": "high",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        },
+        {
+          "candidate_id": "pc_large_rank_003",
+          "expected_block": false,
+          "governance_impact": "medium",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        },
+        {
+          "candidate_id": "pc_large_rank_004",
+          "expected_block": false,
+          "governance_impact": "high",
+          "linkage_complete": true,
+          "next_action": "",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": ""
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_high_cardinality_candidate_ranking_v0.json",
+      "profile_id": "large",
+      "scenario_id": "s_large_high_cardinality_candidate_ranking"
+    },
+    {
+      "candidate_count": 3,
+      "candidates": [
+        {
+          "candidate_id": "pc_gd_large_001",
+          "expected_block": true,
+          "governance_impact": "high",
+          "linkage_complete": false,
+          "next_action": "Link reflection scaffold before closure.",
+          "observed_block": true,
+          "observed_recommendation": "block_unlinked_governance_closure",
+          "owner": "Governance Enforcement Lead"
+        },
+        {
+          "candidate_id": "pc_gd_large_002",
+          "expected_block": false,
+          "governance_impact": "medium",
+          "linkage_complete": false,
+          "next_action": "Promote candidate with complete evidence mapping.",
+          "observed_block": false,
+          "observed_recommendation": "eligible_for_promotion",
+          "owner": "Runtime Reliability Lead"
+        },
+        {
+          "candidate_id": "pc_gd_large_003",
+          "expected_block": true,
+          "governance_impact": "high",
+          "linkage_complete": false,
+          "next_action": "Re-run required governance gate bundle after linkage fixes.",
+          "observed_block": true,
+          "observed_recommendation": "block_unlinked_governance_closure",
+          "owner": "CI/Gate Owner"
+        }
+      ],
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_governance_debt_backlog_v0.json",
+      "profile_id": "large",
+      "scenario_id": "s_large_governance_debt_backlog"
+    }
+  ],
+  "fixture_source": ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-24T15:50:38Z",
+  "status": "pass",
+  "summary": {
+    "blocked_unlinked_count": 4,
+    "linked_closure_false_block_rate": 0.0,
+    "linked_false_block_count": 0,
+    "linked_governance_attempt_count": 5,
+    "unlinked_closure_block_rate": 1.0,
+    "unlinked_governance_attempt_count": 4
+  },
+  "target_results": {
+    "linked_closure_false_block_rate_met": true,
+    "unlinked_closure_block_rate_met": true
+  },
+  "targets": {
+    "linked_closure_false_block_rate_max": 0.05,
+    "unlinked_closure_block_rate": 1.0
+  },
+  "version": "v0"
+}

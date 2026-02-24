@@ -18,54 +18,62 @@ run_quiet() {
   rm -f "$log_file"
 }
 
-echo "[quality-gate-ci] 1/9 quality gate sync check"
+echo "[quality-gate-ci] 1/10 quality gate sync check"
 run_quiet "quality_gate_sync_check_v0.py" python3 scripts/quality_gate_sync_check_v0.py \
   --ci-script scripts/quality_gate_ci_v0.sh \
   --local-script scripts/quality_gate_v0.sh \
   --format json
 
-echo "[quality-gate-ci] 2/9 coach smoke checks"
+echo "[quality-gate-ci] 2/10 coach smoke checks"
 run_quiet "coach help" python3 scripts/cortex_project_coach_v0.py --help
 run_quiet "audit-needed smoke" python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 3/9 decision gap check"
+echo "[quality-gate-ci] 3/10 decision gap check"
 run_quiet "decision-gap-check" python3 scripts/cortex_project_coach_v0.py decision-gap-check \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 4/9 reflection enforcement gate"
+echo "[quality-gate-ci] 4/10 phase4 enforcement blocking harness"
+run_quiet "phase4_enforcement_blocking_harness_v0.py" python3 scripts/phase4_enforcement_blocking_harness_v0.py \
+  --project-dir . \
+  --format json
+
+echo "[quality-gate-ci] 5/10 reflection enforcement gate"
 run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforcement_gate_v0.py \
   --project-dir . \
   --required-decision-status promoted \
   --min-scaffold-reports 1 \
   --min-required-status-mappings 1 \
+  --require-phase4-enforcement-report \
+  --phase4-enforcement-report .cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json \
   --format json
 
-echo "[quality-gate-ci] 5/9 mistake provenance gate"
+echo "[quality-gate-ci] 6/10 mistake provenance gate"
 run_quiet "mistake_candidate_gate_v0.py" python3 scripts/mistake_candidate_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 6/9 project-state boundary gate"
+echo "[quality-gate-ci] 7/10 project-state boundary gate"
 run_quiet "project_state_boundary_gate_v0.py" python3 scripts/project_state_boundary_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 7/9 temporal playbook release-surface gate"
+echo "[quality-gate-ci] 8/10 temporal playbook release-surface gate"
 run_quiet "temporal_playbook_release_gate_v0.py" python3 scripts/temporal_playbook_release_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate-ci] 8/9 docs and json integrity"
+echo "[quality-gate-ci] 9/10 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
-echo "[quality-gate-ci] 9/9 focused coach tests"
+echo "[quality-gate-ci] 10/10 focused coach tests"
 uv run --locked --group dev pytest -q \
   tests/test_coach_decision_gap_check.py \
   tests/test_coach_reflection_enforcement_gate.py \
   tests/test_coach_context_load.py \
-  tests/test_coach_quality_gate_sync_check.py
+  tests/test_coach_quality_gate_sync_check.py \
+  tests/test_phase4_enforcement_blocking_harness.py
 
 echo "[quality-gate-ci] PASS"

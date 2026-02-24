@@ -172,7 +172,7 @@
   ],
   "fixture_source": ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-24T15:50:38Z",
+  "run_at": "2026-02-24T16:08:42Z",
   "status": "pass",
   "summary": {
     "blocked_unlinked_count": 4,

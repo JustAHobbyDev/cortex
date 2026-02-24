@@ -92,7 +92,27 @@ Expected outputs:
 - `.cortex/reports/project_state/phase4_promotion_candidate_quality_report_v0.json`
 - `.cortex/reports/project_state/phase4_promotion_determinism_report_v0.json`
 
-Enforcement/debt/governance regression pack:
+Enforcement blocking:
+
+```bash
+python3 scripts/phase4_enforcement_blocking_harness_v0.py \
+  --project-dir .
+```
+
+Expected outputs:
+- `.cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json`
+
+Governance debt visibility:
+
+```bash
+python3 scripts/phase4_governance_debt_harness_v0.py \
+  --project-dir .
+```
+
+Expected outputs:
+- `.cortex/reports/project_state/phase4_governance_debt_visibility_report_v0.json`
+
+Governance non-regression pack:
 
 ```bash
 python3 scripts/phase4_promotion_governance_regression_harness_v0.py \
@@ -100,8 +120,6 @@ python3 scripts/phase4_promotion_governance_regression_harness_v0.py \
 ```
 
 Expected outputs:
-- `.cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json`
-- `.cortex/reports/project_state/phase4_governance_debt_visibility_report_v0.json`
 - `.cortex/reports/project_state/phase4_governance_regression_report_v0.md`
 
 Performance and CI-overhead pack:

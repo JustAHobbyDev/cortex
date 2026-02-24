@@ -1,0 +1,21 @@
+{
+  "profile_id": "small",
+  "scenario_id": "s_small_unlinked_governance_closure",
+  "captured_at": "2026-02-24T11:02:00Z",
+  "tactical_candidates": [
+    {
+      "candidate_id": "pc_small_unlinked_001",
+      "title": "Attempt governance closeout without linkage",
+      "state": "ready",
+      "governance_impact": "high",
+      "decision_refs": [],
+      "reflection_refs": [],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase5_measurement_plan_v0.md"
+      ]
+    }
+  ]
+}

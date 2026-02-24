@@ -1,0 +1,55 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "contracts/promotion_enforcement_contract_v0.md",
+    ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+    "specs/cortex_project_coach_spec_v0.md",
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    ".cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Phase 4 baseline and governance roster updates were not yet codified as promoted decision-linked artifacts.",
+  "pattern": "Planning and governance updates can land quickly without explicit decision/reflection linkage for all affected control artifacts.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Establish Phase 4 baseline contract/fixtures and close backup-maintainer gap\" --decision \"Mistake observed: Phase 4 baseline and governance roster updates were not yet codified as promoted decision-linked artifacts. Recurring pattern: Planning and governance updates can land quickly without explicit decision/reflection linkage for all affected control artifacts. Adopt reusable rule: When phase baselines or maintainer-governance mappings change, capture and promote a linked decision in the same change set.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260224T131608Z_establish_phase_4_baseli --reflection-report .cortex/reports/reflection_scaffold_20260224T131608Z_establish_phase_4_baseli_v0.json --linked-artifacts .cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md,.cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json,contracts/promotion_enforcement_contract_v0.md,playbooks/cortex_phase0_governance_ticket_breakdown_v0.md,playbooks/cortex_phase4_measurement_plan_v0.md,playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md,specs/cortex_project_coach_spec_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260224T131608Z_establish_phase_4_baseli",
+  "report_file": ".cortex/reports/reflection_scaffold_20260224T131608Z_establish_phase_4_baseli_v0.json",
+  "rule": "When phase baselines or maintainer-governance mappings change, capture and promote a linked decision in the same change set.",
+  "run_at": "2026-02-24T13:16:08Z",
+  "suggested_decision": "Mistake observed: Phase 4 baseline and governance roster updates were not yet codified as promoted decision-linked artifacts. Recurring pattern: Planning and governance updates can land quickly without explicit decision/reflection linkage for all affected control artifacts. Adopt reusable rule: When phase baselines or maintainer-governance mappings change, capture and promote a linked decision in the same change set.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_establish_phase_4_baseline_contract_fixtures_and_close_backup_maintainer_gap_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/ph0_009_maintainer_closeout_handoff_package_v0.md",
+    ".cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json",
+    "contracts/promotion_enforcement_contract_v0.md",
+    "playbooks/cortex_phase0_governance_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase4_measurement_plan_v0.md",
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "specs/cortex_project_coach_spec_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Establish Phase 4 baseline contract/fixtures and close backup-maintainer gap",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

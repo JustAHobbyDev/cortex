@@ -1,0 +1,79 @@
+{
+  "profile_id": "large",
+  "scenario_id": "s_large_high_cardinality_candidate_ranking",
+  "captured_at": "2026-02-24T11:08:00Z",
+  "tactical_candidates": [
+    {
+      "candidate_id": "pc_large_rank_001",
+      "title": "High-priority linked governance closure",
+      "state": "ready",
+      "governance_impact": "high",
+      "decision_refs": [
+        "dec_large_001"
+      ],
+      "reflection_refs": [
+        "ref_large_001"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_adapter_budget_report_v0.json"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md"
+      ]
+    },
+    {
+      "candidate_id": "pc_large_rank_002",
+      "title": "High-priority linked governance closure B",
+      "state": "ready",
+      "governance_impact": "high",
+      "decision_refs": [
+        "dec_large_002"
+      ],
+      "reflection_refs": [
+        "ref_large_002"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_ci_overhead_report_v0.json"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase5_measurement_plan_v0.md"
+      ]
+    },
+    {
+      "candidate_id": "pc_large_rank_003",
+      "title": "Medium-priority candidate",
+      "state": "ready",
+      "governance_impact": "medium",
+      "decision_refs": [
+        "dec_large_003"
+      ],
+      "reflection_refs": [
+        "ref_large_003"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_governance_regression_report_v0.md"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md"
+      ]
+    },
+    {
+      "candidate_id": "pc_large_rank_004",
+      "title": "Blocked dependency candidate",
+      "state": "blocked",
+      "governance_impact": "high",
+      "decision_refs": [
+        "dec_large_004"
+      ],
+      "reflection_refs": [
+        "ref_large_004"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json"
+      ],
+      "impacted_artifacts": [
+        "playbooks/session_governance_hybrid_plan_v0.md"
+      ]
+    }
+  ]
+}

@@ -67,7 +67,7 @@ Map role labels to specific people/accounts before execution begins.
 | Conformance QA Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | Program Lead | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
 | CI/Gate Owner | Dan Schmidt (`@JustAHobbyDev`) | Maintainer Council (interim) | Solo-maintainer interim mapping; add named secondary maintainer before Phase 1. |
-| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | none | No backup maintainer currently; accepted non-blocking governance risk. Solo-maintainer exception review date is 2026-03-08. |
+| Maintainer Council | Dan Schmidt (`@JustAHobbyDev`) | Dan Schmidt (`@JustAHobbyDev`) (interim fallback) | Interim fallback assignment closes unassigned-backup gap under solo-maintainer exception controls; second named maintainer remains onboarding objective. |
 
 | Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|

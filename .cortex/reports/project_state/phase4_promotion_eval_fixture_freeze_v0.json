@@ -1,0 +1,118 @@
+{
+  "artifact": "phase4_promotion_eval_fixture_freeze_v0",
+  "version": "v0",
+  "status": "frozen",
+  "frozen_on": "2026-02-24",
+  "source_ticket": "PH4-001",
+  "source_playbooks": [
+    "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase4_measurement_plan_v0.md"
+  ],
+  "profiles": [
+    {
+      "profile_id": "small",
+      "description": "Low-cardinality promotion inputs focused on single governance-impacting closure path.",
+      "scenario_ids": [
+        "s_small_linked_governance_closure",
+        "s_small_unlinked_governance_closure"
+      ],
+      "query_ids": [
+        "q_small_promote_linked_change",
+        "q_small_block_unlinked_change"
+      ]
+    },
+    {
+      "profile_id": "medium",
+      "description": "Representative mixed tactical/governance context with partial linkage quality.",
+      "scenario_ids": [
+        "s_medium_mixed_tactical_cluster",
+        "s_medium_missing_reflection_linkage"
+      ],
+      "query_ids": [
+        "q_medium_candidate_ranking_quality",
+        "q_medium_enforcement_linkage_blocking"
+      ]
+    },
+    {
+      "profile_id": "large",
+      "description": "High-cardinality promotion candidates requiring deterministic ranking and debt surfacing.",
+      "scenario_ids": [
+        "s_large_high_cardinality_candidate_ranking",
+        "s_large_governance_debt_backlog"
+      ],
+      "query_ids": [
+        "q_large_deterministic_promotion_order",
+        "q_large_governance_debt_visibility"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "s_small_linked_governance_closure",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_linked_governance_closure_v0.json",
+      "description": "Linked decision/reflection metadata present; promotion candidate should remain eligible."
+    },
+    {
+      "scenario_id": "s_small_unlinked_governance_closure",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/small_unlinked_governance_closure_v0.json",
+      "description": "Governance-impacting closure intent without linkage; enforcement must block."
+    },
+    {
+      "scenario_id": "s_medium_mixed_tactical_cluster",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_mixed_tactical_cluster_v0.json",
+      "description": "Mixed tactical cluster with varying evidence coverage for ranking/score validation."
+    },
+    {
+      "scenario_id": "s_medium_missing_reflection_linkage",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/medium_missing_reflection_linkage_v0.json",
+      "description": "Decision linkage present while reflection linkage is missing; enforcement must report deterministic failure class."
+    },
+    {
+      "scenario_id": "s_large_high_cardinality_candidate_ranking",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_high_cardinality_candidate_ranking_v0.json",
+      "description": "High-cardinality candidate set for deterministic tie-break and score consistency checks."
+    },
+    {
+      "scenario_id": "s_large_governance_debt_backlog",
+      "fixture_ref": ".cortex/fixtures/phase4_promotion/large_governance_debt_backlog_v0.json",
+      "description": "Backlog fixture for ready/blocked governance debt surfacing and owner/action coverage validation."
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "q_small_promote_linked_change",
+      "profile_id": "small",
+      "query_text": "promote linked governance impacting change with evidence coverage"
+    },
+    {
+      "query_id": "q_small_block_unlinked_change",
+      "profile_id": "small",
+      "query_text": "block unlinked governance impacting closure attempt"
+    },
+    {
+      "query_id": "q_medium_candidate_ranking_quality",
+      "profile_id": "medium",
+      "query_text": "rank promotion candidates by evidence and governance impact deterministically"
+    },
+    {
+      "query_id": "q_medium_enforcement_linkage_blocking",
+      "profile_id": "medium",
+      "query_text": "enforcement check for missing reflection linkage on governance closure"
+    },
+    {
+      "query_id": "q_large_deterministic_promotion_order",
+      "profile_id": "large",
+      "query_text": "high cardinality promotion candidate ordering determinism"
+    },
+    {
+      "query_id": "q_large_governance_debt_visibility",
+      "profile_id": "large",
+      "query_text": "governance debt visibility for ready blocked owner action backlog"
+    }
+  ],
+  "freeze_rules": {
+    "version_bump_required_on_query_or_scenario_change": true,
+    "gate_e_baseline_reset_note_required_on_change": true,
+    "deterministic_query_and_scenario_order_required": true
+  }
+}

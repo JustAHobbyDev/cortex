@@ -35,7 +35,7 @@ Verification status:
 
 | Question | Owner | Due Date | Severity | Blocker | Mitigation |
 |---|---|---|---|---|---|
-| Maintainer Council backup remains unassigned (`none`). | Maintainer Council | 2026-03-08 | medium | no | Continue solo-maintainer compensating controls; revisit assignment at solo-maintainer exception review date. |
+| Maintainer Council backup assignment resolved as interim fallback to `Dan Schmidt (@JustAHobbyDev)` under solo-maintainer exception controls. | Maintainer Council | 2026-03-31 | low | no | Keep interim fallback active until a second named maintainer is onboarded; review at monthly governance checkpoint. |
 
 ## Fixed Policy vs Implementation Choice Summary
 

@@ -1,0 +1,44 @@
+{
+  "profile_id": "medium",
+  "scenario_id": "s_medium_mixed_tactical_cluster",
+  "captured_at": "2026-02-24T11:04:00Z",
+  "tactical_candidates": [
+    {
+      "candidate_id": "pc_medium_mixed_001",
+      "title": "Promotion candidate with complete governance linkage",
+      "state": "ready",
+      "governance_impact": "high",
+      "decision_refs": [
+        "dec_example_medium_001"
+      ],
+      "reflection_refs": [
+        "ref_example_medium_001"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_adapter_degradation_report_v0.json",
+        ".cortex/reports/project_state/phase3_adapter_determinism_report_v0.json"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md"
+      ]
+    },
+    {
+      "candidate_id": "pc_medium_mixed_002",
+      "title": "Promotion candidate with medium evidence density",
+      "state": "ready",
+      "governance_impact": "medium",
+      "decision_refs": [
+        "dec_example_medium_002"
+      ],
+      "reflection_refs": [
+        "ref_example_medium_002"
+      ],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_adapter_latency_report_v0.json"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_phase4_measurement_plan_v0.md"
+      ]
+    }
+  ]
+}

@@ -8,6 +8,7 @@ Inputs:
 - `specs/spec_spec_v0.md` governance and spec structure
 - `specs/design_ontology_schema_spec_v0.md` design ontology baseline
 - `contracts/promotion_contract_schema_v0.json` promotion contract schema
+- `contracts/promotion_enforcement_contract_v0.md` promotion/enforcement hardening contract baseline
 - `contracts/context_hydration_receipt_schema_v0.json` context hydration receipt contract schema
 - `contracts/mistake_candidate_schema_v0.json` mistake candidate provenance contract schema
 - `contracts/project_state_boundary_contract_v0.json` project-state path boundary contract
@@ -330,6 +331,32 @@ Determinism and budget requirements:
 - Adapter slice inclusion must remain bounded by context budget controls.
 - Adapter degradation behavior must preserve deterministic output shape for automation.
 - Gate D measurements must use the frozen fixture set at `.cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json`.
+
+### Promotion and Enforcement Hardening Baseline (Phase 4 / PH4-001)
+
+Canonical contract sources:
+- `contracts/promotion_contract_schema_v0.json`
+- `contracts/promotion_enforcement_contract_v0.md`
+- `playbooks/cortex_phase4_measurement_plan_v0.md`
+- `.cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json`
+
+Promotion mapping and scoring requirements:
+- Promotion candidate outputs must map cleanly to promotion contract-required fields.
+- Candidate ranking/scoring must remain deterministic with contract-defined tie-break ordering.
+- Score breakdown fields must be machine-readable and bounded for automation traceability.
+
+Enforcement requirements:
+- Governance-impacting closure attempts lacking required decision/reflection linkage must fail closed.
+- Linked governance-impacting closures should proceed unless explicit policy violations are detected.
+- Required governance checks remain authoritative release-boundary controls.
+
+Governance debt visibility requirements:
+- Runtime must provide deterministic `ready`/`blocked` governance debt visibility slices with owner/action fields.
+- Debt visibility remains advisory until promoted into canonical governance artifacts.
+
+Fixture freeze requirements:
+- Gate E measurements must use `.cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json`.
+- Fixture changes require version bump and explicit Gate E baseline reset note in closeout artifacts.
 
 ### Context Hydration Enforcement
 

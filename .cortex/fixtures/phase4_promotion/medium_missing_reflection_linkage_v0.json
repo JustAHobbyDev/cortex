@@ -1,0 +1,23 @@
+{
+  "profile_id": "medium",
+  "scenario_id": "s_medium_missing_reflection_linkage",
+  "captured_at": "2026-02-24T11:06:00Z",
+  "tactical_candidates": [
+    {
+      "candidate_id": "pc_medium_missing_reflection_001",
+      "title": "Candidate missing reflection linkage",
+      "state": "ready",
+      "governance_impact": "high",
+      "decision_refs": [
+        "dec_example_medium_missing_reflection_001"
+      ],
+      "reflection_refs": [],
+      "evidence_refs": [
+        ".cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md"
+      ],
+      "impacted_artifacts": [
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ]
+    }
+  ]
+}

@@ -18,6 +18,8 @@ Define deterministic Gate E criteria that verify tactical-to-governance promotio
 - `playbooks/session_governance_hybrid_plan_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
 - `contracts/promotion_contract_schema_v0.json`
+- `contracts/promotion_enforcement_contract_v0.md`
+- `.cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json`
 
 ## Scope
 

@@ -1,0 +1,43 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase2_measurement_plan_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "planning"
+  ],
+  "mistake": "Updated governance-impacting phase board entries without reflection linkage.",
+  "pattern": "Execution tracking updates can bypass reflection metadata when done ad hoc.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Mark Phase 2 retrieval kickoff and weighting implementation as tracked\" --decision \"Mistake observed: Updated governance-impacting phase board entries without reflection linkage. Recurring pattern: Execution tracking updates can bypass reflection metadata when done ad hoc. Adopt reusable rule: When updating governance-impacting phase ticket status, create or attach reflection scaffold metadata in the same change.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,planning --reflection-id ref_20260224T042926Z_mark_phase_2_retrieval_k --reflection-report .cortex/reports/reflection_scaffold_phase2_tracking_update_v0.json --linked-artifacts playbooks/cortex_phase2_measurement_plan_v0.md,playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260224T042926Z_mark_phase_2_retrieval_k",
+  "report_file": ".cortex/reports/reflection_scaffold_phase2_tracking_update_v0.json",
+  "rule": "When updating governance-impacting phase ticket status, create or attach reflection scaffold metadata in the same change.",
+  "run_at": "2026-02-24T04:29:26Z",
+  "suggested_decision": "Mistake observed: Updated governance-impacting phase board entries without reflection linkage. Recurring pattern: Execution tracking updates can bypass reflection metadata when done ad hoc. Adopt reusable rule: When updating governance-impacting phase ticket status, create or attach reflection scaffold metadata in the same change.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_mark_phase_2_retrieval_kickoff_and_weighting_implementation_as_tracked_v1.md",
+  "suggested_linked_artifacts": [
+    "playbooks/cortex_phase2_measurement_plan_v0.md",
+    "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Mark Phase 2 retrieval kickoff and weighting implementation as tracked",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

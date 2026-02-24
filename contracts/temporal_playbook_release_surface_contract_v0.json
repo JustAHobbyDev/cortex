@@ -78,6 +78,22 @@
       "reason": "Phase 1-scoped command contract execution board used during tactical memory design/implementation.",
       "release_action": "exclude_from_release",
       "status": "active"
+    },
+    {
+      "expires_on": "2026-06-30",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase2_measurement_plan_v0.md",
+      "reason": "Phase 2-scoped Gate C measurement baseline for retrieval and context quality upgrade validation.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-06-30",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
+      "reason": "Phase 2-scoped execution board for ranked retrieval, weighting, and context quality implementation slices.",
+      "release_action": "exclude_from_release",
+      "status": "active"
     }
   ],
   "version": "v0"

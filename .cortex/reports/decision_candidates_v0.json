@@ -527,8 +527,28 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260223T225051Z_record_phase_1_runtime_i_v0.json",
       "status": "promoted",
       "title": "Record Phase 1 runtime implementation backlinks and handoff completion"
+    },
+    {
+      "captured_at": "2026-02-24T04:28:38Z",
+      "decision": "Record PH2-001/002/003 completion state with cross-repo evidence commits before proceeding to PH2-004+.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_mark_phase_2_retrieval_kickoff_and_weighting_implementation_as_tracked_v1.md",
+      "decision_id": "dec_20260224T042838Z_mark_phase_2_retrieval_k",
+      "impact_scope": [
+        "governance",
+        "planning"
+      ],
+      "linked_artifacts": [
+        "playbooks/cortex_phase2_retrieval_context_ticket_breakdown_v0.md",
+        "playbooks/cortex_phase2_measurement_plan_v0.md"
+      ],
+      "promoted_at": "2026-02-24T04:29:50Z",
+      "rationale": "Plan-state mutations under governance paths must remain decision-linked to satisfy gap enforcement and keep execution traceable.",
+      "reflection_id": "ref_20260224T042926Z_mark_phase_2_retrieval_k",
+      "reflection_report": ".cortex/reports/reflection_scaffold_phase2_tracking_update_v0.json",
+      "status": "promoted",
+      "title": "Mark Phase 2 retrieval kickoff and weighting implementation as tracked"
     }
   ],
-  "updated_at": "2026-02-23T22:51:30Z",
+  "updated_at": "2026-02-24T04:29:50Z",
   "version": "v0"
 }

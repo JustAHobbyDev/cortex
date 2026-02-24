@@ -1,0 +1,430 @@
+{
+  "aggregate": {
+    "baseline_median_ndcg_at_5": 0.460517,
+    "baseline_median_top_k_recall": 0.5,
+    "ndcg_uplift_percent": 48.057944,
+    "post_median_ndcg_at_5": 0.681832,
+    "post_median_top_k_recall": 1.0,
+    "query_count": 9
+  },
+  "artifact": "phase2_retrieval_relevance_report_v0",
+  "coach_bin": "/tmp/cortex-coach/.venv/bin/cortex-coach",
+  "fixture_artifact": "phase2_retrieval_eval_fixture_freeze_v0",
+  "fixture_hash": "5f7b8fd539c9e709ab9c0a28f73af94b6c0c47b92286fb6ae6d35b9e2d8480b8",
+  "fixture_version": "v0",
+  "legacy_baseline_proxy": {
+    "description": "Legacy deterministic context loader used as pre-change baseline proxy.",
+    "script": "scripts/agent_context_loader_v0.py"
+  },
+  "profile_summaries": [
+    {
+      "baseline_median_ndcg_at_5": 0.432032,
+      "baseline_median_top_k_recall": 0.5,
+      "ndcg_uplift_percent": 33.231103,
+      "post_median_ndcg_at_5": 0.575601,
+      "post_median_top_k_recall": 0.5,
+      "profile_id": "small",
+      "query_count": 3
+    },
+    {
+      "baseline_median_ndcg_at_5": 0.460517,
+      "baseline_median_top_k_recall": 1.0,
+      "ndcg_uplift_percent": 48.057944,
+      "post_median_ndcg_at_5": 0.681832,
+      "post_median_top_k_recall": 1.0,
+      "profile_id": "medium",
+      "query_count": 3
+    },
+    {
+      "baseline_median_ndcg_at_5": 0.518638,
+      "baseline_median_top_k_recall": 0.5,
+      "ndcg_uplift_percent": 41.121553,
+      "post_median_ndcg_at_5": 0.73191,
+      "post_median_top_k_recall": 1.0,
+      "profile_id": "large",
+      "query_count": 3
+    }
+  ],
+  "query_results": [
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.432032,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          ".cortex/artifacts/design_cortex_repo_v0.dsl",
+          ".cortex/artifacts/design_cortex_repo_v0.json",
+          "templates/design_ontology_dsl_example_v0.json",
+          "templates/design_ontology_example_v0.json",
+          "templates/design_ontology_v0.schema.json"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.143569,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.575601,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          "templates/design_ontology_v0.schema.json",
+          "templates/modern_web_design_vocabulary_v0.json",
+          "templates/design_ontology_example_v0.json",
+          ".cortex/artifacts/design_cortex_repo_v0.dsl",
+          ".cortex/artifacts/design_cortex_repo_v0.json"
+        ]
+      },
+      "profile_id": "small",
+      "query_id": "q_small_decision_linkage_gap"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.643693,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.243598,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.887291,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/design_ontology_schema_spec_v0.md",
+          "specs/project_state_boundary_spec_v0.md",
+          "specs/spec_spec_v0.md"
+        ]
+      },
+      "profile_id": "small",
+      "query_id": "q_small_recent_gate_failure"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": false,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.41443,
+        "top_k_recall": 0.0,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": -0.034346,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": false,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.380084,
+        "top_k_recall": 0.0,
+        "top_paths": [
+          "specs/cortex_project_coach_spec_v0.md",
+          "specs/meta_program_spec_v0.md",
+          "specs/structural_audit_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/agent_context_loader_spec_v0.md"
+        ]
+      },
+      "profile_id": "small",
+      "query_id": "q_small_phase_handoff_checklist"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.460517,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.132515,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.593032,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/cortex_project_coach_spec_v0.md",
+          "specs/prompt_lineage_ontology_spec_v0.md",
+          "specs/spec_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md"
+        ]
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_context_rollover_enforcement"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": false,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.153749,
+        "top_k_recall": 0.0,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.528083,
+        "top_k_recall": 0.5
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.681832,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          "specs/beads_integration_boundary_v0.md",
+          "specs/invariant_drift_detection_v0.md",
+          "specs/cortex_project_coach_spec_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/spec_spec_v0.md"
+        ]
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_ci_overhead_regression"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.691693,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "policies/context_hydration_policy_v0.md",
+          "policies/cortex_coach_cli_output_contract_policy_v0.md",
+          "policies/cortex_coach_final_ownership_boundary_v0.md",
+          "policies/cortex_coach_usage_decision_policy_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.308307,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 1.0,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          "policies/decision_reflection_policy_v0.md",
+          "policies/cortex_coach_cli_output_contract_policy_v0.md",
+          "policies/cortex_coach_usage_decision_policy_v0.md",
+          "policies/context_hydration_policy_v0.md",
+          "policies/cortex_maintainer_mode_tracking_policy_v0.md"
+        ]
+      },
+      "profile_id": "medium",
+      "query_id": "q_medium_policy_vs_implementation_boundary"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": false,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.551153,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.180757,
+        "top_k_recall": 0.5
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.73191,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          "specs/design_ontology_schema_spec_v0.md",
+          "specs/project_state_boundary_spec_v0.md",
+          "specs/pubsub_bus_spec_v0.md",
+          "specs/spec_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md"
+        ]
+      },
+      "profile_id": "large",
+      "query_id": "q_large_stale_playbook_cleanup"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.518638,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.435142,
+        "top_k_recall": 0.0
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": false
+        },
+        "ndcg_at_5": 0.95378,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/cortex_project_coach_spec_v0.md",
+          "specs/scene_graph_integration_spec_v0.md",
+          "specs/spec_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md"
+        ]
+      },
+      "profile_id": "large",
+      "query_id": "q_large_retrieval_noise_control"
+    },
+    {
+      "baseline_proxy": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": false,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.256843,
+        "top_k_recall": 0.5,
+        "top_paths": [
+          ".cortex/artifacts/direction_cortex_repo_v0.md",
+          ".cortex/artifacts/governance_cortex_repo_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/beads_integration_boundary_v0.md",
+          "specs/cortex_project_coach_spec_v0.md"
+        ]
+      },
+      "delta": {
+        "ndcg_at_5": 0.308313,
+        "top_k_recall": 0.5
+      },
+      "post_change": {
+        "group_hits": {
+          "must_exclude_tags_all": true,
+          "must_include_signals_any": true,
+          "must_include_tags_any": true
+        },
+        "ndcg_at_5": 0.565156,
+        "top_k_recall": 1.0,
+        "top_paths": [
+          "specs/cortex_project_coach_spec_v0.md",
+          "specs/meta_program_spec_v0.md",
+          "specs/agent_context_loader_spec_v0.md",
+          "specs/structural_audit_spec_v0.md",
+          "specs/design_prompt_dsl_spec_v0.md"
+        ]
+      },
+      "profile_id": "large",
+      "query_id": "q_large_phase_closeout_traceability"
+    }
+  ],
+  "run_at": "2026-02-24T05:02:53Z",
+  "scoring_contract": {
+    "overlap_gain": "min(1.0, 1.5 * token_overlap_ratio(query_text, document_text))",
+    "relevance_gain_formula": "signal_hit + tag_hit + overlap_gain (exclude-hit => 0)",
+    "signal_hit": "any top document contains token from must_include_signals_any",
+    "tag_hit": "any top document contains token from must_include_tags_any",
+    "top_k_recall_definition": "required-group hit rate over must_include_signals_any and must_include_tags_any (0 if excluded token appears)",
+    "version": "v0"
+  },
+  "targets": {
+    "ndcg_target_met": true,
+    "ndcg_uplift_percent_min": 10.0,
+    "target_met": true,
+    "top_k_recall_min": 0.8,
+    "top_k_recall_not_below_baseline": true,
+    "top_k_recall_target_met": true
+  },
+  "top_k": 5,
+  "version": "v0",
+  "weighting_mode": "evidence_outcome_bias"
+}

@@ -1,0 +1,95 @@
+{
+  "artifact": "phase2_retrieval_determinism_report_v0",
+  "coach_bin": "/tmp/cortex-coach/.venv/bin/cortex-coach",
+  "consistency_rate": 1.0,
+  "deterministic_all": true,
+  "deterministic_queries": 9,
+  "fixture_artifact": "phase2_retrieval_eval_fixture_freeze_v0",
+  "fixture_hash": "5f7b8fd539c9e709ab9c0a28f73af94b6c0c47b92286fb6ae6d35b9e2d8480b8",
+  "fixture_version": "v0",
+  "hash_contract": {
+    "normalization": "retrieval_profile, weighting_mode, fallback_level, and ordered file ranking fields",
+    "version": "v0"
+  },
+  "query_count": 9,
+  "results": [
+    {
+      "deterministic": true,
+      "profile_id": "small",
+      "query_id": "q_small_decision_linkage_gap",
+      "runs": 30,
+      "sample_hash": "7579436525848f9a5d35f39b624112eef2a229c081fe9e282d83c7e0b305a50e",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "small",
+      "query_id": "q_small_recent_gate_failure",
+      "runs": 30,
+      "sample_hash": "171cc666c9f0078b731d0d7cd1e85165dd1528eda48350fd402c04ae619c03b4",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "small",
+      "query_id": "q_small_phase_handoff_checklist",
+      "runs": 30,
+      "sample_hash": "329897b2280e31e945384f22dbc816a976f19e30f5d6a293d692f313c905bd35",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_context_rollover_enforcement",
+      "runs": 30,
+      "sample_hash": "ebaea511a0a12561e0a0bb91a8b0a4c98e69de97c1de36a88e5ac7a056856afb",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_ci_overhead_regression",
+      "runs": 30,
+      "sample_hash": "1b3140e6755f33150a757a5a51f03befb815de5d46db6c4f254609350d3e75db",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "medium",
+      "query_id": "q_medium_policy_vs_implementation_boundary",
+      "runs": 30,
+      "sample_hash": "c9fd5d5c0cac521a514821647899c75f5180de609af221e305225307b036e5f0",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "large",
+      "query_id": "q_large_stale_playbook_cleanup",
+      "runs": 30,
+      "sample_hash": "8d20dea85f6454369792f880325c418e0171a9104d6e1f5d3f8ec0aef7558ee9",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "large",
+      "query_id": "q_large_retrieval_noise_control",
+      "runs": 30,
+      "sample_hash": "82b5baa08940a39cad96454eaf5f1d0eb05f196e5fb6e9b6cd9de92d3cdb532d",
+      "unique_hash_count": 1
+    },
+    {
+      "deterministic": true,
+      "profile_id": "large",
+      "query_id": "q_large_phase_closeout_traceability",
+      "runs": 30,
+      "sample_hash": "7b1b54da76bd8714989347b57e6dbd10de942454096348b4ed092ac8941034a0",
+      "unique_hash_count": 1
+    }
+  ],
+  "run_at": "2026-02-24T05:02:53Z",
+  "runs_per_query": 30,
+  "target_consistency_rate": 1.0,
+  "target_met": true,
+  "version": "v0",
+  "weighting_mode": "evidence_outcome_bias"
+}

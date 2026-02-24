@@ -105,6 +105,21 @@ Gate C fails if any required metric misses threshold or any required governance 
 - Run full measurement suite before requesting Gate C closeout.
 - If usage pressure triggers constrained mode, prioritize determinism, budget compliance, and governance non-regression checks before additional feature expansion.
 
+## Harness Command (PH2-006)
+
+Deterministic fixture-driven retrieval evaluation command:
+
+```bash
+python3 scripts/phase2_retrieval_eval_harness_v0.py \
+  --project-dir . \
+  --coach-bin /tmp/cortex-coach/.venv/bin/cortex-coach \
+  --legacy-loader-script scripts/agent_context_loader_v0.py
+```
+
+Command outputs:
+- `.cortex/reports/project_state/phase2_retrieval_relevance_report_v0.json`
+- `.cortex/reports/project_state/phase2_retrieval_determinism_report_v0.json`
+
 ## Ownership
 
 - Primary owner: Runtime Reliability Lead.

@@ -152,6 +152,7 @@ Use when:
 4. Certification checklist + scoring rubric.
 5. FAQ and triage playbook for common gate failures.
 6. AI governance fundamentals module guide for M0.
+7. Training project boundary + handoff contract documentation.
 
 ## Baseline Implemented Artifacts (v0)
 
@@ -159,6 +160,8 @@ Use when:
 2. Onboarding completion report template: `.cortex/templates/client_onboarding_completion_report_template_v0.md`
 3. Certification scorecard schema: `contracts/client_onboarding_certification_scorecard_schema_v0.json`
 4. AI governance fundamentals guide: `docs/cortex-coach/client_ai_governance_fundamentals_v0.md`
+5. Training project boundary + handoff guide: `docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md`
+6. Training project handoff schema + manifest template: `contracts/client_training_project_handoff_schema_v0.json`;`.cortex/templates/client_training_project_handoff_manifest_template_v0.json`
 
 ## Certification Rubric (Baseline)
 
@@ -208,3 +211,4 @@ Training track is complete when all conditions are true:
 5. Done: pilot with one internal reference project and publish calibration evidence (`.cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md`).
 6. Done: execute CT-006 certification automation and cadence controls with passing evidence in `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`, supported by preflight + completion artifacts.
 7. Done: add M0 AI governance fundamentals teaching material with explicit control mapping to Cortex implementation.
+8. Done: define training-project separation boundary and machine-checkable handoff contract for future standalone training repo execution.

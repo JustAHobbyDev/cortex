@@ -863,8 +863,35 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T100108Z_attach_reflection_linkag_v0.json",
       "status": "promoted",
       "title": "Formalize Phase 6 GDD role capability matrix and escalation pack"
+    },
+    {
+      "captured_at": "2026-02-25T17:43:36Z",
+      "decision": "Mistake observed: Training expansion content was added without a formal repo boundary and version-pinned handoff interface, leaving ownership and compatibility implicit. Recurring pattern: Enablement assets can sprawl in core repos when separation contracts are not defined before expansion. Adopt reusable rule: Before scaling training assets, define a standalone-project boundary and a machine-checkable handoff contract with version pinning and required interfaces.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_define_standalone_training_project_boundary_and_handoff_contract_v1.md",
+      "decision_id": "dec_20260225T174336Z_define_standalone_traini",
+      "impact_scope": [
+        "governance",
+        "training",
+        "docs",
+        "contracts"
+      ],
+      "linked_artifacts": [
+        "docs/cortex-coach/README.md",
+        "docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md",
+        "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+        "playbooks/cortex_client_onboarding_training_track_v0.md",
+        "contracts/client_training_project_handoff_schema_v0.json",
+        ".cortex/templates/client_training_project_handoff_manifest_template_v0.json",
+        ".cortex/templates/client_onboarding_completion_report_template_v0.md"
+      ],
+      "promoted_at": "2026-02-25T17:43:39Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260225T174323Z_define_standalone_traini",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T174323Z_define_standalone_traini_v0.json",
+      "status": "promoted",
+      "title": "Define standalone training project boundary and handoff contract"
     }
   ],
-  "updated_at": "2026-02-25T10:01:42Z",
+  "updated_at": "2026-02-25T17:43:39Z",
   "version": "v0"
 }

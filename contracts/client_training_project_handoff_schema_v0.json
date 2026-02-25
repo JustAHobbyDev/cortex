@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex/contracts/client_training_project_handoff_schema_v0.json",
+  "title": "Client Training Project Handoff Schema v0",
+  "description": "Machine-checkable contract for handing off Cortex training assets to a standalone training project while preserving integration compatibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact",
+    "version",
+    "generated_at",
+    "source_project",
+    "training_project",
+    "compatibility",
+    "required_interfaces",
+    "handoff_checklist",
+    "status"
+  ],
+  "properties": {
+    "artifact": {
+      "const": "client_training_project_handoff_manifest_v0"
+    },
+    "version": {
+      "const": "v0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_name",
+        "repo_url",
+        "commit_ref"
+      ],
+      "properties": {
+        "repo_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repo_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "training_project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_name",
+        "repo_url",
+        "pin_type",
+        "pin_ref",
+        "training_pack_version"
+      ],
+      "properties": {
+        "repo_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repo_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pin_type": {
+          "type": "string",
+          "enum": [
+            "commit_sha",
+            "tag",
+            "branch"
+          ]
+        },
+        "pin_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "training_pack_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+$"
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cortex_contract_min_version",
+        "cortex_coach_min_version",
+        "scorecard_schema_version",
+        "breaking_changes"
+      ],
+      "properties": {
+        "cortex_contract_min_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+$"
+        },
+        "cortex_coach_min_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scorecard_schema_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+$"
+        },
+        "breaking_changes": {
+          "type": "boolean"
+        },
+        "migration_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "required_interfaces": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "interface_id",
+          "description",
+          "source_path",
+          "target_path",
+          "required",
+          "owner_role"
+        ],
+        "properties": {
+          "interface_id": {
+            "type": "string",
+            "enum": [
+              "ai_governance_fundamentals_module",
+              "client_training_labs_pack",
+              "onboarding_completion_template",
+              "certification_scorecard_schema",
+              "faq_triage_playbook",
+              "training_execution_board_link"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "owner_role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "handoff_checklist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_confirmed",
+        "interface_coverage_confirmed",
+        "version_pin_confirmed",
+        "governance_approvals"
+      ],
+      "properties": {
+        "boundary_confirmed": {
+          "type": "boolean"
+        },
+        "interface_coverage_confirmed": {
+          "type": "boolean"
+        },
+        "version_pin_confirmed": {
+          "type": "boolean"
+        },
+        "governance_approvals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "ready_for_handoff",
+        "accepted"
+      ]
+    },
+    "linked_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}

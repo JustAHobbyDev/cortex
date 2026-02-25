@@ -1,0 +1,93 @@
+{
+  "artifact": "client_training_project_handoff_manifest_v0",
+  "version": "v0",
+  "generated_at": "<YYYY-MM-DDTHH:MM:SSZ>",
+  "source_project": {
+    "repo_name": "cortex",
+    "repo_url": "https://github.com/JustAHobbyDev/cortex",
+    "commit_ref": "<commit_sha>"
+  },
+  "training_project": {
+    "repo_name": "<training_repo_name>",
+    "repo_url": "<training_repo_url>",
+    "pin_type": "commit_sha",
+    "pin_ref": "<training_repo_commit_or_tag>",
+    "training_pack_version": "v0"
+  },
+  "compatibility": {
+    "cortex_contract_min_version": "v0",
+    "cortex_coach_min_version": "<semver_or_commit>",
+    "scorecard_schema_version": "v0",
+    "breaking_changes": false,
+    "migration_notes": ""
+  },
+  "required_interfaces": [
+    {
+      "interface_id": "ai_governance_fundamentals_module",
+      "description": "M0 AI governance fundamentals content",
+      "source_path": "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+      "target_path": "docs/client_ai_governance_fundamentals_v0.md",
+      "required": true,
+      "owner_role": "Governance Policy Lead",
+      "notes": ""
+    },
+    {
+      "interface_id": "client_training_labs_pack",
+      "description": "M2-M5 deterministic lab guide pack",
+      "source_path": "docs/cortex-coach/client_training_labs_v0.md",
+      "target_path": "docs/client_training_labs_v0.md",
+      "required": true,
+      "owner_role": "Delivery Operations Lead",
+      "notes": ""
+    },
+    {
+      "interface_id": "onboarding_completion_template",
+      "description": "Onboarding completion report template",
+      "source_path": ".cortex/templates/client_onboarding_completion_report_template_v0.md",
+      "target_path": "templates/client_onboarding_completion_report_template_v0.md",
+      "required": true,
+      "owner_role": "Conformance QA Lead",
+      "notes": ""
+    },
+    {
+      "interface_id": "certification_scorecard_schema",
+      "description": "Certification scorecard schema contract",
+      "source_path": "contracts/client_onboarding_certification_scorecard_schema_v0.json",
+      "target_path": "contracts/client_onboarding_certification_scorecard_schema_v0.json",
+      "required": true,
+      "owner_role": "Contract/Schema Lead",
+      "notes": ""
+    },
+    {
+      "interface_id": "faq_triage_playbook",
+      "description": "FAQ and troubleshooting references for onboarding operations",
+      "source_path": "docs/cortex-coach/faq.md",
+      "target_path": "docs/faq.md",
+      "required": true,
+      "owner_role": "Delivery Operations Lead",
+      "notes": ""
+    },
+    {
+      "interface_id": "training_execution_board_link",
+      "description": "Training execution plan pointer",
+      "source_path": "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+      "target_path": "playbooks/client_training_execution_board_v0.md",
+      "required": false,
+      "owner_role": "Program Lead",
+      "notes": "Optional when execution board fully migrates to training project."
+    }
+  ],
+  "handoff_checklist": {
+    "boundary_confirmed": false,
+    "interface_coverage_confirmed": false,
+    "version_pin_confirmed": false,
+    "governance_approvals": [
+      "<approval_ref>"
+    ]
+  },
+  "status": "draft",
+  "linked_artifacts": [
+    "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+    "playbooks/cortex_client_onboarding_training_track_v0.md"
+  ]
+}

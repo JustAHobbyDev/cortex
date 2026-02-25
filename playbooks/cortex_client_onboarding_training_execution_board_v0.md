@@ -24,6 +24,7 @@ Translate the client onboarding training track into owned, evidence-backed execu
 3. Pilot and calibration (`CT-005`)
 4. Automation and recurring operating cadence (`CT-006`)
 5. AI governance fundamentals module material (`CT-007`)
+6. Training-project boundary + handoff contract baseline (`CT-008`)
 
 ## Execution Board
 
@@ -43,11 +44,12 @@ Status vocabulary:
 | CT-005 | Internal Pilot Completion + Calibration Report | done | Program Lead | Maintainer Council | 2026-03-14 | - | `.cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md`;`.cortex/reports/project_state/client_onboarding_pilot_calibration_data_v0.json`;`.cortex/reports/project_state/client_onboarding_pilot_command_runs_v0.ndjson` | Reference-project calibration completed; command-surface and environment prerequisite gaps captured for CT-006 remediation. |
 | CT-006 | Certification Workflow Automation + Recurring Cadence | done | Conformance QA Lead | CI/Gate Owner | 2026-03-21 | - | `scripts/client_onboarding_certification_pack_v0.py`;`.cortex/reports/project_state/client_onboarding_command_preflight_v0.json`;`.cortex/reports/project_state/client_onboarding_completion_report_v0.md`;`.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`;`playbooks/session_governance_hybrid_plan_v0.md` | Certification pack automation + cadence scheduling implemented; final run passes with delegator rollout fallback coverage and populated completion-report evidence. |
 | CT-007 | AI Governance Fundamentals Module Content (`M0`) | done | Governance Policy Lead | Program Lead | 2026-02-25 | CT-001 | `docs/cortex-coach/client_ai_governance_fundamentals_v0.md`;`playbooks/cortex_client_onboarding_training_track_v0.md`;`docs/cortex-coach/README.md` | Adds explicit teaching content for what AI governance is, what risks it solves, how it works, and how Cortex implements it in project operations. |
+| CT-008 | Training Project Boundary + Handoff Contract Baseline | done | Program Lead | Maintainer Council | 2026-02-25 | CT-001,CT-007 | `docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md`;`contracts/client_training_project_handoff_schema_v0.json`;`.cortex/templates/client_training_project_handoff_manifest_template_v0.json`;`playbooks/cortex_client_onboarding_training_track_v0.md` | Defines standalone training-project repo boundary and version-pinned, machine-checkable handoff contract to preserve Cortex integration compatibility. |
 
 ## Definition of Done
 
 This execution board is complete when:
 
-1. `CT-001` through `CT-007` are marked `done` with evidence links.
+1. `CT-001` through `CT-008` are marked `done` with evidence links.
 2. At least one internal pilot team achieves certification using the rubric and schema.
 3. Certification outputs are reproducible and auditable through defined artifacts.

@@ -67,3 +67,5 @@ Summarize onboarding execution, evidence, certification outcome, and go-live rea
 2. `playbooks/cortex_client_onboarding_training_execution_board_v0.md`
 3. `contracts/client_onboarding_certification_scorecard_schema_v0.json`
 4. `docs/cortex-coach/client_ai_governance_fundamentals_v0.md`
+5. `docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md`
+6. `contracts/client_training_project_handoff_schema_v0.json`

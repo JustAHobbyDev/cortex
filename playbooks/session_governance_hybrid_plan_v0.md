@@ -169,6 +169,14 @@ Weekly cadence:
 3. Review-load guard: keep code-review scheduling under the planned weekly review cap and defer non-critical review-heavy work when pressure is rising.
 4. End-of-week checkpoint (Friday): update weekly capacity notes in `playbooks/cortex_phase0_governance_ticket_breakdown_v0.md` and carry unfinished implementation into the next cycle instead of skipping governance gates.
 
+Post-Gate-F recurring rollout cadence check:
+
+1. Run:
+- `python3 scripts/phase5_recurring_cadence_pack_v0.py --project-dir . --ci-runs 3 --format json --out-file .cortex/reports/project_state/phase5_recurring_cadence_report_v0.json`
+2. Require `transition_audit.status=pass` and `transition_completeness_rate=1.0`.
+3. Record CI-overhead delta trend from `.cortex/reports/project_state/phase5_recurring_cadence_report_v0.json` in weekly governance review notes.
+4. If overhead drift remains above legacy threshold for two consecutive weekly checkpoints, open a maintenance ticket to refresh baseline policy and/or optimize gate runtime.
+
 Budget source note:
 - Use the planning envelope and sequencing guidance from the Mulch+Beads synthesized plan proposal report as the default capacity baseline unless superseded by newer approved policy.
 

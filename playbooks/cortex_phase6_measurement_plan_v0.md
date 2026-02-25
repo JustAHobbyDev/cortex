@@ -1,7 +1,7 @@
 # Cortex Phase 6 Measurement Plan v0
 
 Version: v0  
-Status: Draft  
+Status: Active  
 Date: 2026-02-25  
 Scope: Measurement and validation plan for project bootstrap portability and Governance Driven Development (GDD) scale-out
 

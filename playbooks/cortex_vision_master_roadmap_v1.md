@@ -262,9 +262,11 @@ Exit Criteria:
 
 1. Done: Gate F closeout artifacts and default-mode decision linkage are published.
   - Current state: Gate F closeout published and default mode activated with audited linkage.
-2. Active: keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
-3. Active: track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
-4. In progress: route expansion through Phase 6 definitions (kickoff board + measurement baseline).
+2. Done: keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
+  - Evidence: `.cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json`
+3. Done: track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
+  - Evidence: `.cortex/reports/project_state/phase5_recurring_cadence_report_v0.json`;`playbooks/session_governance_hybrid_plan_v0.md`
+4. Done: route expansion through Phase 6 definitions (kickoff board + measurement baseline).
   - `playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md`
   - `playbooks/cortex_phase6_measurement_plan_v0.md`
 5. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

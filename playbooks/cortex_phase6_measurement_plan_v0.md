@@ -61,6 +61,28 @@ Gate G passes only when all conditions are true:
 
 Gate G fails if any threshold is missed or if governance authority can be bypassed in bootstrap flows.
 
+## Planned Harness Commands
+
+Hydration compliance:
+
+```bash
+python3 scripts/context_hydration_gate_v0.py compliance \
+  --project-dir . \
+  --enforcement-mode block \
+  --emit-events new_session,window_rollover \
+  --verify-event pre_closeout \
+  --required-events new_session,window_rollover \
+  --out-file .cortex/reports/project_state/phase6_hydration_compliance_report_v0.json
+```
+
+Boundary conformance:
+
+```bash
+python3 scripts/phase6_boundary_conformance_harness_v0.py \
+  --project-dir . \
+  --out-file .cortex/reports/project_state/phase6_boundary_conformance_report_v0.json
+```
+
 ## Planned Artifacts
 
 - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`

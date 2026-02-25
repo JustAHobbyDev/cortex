@@ -19,42 +19,42 @@
   "measurement_mode": "phase5_recurring_cadence_pack",
   "next_action": "Continue recurring cadence tracking.",
   "overhead_tracking": {
-    "delta_percent_vs_phase4": -16.565302148547854,
+    "delta_percent_vs_phase4": -1.503882547986251,
     "delta_within_legacy_threshold": true,
     "legacy_phase5_threshold_percent_max": 10.0,
     "status": "within_legacy_threshold"
   },
   "project_dir": "/home/d/codex/cortex",
   "quality_gate_ci": {
-    "delta_percent_vs_phase4": -16.565302148547854,
+    "delta_percent_vs_phase4": -1.503882547986251,
     "durations_seconds": [
-      4.853966700029559,
-      4.19968548999168,
-      4.25295651005581
+      5.275509910075925,
+      5.020689410041086,
+      4.998668510001153
     ],
     "measurement_mode": "required_ci_gate_phase4_baseline_compatible_offline_probe",
-    "median_seconds": 4.25295651005581,
+    "median_seconds": 5.020689410041086,
     "pass_count": 3,
     "phase4_baseline_median_seconds": 5.097347529954277,
     "phase4_measurement_mode": "required_ci_gate_vs_phase3_baseline_ephemeral_git_workspace_offline_probe",
     "reliability_rate": 1.0,
     "run_summaries": [
       {
-        "duration_seconds": 4.853966700029559,
+        "duration_seconds": 5.275509910075925,
         "returncode": 0,
         "run": 1,
         "status": "pass",
         "summary": "[quality-gate-ci] PASS"
       },
       {
-        "duration_seconds": 4.19968548999168,
+        "duration_seconds": 5.020689410041086,
         "returncode": 0,
         "run": 2,
         "status": "pass",
         "summary": "[quality-gate-ci] PASS"
       },
       {
-        "duration_seconds": 4.25295651005581,
+        "duration_seconds": 4.998668510001153,
         "returncode": 0,
         "run": 3,
         "status": "pass",
@@ -64,21 +64,21 @@
     "runs": 3
   },
   "rollout_mode_read": {
-    "duration_seconds": 0.3652260700473562,
+    "duration_seconds": 0.36548039002809674,
     "returncode": 0,
     "state_mode": "default",
     "status": "pass",
     "stderr": "",
     "stdout": ""
   },
-  "run_at": "2026-02-25T09:37:10Z",
+  "run_at": "2026-02-25T09:47:40Z",
   "sources": {
     "phase4_ci_report": ".cortex/reports/project_state/phase4_ci_overhead_report_v0.json",
     "rollout_audit_report": ".cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json"
   },
   "status": "pass",
   "summary": {
-    "ci_runtime_delta_percent": -16.565302148547854,
+    "ci_runtime_delta_percent": -1.503882547986251,
     "overhead_tracking_status": "within_legacy_threshold",
     "quality_gate_ci_reliability_rate": 1.0,
     "transition_completeness_rate": 1.0,

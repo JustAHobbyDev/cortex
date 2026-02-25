@@ -25,6 +25,16 @@ The following classes MUST NOT be stored in tactical records:
 
 ## Required Controls
 
+### Governance Capsule Hydration Coupling (PH6-002)
+
+1. Tactical and adapter slices MUST be loaded only after a valid governance capsule hydration receipt is available for the current context window.
+2. Required hydration trigger coverage for governed closeout paths is:
+   - `new_session`
+   - `window_rollover`
+   - `pre_closeout`
+3. If hydration freshness checks fail, runtime MUST degrade to governance-only behavior and block governance-impacting closeout when enforcement mode is `block`.
+4. Hydration receipt payloads must conform to `contracts/context_hydration_receipt_schema_v0.json` and policy rules in `policies/context_hydration_policy_v0.md`.
+
 ### TTL, Pruning, and Compaction
 
 1. Tactical records MUST have TTL metadata.

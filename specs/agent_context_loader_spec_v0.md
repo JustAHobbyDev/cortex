@@ -52,6 +52,7 @@ Define a deterministic retrieval policy so agents unfamiliar with both project a
 
 - Governance control-plane selection always precedes tactical/adapter slices.
 - Tactical/adapter slices cannot suppress or overwrite governance selections.
+- Loader workflows that feed governance-impacting closeout paths must have a fresh hydration receipt for the active context window.
 
 ### Budget-First Rule
 
@@ -86,6 +87,16 @@ Define a deterministic retrieval policy so agents unfamiliar with both project a
 - Adapter failures/timeouts must degrade to governance-only + task slices.
 - Degradation must be explicit in warnings and fallback metadata.
 - Degradation behavior must preserve deterministic output generation without adapter-dependent hard-fail paths.
+
+### Hydration Invariant Rule (PH6-002)
+
+- Runtime must support deterministic hydration trigger coverage for `new_session` and `window_rollover` before `pre_closeout`.
+- Hydration checks for governed closeout must validate:
+  - receipt schema conformance (`contracts/context_hydration_receipt_schema_v0.json`)
+  - receipt freshness threshold
+  - git-head drift
+  - governance-capsule hash drift
+- Missing/stale hydration receipts in `block` enforcement mode must fail closed for governance-impacting closeout paths.
 
 ## Failure Modes
 

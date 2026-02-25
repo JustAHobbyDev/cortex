@@ -1,0 +1,62 @@
+{
+  "artifact": "phase6_hydration_compliance_report_v0",
+  "contract_source": "contracts/context_hydration_receipt_schema_v0.json",
+  "emit_events": [
+    "new_session",
+    "window_rollover"
+  ],
+  "emit_results": [
+    {
+      "event": "new_session",
+      "finding_count": 0,
+      "latest_receipt_written": true,
+      "returncode": 0,
+      "status": "pass"
+    },
+    {
+      "event": "window_rollover",
+      "finding_count": 0,
+      "latest_receipt_written": true,
+      "returncode": 0,
+      "status": "pass"
+    }
+  ],
+  "enforcement_mode": "block",
+  "findings": [],
+  "history_dir": "/tmp/tmp.v41qm3Rofs",
+  "history_events": [
+    "new_session",
+    "window_rollover"
+  ],
+  "latest_receipt_path": "/tmp/tmp.SxBa0B9HvH",
+  "mode": "compliance",
+  "policy_source": "policies/context_hydration_policy_v0.md",
+  "project_dir": "/home/d/codex/cortex",
+  "required_events": [
+    "new_session",
+    "window_rollover"
+  ],
+  "run_at": "2026-02-25T09:46:39Z",
+  "status": "pass",
+  "summary": {
+    "finding_count": 0,
+    "required_events_covered": true,
+    "verify_step_pass": true
+  },
+  "target_results": {
+    "required_events_covered": true,
+    "verify_step_pass": true
+  },
+  "targets": {
+    "required_events_covered": true,
+    "verify_step_pass": true
+  },
+  "verify_event": "pre_closeout",
+  "verify_result": {
+    "finding_count": 0,
+    "latest_receipt_loaded": true,
+    "returncode": 0,
+    "status": "pass"
+  },
+  "version": "v0"
+}

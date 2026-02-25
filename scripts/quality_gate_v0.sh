@@ -19,35 +19,50 @@ run_quiet() {
 }
 
 decision_gap_report="$(mktemp)"
+hydration_latest_receipt="$(mktemp)"
+hydration_history_dir="$(mktemp -d)"
 cleanup() {
   rm -f "$decision_gap_report"
+  rm -f "$hydration_latest_receipt"
+  rm -rf "$hydration_history_dir"
 }
 trap cleanup EXIT
 
-echo "[quality-gate] 1/10 quality gate sync check"
+echo "[quality-gate] 1/11 quality gate sync check"
 run_quiet "quality_gate_sync_check_v0.py" python3 scripts/quality_gate_sync_check_v0.py \
   --ci-script scripts/quality_gate_ci_v0.sh \
   --local-script scripts/quality_gate_v0.sh \
   --format json
 
-echo "[quality-gate] 2/10 audit-needed"
+echo "[quality-gate] 2/11 audit-needed"
 run_quiet "audit-needed --fail-on-required" python3 scripts/cortex_project_coach_v0.py audit-needed \
   --project-dir . \
   --format json \
   --fail-on-required
 
-echo "[quality-gate] 3/10 decision gap check"
+echo "[quality-gate] 3/11 decision gap check"
 run_quiet "decision-gap-check" python3 scripts/cortex_project_coach_v0.py decision-gap-check \
   --project-dir . \
   --format json \
   --out-file "$decision_gap_report"
 
-echo "[quality-gate] 4/10 phase4 enforcement blocking harness"
+echo "[quality-gate] 4/11 context hydration compliance gate"
+run_quiet "context_hydration_gate_v0.py" python3 scripts/context_hydration_gate_v0.py compliance \
+  --project-dir . \
+  --enforcement-mode block \
+  --latest-receipt-path "$hydration_latest_receipt" \
+  --history-dir "$hydration_history_dir" \
+  --emit-events new_session,window_rollover \
+  --verify-event pre_closeout \
+  --required-events new_session,window_rollover \
+  --format json
+
+echo "[quality-gate] 5/11 phase4 enforcement blocking harness"
 run_quiet "phase4_enforcement_blocking_harness_v0.py" python3 scripts/phase4_enforcement_blocking_harness_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 5/10 reflection enforcement gate"
+echo "[quality-gate] 6/11 reflection enforcement gate"
 run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforcement_gate_v0.py \
   --project-dir . \
   --required-decision-status promoted \
@@ -58,25 +73,25 @@ run_quiet "reflection_enforcement_gate_v0.py" python3 scripts/reflection_enforce
   --phase4-enforcement-report .cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json \
   --format json
 
-echo "[quality-gate] 6/10 mistake provenance gate"
+echo "[quality-gate] 7/11 mistake provenance gate"
 run_quiet "mistake_candidate_gate_v0.py" python3 scripts/mistake_candidate_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 7/10 project-state boundary gate"
+echo "[quality-gate] 8/11 project-state boundary gate"
 run_quiet "project_state_boundary_gate_v0.py" python3 scripts/project_state_boundary_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 8/10 temporal playbook release-surface gate"
+echo "[quality-gate] 9/11 temporal playbook release-surface gate"
 run_quiet "temporal_playbook_release_gate_v0.py" python3 scripts/temporal_playbook_release_gate_v0.py \
   --project-dir . \
   --format json
 
-echo "[quality-gate] 9/10 docs and json integrity"
+echo "[quality-gate] 10/11 docs and json integrity"
 ./scripts/ci_validate_docs_and_json_v0.sh
 
-echo "[quality-gate] 10/10 focused coach tests"
+echo "[quality-gate] 11/11 focused coach tests"
 if [[ "${CORTEX_QG_SKIP_FOCUSED_TESTS:-0}" == "1" ]]; then
   echo "[quality-gate] focused coach tests skipped (CORTEX_QG_SKIP_FOCUSED_TESTS=1)"
 else

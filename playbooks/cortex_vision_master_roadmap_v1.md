@@ -269,4 +269,11 @@ Exit Criteria:
 4. Done: route expansion through Phase 6 definitions (kickoff board + measurement baseline).
   - `playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md`
   - `playbooks/cortex_phase6_measurement_plan_v0.md`
-5. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+5. Done: complete PH6-002 hydration invariants and PH6-003 configurable boundary contract baselines.
+  - `scripts/context_hydration_gate_v0.py`
+  - `.cortex/reports/project_state/phase6_hydration_compliance_report_v0.json`
+  - `scripts/phase6_boundary_conformance_harness_v0.py`
+  - `.cortex/reports/project_state/phase6_boundary_conformance_report_v0.json`
+6. Next: start PH6-004 deterministic bootstrap scaffolder for fresh project initialization and first-green-gate workflow.
+  - target: `scripts/cortex_project_coach_v0.py`;`docs/cortex-coach/quickstart.md`;`.cortex/templates/`
+7. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

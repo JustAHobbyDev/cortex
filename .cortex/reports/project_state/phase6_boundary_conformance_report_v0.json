@@ -1,0 +1,137 @@
+{
+  "artifact": "phase6_boundary_conformance_report_v0",
+  "checks": {
+    "default_repo_contract": {
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--contract-file",
+        "/home/d/codex/cortex/contracts/project_state_boundary_contract_v0.json",
+        "--format",
+        "json"
+      ],
+      "payload": {
+        "contract_file": "/home/d/codex/cortex/contracts/project_state_boundary_contract_v0.json",
+        "expired_active_waivers": [],
+        "files_scanned": 375,
+        "findings": [],
+        "forbidden_outside_project_state_roots": [
+          "reports"
+        ],
+        "project_dir": "/home/d/codex/cortex",
+        "project_state_root": ".cortex",
+        "run_at": "2026-02-25T09:49:29Z",
+        "status": "pass",
+        "version": "v0",
+        "violation_count": 0,
+        "violations": [],
+        "waiver_count": 0
+      },
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "summary": 0
+    },
+    "fixture_default_root": {
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+        "--project-dir",
+        "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo",
+        "--contract-file",
+        "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo/contract_default.json",
+        "--format",
+        "json"
+      ],
+      "payload": {
+        "contract_file": "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo/contract_default.json",
+        "expired_active_waivers": [],
+        "files_scanned": 3,
+        "findings": [
+          {
+            "check": "forbidden_project_state_path_outside_cortex",
+            "message": "Project-state artifact path is outside .cortex and not covered by an active waiver.",
+            "path": "reports/synthetic_project_state.json",
+            "severity": "error",
+            "violating_root": "reports"
+          }
+        ],
+        "forbidden_outside_project_state_roots": [
+          "reports"
+        ],
+        "project_dir": "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo",
+        "project_state_root": ".cortex",
+        "run_at": "2026-02-25T09:49:29Z",
+        "status": "fail",
+        "version": "v0",
+        "violation_count": 1,
+        "violations": [
+          {
+            "path": "reports/synthetic_project_state.json",
+            "violating_root": "reports"
+          }
+        ],
+        "waiver_count": 0
+      },
+      "returncode": 1,
+      "status": "fail",
+      "stderr": "",
+      "summary": 1
+    },
+    "fixture_override_root": {
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+        "--project-dir",
+        "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo",
+        "--contract-file",
+        "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo/contract_override.json",
+        "--format",
+        "json"
+      ],
+      "payload": {
+        "contract_file": "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo/contract_override.json",
+        "expired_active_waivers": [],
+        "files_scanned": 4,
+        "findings": [],
+        "forbidden_outside_project_state_roots": [
+          "reports"
+        ],
+        "project_dir": "/tmp/phase6_boundary_conformance_zmodnndy/fixture_repo",
+        "project_state_root": "reports",
+        "run_at": "2026-02-25T09:49:30Z",
+        "status": "pass",
+        "version": "v0",
+        "violation_count": 0,
+        "violations": [],
+        "waiver_count": 0
+      },
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "summary": 0
+    }
+  },
+  "contract_sources": {
+    "json_contract": "contracts/project_state_boundary_contract_v0.json",
+    "markdown_contract": "contracts/project_state_boundary_contract_v0.md",
+    "policy": "policies/project_state_boundary_policy_v0.md"
+  },
+  "measurement_mode": "phase6_boundary_conformance_harness",
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-25T09:49:30Z",
+  "status": "pass",
+  "target_results": {
+    "default_contract_pass_met": true,
+    "default_root_blocks_reports_outside_boundary_met": true,
+    "override_root_allows_reports_boundary_met": true
+  },
+  "targets": {
+    "default_contract_pass": true,
+    "default_root_blocks_reports_outside_boundary": true,
+    "override_root_allows_reports_boundary": true
+  },
+  "version": "v0"
+}

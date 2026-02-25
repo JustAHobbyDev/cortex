@@ -28,9 +28,14 @@ jobs:
           # which is required by scripts/reflection_enforcement_gate_v0.py.
           uv tool install --force git+https://github.com/JustAHobbyDev/cortex-coach.git@bc737f0462fbae5d1e568f5e6854c388f6eccf6c
 
+      - name: Sync project runtime dependencies
+        run: |
+          # Ensure runtime deps (for example jsonschema) are available to gate scripts.
+          uv sync --locked --no-dev
+
       - name: Run CI quality gate
         run: |
           chmod +x scripts/ci_validate_docs_and_json_v0.sh
           chmod +x scripts/quality_gate_v0.sh
           chmod +x scripts/quality_gate_ci_v0.sh
-          ./scripts/quality_gate_ci_v0.sh
+          uv run --locked ./scripts/quality_gate_ci_v0.sh

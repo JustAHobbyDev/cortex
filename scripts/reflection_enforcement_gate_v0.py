@@ -72,6 +72,12 @@ def _load_json_file(path: Path) -> dict[str, Any] | None:
     return None
 
 
+def _load_optional_report(project_dir: Path, report_path_text: str) -> tuple[dict[str, Any] | None, Path]:
+    resolved_path = _resolve_report_path(project_dir, report_path_text)
+    payload = _load_json_file(resolved_path)
+    return payload, resolved_path
+
+
 def _finding(check: str, message: str, **extra: Any) -> dict[str, Any]:
     item: dict[str, Any] = {
         "check": check,
@@ -249,6 +255,11 @@ def main() -> int:
         "--phase4-enforcement-report",
         default=".cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json",
     )
+    parser.add_argument(
+        "--decision-gap-report",
+        default="",
+        help="Optional precomputed decision-gap-check JSON report path to avoid rerunning the command.",
+    )
     parser.add_argument("--strict-generated", action="store_true")
     parser.add_argument("--format", default="text", choices=("text", "json"))
     args = parser.parse_args()
@@ -258,28 +269,50 @@ def main() -> int:
 
     findings: list[dict[str, Any]] = []
 
-    gap_cmd = [
-        sys.executable,
-        str(coach_script),
-        "decision-gap-check",
-        "--project-dir",
-        str(project_dir),
-        "--format",
-        "json",
-    ]
-    if args.strict_generated:
-        gap_cmd.append("--strict-generated")
-
-    gap_payload, gap_returncode, gap_stderr = _run_json_command(gap_cmd, "decision-gap-check")
-    if gap_returncode != 0:
-        findings.append(
-            _finding(
-                "decision_gap_command_failed",
-                "decision-gap-check command failed.",
-                returncode=gap_returncode,
-                stderr=gap_stderr,
+    gap_source = "command"
+    gap_source_path = ""
+    gap_payload: dict[str, Any]
+    gap_returncode = 0
+    gap_stderr = ""
+    if args.decision_gap_report:
+        gap_source = "report"
+        loaded_gap_payload, resolved_gap_path = _load_optional_report(project_dir, args.decision_gap_report)
+        gap_source_path = str(resolved_gap_path)
+        if loaded_gap_payload is None:
+            findings.append(
+                _finding(
+                    "invalid_decision_gap_report",
+                    "Provided decision-gap report is missing or invalid JSON.",
+                    report_path=args.decision_gap_report,
+                    resolved_path=gap_source_path,
+                )
             )
-        )
+            gap_payload = {"status": "fail", "error": "invalid_decision_gap_report"}
+        else:
+            gap_payload = loaded_gap_payload
+    else:
+        gap_cmd = [
+            sys.executable,
+            str(coach_script),
+            "decision-gap-check",
+            "--project-dir",
+            str(project_dir),
+            "--format",
+            "json",
+        ]
+        if args.strict_generated:
+            gap_cmd.append("--strict-generated")
+
+        gap_payload, gap_returncode, gap_stderr = _run_json_command(gap_cmd, "decision-gap-check")
+        if gap_returncode != 0:
+            findings.append(
+                _finding(
+                    "decision_gap_command_failed",
+                    "decision-gap-check command failed.",
+                    returncode=gap_returncode,
+                    stderr=gap_stderr,
+                )
+            )
 
     reflection_cmd = [
         sys.executable,
@@ -473,6 +506,8 @@ def main() -> int:
             "required_status_mapping_count": len(mapping_items),
         },
         "decision_gap": {
+            "source": gap_source,
+            "source_path": gap_source_path,
             "status": gap_payload.get("status", "unknown"),
             "governance_impact_files": _as_str_list(gap_payload.get("governance_impact_files")),
             "covered_files": _as_str_list(gap_payload.get("covered_files")),

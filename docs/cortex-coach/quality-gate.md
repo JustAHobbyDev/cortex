@@ -46,8 +46,8 @@ Release-grade full matrix mode:
 
 1. `quality_gate_sync_check_v0.py` (fail if local/CI shared gate bundle drifts)
 2. `audit-needed` with fail-on-required behavior
-3. `cortex-coach` smoke commands
-4. `decision-gap-check` for governance-impacting dirty files
+3. `decision-gap-check` for governance-impacting dirty files
+4. `phase4_enforcement_blocking_harness_v0.py` deterministic enforcement block-rate verification
 5. `reflection_enforcement_gate_v0.py` fail-closed checks:
    - no vacuous reflection pass (`min_scaffold_reports >= 1`)
    - required promoted mappings (`min_required_status_mappings >= 1`)
@@ -73,8 +73,8 @@ Release-grade full matrix mode:
 `quality-gate-ci`:
 
 1. `quality_gate_sync_check_v0.py` (fail if local/CI shared gate bundle drifts)
-2. `cortex-coach` smoke commands
-3. `decision-gap-check` for governance-impacting dirty files
+2. `decision-gap-check` for governance-impacting dirty files
+3. `phase4_enforcement_blocking_harness_v0.py` deterministic enforcement block-rate verification
 4. `reflection_enforcement_gate_v0.py` with promoted-status thresholds
 5. `mistake_candidate_gate_v0.py` with contract-driven provenance checks
 6. `project_state_boundary_gate_v0.py` with contract-driven path checks

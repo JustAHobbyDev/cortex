@@ -1,0 +1,52 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/README.md",
+    "playbooks/cortex_phase0_role_charters_v0.md",
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase0_role_charters_v0.md",
+    "docs/cortex-coach/README.md",
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    ".cortex/reports/project_state/phase6_role_capability_pack_report_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "workflow"
+  ],
+  "mistake": "Captured a governance-impacting decision without reflection linkage, causing reflection-enforcement failure.",
+  "pattern": "When moving quickly on phase tickets, decision capture can happen before reflection scaffold is generated.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Attach reflection linkage to PH6 role capability governance update\" --decision \"Mistake observed: Captured a governance-impacting decision without reflection linkage, causing reflection-enforcement failure. Recurring pattern: When moving quickly on phase tickets, decision capture can happen before reflection scaffold is generated. Adopt reusable rule: For governance-impacting Phase 6 ticket closures, run reflection-scaffold first and include reflection_id/reflection_report in decision-capture.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,workflow --reflection-id ref_20260225T100108Z_attach_reflection_linkag --reflection-report .cortex/reports/reflection_scaffold_20260225T100108Z_attach_reflection_linkag_v0.json --linked-artifacts .cortex/reports/project_state/phase6_role_capability_pack_report_v0.md,docs/cortex-coach/README.md,playbooks/cortex_phase0_role_charters_v0.md,playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md,playbooks/cortex_vision_master_roadmap_v1.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260225T100108Z_attach_reflection_linkag",
+  "report_file": ".cortex/reports/reflection_scaffold_20260225T100108Z_attach_reflection_linkag_v0.json",
+  "rule": "For governance-impacting Phase 6 ticket closures, run reflection-scaffold first and include reflection_id/reflection_report in decision-capture.",
+  "run_at": "2026-02-25T10:01:08Z",
+  "suggested_decision": "Mistake observed: Captured a governance-impacting decision without reflection linkage, causing reflection-enforcement failure. Recurring pattern: When moving quickly on phase tickets, decision capture can happen before reflection scaffold is generated. Adopt reusable rule: For governance-impacting Phase 6 ticket closures, run reflection-scaffold first and include reflection_id/reflection_report in decision-capture.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_attach_reflection_linkage_to_ph6_role_capability_governance_update_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/phase6_role_capability_pack_report_v0.md",
+    "docs/cortex-coach/README.md",
+    "playbooks/cortex_phase0_role_charters_v0.md",
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Attach reflection linkage to PH6 role capability governance update",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

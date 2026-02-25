@@ -280,6 +280,10 @@ Exit Criteria:
   - `docs/cortex-coach/commands.md`
   - `.cortex/templates/bootstrap_first_green_gate_checklist_template_v0.md`
   - `.cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json`
-7. Next: start PH6-005 GDD role + capability pack to formalize role minimums, permissions, and escalation matrix.
-  - target: `playbooks/cortex_phase0_role_charters_v0.md`;`docs/cortex-coach/README.md`
-8. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+7. Done: complete PH6-005 GDD role + capability pack to formalize role minimums, permissions, and escalation matrix.
+  - `playbooks/cortex_phase0_role_charters_v0.md`
+  - `docs/cortex-coach/README.md`
+  - `.cortex/reports/project_state/phase6_role_capability_pack_report_v0.md`
+8. Next: start PH6-006 bootstrap readiness harness + certification evidence for first-green-gate portability checks.
+  - target: `scripts/client_onboarding_certification_pack_v0.py`;`.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`
+9. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

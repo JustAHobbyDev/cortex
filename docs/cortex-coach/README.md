@@ -16,6 +16,7 @@ This documentation is for users running `cortex-coach` in their own projects.
 8. [FAQ](faq.md)
 9. [Troubleshooting](troubleshooting.md)
 10. [Migration to Standalone](migration_to_standalone_v0.md)
+11. [GDD Role + Capability Pack](../../playbooks/cortex_phase0_role_charters_v0.md)
 
 ## What Cortex Coach Does
 
@@ -27,3 +28,9 @@ This documentation is for users running `cortex-coach` in their own projects.
 - optionally draft next-version artifacts (`coach --apply`)
 
 It is designed to keep lifecycle artifacts deterministic, versioned, and auditable.
+
+## Multi-Agent Governance Baseline
+
+For bootstrap and governed multi-agent delivery, use the minimum role/capability matrix and escalation rules in:
+
+- `playbooks/cortex_phase0_role_charters_v0.md` (section: `Phase 6 GDD Minimum Role + Capability Pack (PH6-005)`)

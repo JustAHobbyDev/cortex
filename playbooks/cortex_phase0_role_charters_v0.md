@@ -44,6 +44,51 @@ Compensating controls:
 3. Ticket should remain at `review` for at least one working session before `done`.
 4. Phase 1 gate elevation is blocked until `Maintainer Council` has at least two named maintainers.
 
+## Phase 6 GDD Minimum Role + Capability Pack (PH6-005)
+
+Purpose:
+- provide a portable minimum role/capability contract for multi-agent bootstrap and governed delivery flows.
+
+Minimum role set (required before external bootstrap pilots):
+
+| Role | Minimum Coverage Rule |
+|---|---|
+| Program Lead | Owns sequencing, dependency arbitration, and closeout readiness. |
+| Governance Policy Lead | Owns canonical policy language and authority semantics. |
+| Governance Enforcement Lead | Owns gate mapping and blocking rule behavior. |
+| Runtime Reliability Lead | Owns rollback, kill-switch, and fail-safe degradation criteria. |
+| Delivery Operations Lead | Owns execution cadence and capacity throttling decisions. |
+| Conformance QA Lead | Owns reproducibility checks and pass/fail evidence packaging. |
+| Maintainer Council | Final authority for override approval and unresolved escalations. |
+
+Command/capability matrix (minimum):
+
+| Command Surface | Operator Role(s) | Approval Role(s) | Rule |
+|---|---|---|---|
+| `bootstrap-scaffold`, `init` | Delivery Operations Lead | Program Lead | Bootstrap execution cannot mark ticket `done` without QA evidence. |
+| `audit-needed`, `audit` | Conformance QA Lead, Delivery Operations Lead | Governance Enforcement Lead | Audit failures are blocking for governance-impacting closeout. |
+| `decision-capture`, `decision-promote` | Governance Policy Lead | Maintainer Council (for overrides) | Promotion authority remains canonical-governance scoped. |
+| `reflection-scaffold` | Governance Enforcement Lead, Program Lead | Governance Policy Lead | Required when repeatable mistake patterns are detected. |
+| `rollout-mode`, `rollout-mode-audit` | Runtime Reliability Lead | Maintainer Council (default activation/rollback exceptions) | Default-mode transitions require decision/reflection/audit linkage. |
+| `quality_gate_v0.sh`, `quality_gate_ci_v0.sh` | Conformance QA Lead | Governance Enforcement Lead | Required gate bundle is mandatory before merge/release. |
+
+Escalation matrix (minimum):
+
+| Trigger | Initial Owner | Escalate To | SLA |
+|---|---|---|---|
+| Owner/reviewer deadlock on blocking finding | Program Lead | Maintainer Council | 1 working day |
+| Gate failure with unclear policy interpretation | Governance Enforcement Lead | Governance Policy Lead then Maintainer Council | same working session |
+| Rollback/kill-switch dispute | Runtime Reliability Lead | Maintainer Council | immediate |
+| Capacity stop-rule breach or sustained overload | Delivery Operations Lead | Program Lead then Maintainer Council | 1 working day |
+| Missing backup coverage for required role | Program Lead | Maintainer Council | before ticket moves to `in_progress` |
+
+Coverage invariants for GDD operation:
+
+1. Every active ticket must have distinct owner and reviewer unless an explicitly documented solo-maintainer exception is active.
+2. Every required role must have a named backup before external pilot bootstrap work starts.
+3. Capability grants are least-privilege by default and scoped to ticket needs.
+4. Override approvals must be decision/reflection linked in canonical governance artifacts.
+
 ## Role Charters
 
 | Role | Mandate | Primary Tickets | Decision Rights | Required Evidence | Escalation |

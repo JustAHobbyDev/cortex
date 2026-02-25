@@ -296,4 +296,8 @@ Exit Criteria:
   - `.cortex/reports/project_state/phase6_gate_g_measurement_closeout_v0.md`
   - `.cortex/reports/project_state/phase6_operator_overhead_report_v0.json`
 11. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
-12. Next: define next expansion phase scope and measurement baseline, starting with a larger external portability matrix.
+12. Done: training material ownership split to standalone training project with boundary + handoff contract and compatibility stubs.
+  - `docs/cortex-coach/client_training_external_repo_v0.md`
+  - `docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md`
+  - `contracts/client_training_project_handoff_schema_v0.json`
+13. Next: define next expansion phase scope and measurement baseline, starting with a larger external portability matrix.

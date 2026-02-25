@@ -61,21 +61,13 @@ Phase 5 migration note:
 
 ## Client Onboarding Certification Automation (CT-006)
 
-Certification workflow command:
+Certification workflow ownership has moved to the standalone training project.
 
-1. `python3 scripts/client_onboarding_certification_pack_v0.py --project-dir . --run-quality-gate --format json --out-file .cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
+In `cortex`:
 
-Command behavior:
-
-1. Generates a schema-valid certification scorecard payload using `contracts/client_onboarding_certification_scorecard_schema_v0.json`.
-2. Executes recurring cadence prerequisite checks (governance, boundary, command-surface preflight, and dependency bootstrap controls).
-3. Produces weekly (weeks 1-4) and monthly (month 2+) checkpoint schedule fields for post-onboarding governance operations.
-4. Fails closed (`status=fail`) when rollout command surface, dependency bootstrap, or required documentation readiness is not met.
-
-Operating rule:
-
-1. Do not approve onboarding go-live when certification pack `status` is `fail`.
-2. Remediate findings and rerun the certification pack until scorecard + cadence checks pass.
+1. `scripts/client_onboarding_certification_pack_v0.py` is a compatibility shim (`status=moved`).
+2. Canonical training-project reference is `docs/cortex-coach/client_training_external_repo_v0.md`.
+3. Boundary/handoff contract is `docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md`.
 
 ## Enforcement Ladder in Session Operations
 

@@ -25,43 +25,43 @@
     {
       "interface_id": "ai_governance_fundamentals_module",
       "description": "M0 AI governance fundamentals content",
-      "source_path": "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+      "source_path": "training/docs/client_ai_governance_fundamentals_v0.md",
       "target_path": "docs/client_ai_governance_fundamentals_v0.md",
       "required": true,
       "owner_role": "Governance Policy Lead",
-      "notes": ""
+      "notes": "Owned by training project; cortex keeps compatibility stub only."
     },
     {
       "interface_id": "client_training_labs_pack",
       "description": "M2-M5 deterministic lab guide pack",
-      "source_path": "docs/cortex-coach/client_training_labs_v0.md",
+      "source_path": "training/docs/client_training_labs_v0.md",
       "target_path": "docs/client_training_labs_v0.md",
       "required": true,
       "owner_role": "Delivery Operations Lead",
-      "notes": ""
+      "notes": "Owned by training project; cortex keeps compatibility stub only."
     },
     {
       "interface_id": "onboarding_completion_template",
       "description": "Onboarding completion report template",
-      "source_path": ".cortex/templates/client_onboarding_completion_report_template_v0.md",
+      "source_path": "training/templates/client_onboarding_completion_report_template_v0.md",
       "target_path": "templates/client_onboarding_completion_report_template_v0.md",
       "required": true,
       "owner_role": "Conformance QA Lead",
-      "notes": ""
+      "notes": "Canonical template owned by training project."
     },
     {
       "interface_id": "certification_scorecard_schema",
       "description": "Certification scorecard schema contract",
-      "source_path": "contracts/client_onboarding_certification_scorecard_schema_v0.json",
+      "source_path": "training/contracts/client_onboarding_certification_scorecard_schema_v0.json",
       "target_path": "contracts/client_onboarding_certification_scorecard_schema_v0.json",
       "required": true,
       "owner_role": "Contract/Schema Lead",
-      "notes": ""
+      "notes": "Canonical schema owned by training project."
     },
     {
       "interface_id": "faq_triage_playbook",
       "description": "FAQ and troubleshooting references for onboarding operations",
-      "source_path": "docs/cortex-coach/faq.md",
+      "source_path": "training/docs/faq.md",
       "target_path": "docs/faq.md",
       "required": true,
       "owner_role": "Delivery Operations Lead",
@@ -87,7 +87,7 @@
   },
   "status": "draft",
   "linked_artifacts": [
-    "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
-    "playbooks/cortex_client_onboarding_training_track_v0.md"
+    "docs/cortex-coach/client_training_external_repo_v0.md",
+    "docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md"
   ]
 }

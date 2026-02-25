@@ -97,16 +97,9 @@ python3 scripts/cortex_project_coach_v0.py bootstrap-scaffold \
 
 Bootstrap readiness harness + certification:
 
-```bash
-python3 scripts/client_onboarding_certification_pack_v0.py \
-  --project-dir . \
-  --python-bin python3 \
-  --run-quality-gate \
-  --emit-phase6-bootstrap-readiness \
-  --phase6-bootstrap-readiness-file .cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json \
-  --out-file .cortex/reports/project_state/client_onboarding_certification_pack_v0.json \
-  --format json
-```
+Training certification ownership has moved to the standalone training project.
+In this repository, `scripts/client_onboarding_certification_pack_v0.py` is a compatibility shim (`status=moved`).
+Historical Phase 6 readiness artifacts remain in `.cortex/reports/project_state/`.
 
 External pilot validation harness:
 

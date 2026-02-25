@@ -1,0 +1,59 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/README.md",
+    "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+    "docs/cortex-coach/client_training_external_repo_v0.md",
+    "docs/cortex-coach/client_training_labs_v0.md",
+    "docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md",
+    "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+    "playbooks/cortex_client_onboarding_training_track_v0.md",
+    "playbooks/cortex_phase6_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/session_governance_hybrid_plan_v0.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [],
+  "impact_scope": [
+    "governance",
+    "training",
+    "docs",
+    "operations"
+  ],
+  "mistake": "Training artifacts remained in core repo after deciding they should be owned by a dedicated training project.",
+  "pattern": "Without an explicit extraction pass, ownership shifts can stop at policy/contracts while content remains colocated in core runtime repo.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Execute training material split to standalone project\" --decision \"Mistake observed: Training artifacts remained in core repo after deciding they should be owned by a dedicated training project. Recurring pattern: Without an explicit extraction pass, ownership shifts can stop at policy/contracts while content remains colocated in core runtime repo. Adopt reusable rule: When deciding a domain should become its own project, perform an explicit extraction pass that leaves only compatibility stubs and integration contracts in the core repo.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,training,docs,operations --reflection-id ref_20260225T175845Z_execute_training_materia --reflection-report .cortex/reports/reflection_scaffold_20260225T175845Z_execute_training_materia_v0.json --linked-artifacts docs/cortex-coach/README.md,docs/cortex-coach/client_ai_governance_fundamentals_v0.md,docs/cortex-coach/client_training_external_repo_v0.md,docs/cortex-coach/client_training_labs_v0.md,docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md,playbooks/cortex_client_onboarding_training_execution_board_v0.md,playbooks/cortex_client_onboarding_training_track_v0.md,playbooks/cortex_phase6_measurement_plan_v0.md,playbooks/cortex_vision_master_roadmap_v1.md,playbooks/session_governance_hybrid_plan_v0.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260225T175845Z_execute_training_materia",
+  "report_file": ".cortex/reports/reflection_scaffold_20260225T175845Z_execute_training_materia_v0.json",
+  "rule": "When deciding a domain should become its own project, perform an explicit extraction pass that leaves only compatibility stubs and integration contracts in the core repo.",
+  "run_at": "2026-02-25T17:58:45Z",
+  "suggested_decision": "Mistake observed: Training artifacts remained in core repo after deciding they should be owned by a dedicated training project. Recurring pattern: Without an explicit extraction pass, ownership shifts can stop at policy/contracts while content remains colocated in core runtime repo. Adopt reusable rule: When deciding a domain should become its own project, perform an explicit extraction pass that leaves only compatibility stubs and integration contracts in the core repo.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_execute_training_material_split_to_standalone_project_v1.md",
+  "suggested_linked_artifacts": [
+    "docs/cortex-coach/README.md",
+    "docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+    "docs/cortex-coach/client_training_external_repo_v0.md",
+    "docs/cortex-coach/client_training_labs_v0.md",
+    "docs/cortex-coach/client_training_project_boundary_and_handoff_v0.md",
+    "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+    "playbooks/cortex_client_onboarding_training_track_v0.md",
+    "playbooks/cortex_phase6_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "playbooks/session_governance_hybrid_plan_v0.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Execute training material split to standalone project",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

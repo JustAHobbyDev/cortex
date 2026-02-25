@@ -1,8 +1,8 @@
 # Client Training Project Boundary and Handoff v0
 
 Version: v0  
-Status: Active  
-Scope: Define how training content can operate as a standalone project while keeping Cortex governance and runtime contracts stable.
+Status: Active (split executed)  
+Scope: Define how training content operates as a standalone project while keeping Cortex governance and runtime contracts stable.
 
 ## Purpose
 
@@ -95,4 +95,10 @@ Even after full training split, Cortex should retain:
 
 ## Current Status
 
-This v0 boundary/handoff spec defines the contract layer needed to start training-project separation without weakening Cortex governance guarantees.
+Training content ownership has been split out of `cortex`.
+
+`cortex` now retains:
+
+1. Boundary/handoff contract artifacts.
+2. Compatibility stubs at legacy training paths for historical reference stability.
+3. External training repo pointer documentation.

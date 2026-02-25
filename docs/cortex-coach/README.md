@@ -7,18 +7,16 @@ This documentation is for users running `cortex-coach` in their own projects.
 1. [Install](install.md)
 2. [Quickstart](quickstart.md)
    - Includes Minimal Workflow and Complete Workflow paths
-3. [AI Governance Fundamentals (M0)](client_ai_governance_fundamentals_v0.md)
-4. [Client Training Labs](client_training_labs_v0.md)
-   - Includes required command-surface preflight before `M2` and `M4`
-5. [Training Project Boundary + Handoff](client_training_project_boundary_and_handoff_v0.md)
-6. [Commands](commands.md)
-7. [Maintainer Mode](maintainer-mode.md)
-8. [Agent Context Loader](agent-context-loader.md)
-9. [Quality Gate](quality-gate.md)
-10. [FAQ](faq.md)
-11. [Troubleshooting](troubleshooting.md)
-12. [Migration to Standalone](migration_to_standalone_v0.md)
-13. [GDD Role + Capability Pack](../../playbooks/cortex_phase0_role_charters_v0.md)
+3. [Training (External Project)](client_training_external_repo_v0.md)
+4. [Training Project Boundary + Handoff](client_training_project_boundary_and_handoff_v0.md)
+5. [Commands](commands.md)
+6. [Maintainer Mode](maintainer-mode.md)
+7. [Agent Context Loader](agent-context-loader.md)
+8. [Quality Gate](quality-gate.md)
+9. [FAQ](faq.md)
+10. [Troubleshooting](troubleshooting.md)
+11. [Migration to Standalone](migration_to_standalone_v0.md)
+12. [GDD Role + Capability Pack](../../playbooks/cortex_phase0_role_charters_v0.md)
 
 ## What Cortex Coach Does
 

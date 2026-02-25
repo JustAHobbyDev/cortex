@@ -13,11 +13,12 @@ Define a repeatable training track that gets new client teams from initial setup
 
 By the end of the track, a client team can:
 
-1. Bootstrap and run Cortex in a project with deterministic outputs.
-2. Operate required governance checks without bypasses.
-3. Capture/promote decisions with reflection linkage.
-4. Execute release-boundary closeout with auditable evidence.
-5. Run in default mode with reversible rollback controls.
+1. Explain what AI governance is, what risks it addresses, and how Cortex enforces it.
+2. Bootstrap and run Cortex in a project with deterministic outputs.
+3. Operate required governance checks without bypasses.
+4. Capture/promote decisions with reflection linkage.
+5. Execute release-boundary closeout with auditable evidence.
+6. Run in default mode with reversible rollback controls.
 
 ## Target Personas
 
@@ -45,11 +46,21 @@ By the end of the track, a client team can:
 
 ### M0: Orientation and Operating Model
 
+AI governance fundamentals:
+
+- Explain what AI governance is and what it is not.
+- Cover the failure modes governance is designed to prevent (drift, unsafe closeout, missing accountability, non-reproducible operation).
+- Teach the control model: policy -> contracts -> gates -> evidence -> escalation.
+- Walk through how Cortex implements this model in project workflows.
+
+Operating model alignment:
+
 - Explain Governance Plane / Tactical Plane / Promotion Plane.
 - Clarify ownership split: policy/spec authority vs runtime execution.
 - Confirm client boundaries (`project_state_root`) and artifact discipline.
 
 Completion criteria:
+- Team can explain AI governance purpose, control model, and Cortex implementation path.
 - Role ownership agreed.
 - Success metrics and rollout stop-rules accepted.
 
@@ -140,12 +151,14 @@ Use when:
 3. Client onboarding completion report template.
 4. Certification checklist + scoring rubric.
 5. FAQ and triage playbook for common gate failures.
+6. AI governance fundamentals module guide for M0.
 
 ## Baseline Implemented Artifacts (v0)
 
 1. Execution board: `playbooks/cortex_client_onboarding_training_execution_board_v0.md`
 2. Onboarding completion report template: `.cortex/templates/client_onboarding_completion_report_template_v0.md`
 3. Certification scorecard schema: `contracts/client_onboarding_certification_scorecard_schema_v0.json`
+4. AI governance fundamentals guide: `docs/cortex-coach/client_ai_governance_fundamentals_v0.md`
 
 ## Certification Rubric (Baseline)
 
@@ -194,3 +207,4 @@ Training track is complete when all conditions are true:
 4. Done: author module lab guides (`M2`-`M5`) with deterministic command checklists.
 5. Done: pilot with one internal reference project and publish calibration evidence (`.cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md`).
 6. Done: execute CT-006 certification automation and cadence controls with passing evidence in `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`, supported by preflight + completion artifacts.
+7. Done: add M0 AI governance fundamentals teaching material with explicit control mapping to Cortex implementation.

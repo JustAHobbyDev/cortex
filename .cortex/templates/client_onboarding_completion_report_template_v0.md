@@ -18,7 +18,7 @@ Summarize onboarding execution, evidence, certification outcome, and go-live rea
 
 | Module | Status (`pass`/`fail`) | Completion Date | Primary Evidence |
 |---|---|---|---|
-| M0 Orientation and Operating Model | <status> | <date> | <artifact_path> |
+| M0 AI Governance Fundamentals and Operating Model | <status> | <date> | <artifact_path> |
 | M1 Core Foundations | <status> | <date> | <artifact_path> |
 | M2 Operator Workflow | <status> | <date> | <artifact_path> |
 | M3 Governance Enforcement | <status> | <date> | <artifact_path> |
@@ -66,3 +66,4 @@ Summarize onboarding execution, evidence, certification outcome, and go-live rea
 1. `playbooks/cortex_client_onboarding_training_track_v0.md`
 2. `playbooks/cortex_client_onboarding_training_execution_board_v0.md`
 3. `contracts/client_onboarding_certification_scorecard_schema_v0.json`
+4. `docs/cortex-coach/client_ai_governance_fundamentals_v0.md`

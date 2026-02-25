@@ -1,0 +1,81 @@
+{
+  "artifact": "client_onboarding_command_preflight_v0",
+  "checks": [
+    {
+      "check": "delegator_present",
+      "path": "scripts/cortex_project_coach_v0.py",
+      "status": "pass"
+    },
+    {
+      "check": "audit_command_surface",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "audit",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json",
+        "--audit-scope",
+        "cortex-only"
+      ],
+      "payload_status": "pass",
+      "returncode": 0,
+      "runner_mode": "delegator",
+      "status": "pass",
+      "subcommand": "audit"
+    },
+    {
+      "check": "rollout-mode_command_surface",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "rollout-mode",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "payload_status": "pass",
+      "returncode": 0,
+      "runner_mode": "delegator",
+      "status": "pass",
+      "subcommand": "rollout-mode"
+    },
+    {
+      "check": "rollout-mode-audit_command_surface",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "rollout-mode-audit",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "payload_status": "pass",
+      "returncode": 0,
+      "runner_mode": "delegator",
+      "status": "pass",
+      "subcommand": "rollout-mode-audit"
+    }
+  ],
+  "coach_binary": "/home/d/.local/bin/cortex-coach",
+  "coach_binary_requested": "cortex-coach",
+  "coach_script": "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+  "delegator_available": true,
+  "findings": [],
+  "project_dir": "/home/d/codex/cortex",
+  "remediation_hints": [
+    "Preflight passed. Proceed with M2 labs and rerun preflight before M4."
+  ],
+  "run_at": "2026-02-25T04:08:03Z",
+  "runner_mode": "delegator",
+  "status": "pass",
+  "summary": {
+    "required_check_count": 4,
+    "required_check_fail_count": 0,
+    "required_check_pass_count": 4
+  },
+  "version": "v0"
+}

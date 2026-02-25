@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -26,6 +28,8 @@ NATIVE_FORMAT_COMMANDS = {
     "rollout-mode",
     "rollout-mode-audit",
 }
+
+ROLLOUT_MODES = {"off", "experimental", "default"}
 
 
 def _now_iso() -> str:
@@ -102,6 +106,491 @@ def _emit_text(stdout: str, stderr: str) -> None:
         sys.stdout.write(stdout)
     if stderr:
         sys.stderr.write(stderr)
+
+
+def _safe_rel_path(project_dir: Path, path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(project_dir.resolve()))
+    except ValueError:
+        return str(path.resolve())
+
+
+def _split_csv(value: str) -> list[str]:
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _parse_args_with_exit(parser: argparse.ArgumentParser, args: list[str]) -> tuple[argparse.Namespace | None, int]:
+    try:
+        return parser.parse_args(args), 0
+    except SystemExit as exc:  # argparse exits on parse errors / --help
+        return None, int(exc.code) if isinstance(exc.code, int) else 1
+
+
+def _build_rollout_mode_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="cortex-coach rollout-mode")
+    parser.add_argument("--project-dir", required=True)
+    parser.add_argument("--cortex-root", default=".cortex")
+    parser.add_argument("--set-mode", choices=sorted(ROLLOUT_MODES))
+    parser.add_argument("--changed-by", default="")
+    parser.add_argument("--reason", default="")
+    parser.add_argument("--incident-ref", default="")
+    parser.add_argument("--decision-refs", default="")
+    parser.add_argument("--reflection-refs", default="")
+    parser.add_argument("--audit-refs", default="")
+    parser.add_argument("--format", choices=("text", "json"), default="text")
+    return parser
+
+
+def _build_rollout_mode_audit_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="cortex-coach rollout-mode-audit")
+    parser.add_argument("--project-dir", required=True)
+    parser.add_argument("--cortex-root", default=".cortex")
+    parser.add_argument("--format", choices=("text", "json"), default="text")
+    return parser
+
+
+def _rollout_paths(project_dir: Path, cortex_root: str) -> tuple[Path, Path, Path]:
+    root = project_dir / cortex_root
+    state_path = root / "state" / "rollout_mode_state_v0.json"
+    transitions_path = root / "state" / "rollout_mode_transitions_v0.jsonl"
+    audit_report_path = root / "reports" / "project_state" / "phase5_mode_transition_audit_report_v0.json"
+    return state_path, transitions_path, audit_report_path
+
+
+def _default_rollout_state() -> dict[str, Any]:
+    return {
+        "version": "v0",
+        "mode": "experimental",
+        "updated_at": _now_iso(),
+        "updated_by": "system",
+        "reason": "initial_rollout_mode_state",
+        "last_transition_id": "",
+        "decision_refs": [],
+        "reflection_refs": [],
+        "audit_refs": [],
+    }
+
+
+def _load_rollout_state(state_path: Path) -> tuple[dict[str, Any], str | None]:
+    if not state_path.exists():
+        return _default_rollout_state(), None
+    payload = _load_json_file(state_path)
+    if not isinstance(payload, dict):
+        return {}, f"invalid rollout mode state payload: {state_path}"
+    mode = str(payload.get("mode", "")).strip()
+    if mode not in ROLLOUT_MODES:
+        return {}, f"invalid rollout mode in state: {mode!r}"
+    payload.setdefault("version", "v0")
+    payload.setdefault("decision_refs", [])
+    payload.setdefault("reflection_refs", [])
+    payload.setdefault("audit_refs", [])
+    return payload, None
+
+
+def _write_rollout_state(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _append_rollout_transition(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(payload, sort_keys=True))
+        fh.write("\n")
+
+
+def _transition_id(payload: dict[str, Any]) -> str:
+    seed = json.dumps(payload, sort_keys=True)
+    return f"rmt_{hashlib.sha256(seed.encode('utf-8')).hexdigest()[:16]}"
+
+
+def _emit_rollout_payload(payload: dict[str, Any], output_format: str) -> None:
+    if output_format == "json":
+        _emit_json_payload(payload)
+        return
+    lines = [
+        f"status: {payload.get('status', 'fail')}",
+        f"run_at: {payload.get('run_at', '')}",
+    ]
+    result = payload.get("result", {})
+    if isinstance(result, dict):
+        mode = result.get("mode")
+        if isinstance(mode, str) and mode:
+            lines.append(f"mode: {mode}")
+        transition_id = result.get("transition_id")
+        if isinstance(transition_id, str) and transition_id:
+            lines.append(f"transition_id: {transition_id}")
+        report_path = result.get("report_path")
+        if isinstance(report_path, str) and report_path:
+            lines.append(f"report_path: {report_path}")
+    message = payload.get("message")
+    if isinstance(message, str) and message:
+        lines.append(f"message: {message}")
+    sys.stdout.write("\n".join(lines))
+    sys.stdout.write("\n")
+
+
+def _run_rollout_mode_command(argv: list[str]) -> int:
+    subcommand = "rollout-mode"
+    args = argv[1:] if len(argv) > 1 else []
+    parsed, parse_code = _parse_args_with_exit(_build_rollout_mode_parser(), args)
+    if parsed is None:
+        return parse_code
+
+    project_dir = Path(parsed.project_dir).resolve()
+    cortex_root = str(parsed.cortex_root or ".cortex")
+    output_format = str(parsed.format)
+    state_path, transitions_path, _ = _rollout_paths(project_dir, cortex_root)
+    state, state_error = _load_rollout_state(state_path)
+    if state_error:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "fail",
+            "returncode": 3,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_rollout_fallback_v0",
+            "message": state_error,
+        }
+        _emit_rollout_payload(payload, output_format)
+        return 3
+
+    current_mode = str(state.get("mode", "experimental"))
+    set_mode = str(parsed.set_mode) if parsed.set_mode else ""
+    if not set_mode:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "pass",
+            "returncode": 0,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_rollout_fallback_v0",
+            "result": {
+                "mode": current_mode,
+                "state_path": _safe_rel_path(project_dir, state_path),
+                "transitions_path": _safe_rel_path(project_dir, transitions_path),
+                "changed": False,
+                "transition_id": "",
+            },
+        }
+        _emit_rollout_payload(payload, output_format)
+        return 0
+
+    changed_by = str(parsed.changed_by).strip()
+    reason = str(parsed.reason).strip()
+    incident_ref = str(parsed.incident_ref).strip()
+    decision_refs = _split_csv(str(parsed.decision_refs))
+    reflection_refs = _split_csv(str(parsed.reflection_refs))
+    audit_refs = _split_csv(str(parsed.audit_refs))
+
+    findings: list[str] = []
+    if not changed_by:
+        findings.append("missing_changed_by")
+    if not reason:
+        findings.append("missing_reason")
+    if set_mode == "default":
+        if not decision_refs:
+            findings.append("missing_decision_refs_for_default")
+        if not reflection_refs:
+            findings.append("missing_reflection_refs_for_default")
+        if not audit_refs:
+            findings.append("missing_audit_refs_for_default")
+    if current_mode == "default" and set_mode in {"experimental", "off"} and not incident_ref:
+        findings.append("missing_incident_ref_for_default_rollback")
+
+    if findings:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "fail",
+            "returncode": 3,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_rollout_fallback_v0",
+            "message": "rollout-mode policy preconditions not met",
+            "findings": findings,
+            "result": {
+                "mode": current_mode,
+                "state_path": _safe_rel_path(project_dir, state_path),
+                "transitions_path": _safe_rel_path(project_dir, transitions_path),
+                "changed": False,
+                "transition_id": "",
+            },
+        }
+        _emit_rollout_payload(payload, output_format)
+        return 3
+
+    if set_mode == current_mode:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "pass",
+            "returncode": 0,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_rollout_fallback_v0",
+            "message": "requested mode already active",
+            "result": {
+                "mode": current_mode,
+                "state_path": _safe_rel_path(project_dir, state_path),
+                "transitions_path": _safe_rel_path(project_dir, transitions_path),
+                "changed": False,
+                "transition_id": "",
+            },
+        }
+        _emit_rollout_payload(payload, output_format)
+        return 0
+
+    transition_base = {
+        "version": "v0",
+        "from_mode": current_mode,
+        "to_mode": set_mode,
+        "changed_at": _now_iso(),
+        "changed_by": changed_by,
+        "reason": reason,
+        "incident_ref": incident_ref,
+        "decision_refs": decision_refs,
+        "reflection_refs": reflection_refs,
+        "audit_refs": audit_refs,
+    }
+    transition_id = _transition_id(transition_base)
+    transition_payload = {
+        **transition_base,
+        "transition_id": transition_id,
+    }
+    _append_rollout_transition(transitions_path, transition_payload)
+
+    next_state = {
+        "version": "v0",
+        "mode": set_mode,
+        "updated_at": transition_payload["changed_at"],
+        "updated_by": changed_by,
+        "reason": reason,
+        "last_transition_id": transition_id,
+        "decision_refs": decision_refs,
+        "reflection_refs": reflection_refs,
+        "audit_refs": audit_refs,
+    }
+    _write_rollout_state(state_path, next_state)
+
+    payload = {
+        "version": "v0",
+        "command": subcommand,
+        "status": "pass",
+        "returncode": 0,
+        "run_at": _now_iso(),
+        "project_dir": str(project_dir),
+        "format_source": "delegator_rollout_fallback_v0",
+        "result": {
+            "mode": set_mode,
+            "from_mode": current_mode,
+            "to_mode": set_mode,
+            "changed": True,
+            "transition_id": transition_id,
+            "state_path": _safe_rel_path(project_dir, state_path),
+            "transitions_path": _safe_rel_path(project_dir, transitions_path),
+        },
+    }
+    _emit_rollout_payload(payload, output_format)
+    return 0
+
+
+def _read_transition_records(transitions_path: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    records: list[dict[str, Any]] = []
+    findings: list[dict[str, Any]] = []
+    if not transitions_path.exists():
+        return records, findings
+    for line_no, raw_line in enumerate(transitions_path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw_line.strip()
+        if not line:
+            continue
+        try:
+            parsed = json.loads(line)
+        except json.JSONDecodeError:
+            findings.append(
+                {
+                    "check": "invalid_transition_json",
+                    "severity": "error",
+                    "line": line_no,
+                    "message": "Transition log line is not valid JSON.",
+                }
+            )
+            continue
+        if not isinstance(parsed, dict):
+            findings.append(
+                {
+                    "check": "invalid_transition_record",
+                    "severity": "error",
+                    "line": line_no,
+                    "message": "Transition record must be a JSON object.",
+                }
+            )
+            continue
+        parsed["_line"] = line_no
+        records.append(parsed)
+    return records, findings
+
+
+def _transition_findings(transition: dict[str, Any]) -> list[dict[str, Any]]:
+    transition_id = str(transition.get("transition_id", "<missing>"))
+    findings: list[dict[str, Any]] = []
+
+    required_fields = ("transition_id", "from_mode", "to_mode", "changed_at", "changed_by", "reason")
+    for field in required_fields:
+        value = transition.get(field)
+        if not isinstance(value, str) or not value.strip():
+            findings.append(
+                {
+                    "check": "missing_transition_field",
+                    "severity": "error",
+                    "transition_id": transition_id,
+                    "field": field,
+                    "message": f"Transition missing required field: {field}.",
+                }
+            )
+
+    from_mode = str(transition.get("from_mode", ""))
+    to_mode = str(transition.get("to_mode", ""))
+    if from_mode not in ROLLOUT_MODES:
+        findings.append(
+            {
+                "check": "invalid_from_mode",
+                "severity": "error",
+                "transition_id": transition_id,
+                "message": f"Invalid from_mode: {from_mode!r}.",
+            }
+        )
+    if to_mode not in ROLLOUT_MODES:
+        findings.append(
+            {
+                "check": "invalid_to_mode",
+                "severity": "error",
+                "transition_id": transition_id,
+                "message": f"Invalid to_mode: {to_mode!r}.",
+            }
+        )
+
+    decision_refs = transition.get("decision_refs")
+    reflection_refs = transition.get("reflection_refs")
+    audit_refs = transition.get("audit_refs")
+    if not isinstance(decision_refs, list):
+        decision_refs = []
+    if not isinstance(reflection_refs, list):
+        reflection_refs = []
+    if not isinstance(audit_refs, list):
+        audit_refs = []
+
+    if to_mode == "default":
+        if not decision_refs or not reflection_refs or not audit_refs:
+            findings.append(
+                {
+                    "check": "missing_default_linkage",
+                    "severity": "error",
+                    "transition_id": transition_id,
+                    "message": "Default transition requires decision/reflection/audit linkage refs.",
+                }
+            )
+
+    incident_ref = str(transition.get("incident_ref", "")).strip()
+    if from_mode == "default" and to_mode in {"experimental", "off"} and not incident_ref:
+        findings.append(
+            {
+                "check": "missing_default_rollback_incident_ref",
+                "severity": "error",
+                "transition_id": transition_id,
+                "message": "Rollback from default requires incident_ref.",
+            }
+        )
+
+    return findings
+
+
+def _run_rollout_mode_audit_command(argv: list[str]) -> int:
+    subcommand = "rollout-mode-audit"
+    args = argv[1:] if len(argv) > 1 else []
+    parsed, parse_code = _parse_args_with_exit(_build_rollout_mode_audit_parser(), args)
+    if parsed is None:
+        return parse_code
+
+    project_dir = Path(parsed.project_dir).resolve()
+    cortex_root = str(parsed.cortex_root or ".cortex")
+    output_format = str(parsed.format)
+    state_path, transitions_path, audit_report_path = _rollout_paths(project_dir, cortex_root)
+
+    state, state_error = _load_rollout_state(state_path)
+    if state_error:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "fail",
+            "returncode": 3,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_rollout_fallback_v0",
+            "message": state_error,
+        }
+        _emit_rollout_payload(payload, output_format)
+        return 3
+
+    transition_records, findings = _read_transition_records(transitions_path)
+    complete_transition_count = 0
+    for transition in transition_records:
+        tf = _transition_findings(transition)
+        if tf:
+            findings.extend(tf)
+        else:
+            complete_transition_count += 1
+
+    transition_count = len(transition_records)
+    completeness_rate = 1.0 if transition_count == 0 else float(complete_transition_count / transition_count)
+    status = "pass" if not findings and completeness_rate >= 1.0 else "fail"
+
+    report_payload = {
+        "artifact": "phase5_mode_transition_audit_report_v0",
+        "version": "v0",
+        "project_dir": str(project_dir),
+        "run_at": _now_iso(),
+        "state_mode": str(state.get("mode", "experimental")),
+        "state_path": _safe_rel_path(project_dir, state_path),
+        "transitions_path": _safe_rel_path(project_dir, transitions_path),
+        "summary": {
+            "transition_count": transition_count,
+            "complete_transition_count": complete_transition_count,
+            "finding_count": len(findings),
+            "transition_completeness_rate": completeness_rate,
+        },
+        "targets": {
+            "transition_completeness_rate": 1.0,
+        },
+        "target_results": {
+            "transition_completeness_rate_met": completeness_rate >= 1.0 and not findings,
+        },
+        "findings": findings,
+        "status": status,
+    }
+    audit_report_path.parent.mkdir(parents=True, exist_ok=True)
+    audit_report_path.write_text(json.dumps(report_payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    payload = {
+        "version": "v0",
+        "command": subcommand,
+        "status": status,
+        "returncode": 0 if status == "pass" else 3,
+        "run_at": _now_iso(),
+        "project_dir": str(project_dir),
+        "format_source": "delegator_rollout_fallback_v0",
+        "result": {
+            "report_path": _safe_rel_path(project_dir, audit_report_path),
+            "transition_count": transition_count,
+            "finding_count": len(findings),
+            "transition_completeness_rate": completeness_rate,
+            "state_mode": str(state.get("mode", "experimental")),
+        },
+    }
+    _emit_rollout_payload(payload, output_format)
+    return 0 if status == "pass" else 3
 
 
 def _shim_json_payload(
@@ -216,6 +705,18 @@ def _run_with_format_shim(coach_bin: str, argv: list[str], subcommand: str, requ
 
 
 def main() -> int:
+    argv = sys.argv[1:]
+    subcommand = _extract_subcommand(argv)
+    if subcommand in {"rollout-mode", "rollout-mode-audit"}:
+        try:
+            idx = argv.index(subcommand)
+        except ValueError:
+            idx = 0
+        command_argv = argv[idx:]
+        if subcommand == "rollout-mode":
+            return _run_rollout_mode_command(command_argv)
+        return _run_rollout_mode_audit_command(command_argv)
+
     if os.environ.get("CORTEX_COACH_FORCE_INTERNAL") == "1":
         print(
             "CORTEX_COACH_FORCE_INTERNAL is no longer supported in Phase 4. "
@@ -233,12 +734,10 @@ def main() -> int:
         )
         return 1
 
-    argv = sys.argv[1:]
     requested_format = _extract_option_value(argv, "--format")
     if requested_format is None:
         return _run_passthrough(coach_bin, argv)
 
-    subcommand = _extract_subcommand(argv)
     return _run_with_format_shim(coach_bin, argv, subcommand, requested_format)
 
 

@@ -2,7 +2,7 @@
   "artifact": "phase5_mode_transition_audit_report_v0",
   "findings": [],
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-25T02:18:36Z",
+  "run_at": "2026-02-25T04:08:32Z",
   "state_mode": "default",
   "state_path": ".cortex/state/rollout_mode_state_v0.json",
   "status": "pass",

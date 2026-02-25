@@ -4,7 +4,7 @@
     "latest_results": [
       {
         "check_id": "command_surface_preflight",
-        "status": "fail"
+        "status": "pass"
       },
       {
         "check_id": "dependency_bootstrap_control",
@@ -31,7 +31,7 @@
         "status": "pass"
       }
     ],
-    "next_action": "Remediate failed cadence prerequisite checks before go-live handoff.",
+    "next_action": "Proceed with scheduled weekly cadence checks.",
     "policy": {
       "month_2_plus_cadence": "monthly",
       "week_1_to_4_cadence": "weekly"
@@ -58,7 +58,7 @@
         "2026-03-25"
       ]
     },
-    "status": "fail"
+    "status": "pass"
   },
   "checks": [
     {
@@ -71,17 +71,17 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 1.2774654200766236,
-      "payload_status": "fail",
+      "duration_seconds": 1.7456285000080243,
+      "payload_status": "pass",
       "report_path": null,
-      "returncode": 1,
-      "status": "fail",
+      "returncode": 0,
+      "status": "pass",
       "stderr": "",
       "stdout_excerpt": "{",
       "summary": {
         "required_check_count": 4,
-        "required_check_fail_count": 3,
-        "required_check_pass_count": 1
+        "required_check_fail_count": 0,
+        "required_check_pass_count": 4
       }
     },
     {
@@ -111,7 +111,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.7849933300167322,
+      "duration_seconds": 0.768278060015291,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -131,7 +131,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.6186503400094807,
+      "duration_seconds": 0.597993109957315,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -153,7 +153,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.6121821199776605,
+      "duration_seconds": 0.6343673599185422,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -178,7 +178,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 1.1476527699269354,
+      "duration_seconds": 1.1655863999621943,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -186,11 +186,11 @@
       "stderr": "",
       "stdout_excerpt": "{",
       "summary": {
-        "decision_match_count": 0,
-        "governance_impact_file_count": 0,
-        "required_status_entry_count": 30,
-        "required_status_mapping_count": 30,
-        "scaffold_reports_scanned": 30
+        "decision_match_count": 3,
+        "governance_impact_file_count": 1,
+        "required_status_entry_count": 31,
+        "required_status_mapping_count": 31,
+        "scaffold_reports_scanned": 31
       }
     },
     {
@@ -203,7 +203,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.36160849989391863,
+      "duration_seconds": 0.3603268900187686,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -224,7 +224,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.2910337100038305,
+      "duration_seconds": 0.2962089899228886,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -238,24 +238,15 @@
       "command": [
         "./scripts/quality_gate_ci_v0.sh"
       ],
-      "duration_seconds": 21.207923879963346,
+      "duration_seconds": 20.95419077691622,
       "returncode": 0,
       "status": "pass",
       "stderr_first_line": "",
       "summary_line": "[quality-gate-ci] PASS"
     }
   ],
-  "findings": [
-    {
-      "cadence_status": "fail",
-      "check": "certification_pack_status",
-      "message": "Certification pack did not meet pass criteria.",
-      "schema_validation_status": "pass",
-      "scorecard_status": "fail",
-      "severity": "error"
-    }
-  ],
-  "generated_at": "2026-02-25T03:58:03Z",
+  "findings": [],
+  "generated_at": "2026-02-25T04:08:54Z",
   "inputs": {
     "assessor_name": "automation",
     "assessor_role": "Conformance QA Lead",
@@ -274,10 +265,7 @@
     "track_variant": "standard"
   },
   "project_dir": "/home/d/codex/cortex",
-  "remediation_hints": [
-    "Populate onboarding completion report before final M6 certification review.",
-    "Upgrade cortex-coach command surface to support onboarding rollback-mode requirements before certification pass."
-  ],
+  "remediation_hints": [],
   "scorecard": {
     "artifact": "client_onboarding_certification_scorecard_v0",
     "assessment": {
@@ -290,11 +278,13 @@
     },
     "categories": {
       "documentation_quality": {
-        "evidence_refs": [],
+        "evidence_refs": [
+          ".cortex/reports/project_state/client_onboarding_completion_report_v0.md"
+        ],
         "minimum_required_percent": 80.0,
-        "notes": "Completion report missing; documentation score capped at 70.",
-        "pass": false,
-        "score_percent": 70.0,
+        "notes": "Completion report exists and appears populated.",
+        "pass": true,
+        "score_percent": 85.0,
         "weight_percent": 10.0
       },
       "governance_integrity": {
@@ -314,9 +304,9 @@
           ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json"
         ],
         "minimum_required_percent": 85.0,
-        "notes": "4/5 checks passed. Failed checks: command_surface_preflight.",
-        "pass": false,
-        "score_percent": 80.0,
+        "notes": "5/5 checks passed.",
+        "pass": true,
+        "score_percent": 100.0,
         "weight_percent": 35.0
       },
       "team_readiness": {
@@ -336,19 +326,19 @@
       ".cortex/reports/project_state/client_onboarding_completion_report_v0.md",
       ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json"
     ],
-    "generated_at": "2026-02-25T03:58:03Z",
+    "generated_at": "2026-02-25T04:08:54Z",
     "hard_fail_conditions": {
-      "notes": "Rollout command surface unavailable in preflight.",
+      "notes": "",
       "required_governance_gate_bypass_detected": false,
-      "rollback_drill_failed": true,
-      "triggered": true,
+      "rollback_drill_failed": false,
+      "triggered": false,
       "unlinked_governance_closure_detected": false
     },
-    "status": "fail",
+    "status": "pass",
     "totals": {
       "minimum_required_percent": 85.0,
       "pass_by_score": true,
-      "weighted_score_percent": 87.0
+      "weighted_score_percent": 95.5
     },
     "track": {
       "end_date": "2026-02-25",
@@ -362,6 +352,6 @@
     "error": "",
     "status": "pass"
   },
-  "status": "fail",
+  "status": "pass",
   "version": "v0"
 }

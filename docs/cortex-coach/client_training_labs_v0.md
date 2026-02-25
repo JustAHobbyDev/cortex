@@ -46,8 +46,9 @@ Fail early when the installed `cortex-coach` build cannot satisfy onboarding lab
 If preflight fails:
 
 1. Stop onboarding labs and remediate capability gaps first.
-2. Upgrade `cortex-coach` when `rollout-mode` surface checks fail.
-3. For temporary `audit --format json` compatibility, use `python3 scripts/cortex_project_coach_v0.py audit ... --format json` until native support is available.
+2. Use delegator compatibility path for universal JSON command support:
+   - `python3 scripts/cortex_project_coach_v0.py <command> ... --format json`
+3. Upgrade standalone `cortex-coach` when delegator preflight still reports rollout capability failures.
 
 ## M2 Lab: Operator Workflow
 
@@ -58,8 +59,8 @@ Demonstrate daily operator flow and pre-merge closeout sequence without governan
 ### Command Checklist
 
 1. `cortex-coach audit-needed --project-dir . --format json`
-2. `cortex-coach audit --project-dir . --audit-scope cortex-only --format json`
-3. `cortex-coach audit --project-dir . --audit-scope all --format json`
+2. `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope cortex-only --format json`
+3. `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all --format json`
 4. `cortex-coach decision-gap-check --project-dir . --format json`
 5. `cortex-coach reflection-completeness-check --project-dir . --required-decision-status promoted --format json`
 6. `python3 scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`
@@ -118,15 +119,15 @@ Demonstrate safe rollout-mode transitions, rollback drill execution, and transit
 1. Rerun required preflight:
 - `python3 scripts/client_onboarding_command_preflight_v0.py --project-dir . --format json`
 2. Read mode:
-- `cortex-coach rollout-mode --project-dir . --format json`
+- `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --format json`
 3. Drill transition to `off`:
-- `cortex-coach rollout-mode --project-dir . --set-mode off --changed-by <actor> --reason "<reason>" --format json`
+- `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --set-mode off --changed-by <actor> --reason "<reason>" --format json`
 4. Restore to `experimental`:
-- `cortex-coach rollout-mode --project-dir . --set-mode experimental --changed-by <actor> --reason "<reason>" --incident-ref <incident_ref> --format json`
+- `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --set-mode experimental --changed-by <actor> --reason "<reason>" --incident-ref <incident_ref> --format json`
 5. Audit transitions:
-- `cortex-coach rollout-mode-audit --project-dir . --format json`
+- `python3 scripts/cortex_project_coach_v0.py rollout-mode-audit --project-dir . --format json`
 6. (Instructor-supervised only) transition to `default` with full linkage:
-- `cortex-coach rollout-mode --project-dir . --set-mode default --changed-by <actor> --reason "<reason>" --decision-refs <decision_refs> --reflection-refs <reflection_refs> --audit-refs <audit_refs> --format json`
+- `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --set-mode default --changed-by <actor> --reason "<reason>" --decision-refs <decision_refs> --reflection-refs <reflection_refs> --audit-refs <audit_refs> --format json`
 
 ### Expected Results
 
@@ -149,7 +150,7 @@ Demonstrate client-repo operational readiness with CI-quality gates and onboardi
 ### Command Checklist
 
 1. Run release-boundary gate bundle:
-- `cortex-coach audit --project-dir . --audit-scope all --format json`
+- `python3 scripts/cortex_project_coach_v0.py audit --project-dir . --audit-scope all --format json`
 - `cortex-coach decision-gap-check --project-dir . --format json`
 - `cortex-coach reflection-completeness-check --project-dir . --required-decision-status promoted --format json`
 - `python3 scripts/reflection_enforcement_gate_v0.py --project-dir . --required-decision-status promoted --min-scaffold-reports 1 --min-required-status-mappings 1 --format json`

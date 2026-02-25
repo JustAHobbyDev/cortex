@@ -15,14 +15,32 @@
       },
       {
         "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json'])",
+        "path": "contracts/promotion_enforcement_contract_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
         "detail": "references missing project paths (examples=['cortex/'])",
         "path": "contracts/tactical_memory_command_family_contract_v0.md",
         "severity": "warn"
       },
       {
         "check": "missing_source_paths",
-        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json'])",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase2_retrieval_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json'])",
         "path": "specs/cortex_project_coach_spec_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/templates/client_onboarding_completion_report_template_v0.md', 'cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md', 'cortex/reports/project_state/client_onboarding_pilot_calibration_data_v0.json', 'cortex/reports/project_state/client_onboarding_pilot_command_runs_v0.ndjson', 'cortex/reports/project_state/client_onboarding_certification_pack_v0.json'])",
+        "path": "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/templates/client_onboarding_completion_report_template_v0.md', 'cortex/templates/', 'cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md', 'cortex/reports/project_state/client_onboarding_certification_pack_v0.json'])",
+        "path": "playbooks/cortex_client_onboarding_training_track_v0.md",
         "severity": "warn"
       },
       {
@@ -60,9 +78,51 @@
         "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/beads_comparative_research_report_v0.md', 'cortex/reports/project_state/phase2_gate_c_measurement_closeout_v0.md', 'cortex/reports/project_state/phase3_work_graph_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/phase3_adapter_degradation_report_v0.json'])",
         "path": "playbooks/cortex_phase3_work_graph_adapter_ticket_breakdown_v0.md",
         "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md', 'cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json', 'cortex/reports/project_state/', 'cortex/reports/project_state/phase4_promotion_candidate_quality_report_v0.json'])",
+        "path": "playbooks/cortex_phase4_measurement_plan_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md', 'cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json', 'cortex/fixtures/phase4_promotion/', 'cortex/reports/project_state/phase4_promotion_candidate_quality_report_v0.json'])",
+        "path": "playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/', 'cortex/reports/project_state/phase5_cycle1_rollout_reliability_report_v0.json', 'cortex/reports/project_state/phase5_cycle2_rollout_reliability_report_v0.json', 'cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md'])",
+        "path": "playbooks/cortex_phase5_measurement_plan_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase4_gate_e_measurement_closeout_v0.md', 'cortex/reports/project_state/phase5_*'])",
+        "path": "playbooks/cortex_phase5_migration_playbook_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md', 'cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md', 'cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json', 'cortex/reports/project_state/phase5_reference_implementation_report_v0.md', 'cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json'])",
+        "path": "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/', 'cortex/reports/project_state/'])",
+        "path": "playbooks/session_governance_hybrid_plan_v0.md",
+        "severity": "warn"
+      },
+      {
+        "check": "missing_source_paths",
+        "detail": "references missing project paths (examples=['cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json', 'cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md'])",
+        "path": "policies/rollout_mode_policy_v0.md",
+        "severity": "warn"
       }
     ],
-    "scanned_files": 90,
+    "scanned_files": 100,
     "status": "warn"
   },
   "assets_dir": "/home/d/.local/share/uv/tools/cortex-coach/lib/python3.12/site-packages/cortex_coach/data/assets",
@@ -100,12 +160,12 @@
     },
     {
       "check": "artifact_conformance",
-      "detail": "scanned=90, findings=10",
+      "detail": "scanned=100, findings=20",
       "status": "warn"
     },
     {
       "check": "unsynced_decisions",
-      "detail": "promoted=23, findings=0",
+      "detail": "promoted=31, findings=0",
       "status": "pass"
     }
   ],
@@ -116,7 +176,7 @@
     "rules": 3
   },
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-24T10:18:06Z",
+  "run_at": "2026-02-25T04:08:33Z",
   "spec_coverage": {
     "missing_required": [],
     "orphan": [],
@@ -128,7 +188,7 @@
   "status": "pass",
   "unsynced_decisions": {
     "findings": [],
-    "promoted_decision_count": 23,
+    "promoted_decision_count": 31,
     "status": "pass"
   },
   "version": "v0"

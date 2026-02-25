@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preflight required coach command surface for client onboarding labs."""
+"""Preflight required command surface for client onboarding labs."""
 
 from __future__ import annotations
 
@@ -14,9 +14,9 @@ from typing import Any
 
 
 REQUIRED_COMMAND_SURFACE = (
-    ("audit", True),
-    ("rollout-mode", True),
-    ("rollout-mode-audit", True),
+    "audit",
+    "rollout-mode",
+    "rollout-mode-audit",
 )
 
 
@@ -32,13 +32,16 @@ def _first_non_empty_line(text: str) -> str:
     return ""
 
 
-def _run_help(coach_bin: str, subcommand: str) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        [coach_bin, subcommand, "--help"],
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+def _load_json_text(text: str) -> dict[str, Any] | None:
+    if not text.strip():
+        return None
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        return None
+    if isinstance(payload, dict):
+        return payload
+    return None
 
 
 def _finding(check: str, message: str, **extra: Any) -> dict[str, Any]:
@@ -51,49 +54,105 @@ def _finding(check: str, message: str, **extra: Any) -> dict[str, Any]:
     return payload
 
 
-def _check_subcommand_support(coach_bin: str, subcommand: str, require_format_json: bool) -> tuple[dict[str, Any], dict[str, Any] | None]:
-    proc = _run_help(coach_bin, subcommand)
-    combined_output = f"{proc.stdout}\n{proc.stderr}".strip()
+def _run_command(cmd: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, text=True, capture_output=True, check=False)
 
-    check_payload: dict[str, Any] = {
+
+def _check_subcommand_with_coach_bin(coach_bin: str, subcommand: str) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    cmd = [coach_bin, subcommand, "--help"]
+    proc = _run_command(cmd)
+    combined_output = f"{proc.stdout}\n{proc.stderr}".strip()
+    supports_json = "--format" in combined_output and "json" in combined_output
+
+    payload: dict[str, Any] = {
         "check": f"{subcommand}_command_surface",
         "subcommand": subcommand,
-        "command": f"{coach_bin} {subcommand} --help",
-        "requires_format_json": require_format_json,
+        "runner_mode": "coach-bin",
+        "command": cmd,
         "returncode": proc.returncode,
-        "status": "fail",
+        "status": "pass" if proc.returncode == 0 and supports_json else "fail",
+        "supports_json_mode": supports_json,
     }
+    if payload["status"] == "pass":
+        return payload, None
 
+    reason = _first_non_empty_line(proc.stderr) or _first_non_empty_line(combined_output)
+    payload["reason"] = reason or "subcommand unavailable or --format json unsupported"
     if proc.returncode != 0:
-        reason = _first_non_empty_line(proc.stderr) or _first_non_empty_line(combined_output) or "subcommand unavailable"
-        check_payload["reason"] = reason
         return (
-            check_payload,
+            payload,
             _finding(
                 "unsupported_subcommand",
-                "Required onboarding subcommand is unavailable.",
+                "Required onboarding subcommand is unavailable on coach binary.",
                 subcommand=subcommand,
-                reason=reason,
+                reason=payload["reason"],
             ),
         )
+    return (
+        payload,
+        _finding(
+            "missing_json_format_support",
+            "Required onboarding subcommand does not expose --format json support on coach binary.",
+            subcommand=subcommand,
+            reason=payload["reason"],
+        ),
+    )
 
-    if require_format_json:
-        supports_json = "--format" in combined_output and "json" in combined_output
-        if not supports_json:
-            reason = "help output does not advertise --format json support"
-            check_payload["reason"] = reason
-            return (
-                check_payload,
-                _finding(
-                    "missing_json_format_support",
-                    "Required onboarding subcommand does not advertise --format json support.",
-                    subcommand=subcommand,
-                    reason=reason,
-                ),
-            )
 
-    check_payload["status"] = "pass"
-    return check_payload, None
+def _delegator_command(project_dir: Path, python_bin: str, delegator_path: Path, subcommand: str) -> list[str]:
+    cmd = [
+        python_bin,
+        str(delegator_path),
+        subcommand,
+        "--project-dir",
+        str(project_dir),
+        "--format",
+        "json",
+    ]
+    if subcommand == "audit":
+        cmd.extend(["--audit-scope", "cortex-only"])
+    return cmd
+
+
+def _check_subcommand_with_delegator(
+    project_dir: Path,
+    python_bin: str,
+    delegator_path: Path,
+    subcommand: str,
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    cmd = _delegator_command(project_dir, python_bin, delegator_path, subcommand)
+    proc = _run_command(cmd)
+    parsed = _load_json_text(proc.stdout)
+    payload_status = ""
+    if parsed is not None:
+        payload_status = str(parsed.get("status", ""))
+
+    # Capability check: command is considered supported when it returns JSON object output,
+    # even if status is fail due to policy/state findings.
+    supported = parsed is not None and proc.returncode in {0, 1, 3}
+    payload: dict[str, Any] = {
+        "check": f"{subcommand}_command_surface",
+        "subcommand": subcommand,
+        "runner_mode": "delegator",
+        "command": cmd,
+        "returncode": proc.returncode,
+        "status": "pass" if supported else "fail",
+        "payload_status": payload_status,
+    }
+    if payload["status"] == "pass":
+        return payload, None
+
+    reason = _first_non_empty_line(proc.stderr) or _first_non_empty_line(proc.stdout) or "delegator command failed"
+    payload["reason"] = reason
+    return (
+        payload,
+        _finding(
+            "unsupported_subcommand",
+            "Required onboarding subcommand is unavailable through delegator.",
+            subcommand=subcommand,
+            reason=reason,
+        ),
+    )
 
 
 def _render_text(payload: dict[str, Any]) -> str:
@@ -101,6 +160,7 @@ def _render_text(payload: dict[str, Any]) -> str:
     lines = [
         f"status: {payload.get('status', 'fail')}",
         f"run_at: {payload.get('run_at', '')}",
+        f"runner_mode: {payload.get('runner_mode', '')}",
         f"coach_binary: {payload.get('coach_binary', '')}",
         "summary: "
         f"required_checks={summary.get('required_check_count', 0)} "
@@ -114,11 +174,7 @@ def _render_text(payload: dict[str, Any]) -> str:
         for finding in findings:
             if not isinstance(finding, dict):
                 continue
-            check = str(finding.get("check", "unknown"))
-            message = str(finding.get("message", ""))
-            subcommand = finding.get("subcommand")
-            suffix = f" subcommand={subcommand}" if isinstance(subcommand, str) else ""
-            lines.append(f"- {check}:{suffix} {message}".rstrip())
+            lines.append(f"- {finding.get('check')}: {finding.get('message')}")
 
     remediation_hints = payload.get("remediation_hints", [])
     if isinstance(remediation_hints, list) and remediation_hints:
@@ -130,54 +186,112 @@ def _render_text(payload: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _select_runner(args: argparse.Namespace, delegator_available: bool, coach_binary: str | None) -> tuple[str, list[dict[str, Any]]]:
+    checks: list[dict[str, Any]] = []
+    requested = str(args.runner_mode)
+    if requested == "delegator":
+        checks.append(
+            {
+                "check": "delegator_present",
+                "status": "pass" if delegator_available else "fail",
+                "path": str(args.coach_script),
+            }
+        )
+        return ("delegator", checks)
+    if requested == "coach-bin":
+        checks.append(
+            {
+                "check": "coach_binary_present",
+                "status": "pass" if coach_binary else "fail",
+                "command": args.coach_bin,
+                "resolved_path": coach_binary or "",
+            }
+        )
+        return ("coach-bin", checks)
+
+    # auto
+    if delegator_available:
+        checks.append(
+            {
+                "check": "delegator_present",
+                "status": "pass",
+                "path": str(args.coach_script),
+            }
+        )
+        return ("delegator", checks)
+
+    checks.append(
+        {
+            "check": "coach_binary_present",
+            "status": "pass" if coach_binary else "fail",
+            "command": args.coach_bin,
+            "resolved_path": coach_binary or "",
+        }
+    )
+    return ("coach-bin", checks)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Preflight required cortex-coach command surface before onboarding labs M2 and M4."
+        description="Preflight required command surface before onboarding labs M2 and M4."
     )
     parser.add_argument("--project-dir", default=".")
     parser.add_argument("--coach-bin", default="cortex-coach")
+    parser.add_argument("--python-bin", default="python3")
+    parser.add_argument("--coach-script", default="scripts/cortex_project_coach_v0.py")
+    parser.add_argument("--runner-mode", default="auto", choices=("auto", "delegator", "coach-bin"))
     parser.add_argument("--format", default="text", choices=("text", "json"))
     parser.add_argument("--out-file")
     args = parser.parse_args()
 
     project_dir = Path(args.project_dir).resolve()
+    delegator_path = Path(args.coach_script)
+    if not delegator_path.is_absolute():
+        delegator_path = (project_dir / delegator_path).resolve()
+    delegator_available = delegator_path.exists()
     coach_binary = shutil.which(args.coach_bin)
 
     checks: list[dict[str, Any]] = []
     findings: list[dict[str, Any]] = []
     remediation_hints: list[str] = []
 
-    delegator_path = project_dir / "scripts" / "cortex_project_coach_v0.py"
-    delegator_available = delegator_path.exists()
+    runner_mode, runner_checks = _select_runner(args, delegator_available, coach_binary)
+    checks.extend(runner_checks)
 
-    if coach_binary is None:
-        checks.append(
-            {
-                "check": "coach_binary_present",
-                "status": "fail",
-                "command": args.coach_bin,
-                "reason": "binary not found on PATH",
-            }
-        )
-        findings.append(
-            _finding(
-                "missing_coach_binary",
-                "Required coach binary is not available on PATH.",
-                coach_bin=args.coach_bin,
+    runner_ready = all(item.get("status") == "pass" for item in runner_checks)
+    if not runner_ready:
+        if runner_mode == "delegator":
+            findings.append(
+                _finding(
+                    "missing_delegator_script",
+                    "Delegator runner requested but script is missing.",
+                    coach_script=str(delegator_path),
+                )
             )
-        )
-        remediation_hints.append("Install cortex-coach and rerun this preflight before onboarding labs.")
+            remediation_hints.append("Use --runner-mode coach-bin or restore scripts/cortex_project_coach_v0.py.")
+        else:
+            findings.append(
+                _finding(
+                    "missing_coach_binary",
+                    "Coach binary runner requested but binary is not available on PATH.",
+                    coach_bin=args.coach_bin,
+                )
+            )
+            remediation_hints.append("Install cortex-coach or run with --runner-mode delegator.")
     else:
-        checks.append(
-            {
-                "check": "coach_binary_present",
-                "status": "pass",
-                "command": args.coach_bin,
-                "resolved_path": coach_binary,
-            }
-        )
-        for subcommand, require_format_json in REQUIRED_COMMAND_SURFACE:
-            check_payload, finding = _check_subcommand_support(coach_binary, subcommand, require_format_json)
+        for subcommand in REQUIRED_COMMAND_SURFACE:
+            if runner_mode == "delegator":
+                check_payload, finding = _check_subcommand_with_delegator(
+                    project_dir,
+                    args.python_bin,
+                    delegator_path,
+                    subcommand,
+                )
+            else:
+                if coach_binary is None:
+                    # Guard for type checkers; runner_ready already covers this.
+                    continue
+                check_payload, finding = _check_subcommand_with_coach_bin(coach_binary, subcommand)
             checks.append(check_payload)
             if finding is not None:
                 findings.append(finding)
@@ -195,14 +309,16 @@ def main() -> int:
         for item in checks
     )
 
-    if missing_audit_json and delegator_available:
+    if missing_audit_json and runner_mode == "coach-bin" and delegator_available:
         remediation_hints.append(
-            "Temporary audit fallback: use `python3 scripts/cortex_project_coach_v0.py audit ... --format json` until coach is upgraded."
+            "Use delegator for universal JSON support: `python3 scripts/cortex_project_coach_v0.py audit ... --format json`."
         )
-    if missing_rollout_surface:
+    if missing_rollout_surface and runner_mode == "coach-bin" and delegator_available:
         remediation_hints.append(
-            "Upgrade cortex-coach to a build that includes `rollout-mode` and `rollout-mode-audit` before running M4."
+            "Use delegator fallback rollout commands: `python3 scripts/cortex_project_coach_v0.py rollout-mode ...`."
         )
+    if missing_rollout_surface and runner_mode == "delegator":
+        remediation_hints.append("Investigate delegator rollout fallback error and rerun preflight.")
     if required_check_fail_count == 0:
         remediation_hints.append("Preflight passed. Proceed with M2 labs and rerun preflight before M4.")
 
@@ -211,8 +327,10 @@ def main() -> int:
         "version": "v0",
         "run_at": _now_iso(),
         "project_dir": str(project_dir),
+        "runner_mode": runner_mode,
         "coach_binary": coach_binary or "",
         "coach_binary_requested": args.coach_bin,
+        "coach_script": str(delegator_path),
         "delegator_available": delegator_available,
         "checks": checks,
         "findings": findings,

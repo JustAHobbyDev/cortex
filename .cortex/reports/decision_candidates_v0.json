@@ -790,8 +790,31 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T035859Z_implement_ct_006_certifi_v0.json",
       "status": "promoted",
       "title": "Adopt automated onboarding certification pack for CT-006"
+    },
+    {
+      "captured_at": "2026-02-25T06:44:44Z",
+      "decision": "Mistake observed: Phase 5 completion left expansion work without an explicit next-phase execution contract. Recurring pattern: After a phase closeout, roadmap continuation can drift unless the next phase has a ticket board and measurement baseline. Adopt reusable rule: Before starting post-closeout implementation, publish the next phase board + measurement plan and link it to the roadmap.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_kick_off_phase_6_bootstrap_and_gdd_scale_out_planning_v1.md",
+      "decision_id": "dec_20260225T064444Z_kick_off_phase_6_bootstr",
+      "impact_scope": [
+        "governance",
+        "planning",
+        "roadmap"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/phase5_reference_implementation_report_v0.md",
+        "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+        "playbooks/cortex_phase6_measurement_plan_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ],
+      "promoted_at": "2026-02-25T06:44:56Z",
+      "rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+      "reflection_id": "ref_20260225T064434Z_kick_off_phase_6_bootstr",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T064434Z_kick_off_phase_6_bootstr_v0.json",
+      "status": "promoted",
+      "title": "Kick off Phase 6 bootstrap and GDD scale-out planning"
     }
   ],
-  "updated_at": "2026-02-25T03:59:00Z",
+  "updated_at": "2026-02-25T06:44:56Z",
   "version": "v0"
 }

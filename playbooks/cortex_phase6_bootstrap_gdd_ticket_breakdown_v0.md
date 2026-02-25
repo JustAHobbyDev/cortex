@@ -1,0 +1,67 @@
+# Cortex Phase 6 Bootstrap and GDD Ticket Breakdown v0
+
+Version: v0  
+Status: Active  
+Date: 2026-02-25  
+Scope: Phase 6 implementation ticket set for project bootstrap portability and Governance Driven Development (GDD) scale-out
+
+## Purpose
+
+Define the next execution phase after Gate F so Cortex can bootstrap governance in new projects with deterministic setup, boundary-safe defaults, and context-hydration enforcement.
+
+## Source Inputs
+
+- `playbooks/cortex_vision_master_roadmap_v1.md`
+- `playbooks/cortex_client_onboarding_training_track_v0.md`
+- `playbooks/session_governance_hybrid_plan_v0.md`
+- `playbooks/cortex_phase5_migration_playbook_v0.md`
+- `playbooks/cortex_phase5_measurement_plan_v0.md`
+- `.cortex/reports/project_state/mulch_beads_synthesized_plan_proposal_v0.md`
+- `.cortex/reports/project_state/beads_comparative_research_report_v0.md`
+
+## Guardrails (Non-Negotiable)
+
+- `.cortex` remains the default project boundary unless explicitly configured otherwise.
+- Bootstrap automation must preserve required release-boundary governance gates.
+- Context-hydration automation must not bypass policy/spec/decision authority.
+- Multi-agent workflows remain capability-scoped and fail-safe to governance-only operation.
+- New-project bootstrap evidence must be reproducible under `.cortex/reports/project_state/`.
+
+## Execution Order
+
+1. `PH6-001` phase scope + acceptance baseline
+2. `PH6-002` governance capsule hydration invariants and context-rollover enforcement
+3. `PH6-003` configurable project boundary contract (default `.cortex`)
+4. `PH6-004` deterministic bootstrap scaffolding flow for new repos
+5. `PH6-005` role/capability pack for GDD swarm operation
+6. `PH6-006` bootstrap readiness harness + certification artifact
+7. `PH6-007` external pilot validation across at least two fresh repos
+8. `PH6-008` Gate G closeout + recommendation for next expansion phase
+
+## Execution Board
+
+Status vocabulary:
+- `todo`
+- `in_progress`
+- `blocked`
+- `review`
+- `done`
+
+| Ticket | Title | Status | Owner (Suggested Role) | Primary Reviewer (Suggested Role) | Target Week | Target Date | Blockers | Evidence Link | Notes |
+|---|---|---|---|---|---|---|---|---|---|
+| PH6-001 | Phase 6 Scope + Acceptance Baseline | in_progress | Program Lead | Maintainer Council | Week 15 | 2026-06-03 | Phase 5 complete | `playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md`;`playbooks/cortex_phase6_measurement_plan_v0.md`;`playbooks/cortex_vision_master_roadmap_v1.md` | Kickoff item: establish phase contract, metrics, and sequencing before implementation work. |
+| PH6-002 | Governance Capsule Hydration Invariants | todo | Governance Policy Lead | Runtime Reliability Lead | Week 15 | 2026-06-05 | PH6-001 | `policies/tactical_data_policy_v0.md`;`specs/agent_context_loader_spec_v0.md`;`scripts/reflection_enforcement_gate_v0.py` | Require deterministic governance-capsule reload at session start and context rollover events. |
+| PH6-003 | Configurable Project Boundary Contract | todo | Governance Enforcement Lead | Contract/Schema Lead | Week 16 | 2026-06-10 | PH6-001 | `contracts/project_state_boundary_contract_v0.md`;`policies/cortex_coach_final_ownership_boundary_v0.md`;`scripts/project_state_boundary_gate_v0.py` | Boundary root defaults to `.cortex`; explicit override path must be policy-valid and auditable. |
+| PH6-004 | Bootstrap Scaffolder for New Projects | todo | Delivery Operations Lead | Program Lead | Week 16 | 2026-06-12 | PH6-002,PH6-003 | `scripts/cortex_project_coach_v0.py`;`docs/cortex-coach/quickstart.md`;`.cortex/templates/` | One deterministic bootstrap flow for creating required governance artifacts in fresh repos. |
+| PH6-005 | GDD Role + Capability Pack | todo | Maintainer Council | Governance Policy Lead | Week 17 | 2026-06-17 | PH6-002 | `playbooks/cortex_phase0_role_charters_v0.md`;`docs/cortex-coach/README.md` | Define minimum role set, command permissions, and escalation matrix for multi-agent delivery. |
+| PH6-006 | Bootstrap Readiness Harness + Certification | todo | Conformance QA Lead | CI/Gate Owner | Week 17 | 2026-06-19 | PH6-004,PH6-005 | `scripts/client_onboarding_certification_pack_v0.py`;`.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json` | Verify bootstrap-to-green-gate pathway and governance integrity on generated repos. |
+| PH6-007 | External Pilot Validation | todo | Program Lead | Delivery Operations Lead | Week 18 | 2026-06-24 | PH6-006 | `.cortex/reports/project_state/phase6_external_pilot_report_v0.md` | Validate portability on at least two non-Cortex seed repos with different stack shapes. |
+| PH6-008 | Gate G Closeout + Next-Phase Recommendation | todo | Program Lead | Maintainer Council | Week 18 | 2026-06-27 | PH6-001,PH6-002,PH6-003,PH6-004,PH6-005,PH6-006,PH6-007 | `.cortex/reports/project_state/phase6_gate_g_measurement_closeout_v0.md`;`playbooks/cortex_phase6_measurement_plan_v0.md` | Final decision: bootstrap capability maturity and whether to advance to next phase definition. |
+
+## Definition of Done (Phase 6 Ticket Set)
+
+This ticket set is complete when:
+
+1. `PH6-001` through `PH6-008` are marked `done` with evidence links.
+2. Fresh-project bootstrap flow reaches first green required gate deterministically in target budget.
+3. Governance capsule hydration and boundary constraints are enforced and auditable.

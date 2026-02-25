@@ -1,0 +1,50 @@
+{
+  "auto_linked_governance_files": [
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase6_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase6_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    ".cortex/reports/project_state/phase5_reference_implementation_report_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "planning",
+    "roadmap"
+  ],
+  "mistake": "Phase 5 completion left expansion work without an explicit next-phase execution contract.",
+  "pattern": "After a phase closeout, roadmap continuation can drift unless the next phase has a ticket board and measurement baseline.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Kick off Phase 6 bootstrap and GDD scale-out planning\" --decision \"Mistake observed: Phase 5 completion left expansion work without an explicit next-phase execution contract. Recurring pattern: After a phase closeout, roadmap continuation can drift unless the next phase has a ticket board and measurement baseline. Adopt reusable rule: Before starting post-closeout implementation, publish the next phase board + measurement plan and link it to the roadmap.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,planning,roadmap --reflection-id ref_20260225T064434Z_kick_off_phase_6_bootstr --reflection-report .cortex/reports/reflection_scaffold_20260225T064434Z_kick_off_phase_6_bootstr_v0.json --linked-artifacts .cortex/reports/project_state/phase5_reference_implementation_report_v0.md,playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md,playbooks/cortex_phase6_measurement_plan_v0.md,playbooks/cortex_vision_master_roadmap_v1.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260225T064434Z_kick_off_phase_6_bootstr",
+  "report_file": ".cortex/reports/reflection_scaffold_20260225T064434Z_kick_off_phase_6_bootstr_v0.json",
+  "rule": "Before starting post-closeout implementation, publish the next phase board + measurement plan and link it to the roadmap.",
+  "run_at": "2026-02-25T06:44:34Z",
+  "suggested_decision": "Mistake observed: Phase 5 completion left expansion work without an explicit next-phase execution contract. Recurring pattern: After a phase closeout, roadmap continuation can drift unless the next phase has a ticket board and measurement baseline. Adopt reusable rule: Before starting post-closeout implementation, publish the next phase board + measurement plan and link it to the roadmap.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_kick_off_phase_6_bootstrap_and_gdd_scale_out_planning_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/phase5_reference_implementation_report_v0.md",
+    "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase6_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Kick off Phase 6 bootstrap and GDD scale-out planning",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

@@ -170,6 +170,22 @@ Exit Criteria:
 - SLO and gate reliability thresholds pass for two consecutive cycles.
 - Adoption targets are met without governance regression.
 
+### Phase 6: Bootstrap and GDD Scale-Out
+
+Goal: make Cortex a deterministic bootstrap layer for new projects and governed multi-agent execution.
+
+Deliverables:
+- Bootstrap flow for fresh repos with required governance artifacts and gates wired by default.
+- Governance capsule hydration invariants for session start and context rollover.
+- Configurable project-boundary contract with `.cortex` as default boundary root.
+- Role/capability pack for multi-agent GDD operation with fail-safe degradation.
+- Gate G measurement and closeout package.
+
+Exit Criteria:
+- Fresh-repo bootstrap reaches first required green gate within target budget.
+- Hydration and boundary conformance checks are pass and auditable.
+- Pilot repos demonstrate governed closeout without bypass.
+
 ## Milestones and Sequencing
 
 1. Phase 0 completes before any tactical feature is default-on.
@@ -178,6 +194,7 @@ Exit Criteria:
 4. Phase 4 must pass governance linkage checks before default-on promotion.
 5. Phase 5 begins only after prior gate stability.
 6. Swarm runtime adoption beyond experimental is blocked until Swarm-GDD Exit Criteria are met.
+7. Phase 6 begins only after Gate F closeout and default-mode governance linkage are complete.
 
 ## Release Gates and Stop-Rules
 
@@ -243,9 +260,11 @@ Exit Criteria:
 
 ## Immediate Next Actions
 
-1. Treat Phase 5 as complete after Gate F closeout artifacts and default-mode decision linkage are published.
+1. Done: Gate F closeout artifacts and default-mode decision linkage are published.
   - Current state: Gate F closeout published and default mode activated with audited linkage.
-2. Keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
-3. Track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
-4. Route further capability expansion through new phase definitions rather than extending Phase 5 scope.
-5. Build client enablement track using `playbooks/cortex_client_onboarding_training_track_v0.md` and `playbooks/cortex_client_onboarding_training_execution_board_v0.md` as baseline execution contracts.
+2. Active: keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
+3. Active: track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
+4. In progress: route expansion through Phase 6 definitions (kickoff board + measurement baseline).
+  - `playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md`
+  - `playbooks/cortex_phase6_measurement_plan_v0.md`
+5. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

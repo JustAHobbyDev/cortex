@@ -153,6 +153,22 @@
       "status": "active"
     },
     {
+      "expires_on": "2026-10-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase6_bootstrap_gdd_ticket_breakdown_v0.md",
+      "reason": "Phase 6-scoped execution board for bootstrap portability and GDD scale-out sequencing.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-10-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase6_measurement_plan_v0.md",
+      "reason": "Phase 6-scoped Gate G measurement baseline for bootstrap readiness, hydration, and boundary conformance.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
       "expires_on": "2026-12-31",
       "owner": "Program Lead",
       "path": "playbooks/cortex_client_onboarding_training_execution_board_v0.md",

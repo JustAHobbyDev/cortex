@@ -18,6 +18,8 @@ Define Gate F criteria for moving from experimental operation to default mode on
 - `playbooks/cortex_phase4_measurement_plan_v0.md`
 - `specs/cortex_project_coach_spec_v0.md`
 - `policies/cortex_coach_final_ownership_boundary_v0.md`
+- `contracts/rollout_mode_contract_v0.md`
+- `policies/rollout_mode_policy_v0.md`
 
 ## Scope
 

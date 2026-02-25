@@ -365,6 +365,28 @@ Fixture freeze requirements:
 - Gate E measurements must use `.cortex/reports/project_state/phase4_promotion_eval_fixture_freeze_v0.json`.
 - Fixture changes require version bump and explicit Gate E baseline reset note in closeout artifacts.
 
+### Rollout Mode Control Baseline (Phase 5 / PH5-001)
+
+Canonical contract sources:
+- `contracts/rollout_mode_contract_v0.md`
+- `policies/rollout_mode_policy_v0.md`
+- `playbooks/cortex_phase5_measurement_plan_v0.md`
+
+Mode semantics requirements:
+- Supported rollout modes are strictly `off`, `experimental`, and `default`.
+- Unknown rollout modes must fail closed.
+- Required governance release-boundary checks remain mandatory in every rollout mode.
+
+Transition and audit requirements:
+- Runtime must support deterministic rollout-mode transition recording with actor/timestamp/reason metadata.
+- Transition history must remain append-only and project-boundary compliant.
+- Runtime must support emitting mode-transition audit output used by Gate F checks.
+
+Default-mode guardrail requirements:
+- Transition into `default` requires linked decision/reflection/audit references.
+- Default-mode activation without Gate F readiness evidence is blocking.
+- Runtime rollback path (`default -> experimental -> off`) must remain available.
+
 ### Context Hydration Enforcement
 
 - Runtime must support issuing hydration receipts and validating freshness before governance-impacting mutation/closeout paths.

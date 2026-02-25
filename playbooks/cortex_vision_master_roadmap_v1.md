@@ -243,7 +243,7 @@ Exit Criteria:
 
 ## Immediate Next Actions
 
-1. Execute Phase 4 baseline artifacts (`playbooks/cortex_phase4_promotion_enforcement_ticket_breakdown_v0.md`, `playbooks/cortex_phase4_measurement_plan_v0.md`).
-2. Close Phase 3 residual-risk follow-ups captured in `.cortex/reports/project_state/phase3_gate_d_measurement_closeout_v0.md`.
-3. Execute Phase 5 rollout/migration baseline artifacts (`playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md`, `playbooks/cortex_phase5_measurement_plan_v0.md`).
+1. Treat Phase 4 as closed (`Gate E: Pass`) and carry residual-risk follow-ups into the Phase 5 execution queue.
+2. Execute Phase 5 rollout/migration baseline artifacts (`playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md`, `playbooks/cortex_phase5_measurement_plan_v0.md`).
+3. Complete `PH5-001` rollout-mode contract/policy baseline, then progress `PH5-002` through `PH5-004`.
 4. Keep default mode at `experimental` until Gate F closeout is published and approved by `Maintainer Council`.

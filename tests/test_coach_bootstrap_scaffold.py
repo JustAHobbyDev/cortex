@@ -40,6 +40,13 @@ def test_bootstrap_scaffold_creates_checklist_and_report(tmp_path: Path) -> None
     assert checklist.exists()
     assert report.exists()
     assert any("quality_gate_ci_v0.sh" in cmd for cmd in result["first_green_gate_commands"])
+    assert (project_dir / "contracts/context_hydration_receipt_schema_v0.json").exists()
+    assert (project_dir / "contracts/project_state_boundary_contract_v0.json").exists()
+    assert (project_dir / ".cortex/reports/lifecycle_audit_v0.json").exists()
+    assert (project_dir / ".cortex/reports/decision_candidates_v0.json").exists()
+    assert (project_dir / "policies/cortex_coach_final_ownership_boundary_v0.md").exists()
+    assert (project_dir / "policies/project_state_boundary_policy_v0.md").exists()
+    assert (project_dir / "playbooks/cortex_vision_master_roadmap_v1.md").exists()
 
     report_payload = json.loads(report.read_text(encoding="utf-8"))
     assert report_payload["status"] == "pass"

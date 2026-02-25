@@ -49,12 +49,6 @@ REQUIRED_GOVERNANCE_CAPSULE_PATHS: tuple[str, ...] = (
     "policies/project_state_boundary_policy_v0.md",
     "playbooks/cortex_vision_master_roadmap_v1.md",
 )
-BOUNDARY_RUNTIME_PATHS: tuple[str, ...] = (
-    "contracts/project_state_boundary_contract_v0.json",
-    ".cortex/policies/project_state_boundary_waivers_v0.json",
-)
-
-
 def _now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -169,19 +163,6 @@ def _seed_governance_capsule(project_dir: Path, pilot_repo: Path) -> list[str]:
     return copied
 
 
-def _seed_paths(project_dir: Path, pilot_repo: Path, paths: tuple[str, ...]) -> list[str]:
-    copied: list[str] = []
-    for rel in paths:
-        source = project_dir / rel
-        target = pilot_repo / rel
-        if not source.exists():
-            continue
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        copied.append(rel)
-    return copied
-
-
 def _run_pilot(
     *,
     project_dir: Path,
@@ -255,7 +236,6 @@ def _run_pilot(
             timeout_seconds=timeout_seconds,
         )
     )
-    copied_boundary_paths = _seed_paths(project_dir, pilot_repo, BOUNDARY_RUNTIME_PATHS)
     checks.append(
         _run_json_command(
             [
@@ -293,30 +273,42 @@ def _run_pilot(
         timeout_seconds=timeout_seconds,
     )
 
-    copied_capsule_paths = _seed_governance_capsule(project_dir, pilot_repo)
-    hydration_seeded = _run_json_command(
-        [
-            python_bin,
-            str(scripts_dir / "context_hydration_gate_v0.py"),
-            "compliance",
-            "--project-dir",
-            str(pilot_repo),
-            "--enforcement-mode",
-            "block",
-            "--emit-events",
-            "new_session,window_rollover",
-            "--verify-event",
-            "pre_closeout",
-            "--required-events",
-            "new_session,window_rollover",
-            "--format",
-            "json",
-        ],
-        cwd=project_dir,
-        timeout_seconds=timeout_seconds,
-    )
+    copied_capsule_paths: list[str] = []
+    hydration_seeded: dict[str, Any] = {
+        "command": [],
+        "returncode": 0,
+        "duration_seconds": 0.0,
+        "stdout_excerpt": "",
+        "stderr_excerpt": "",
+        "payload": {},
+        "status": "not_run",
+        "payload_status": "not_run",
+    }
+    if hydration_raw["status"] != "pass":
+        copied_capsule_paths = _seed_governance_capsule(project_dir, pilot_repo)
+        hydration_seeded = _run_json_command(
+            [
+                python_bin,
+                str(scripts_dir / "context_hydration_gate_v0.py"),
+                "compliance",
+                "--project-dir",
+                str(pilot_repo),
+                "--enforcement-mode",
+                "block",
+                "--emit-events",
+                "new_session,window_rollover",
+                "--verify-event",
+                "pre_closeout",
+                "--required-events",
+                "new_session,window_rollover",
+                "--format",
+                "json",
+            ],
+            cwd=project_dir,
+            timeout_seconds=timeout_seconds,
+        )
 
-    command_count = 3 + len(checks) + 2
+    command_count = 3 + len(checks) + 1 + (1 if hydration_raw["status"] != "pass" else 0)
     pilot_status = "pass"
     blocking_checks = []
     if bootstrap_result["status"] != "pass":
@@ -330,7 +322,7 @@ def _run_pilot(
         if check["status"] != "pass":
             pilot_status = "fail"
             blocking_checks.append(check_id)
-    if hydration_seeded["status"] != "pass":
+    if hydration_raw["status"] != "pass" and hydration_seeded["status"] != "pass":
         pilot_status = "fail"
         blocking_checks.append("context_hydration_compliance_gate_seeded")
 
@@ -364,7 +356,7 @@ def _run_pilot(
             "context_hydration_raw": hydration_raw,
             "context_hydration_seeded": hydration_seeded,
         },
-        "copied_boundary_runtime_paths": copied_boundary_paths,
+        "copied_boundary_runtime_paths": [],
     }
 
 
@@ -448,8 +440,8 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "",
             "## Follow-On",
             "",
-            "1. Use seeded governance capsule bundle as part of external bootstrap package.",
-            "2. Execute PH6-008 Gate G closeout with this pilot evidence.",
+            "1. Expand pilot matrix to at least four stack shapes and rerun portability checks quarterly.",
+            "2. Use this report as Gate G evidence and next-phase expansion baseline.",
         ]
     )
     return "\n".join(lines).rstrip() + "\n"
@@ -505,15 +497,23 @@ def main() -> int:
         "pilot_count_met": pilot_count >= 2,
         "stack_diversity_met": len(stack_shapes) >= 2,
         "core_portability_pass_rate_met": pilot_count > 0 and pilot_pass_count == pilot_count,
+        "raw_portability_pass_rate_met": pilot_count > 0 and raw_portability_pass_count == pilot_count,
         "operator_overhead_target_met": pilot_count > 0 and operator_overhead_pass_count == pilot_count,
     }
     status = "pass" if all(target_results.values()) else "fail"
 
-    decision = (
-        "External pilot portability validated on two non-Cortex seed repos across distinct stack shapes. "
-        "Core bootstrap + boundary + decision-gap checks pass deterministically; hydration requires seeded "
-        "governance capsule files in raw repos and then passes."
-    )
+    if raw_portability_pass_count == pilot_count and pilot_count > 0:
+        decision = (
+            "External pilot portability validated on two non-Cortex seed repos across distinct stack shapes. "
+            "Bootstrap, boundary, decision-gap, and hydration checks now pass on raw seeded repos without manual "
+            "governance capsule backfill."
+        )
+    else:
+        decision = (
+            "External pilot portability validated on two non-Cortex seed repos across distinct stack shapes. "
+            "Core bootstrap + boundary + decision-gap checks pass deterministically; hydration requires seeded "
+            "governance capsule files in raw repos and then passes."
+        )
 
     payload: dict[str, Any] = {
         "artifact": "phase6_external_pilot_report_v0",

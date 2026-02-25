@@ -37,6 +37,21 @@ BOOTSTRAP_REQUIRED_PATHS = (
     ".cortex/prompts",
     ".cortex/reports",
 )
+BOOTSTRAP_PORTABILITY_SEED_PATHS = (
+    "contracts/context_hydration_receipt_schema_v0.json",
+    "contracts/project_state_boundary_contract_v0.json",
+    ".cortex/policies/project_state_boundary_waivers_v0.json",
+    ".cortex/reports/lifecycle_audit_v0.json",
+    ".cortex/reports/decision_candidates_v0.json",
+    "policies/cortex_coach_final_ownership_boundary_v0.md",
+    "policies/project_state_boundary_policy_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+)
+BOOTSTRAP_PORTABILITY_FORCE_TEMPLATE_PATHS = {
+    ".cortex/reports/lifecycle_audit_v0.json",
+    ".cortex/reports/decision_candidates_v0.json",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+}
 BOOTSTRAP_TEMPLATE_REL_PATH = ".cortex/templates/bootstrap_first_green_gate_checklist_template_v0.md"
 BOOTSTRAP_TEMPLATE_FALLBACK = """# Bootstrap First Green Gate Checklist v0
 
@@ -56,6 +71,43 @@ Project: <project_name> (<project_id>)
 1. Required governance gate bundle is green.
 2. No unresolved decision gaps for governance-impacting files.
 3. Boundary and hydration enforcement checks pass in block mode.
+"""
+BOOTSTRAP_OWNERSHIP_BOUNDARY_FALLBACK = """# Cortex Coach Final Ownership Boundary v0
+
+Version: v0
+Date: <YYYY-MM-DD>
+
+## Boundary
+
+The agent may propose and implement project changes but cannot self-approve governance policy exceptions.
+Maintainer approval is required for boundary overrides, release-surface exceptions, and enforcement downgrades.
+"""
+BOOTSTRAP_BOUNDARY_POLICY_FALLBACK = """# Project State Boundary Policy v0
+
+Version: v0
+Date: <YYYY-MM-DD>
+
+## Policy
+
+1. Project-state artifacts default to `<cortex_root>/`.
+2. Writes outside the project-state root require an approved waiver.
+3. Boundary violations block governed closeout.
+"""
+BOOTSTRAP_ROADMAP_FALLBACK = """# <project_name> Vision Roadmap v1
+
+Version: v1
+Date: <YYYY-MM-DD>
+Project: <project_name> (<project_id>)
+
+## Intent
+
+Establish governed delivery with deterministic closeout quality gates.
+
+## Immediate Sequence
+
+1. Baseline governance policies and contracts.
+2. Run required gate bundle and fix blockers.
+3. Capture decision and reflection linkage for release-boundary changes.
 """
 
 
@@ -682,19 +734,135 @@ def _render_bootstrap_checklist(template_text: str, project_id: str, project_nam
     )
 
 
+def _bootstrap_rel_path(rel: str, cortex_root: str) -> str:
+    if rel == ".cortex":
+        return cortex_root
+    if rel.startswith(".cortex/"):
+        return f"{cortex_root}{rel[len('.cortex'):]}"
+    return rel
+
+
 def _bootstrap_required_paths(project_dir: Path, cortex_root: str) -> list[str]:
     required: list[str] = []
     for rel in BOOTSTRAP_REQUIRED_PATHS:
-        if rel.startswith(".cortex/"):
-            required.append(f"{cortex_root}{rel[len('.cortex'):]}")
-            continue
-        required.append(rel)
+        required.append(_bootstrap_rel_path(rel, cortex_root))
     return required
 
 
 def _write_json_file(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _render_bootstrap_text_template(template_text: str, project_id: str, project_name: str, cortex_root: str) -> str:
+    return (
+        template_text.replace("<project_id>", project_id)
+        .replace("<project_name>", project_name)
+        .replace("<YYYY-MM-DD>", _now_iso()[:10])
+        .replace("<cortex_root>", cortex_root)
+    )
+
+
+def _bootstrap_portability_fallback(
+    rel: str,
+    *,
+    project_id: str,
+    project_name: str,
+    cortex_root: str,
+) -> dict[str, Any] | str | None:
+    if rel == "contracts/context_hydration_receipt_schema_v0.json":
+        return {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+        }
+    if rel == "contracts/project_state_boundary_contract_v0.json":
+        return {
+            "version": "v0",
+            "project_state_root": cortex_root,
+            "forbidden_outside_project_state_roots": ["reports"],
+            "waiver_file": _bootstrap_rel_path(".cortex/policies/project_state_boundary_waivers_v0.json", cortex_root),
+        }
+    if rel == ".cortex/policies/project_state_boundary_waivers_v0.json":
+        return {
+            "version": "v0",
+            "waivers": [],
+        }
+    if rel == ".cortex/reports/lifecycle_audit_v0.json":
+        return {
+            "artifact": "lifecycle_audit_v0",
+            "version": "v0",
+            "run_at": _now_iso(),
+            "project_id": project_id,
+            "project_name": project_name,
+            "status": "pass",
+            "checks": [],
+        }
+    if rel == ".cortex/reports/decision_candidates_v0.json":
+        return {
+            "version": "v0",
+            "generated_at": _now_iso(),
+            "project_id": project_id,
+            "project_name": project_name,
+            "candidate_count": 0,
+            "candidates": [],
+        }
+    if rel == "policies/cortex_coach_final_ownership_boundary_v0.md":
+        return _render_bootstrap_text_template(BOOTSTRAP_OWNERSHIP_BOUNDARY_FALLBACK, project_id, project_name, cortex_root)
+    if rel == "policies/project_state_boundary_policy_v0.md":
+        return _render_bootstrap_text_template(BOOTSTRAP_BOUNDARY_POLICY_FALLBACK, project_id, project_name, cortex_root)
+    if rel == "playbooks/cortex_vision_master_roadmap_v1.md":
+        return _render_bootstrap_text_template(BOOTSTRAP_ROADMAP_FALLBACK, project_id, project_name, cortex_root)
+    return None
+
+
+def _seed_bootstrap_portability_bundle(
+    *,
+    project_dir: Path,
+    cortex_root: str,
+    project_id: str,
+    project_name: str,
+    force: bool,
+) -> tuple[list[str], list[str], list[str], list[str]]:
+    created_or_updated: list[str] = []
+    skipped: list[str] = []
+    fallback_used: list[str] = []
+    missing: list[str] = []
+    repo_root = _repo_root()
+
+    for rel in BOOTSTRAP_PORTABILITY_SEED_PATHS:
+        target_rel = _bootstrap_rel_path(rel, cortex_root)
+        target_path = project_dir / target_rel
+        if target_path.exists() and not force:
+            skipped.append(target_rel)
+            continue
+
+        source_path = repo_root / rel
+        source_allowed = rel not in BOOTSTRAP_PORTABILITY_FORCE_TEMPLATE_PATHS
+        if source_allowed and source_path.exists():
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, target_path)
+            created_or_updated.append(target_rel)
+            continue
+
+        fallback_payload = _bootstrap_portability_fallback(
+            rel,
+            project_id=project_id,
+            project_name=project_name,
+            cortex_root=cortex_root,
+        )
+        if fallback_payload is None:
+            missing.append(target_rel)
+            continue
+
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        if isinstance(fallback_payload, dict):
+            _write_json_file(target_path, fallback_payload)
+        else:
+            target_path.write_text(fallback_payload, encoding="utf-8")
+        created_or_updated.append(target_rel)
+        fallback_used.append(target_rel)
+
+    return created_or_updated, skipped, fallback_used, missing
 
 
 def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> int:
@@ -706,7 +874,9 @@ def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> i
 
     project_dir = Path(parsed.project_dir).resolve()
     project_dir.mkdir(parents=True, exist_ok=True)
-    cortex_root = str(parsed.cortex_root or ".cortex")
+    cortex_root = str(parsed.cortex_root or ".cortex").strip() or ".cortex"
+    if cortex_root.endswith("/"):
+        cortex_root = cortex_root.rstrip("/")
     output_format = str(parsed.format)
     project_id = str(parsed.project_id).strip()
     project_name = str(parsed.project_name).strip()
@@ -800,6 +970,25 @@ def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> i
 
     created_or_updated_paths: list[str] = []
     skipped_paths: list[str] = []
+    portability_bundle_created: list[str] = []
+    portability_bundle_skipped: list[str] = []
+    portability_bundle_fallback_used: list[str] = []
+    portability_bundle_missing: list[str] = []
+    if not missing_required:
+        (
+            portability_bundle_created,
+            portability_bundle_skipped,
+            portability_bundle_fallback_used,
+            portability_bundle_missing,
+        ) = _seed_bootstrap_portability_bundle(
+            project_dir=project_dir,
+            cortex_root=cortex_root,
+            project_id=project_id,
+            project_name=project_name,
+            force=force,
+        )
+        created_or_updated_paths.extend(portability_bundle_created)
+        skipped_paths.extend(portability_bundle_skipped)
 
     checklist_path = project_dir / cortex_root / "templates" / "bootstrap_first_green_gate_checklist_v0.md"
     checklist_text = _render_bootstrap_checklist(_load_bootstrap_template(), project_id, project_name)
@@ -818,6 +1007,7 @@ def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> i
     ]
 
     report_path = project_dir / cortex_root / "reports" / "project_state" / "phase6_bootstrap_scaffold_report_v0.json"
+    status = "pass" if not missing_required and not portability_bundle_missing else "fail"
     report_payload = {
         "artifact": "phase6_bootstrap_scaffold_report_v0",
         "version": "v0",
@@ -833,22 +1023,29 @@ def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> i
             "performed": bool(init_result.get("performed", False)),
             "returncode": int(init_result.get("returncode", 0)),
         },
+        "portability_bundle": {
+            "seed_paths": [_bootstrap_rel_path(rel, cortex_root) for rel in BOOTSTRAP_PORTABILITY_SEED_PATHS],
+            "created_or_updated_paths": portability_bundle_created,
+            "skipped_paths": portability_bundle_skipped,
+            "fallback_used_paths": portability_bundle_fallback_used,
+            "missing_paths": portability_bundle_missing,
+        },
         "first_green_gate_commands": first_green_gate_commands,
         "bootstrap_assets": {
             "checklist_path": _safe_rel_path(project_dir, checklist_path),
         },
-        "status": "pass" if not missing_required else "fail",
+        "status": status,
     }
     _write_json_file(report_path, report_payload)
     created_or_updated_paths.append(_safe_rel_path(project_dir, report_path))
 
-    status = "pass" if not missing_required else "fail"
     returncode = 0 if status == "pass" else 3
-    message = (
-        "bootstrap scaffold complete"
-        if status == "pass"
-        else "required bootstrap artifacts missing; run without --skip-init or fix init outputs."
-    )
+    if status == "pass":
+        message = "bootstrap scaffold complete"
+    elif missing_required:
+        message = "required bootstrap artifacts missing; run without --skip-init or fix init outputs."
+    else:
+        message = "bootstrap portability bundle incomplete; verify governance seed templates."
 
     payload = {
         "version": "v0",
@@ -864,6 +1061,7 @@ def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> i
             "missing_required_paths": missing_required,
             "created_or_updated_paths": created_or_updated_paths,
             "skipped_paths": skipped_paths,
+            "portability_bundle": report_payload["portability_bundle"],
             "report_path": _safe_rel_path(project_dir, report_path),
             "checklist_path": _safe_rel_path(project_dir, checklist_path),
             "first_green_gate_commands": first_green_gate_commands,

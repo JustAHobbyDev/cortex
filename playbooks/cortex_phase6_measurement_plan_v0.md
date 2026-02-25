@@ -118,6 +118,16 @@ python3 scripts/phase6_external_pilot_harness_v0.py \
   --format json
 ```
 
+Operator overhead report:
+
+```bash
+python3 scripts/phase6_operator_overhead_pack_v0.py \
+  --project-dir . \
+  --external-pilot-file .cortex/reports/project_state/phase6_external_pilot_report_v0.json \
+  --out-file .cortex/reports/project_state/phase6_operator_overhead_report_v0.json \
+  --format json
+```
+
 ## Planned Artifacts
 
 - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`

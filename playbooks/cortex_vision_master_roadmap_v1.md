@@ -292,6 +292,8 @@ Exit Criteria:
   - `scripts/phase6_external_pilot_harness_v0.py`
   - `.cortex/reports/project_state/phase6_external_pilot_report_v0.md`
   - `.cortex/reports/project_state/phase6_external_pilot_report_v0.json`
-10. Next: start PH6-008 Gate G closeout + next-phase recommendation package.
-  - target: `.cortex/reports/project_state/phase6_gate_g_measurement_closeout_v0.md`;`playbooks/cortex_phase6_measurement_plan_v0.md`
+10. Done: complete PH6-008 Gate G closeout + next-phase recommendation package.
+  - `.cortex/reports/project_state/phase6_gate_g_measurement_closeout_v0.md`
+  - `.cortex/reports/project_state/phase6_operator_overhead_report_v0.json`
 11. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+12. Next: define next expansion phase scope and measurement baseline, starting with a larger external portability matrix.

@@ -165,6 +165,7 @@ What it does:
 
 - runs `cortex-coach init` (unless `--skip-init` is set)
 - verifies required bootstrap contract paths exist under selected `--cortex-root`
+- seeds governance portability bundle needed by boundary/hydration gates (contracts, policies, roadmap stub, and hydration input reports)
 - writes first-green-gate checklist under `.cortex/templates/`
 - emits scaffold report under `.cortex/reports/project_state/`
 

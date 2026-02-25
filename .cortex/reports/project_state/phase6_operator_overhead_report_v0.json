@@ -1,0 +1,21 @@
+{
+  "artifact": "phase6_operator_overhead_report_v0",
+  "findings": [],
+  "measurement_mode": "phase6_external_pilot_command_telemetry_v0",
+  "phase6_median_closeout_command_count": 7.0,
+  "pilot_command_counts": [
+    7.0,
+    7.0
+  ],
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-25T12:38:18Z",
+  "source_external_pilot_report": ".cortex/reports/project_state/phase6_external_pilot_report_v0.json",
+  "status": "pass",
+  "target_max_command_count": 12.0,
+  "target_results": {
+    "all_pilots_within_target_met": true,
+    "operator_overhead_target_met": true,
+    "pilot_command_telemetry_present_met": true
+  },
+  "version": "v0"
+}

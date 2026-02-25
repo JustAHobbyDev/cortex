@@ -41,6 +41,7 @@ python3 scripts/cortex_project_coach_v0.py \
 Outputs:
 - `.cortex/templates/bootstrap_first_green_gate_checklist_v0.md`
 - `.cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json`
+- governance portability bundle files under `contracts/`, `policies/`, `playbooks/`, and `.cortex/reports/`
 
 ### 3) Risk Check
 

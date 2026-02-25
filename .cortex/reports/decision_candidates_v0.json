@@ -719,8 +719,32 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T032325Z_add_deterministic_client_v0.json",
       "status": "promoted",
       "title": "Add deterministic client onboarding lab pack for modules M2-M5"
+    },
+    {
+      "captured_at": "2026-02-25T03:37:19Z",
+      "decision": "Mark CT-005 complete with calibrated findings and carry command compatibility/bootstrap remediations into CT-006 gating scope.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_ct_005_calibration_complete_defer_external_rollout_until_ct_006_remediations_v1.md",
+      "decision_id": "dec_20260225T033719Z_ct_005_calibration_compl",
+      "impact_scope": [
+        "governance",
+        "docs",
+        "training"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md",
+        ".cortex/reports/project_state/client_onboarding_pilot_calibration_data_v0.json",
+        ".cortex/reports/project_state/client_onboarding_pilot_command_runs_v0.ndjson",
+        "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+        "playbooks/cortex_client_onboarding_training_track_v0.md"
+      ],
+      "promoted_at": "2026-02-25T03:37:19Z",
+      "rationale": "Pilot evidence validates rubric strictness and exposes deterministic blockers that must be closed before client rollout.",
+      "reflection_id": "ref_20260225T033718Z_complete_ct_005_pilot_ca",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T033718Z_complete_ct_005_pilot_ca_v0.json",
+      "status": "promoted",
+      "title": "CT-005 calibration complete; defer external rollout until CT-006 remediations"
     }
   ],
-  "updated_at": "2026-02-25T03:23:39Z",
+  "updated_at": "2026-02-25T03:37:19Z",
   "version": "v0"
 }

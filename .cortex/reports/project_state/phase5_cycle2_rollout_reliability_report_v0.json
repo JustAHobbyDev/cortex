@@ -1,0 +1,307 @@
+{
+  "artifact": "phase5_cycle2_rollout_reliability_report_v0",
+  "cycle_id": "cycle2",
+  "measurement_mode": "phase5_rollout_reliability_pack_required_governance_bundle",
+  "mode_transition_audit": {
+    "finding_count": 0,
+    "report_path": ".cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json",
+    "returncode": 0,
+    "status": "pass",
+    "stderr": "",
+    "stdout": "",
+    "transition_completeness_rate": 1.0,
+    "transition_count": 8
+  },
+  "phase4_ci_baseline_median_seconds": 5.097347529954277,
+  "phase4_ci_baseline_source": ".cortex/reports/project_state/phase4_ci_overhead_report_v0.json",
+  "project_dir": "/home/d/codex/cortex",
+  "quality_gate_measurement_mode": "required_ci_gate_phase4_baseline_compatible_offline_probe",
+  "quality_gate_runs": {
+    "delta_percent_vs_phase4": 4.44686083874838,
+    "durations_seconds": [
+      5.385509010986425,
+      5.279548019054346,
+      5.324019481078722,
+      5.261157330009155,
+      5.407025194028392
+    ],
+    "median_seconds": 5.324019481078722,
+    "pass_count": 5,
+    "reliability_rate": 1.0,
+    "run_summaries": [
+      {
+        "duration_seconds": 5.385509010986425,
+        "returncode": 0,
+        "run": 1,
+        "status": "pass",
+        "summary": "[quality-gate-ci] PASS"
+      },
+      {
+        "duration_seconds": 5.279548019054346,
+        "returncode": 0,
+        "run": 2,
+        "status": "pass",
+        "summary": "[quality-gate-ci] PASS"
+      },
+      {
+        "duration_seconds": 5.324019481078722,
+        "returncode": 0,
+        "run": 3,
+        "status": "pass",
+        "summary": "[quality-gate-ci] PASS"
+      },
+      {
+        "duration_seconds": 5.261157330009155,
+        "returncode": 0,
+        "run": 4,
+        "status": "pass",
+        "summary": "[quality-gate-ci] PASS"
+      },
+      {
+        "duration_seconds": 5.407025194028392,
+        "returncode": 0,
+        "run": 5,
+        "status": "pass",
+        "summary": "[quality-gate-ci] PASS"
+      }
+    ],
+    "runs": 5
+  },
+  "quality_gate_script": "./scripts/quality_gate_ci_v0.sh",
+  "required_checks": [
+    {
+      "check_id": "audit_all",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "audit",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--audit-scope",
+        "all",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.7814990699989721,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {}
+    },
+    {
+      "check_id": "decision_gap_check",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "decision-gap-check",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.6309874999569729,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {}
+    },
+    {
+      "check_id": "reflection_enforcement_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/reflection_enforcement_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--required-decision-status",
+        "promoted",
+        "--min-scaffold-reports",
+        "1",
+        "--min-required-status-mappings",
+        "1",
+        "--require-phase4-enforcement-report",
+        "--phase4-enforcement-report",
+        ".cortex/reports/project_state/phase4_enforcement_blocking_report_v0.json",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 1.2343746799742803,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {
+        "decision_match_count": 0,
+        "governance_impact_file_count": 0,
+        "required_status_entry_count": 26,
+        "required_status_mapping_count": 26,
+        "scaffold_reports_scanned": 26
+      }
+    },
+    {
+      "check_id": "mistake_candidate_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/mistake_candidate_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.30126920994371176,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {}
+    },
+    {
+      "check_id": "project_state_boundary_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.3698111999547109,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {}
+    },
+    {
+      "check_id": "temporal_playbook_release_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/temporal_playbook_release_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.3716672300361097,
+      "payload_status": "pass",
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "",
+      "summary": {}
+    }
+  ],
+  "rollout_mode": {
+    "after_check_status": "pass",
+    "after_check_stderr": "",
+    "before_check_status": "pass",
+    "before_check_stderr": "",
+    "mode_after": "experimental",
+    "mode_before": "experimental",
+    "rollback_drill_skipped": false,
+    "rollback_drill_steps": [
+      {
+        "command": [
+          "/tmp/cortex-coach/.venv/bin/cortex-coach",
+          "rollout-mode",
+          "--project-dir",
+          "/home/d/codex/cortex",
+          "--set-mode",
+          "off",
+          "--changed-by",
+          "ci_gate_owner",
+          "--reason",
+          "phase5_cycle2_rollback_drill_to_off",
+          "--format",
+          "json"
+        ],
+        "duration_seconds": 0.3539017899893224,
+        "payload_status": "pass",
+        "result": {
+          "default_mode_linkage_complete": false,
+          "mode": "off",
+          "previous_mode": "experimental",
+          "state_path": ".cortex/state/rollout_mode_state_v0.json",
+          "transition_applied": true,
+          "transition_count": 7,
+          "transition_id": "rmt_eee809535b8cacb5",
+          "transitions_path": ".cortex/state/rollout_mode_transitions_v0.jsonl"
+        },
+        "returncode": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "",
+        "step_id": "rollback_drill_to_off"
+      },
+      {
+        "command": [
+          "/tmp/cortex-coach/.venv/bin/cortex-coach",
+          "rollout-mode",
+          "--project-dir",
+          "/home/d/codex/cortex",
+          "--set-mode",
+          "experimental",
+          "--changed-by",
+          "ci_gate_owner",
+          "--reason",
+          "phase5_cycle2_rollback_drill_restore",
+          "--format",
+          "json",
+          "--incident-ref",
+          "phase5_cycle2_rollback_drill_incident"
+        ],
+        "duration_seconds": 0.35847547999583185,
+        "payload_status": "pass",
+        "result": {
+          "default_mode_linkage_complete": false,
+          "mode": "experimental",
+          "previous_mode": "off",
+          "state_path": ".cortex/state/rollout_mode_state_v0.json",
+          "transition_applied": true,
+          "transition_count": 8,
+          "transition_id": "rmt_d298299c86b3248a",
+          "transitions_path": ".cortex/state/rollout_mode_transitions_v0.jsonl"
+        },
+        "returncode": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "",
+        "step_id": "rollback_drill_restore_experimental"
+      }
+    ],
+    "rollback_drill_success": true
+  },
+  "run_at": "2026-02-25T02:16:20Z",
+  "status": "pass",
+  "stop_rule_incidents": [],
+  "summary": {
+    "ci_runtime_delta_percent": 4.44686083874838,
+    "mode_transition_completeness_rate": 1.0,
+    "required_governance_check_count": 6,
+    "required_governance_checks_pass": true,
+    "required_governance_gate_reliability_rate": 1.0,
+    "rollback_drill_success": true,
+    "stop_rule_incident_count": 0
+  },
+  "target_results": {
+    "ci_runtime_delta_met": true,
+    "mode_transition_completeness_met": true,
+    "required_governance_checks_pass_met": true,
+    "required_governance_gate_reliability_met": true,
+    "rollback_drill_success_met": true,
+    "stop_rule_incident_free_met": true
+  },
+  "targets": {
+    "ci_runtime_delta_percent_max": 10.0,
+    "mode_transition_completeness_rate": 1.0,
+    "required_governance_gate_reliability": 1.0,
+    "stop_rule_incident_count": 0
+  },
+  "version": "v0"
+}

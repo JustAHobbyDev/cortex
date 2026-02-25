@@ -672,8 +672,32 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T015627Z_finalize_phase_5_rollout_v0.json",
       "status": "promoted",
       "title": "Finalize Phase 5 rollout migration baseline and immediate sequence closeout"
+    },
+    {
+      "captured_at": "2026-02-25T02:18:16Z",
+      "decision": "Gate F metrics are satisfied for both required reliability cycles; adopt default rollout mode with reversible controls and audited transition evidence.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_close_phase_5_gate_f_and_authorize_default_mode_v1.md",
+      "decision_id": "dec_20260225T021816Z_close_phase_5_gate_f_and",
+      "impact_scope": [
+        "governance",
+        "playbooks",
+        "docs"
+      ],
+      "linked_artifacts": [
+        ".cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md",
+        "docs/cortex-coach/quality-gate.md",
+        "playbooks/cortex_phase5_measurement_plan_v0.md",
+        "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ],
+      "promoted_at": "2026-02-25T02:18:25Z",
+      "rationale": "Phase 5 objectives are complete with two stable cycles, zero stop-rule incidents, pass adoption/overhead metrics, and complete transition-audit coverage.",
+      "reflection_id": "ref_20260225T021812Z_close_phase_5_gate_f_and",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T021812Z_close_phase_5_gate_f_and_v0.json",
+      "status": "promoted",
+      "title": "Close Phase 5 Gate F and authorize default mode"
     }
   ],
-  "updated_at": "2026-02-25T01:56:53Z",
+  "updated_at": "2026-02-25T02:18:25Z",
   "version": "v0"
 }

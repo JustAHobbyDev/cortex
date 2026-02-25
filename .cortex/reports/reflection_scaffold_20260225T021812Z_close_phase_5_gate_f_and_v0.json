@@ -1,0 +1,53 @@
+{
+  "auto_linked_governance_files": [
+    "docs/cortex-coach/quality-gate.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "cortex_root": "/home/d/codex/cortex/.cortex",
+  "explicit_linked_artifacts": [
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md",
+    "docs/cortex-coach/quality-gate.md",
+    ".cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md"
+  ],
+  "impact_scope": [
+    "governance",
+    "playbooks",
+    "docs"
+  ],
+  "mistake": "Advancing phase state without explicit Gate F decision linkage risks governance ambiguity at rollout boundaries.",
+  "pattern": "Phase completion artifacts can land before final promoted decision linkage is captured.",
+  "project_dir": "/home/d/codex/cortex",
+  "recommended_commands": [
+    "cortex-coach decision-capture --project-dir /home/d/codex/cortex --title \"Close Phase 5 Gate F and authorize default mode\" --decision \"Mistake observed: Advancing phase state without explicit Gate F decision linkage risks governance ambiguity at rollout boundaries. Recurring pattern: Phase completion artifacts can land before final promoted decision linkage is captured. Adopt reusable rule: Before transitioning rollout mode to default, publish and promote Gate F closeout decision with explicit evidence refs.\" --rationale \"Promote durable, auditable learning so repeated mistakes are prevented across sessions.\" --impact-scope governance,playbooks,docs --reflection-id ref_20260225T021812Z_close_phase_5_gate_f_and --reflection-report .cortex/reports/reflection_scaffold_20260225T021812Z_close_phase_5_gate_f_and_v0.json --linked-artifacts .cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md,docs/cortex-coach/quality-gate.md,playbooks/cortex_phase5_measurement_plan_v0.md,playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md,playbooks/cortex_vision_master_roadmap_v1.md",
+    "cortex-coach decision-list --project-dir <path> --status candidate",
+    "cortex-coach decision-promote --project-dir <path> --decision-id <decision_id>",
+    "cortex-coach decision-gap-check --project-dir <path>",
+    "cortex-coach audit --project-dir <path>"
+  ],
+  "reflection_id": "ref_20260225T021812Z_close_phase_5_gate_f_and",
+  "report_file": ".cortex/reports/reflection_scaffold_20260225T021812Z_close_phase_5_gate_f_and_v0.json",
+  "rule": "Before transitioning rollout mode to default, publish and promote Gate F closeout decision with explicit evidence refs.",
+  "run_at": "2026-02-25T02:18:12Z",
+  "suggested_decision": "Mistake observed: Advancing phase state without explicit Gate F decision linkage risks governance ambiguity at rollout boundaries. Recurring pattern: Phase completion artifacts can land before final promoted decision linkage is captured. Adopt reusable rule: Before transitioning rollout mode to default, publish and promote Gate F closeout decision with explicit evidence refs.",
+  "suggested_decision_artifact": ".cortex/artifacts/decisions/decision_close_phase_5_gate_f_and_authorize_default_mode_v1.md",
+  "suggested_linked_artifacts": [
+    ".cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md",
+    "docs/cortex-coach/quality-gate.md",
+    "playbooks/cortex_phase5_measurement_plan_v0.md",
+    "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+    "playbooks/cortex_vision_master_roadmap_v1.md"
+  ],
+  "suggested_rationale": "Promote durable, auditable learning so repeated mistakes are prevented across sessions.",
+  "title": "Close Phase 5 Gate F and authorize default mode",
+  "validation_checklist": [
+    "Run decision-capture with reflected decision/rationale and linked artifacts.",
+    "Promote candidate with decision-promote after review.",
+    "Run decision-gap-check and confirm no uncovered governance-impact files.",
+    "Run audit (cortex-only or all based on workflow) before closeout."
+  ],
+  "version": "v0"
+}

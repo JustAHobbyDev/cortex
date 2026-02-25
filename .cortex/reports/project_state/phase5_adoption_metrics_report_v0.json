@@ -1,0 +1,71 @@
+{
+  "artifact": "phase5_adoption_metrics_report_v0",
+  "cycle_statuses": [
+    {
+      "cycle_id": "cycle1",
+      "status": "pass"
+    },
+    {
+      "cycle_id": "cycle2",
+      "status": "pass"
+    }
+  ],
+  "measurement_mode": "phase5_rollout_adoption_pack",
+  "mode_transition_audit": {
+    "finding_count": 0,
+    "returncode": 0,
+    "state_mode": "experimental",
+    "status": "pass",
+    "stderr": "",
+    "stdout": "",
+    "transition_completeness_rate": 1.0,
+    "transition_count": 8
+  },
+  "project_dir": "/home/d/codex/cortex",
+  "reference_implementations": {
+    "passing_count": 2,
+    "rows": [
+      {
+        "boundary_evidence": "`scripts/cortex_project_coach_v0.py` includes `rollout-mode`/`rollout-mode-audit` in `NATIVE_FORMAT_COMMANDS`; transition and audit outputs are emitted under `.cortex/state/` and `.cortex/reports/project_state/`",
+        "gate_evidence": "`.cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json` shows `status=pass`, `transition_completeness_rate=1.0`; `scripts/ci_validate_docs_and_json_v0.sh` pass (2026-02-25)",
+        "implementation": "`cortex` (project delegator)",
+        "pass": true,
+        "result": "pass",
+        "rollout_surface": "`python3 scripts/cortex_project_coach_v0.py rollout-mode` and `rollout-mode-audit`"
+      },
+      {
+        "boundary_evidence": "Runtime implementation landed in commit `71d5238` (`cortex_coach/coach.py`); operator command surface documented in `docs/cortex-coach/commands.md`; state/report outputs remain project-local",
+        "gate_evidence": "`UV_CACHE_DIR=.uv-cache uv run pytest -q tests/test_coach_rollout_mode.py tests/test_coach_memory_smoke.py` -> `5 passed`; `./scripts/quality_gate_ci_v0.sh` -> `PASS` with `19 passed` (2026-02-25)",
+        "implementation": "`cortex-coach` (standalone runtime)",
+        "pass": true,
+        "result": "pass",
+        "rollout_surface": "Native `cortex-coach rollout-mode` and `cortex-coach rollout-mode-audit` commands"
+      }
+    ],
+    "total_count": 2
+  },
+  "run_at": "2026-02-25T02:16:26Z",
+  "source_reports": {
+    "cycle1_reliability_report": ".cortex/reports/project_state/phase5_cycle1_rollout_reliability_report_v0.json",
+    "cycle2_reliability_report": ".cortex/reports/project_state/phase5_cycle2_rollout_reliability_report_v0.json",
+    "mode_transition_audit_report": ".cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json",
+    "reference_implementation_report": ".cortex/reports/project_state/phase5_reference_implementation_report_v0.md"
+  },
+  "status": "pass",
+  "target_results": {
+    "cycle_reliability_reports_pass_met": true,
+    "mode_transition_audit_status_met": true,
+    "mode_transition_completeness_met": true,
+    "mode_transition_finding_free_met": true,
+    "reference_implementation_coverage_met": true,
+    "reference_implementation_pass_coverage_met": true
+  },
+  "targets": {
+    "cycle_reliability_reports_required_pass": true,
+    "mode_transition_completeness_rate": 1.0,
+    "mode_transition_finding_count": 0,
+    "passing_reference_implementation_min_count": 2,
+    "reference_implementation_min_count": 2
+  },
+  "version": "v0"
+}

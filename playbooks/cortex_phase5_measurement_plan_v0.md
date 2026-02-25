@@ -1,7 +1,7 @@
 # Cortex Phase 5 Measurement Plan v0
 
 Version: v0  
-Status: Draft  
+Status: Closed (Gate F Pass)  
 Date: 2026-02-24  
 Scope: Measurement and validation plan for rollout controls, migration readiness, and Gate F determination
 

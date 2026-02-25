@@ -2,15 +2,15 @@
   "artifact": "phase5_mode_transition_audit_report_v0",
   "findings": [],
   "project_dir": "/home/d/codex/cortex",
-  "run_at": "2026-02-25T01:49:25Z",
-  "state_mode": "experimental",
+  "run_at": "2026-02-25T02:18:36Z",
+  "state_mode": "default",
   "state_path": ".cortex/state/rollout_mode_state_v0.json",
   "status": "pass",
   "summary": {
-    "complete_transition_count": 2,
+    "complete_transition_count": 9,
     "finding_count": 0,
     "transition_completeness_rate": 1.0,
-    "transition_count": 2
+    "transition_count": 9
   },
   "target_results": {
     "transition_completeness_rate_met": true

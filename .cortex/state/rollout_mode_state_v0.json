@@ -1,0 +1,21 @@
+{
+  "audit_refs": [
+    ".cortex/reports/project_state/phase5_adoption_metrics_report_v0.json",
+    ".cortex/reports/project_state/phase5_cycle1_rollout_reliability_report_v0.json",
+    ".cortex/reports/project_state/phase5_cycle2_rollout_reliability_report_v0.json",
+    ".cortex/reports/project_state/phase5_gate_f_measurement_closeout_v0.md",
+    ".cortex/reports/project_state/phase5_operator_overhead_report_v0.json"
+  ],
+  "decision_refs": [
+    "dec_20260225T021816Z_close_phase_5_gate_f_and"
+  ],
+  "last_transition_id": "rmt_a4cf95289041fc6a",
+  "mode": "default",
+  "reason": "phase5_gate_f_pass_default_mode_activation",
+  "reflection_refs": [
+    "ref_20260225T021812Z_close_phase_5_gate_f_and"
+  ],
+  "updated_at": "2026-02-25T02:18:32Z",
+  "updated_by": "program_lead",
+  "version": "v0"
+}

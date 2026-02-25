@@ -1,0 +1,26 @@
+{
+  "artifact": "phase5_operator_overhead_report_v0",
+  "delta_percent": 0.0,
+  "measurement_mode": "phase5_cycle_command_telemetry_vs_phase4_baseline",
+  "phase4_baseline_command_count": 5.0,
+  "phase4_baseline_source": ".cortex/reports/project_state/phase4_ci_overhead_report_v0.json",
+  "phase5_cycle_command_count_source": [
+    ".cortex/reports/project_state/phase5_cycle1_rollout_reliability_report_v0.json",
+    ".cortex/reports/project_state/phase5_cycle2_rollout_reliability_report_v0.json"
+  ],
+  "phase5_cycle_command_counts": [
+    5.0,
+    5.0
+  ],
+  "phase5_median_closeout_command_count": 5.0,
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-25T02:16:26Z",
+  "status": "pass",
+  "target_max_delta_percent": 20.0,
+  "target_results": {
+    "operator_overhead_delta_met": true,
+    "phase4_baseline_present_met": true,
+    "phase5_cycle_command_telemetry_present_met": true
+  },
+  "version": "v0"
+}

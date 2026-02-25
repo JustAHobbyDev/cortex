@@ -243,7 +243,8 @@ Exit Criteria:
 
 ## Immediate Next Actions
 
-1. Preserve `experimental` as the effective rollout mode; `default` remains blocked until Gate F approval.
-2. Treat `PH5-001` through `PH5-004` as completed baseline and use them as inputs for reliability cycles.
-3. Execute `PH5-005` (Cycle 1 reliability/SLO validation) with required governance gates and rollback-drill evidence.
-4. Execute `PH5-006` (Cycle 2 reliability/SLO validation), then continue to `PH5-007` and `PH5-008` Gate F closeout.
+1. Treat Phase 5 as complete after Gate F closeout artifacts and default-mode decision linkage are published.
+  - Current state: Gate F closeout published and default mode activated with audited linkage.
+2. Keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
+3. Track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
+4. Route further capability expansion through new phase definitions rather than extending Phase 5 scope.

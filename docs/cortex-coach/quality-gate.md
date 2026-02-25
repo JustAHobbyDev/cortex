@@ -119,7 +119,7 @@ Required artifact outcomes:
 ## Phase 5 Rollout Operational Add-On
 
 When executing rollout migration toward Gate F, run these checks in addition to required gate baseline.
-Commands 3-5 are planned harness checks that activate with `PH5-005` and `PH5-007` implementation work.
+Commands 3-5 are implemented in Phase 5 cycle/reliability and adoption packs.
 
 1. `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --format json`
 2. `python3 scripts/cortex_project_coach_v0.py rollout-mode-audit --project-dir . --format json`

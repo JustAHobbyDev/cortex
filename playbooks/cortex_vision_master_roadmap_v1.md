@@ -288,6 +288,10 @@ Exit Criteria:
   - `scripts/client_onboarding_certification_pack_v0.py`
   - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`
   - `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
-9. Next: start PH6-007 external pilot validation on non-Cortex seed repos.
-  - target: `.cortex/reports/project_state/phase6_external_pilot_report_v0.md`
-10. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+9. Done: complete PH6-007 external pilot validation on non-Cortex seed repos.
+  - `scripts/phase6_external_pilot_harness_v0.py`
+  - `.cortex/reports/project_state/phase6_external_pilot_report_v0.md`
+  - `.cortex/reports/project_state/phase6_external_pilot_report_v0.json`
+10. Next: start PH6-008 Gate G closeout + next-phase recommendation package.
+  - target: `.cortex/reports/project_state/phase6_gate_g_measurement_closeout_v0.md`;`playbooks/cortex_phase6_measurement_plan_v0.md`
+11. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

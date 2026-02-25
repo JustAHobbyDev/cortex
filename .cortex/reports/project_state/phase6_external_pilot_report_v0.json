@@ -1,0 +1,960 @@
+{
+  "artifact": "phase6_external_pilot_report_v0",
+  "decision": "External pilot portability validated on two non-Cortex seed repos across distinct stack shapes. Core bootstrap + boundary + decision-gap checks pass deterministically; hydration requires seeded governance capsule files in raw repos and then passes.",
+  "measurement_mode": "phase6_external_pilot_harness_v0",
+  "pilots": [
+    {
+      "blocking_checks": [],
+      "checks": {
+        "audit_needed": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "audit-needed",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.5970082799904048,
+          "payload": {
+            "audit_recommended": false,
+            "audit_required": false,
+            "dirty_file_count": 0,
+            "dirty_files": [],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "recommended_action": "Working tree is clean.",
+            "risk_buckets": {
+              "high": [],
+              "ignored": [],
+              "low": [],
+              "medium": []
+            },
+            "run_at": "2026-02-25T10:16:32Z",
+            "status": "not_needed",
+            "version": "v0"
+          },
+          "payload_status": "not_needed",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "bootstrap_baseline_commit": {
+          "command": [
+            "git",
+            "commit",
+            "-m",
+            "cortex bootstrap baseline"
+          ],
+          "duration_seconds": 0.03746225999202579,
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "[main 7d7aaaf] cortex bootstrap baseline"
+        },
+        "bootstrap_scaffold": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "bootstrap-scaffold",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--project-id",
+            "ext_py_api",
+            "--project-name",
+            "External Python API",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.8097709399880841,
+          "payload": {
+            "command": "bootstrap-scaffold",
+            "format_source": "delegator_bootstrap_scaffolder_v0",
+            "message": "bootstrap scaffold complete",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "result": {
+              "checklist_path": ".cortex/templates/bootstrap_first_green_gate_checklist_v0.md",
+              "created_or_updated_paths": [
+                ".cortex/templates/bootstrap_first_green_gate_checklist_v0.md",
+                ".cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json"
+              ],
+              "first_green_gate_commands": [
+                "cortex-coach audit-needed --project-dir . --format json",
+                "cortex-coach coach --project-dir .",
+                "cortex-coach audit --project-dir .",
+                "./scripts/quality_gate_ci_v0.sh"
+              ],
+              "init": {
+                "command": [
+                  "/home/d/.local/bin/cortex-coach",
+                  "init",
+                  "--project-dir",
+                  "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+                  "--project-id",
+                  "ext_py_api",
+                  "--project-name",
+                  "External Python API",
+                  "--cortex-root",
+                  ".cortex"
+                ],
+                "performed": true,
+                "returncode": 0,
+                "stderr": "",
+                "stdout": "initialized: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api\ncreated_or_updated_files: 6"
+              },
+              "missing_required_paths": [],
+              "report_path": ".cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json",
+              "required_paths": [
+                ".cortex/manifest_v0.json",
+                ".cortex/spec_registry_v0.json",
+                ".cortex/artifacts",
+                ".cortex/prompts",
+                ".cortex/reports"
+              ],
+              "skipped_paths": []
+            },
+            "returncode": 0,
+            "run_at": "2026-02-25T10:16:31Z",
+            "status": "pass",
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "context_hydration_raw": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/context_hydration_gate_v0.py",
+            "compliance",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--enforcement-mode",
+            "block",
+            "--emit-events",
+            "new_session,window_rollover",
+            "--verify-event",
+            "pre_closeout",
+            "--required-events",
+            "new_session,window_rollover",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.5382074499502778,
+          "payload": {
+            "artifact": "phase6_hydration_compliance_report_v0",
+            "contract_source": "contracts/context_hydration_receipt_schema_v0.json",
+            "emit_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "emit_results": [
+              {
+                "event": "new_session",
+                "finding_count": 2,
+                "latest_receipt_written": false,
+                "returncode": 1,
+                "status": "fail"
+              },
+              {
+                "event": "window_rollover",
+                "finding_count": 2,
+                "latest_receipt_written": false,
+                "returncode": 1,
+                "status": "fail"
+              }
+            ],
+            "enforcement_mode": "block",
+            "findings": [
+              {
+                "check": "missing_governance_capsule_inputs",
+                "event": "new_session",
+                "message": "Missing required governance capsule inputs for hydration receipt.",
+                "missing_paths": [
+                  ".cortex/reports/lifecycle_audit_v0.json",
+                  ".cortex/reports/decision_candidates_v0.json",
+                  "policies/cortex_coach_final_ownership_boundary_v0.md",
+                  "policies/project_state_boundary_policy_v0.md",
+                  "playbooks/cortex_vision_master_roadmap_v1.md"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api/contracts/context_hydration_receipt_schema_v0.json",
+                "event": "new_session",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "emit_event_failed",
+                "event": "new_session",
+                "message": "Hydration emit step failed.",
+                "severity": "error"
+              },
+              {
+                "check": "missing_governance_capsule_inputs",
+                "event": "window_rollover",
+                "message": "Missing required governance capsule inputs for hydration receipt.",
+                "missing_paths": [
+                  ".cortex/reports/lifecycle_audit_v0.json",
+                  ".cortex/reports/decision_candidates_v0.json",
+                  "policies/cortex_coach_final_ownership_boundary_v0.md",
+                  "policies/project_state_boundary_policy_v0.md",
+                  "playbooks/cortex_vision_master_roadmap_v1.md"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api/contracts/context_hydration_receipt_schema_v0.json",
+                "event": "window_rollover",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "emit_event_failed",
+                "event": "window_rollover",
+                "message": "Hydration emit step failed.",
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api/contracts/context_hydration_receipt_schema_v0.json",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "missing_required_hydration_events",
+                "history_events": [],
+                "message": "Required hydration events are missing from compliance coverage.",
+                "missing_events": [
+                  "new_session",
+                  "window_rollover"
+                ],
+                "required_events": [
+                  "new_session",
+                  "window_rollover"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "verify_step_failed",
+                "message": "Hydration verify step failed in compliance mode.",
+                "severity": "error",
+                "verify_event": "pre_closeout"
+              }
+            ],
+            "history_dir": "/tmp/context_hydration_history_f8o5uso2",
+            "history_events": [],
+            "latest_receipt_path": "/tmp/context_hydration_latest_qw91xaxw.json",
+            "mode": "compliance",
+            "policy_source": "policies/context_hydration_policy_v0.md",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "required_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "run_at": "2026-02-25T10:16:34Z",
+            "status": "fail",
+            "summary": {
+              "finding_count": 9,
+              "required_events_covered": false,
+              "verify_step_pass": false
+            },
+            "target_results": {
+              "required_events_covered": false,
+              "verify_step_pass": false
+            },
+            "targets": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "verify_event": "pre_closeout",
+            "verify_result": {
+              "finding_count": 1,
+              "latest_receipt_loaded": false,
+              "returncode": 1,
+              "status": "fail"
+            },
+            "version": "v0"
+          },
+          "payload_status": "fail",
+          "returncode": 1,
+          "status": "fail",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "context_hydration_seeded": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/context_hydration_gate_v0.py",
+            "compliance",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--enforcement-mode",
+            "block",
+            "--emit-events",
+            "new_session,window_rollover",
+            "--verify-event",
+            "pre_closeout",
+            "--required-events",
+            "new_session,window_rollover",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.6039474100107327,
+          "payload": {
+            "artifact": "phase6_hydration_compliance_report_v0",
+            "contract_source": "contracts/context_hydration_receipt_schema_v0.json",
+            "emit_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "emit_results": [
+              {
+                "event": "new_session",
+                "finding_count": 0,
+                "latest_receipt_written": true,
+                "returncode": 0,
+                "status": "pass"
+              },
+              {
+                "event": "window_rollover",
+                "finding_count": 0,
+                "latest_receipt_written": true,
+                "returncode": 0,
+                "status": "pass"
+              }
+            ],
+            "enforcement_mode": "block",
+            "findings": [],
+            "history_dir": "/tmp/context_hydration_history_84stq1oo",
+            "history_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "latest_receipt_path": "/tmp/context_hydration_latest_n1by294p.json",
+            "mode": "compliance",
+            "policy_source": "policies/context_hydration_policy_v0.md",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "required_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "run_at": "2026-02-25T10:16:34Z",
+            "status": "pass",
+            "summary": {
+              "finding_count": 0,
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "target_results": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "targets": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "verify_event": "pre_closeout",
+            "verify_result": {
+              "finding_count": 0,
+              "latest_receipt_loaded": true,
+              "returncode": 0,
+              "status": "pass"
+            },
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "decision_gap_check": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "decision-gap-check",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.6139863400021568,
+          "payload": {
+            "cortex_root": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api/.cortex",
+            "covered_files": [],
+            "decision_matches": [],
+            "dirty_files": [],
+            "generated_ignored_files": [],
+            "governance_impact_files": [],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "run_at": "2026-02-25T10:16:33Z",
+            "status": "pass",
+            "strict_generated": false,
+            "uncovered_files": [],
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "project_state_boundary_gate": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.3461663699708879,
+          "payload": {
+            "contract_file": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api/contracts/project_state_boundary_contract_v0.json",
+            "expired_active_waivers": [],
+            "files_scanned": 14,
+            "findings": [],
+            "forbidden_outside_project_state_roots": [
+              "reports"
+            ],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+            "project_state_root": ".cortex",
+            "run_at": "2026-02-25T10:16:33Z",
+            "status": "pass",
+            "version": "v0",
+            "violation_count": 0,
+            "violations": [],
+            "waiver_count": 0
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        }
+      },
+      "command_count": 8,
+      "copied_boundary_runtime_paths": [
+        "contracts/project_state_boundary_contract_v0.json",
+        ".cortex/policies/project_state_boundary_waivers_v0.json"
+      ],
+      "copied_governance_capsule_paths": [
+        "contracts/context_hydration_receipt_schema_v0.json",
+        "contracts/project_state_boundary_contract_v0.json",
+        ".cortex/policies/project_state_boundary_waivers_v0.json",
+        ".cortex/reports/lifecycle_audit_v0.json",
+        ".cortex/reports/decision_candidates_v0.json",
+        "policies/cortex_coach_final_ownership_boundary_v0.md",
+        "policies/project_state_boundary_policy_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ],
+      "findings": [
+        "Hydration compliance fails on a raw seed repo until governance capsule policy/playbook files are seeded."
+      ],
+      "pilot_id": "pilot_python_api",
+      "pilot_repo": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_python_api",
+      "portability_without_capsule_seed": false,
+      "project_name": "External Python API",
+      "stack_shape": "python_api_service",
+      "status": "pass",
+      "target_operator_overhead_met": true
+    },
+    {
+      "blocking_checks": [],
+      "checks": {
+        "audit_needed": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "audit-needed",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.6549139299895614,
+          "payload": {
+            "audit_recommended": false,
+            "audit_required": false,
+            "dirty_file_count": 0,
+            "dirty_files": [],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "recommended_action": "Working tree is clean.",
+            "risk_buckets": {
+              "high": [],
+              "ignored": [],
+              "low": [],
+              "medium": []
+            },
+            "run_at": "2026-02-25T10:16:36Z",
+            "status": "not_needed",
+            "version": "v0"
+          },
+          "payload_status": "not_needed",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "bootstrap_baseline_commit": {
+          "command": [
+            "git",
+            "commit",
+            "-m",
+            "cortex bootstrap baseline"
+          ],
+          "duration_seconds": 0.03273182001430541,
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "[main 87b1d61] cortex bootstrap baseline"
+        },
+        "bootstrap_scaffold": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "bootstrap-scaffold",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--project-id",
+            "ext_node_dash",
+            "--project-name",
+            "External Node Dashboard",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.8020115400431678,
+          "payload": {
+            "command": "bootstrap-scaffold",
+            "format_source": "delegator_bootstrap_scaffolder_v0",
+            "message": "bootstrap scaffold complete",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "result": {
+              "checklist_path": ".cortex/templates/bootstrap_first_green_gate_checklist_v0.md",
+              "created_or_updated_paths": [
+                ".cortex/templates/bootstrap_first_green_gate_checklist_v0.md",
+                ".cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json"
+              ],
+              "first_green_gate_commands": [
+                "cortex-coach audit-needed --project-dir . --format json",
+                "cortex-coach coach --project-dir .",
+                "cortex-coach audit --project-dir .",
+                "./scripts/quality_gate_ci_v0.sh"
+              ],
+              "init": {
+                "command": [
+                  "/home/d/.local/bin/cortex-coach",
+                  "init",
+                  "--project-dir",
+                  "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+                  "--project-id",
+                  "ext_node_dash",
+                  "--project-name",
+                  "External Node Dashboard",
+                  "--cortex-root",
+                  ".cortex"
+                ],
+                "performed": true,
+                "returncode": 0,
+                "stderr": "",
+                "stdout": "initialized: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard\ncreated_or_updated_files: 6"
+              },
+              "missing_required_paths": [],
+              "report_path": ".cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json",
+              "required_paths": [
+                ".cortex/manifest_v0.json",
+                ".cortex/spec_registry_v0.json",
+                ".cortex/artifacts",
+                ".cortex/prompts",
+                ".cortex/reports"
+              ],
+              "skipped_paths": []
+            },
+            "returncode": 0,
+            "run_at": "2026-02-25T10:16:35Z",
+            "status": "pass",
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "context_hydration_raw": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/context_hydration_gate_v0.py",
+            "compliance",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--enforcement-mode",
+            "block",
+            "--emit-events",
+            "new_session,window_rollover",
+            "--verify-event",
+            "pre_closeout",
+            "--required-events",
+            "new_session,window_rollover",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.5520276300376281,
+          "payload": {
+            "artifact": "phase6_hydration_compliance_report_v0",
+            "contract_source": "contracts/context_hydration_receipt_schema_v0.json",
+            "emit_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "emit_results": [
+              {
+                "event": "new_session",
+                "finding_count": 2,
+                "latest_receipt_written": false,
+                "returncode": 1,
+                "status": "fail"
+              },
+              {
+                "event": "window_rollover",
+                "finding_count": 2,
+                "latest_receipt_written": false,
+                "returncode": 1,
+                "status": "fail"
+              }
+            ],
+            "enforcement_mode": "block",
+            "findings": [
+              {
+                "check": "missing_governance_capsule_inputs",
+                "event": "new_session",
+                "message": "Missing required governance capsule inputs for hydration receipt.",
+                "missing_paths": [
+                  ".cortex/reports/lifecycle_audit_v0.json",
+                  ".cortex/reports/decision_candidates_v0.json",
+                  "policies/cortex_coach_final_ownership_boundary_v0.md",
+                  "policies/project_state_boundary_policy_v0.md",
+                  "playbooks/cortex_vision_master_roadmap_v1.md"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard/contracts/context_hydration_receipt_schema_v0.json",
+                "event": "new_session",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "emit_event_failed",
+                "event": "new_session",
+                "message": "Hydration emit step failed.",
+                "severity": "error"
+              },
+              {
+                "check": "missing_governance_capsule_inputs",
+                "event": "window_rollover",
+                "message": "Missing required governance capsule inputs for hydration receipt.",
+                "missing_paths": [
+                  ".cortex/reports/lifecycle_audit_v0.json",
+                  ".cortex/reports/decision_candidates_v0.json",
+                  "policies/cortex_coach_final_ownership_boundary_v0.md",
+                  "policies/project_state_boundary_policy_v0.md",
+                  "playbooks/cortex_vision_master_roadmap_v1.md"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard/contracts/context_hydration_receipt_schema_v0.json",
+                "event": "window_rollover",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "emit_event_failed",
+                "event": "window_rollover",
+                "message": "Hydration emit step failed.",
+                "severity": "error"
+              },
+              {
+                "check": "receipt_schema_validation_failed",
+                "error": "invalid or missing schema: /tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard/contracts/context_hydration_receipt_schema_v0.json",
+                "message": "Hydration receipt failed schema validation.",
+                "severity": "error"
+              },
+              {
+                "check": "missing_required_hydration_events",
+                "history_events": [],
+                "message": "Required hydration events are missing from compliance coverage.",
+                "missing_events": [
+                  "new_session",
+                  "window_rollover"
+                ],
+                "required_events": [
+                  "new_session",
+                  "window_rollover"
+                ],
+                "severity": "error"
+              },
+              {
+                "check": "verify_step_failed",
+                "message": "Hydration verify step failed in compliance mode.",
+                "severity": "error",
+                "verify_event": "pre_closeout"
+              }
+            ],
+            "history_dir": "/tmp/context_hydration_history_5mmfdev6",
+            "history_events": [],
+            "latest_receipt_path": "/tmp/context_hydration_latest_mw725qxm.json",
+            "mode": "compliance",
+            "policy_source": "policies/context_hydration_policy_v0.md",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "required_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "run_at": "2026-02-25T10:16:37Z",
+            "status": "fail",
+            "summary": {
+              "finding_count": 9,
+              "required_events_covered": false,
+              "verify_step_pass": false
+            },
+            "target_results": {
+              "required_events_covered": false,
+              "verify_step_pass": false
+            },
+            "targets": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "verify_event": "pre_closeout",
+            "verify_result": {
+              "finding_count": 1,
+              "latest_receipt_loaded": false,
+              "returncode": 1,
+              "status": "fail"
+            },
+            "version": "v0"
+          },
+          "payload_status": "fail",
+          "returncode": 1,
+          "status": "fail",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "context_hydration_seeded": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/context_hydration_gate_v0.py",
+            "compliance",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--enforcement-mode",
+            "block",
+            "--emit-events",
+            "new_session,window_rollover",
+            "--verify-event",
+            "pre_closeout",
+            "--required-events",
+            "new_session,window_rollover",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.6177777099655941,
+          "payload": {
+            "artifact": "phase6_hydration_compliance_report_v0",
+            "contract_source": "contracts/context_hydration_receipt_schema_v0.json",
+            "emit_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "emit_results": [
+              {
+                "event": "new_session",
+                "finding_count": 0,
+                "latest_receipt_written": true,
+                "returncode": 0,
+                "status": "pass"
+              },
+              {
+                "event": "window_rollover",
+                "finding_count": 0,
+                "latest_receipt_written": true,
+                "returncode": 0,
+                "status": "pass"
+              }
+            ],
+            "enforcement_mode": "block",
+            "findings": [],
+            "history_dir": "/tmp/context_hydration_history_kdo89wcy",
+            "history_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "latest_receipt_path": "/tmp/context_hydration_latest_zkadcvrc.json",
+            "mode": "compliance",
+            "policy_source": "policies/context_hydration_policy_v0.md",
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "required_events": [
+              "new_session",
+              "window_rollover"
+            ],
+            "run_at": "2026-02-25T10:16:38Z",
+            "status": "pass",
+            "summary": {
+              "finding_count": 0,
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "target_results": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "targets": {
+              "required_events_covered": true,
+              "verify_step_pass": true
+            },
+            "verify_event": "pre_closeout",
+            "verify_result": {
+              "finding_count": 0,
+              "latest_receipt_loaded": true,
+              "returncode": 0,
+              "status": "pass"
+            },
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "decision_gap_check": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+            "decision-gap-check",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.6184737900039181,
+          "payload": {
+            "cortex_root": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard/.cortex",
+            "covered_files": [],
+            "decision_matches": [],
+            "dirty_files": [],
+            "generated_ignored_files": [],
+            "governance_impact_files": [],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "run_at": "2026-02-25T10:16:36Z",
+            "status": "pass",
+            "strict_generated": false,
+            "uncovered_files": [],
+            "version": "v0"
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        },
+        "project_state_boundary_gate": {
+          "command": [
+            "python3",
+            "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+            "--project-dir",
+            "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "--format",
+            "json"
+          ],
+          "duration_seconds": 0.35454517998732626,
+          "payload": {
+            "contract_file": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard/contracts/project_state_boundary_contract_v0.json",
+            "expired_active_waivers": [],
+            "files_scanned": 14,
+            "findings": [],
+            "forbidden_outside_project_state_roots": [
+              "reports"
+            ],
+            "project_dir": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+            "project_state_root": ".cortex",
+            "run_at": "2026-02-25T10:16:37Z",
+            "status": "pass",
+            "version": "v0",
+            "violation_count": 0,
+            "violations": [],
+            "waiver_count": 0
+          },
+          "payload_status": "pass",
+          "returncode": 0,
+          "status": "pass",
+          "stderr_excerpt": "",
+          "stdout_excerpt": "{"
+        }
+      },
+      "command_count": 8,
+      "copied_boundary_runtime_paths": [
+        "contracts/project_state_boundary_contract_v0.json",
+        ".cortex/policies/project_state_boundary_waivers_v0.json"
+      ],
+      "copied_governance_capsule_paths": [
+        "contracts/context_hydration_receipt_schema_v0.json",
+        "contracts/project_state_boundary_contract_v0.json",
+        ".cortex/policies/project_state_boundary_waivers_v0.json",
+        ".cortex/reports/lifecycle_audit_v0.json",
+        ".cortex/reports/decision_candidates_v0.json",
+        "policies/cortex_coach_final_ownership_boundary_v0.md",
+        "policies/project_state_boundary_policy_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md"
+      ],
+      "findings": [
+        "Hydration compliance fails on a raw seed repo until governance capsule policy/playbook files are seeded."
+      ],
+      "pilot_id": "pilot_node_dashboard",
+      "pilot_repo": "/tmp/phase6_external_pilot_zg0y0qew/fixtures/pilot_node_dashboard",
+      "portability_without_capsule_seed": false,
+      "project_name": "External Node Dashboard",
+      "stack_shape": "node_dashboard_app",
+      "status": "pass",
+      "target_operator_overhead_met": true
+    }
+  ],
+  "project_dir": "/home/d/codex/cortex",
+  "run_at": "2026-02-25T10:16:38Z",
+  "status": "pass",
+  "summary": {
+    "distinct_stack_shape_count": 2,
+    "operator_overhead_pass_count": 2,
+    "pilot_count": 2,
+    "pilot_pass_count": 2,
+    "raw_portability_pass_count": 0,
+    "stack_shapes": [
+      "node_dashboard_app",
+      "python_api_service"
+    ]
+  },
+  "target_results": {
+    "core_portability_pass_rate_met": true,
+    "operator_overhead_target_met": true,
+    "pilot_count_met": true,
+    "stack_diversity_met": true
+  },
+  "targets": {
+    "core_portability_pass_rate": 1.0,
+    "operator_overhead_command_count_max": 12,
+    "pilot_count_min": 2,
+    "stack_shape_diversity_min": 2
+  },
+  "version": "v0"
+}

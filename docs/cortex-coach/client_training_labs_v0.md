@@ -20,6 +20,34 @@ Provide reproducible, command-driven labs that validate operational readiness fo
 1. `cortex-coach` installed and available on `PATH`.
 2. Project initialized with `.cortex/`.
 3. Governance baseline artifacts present and repository clean before each lab.
+4. Command-surface preflight passes before starting `M2` and before starting `M4`.
+
+## Command Surface Preflight (Required)
+
+### Objective
+
+Fail early when the installed `cortex-coach` build cannot satisfy onboarding lab command requirements.
+
+### Command Checklist
+
+1. `python3 scripts/client_onboarding_command_preflight_v0.py --project-dir . --format json --out-file .cortex/reports/project_state/client_onboarding_command_preflight_v0.json`
+
+### Expected Results
+
+1. Preflight exits with code `0`.
+2. JSON payload has `status=pass`.
+3. `summary.required_check_fail_count=0`.
+
+### Exit Evidence
+
+1. `.cortex/reports/project_state/client_onboarding_command_preflight_v0.json`
+2. Command transcript proving pass status.
+
+If preflight fails:
+
+1. Stop onboarding labs and remediate capability gaps first.
+2. Upgrade `cortex-coach` when `rollout-mode` surface checks fail.
+3. For temporary `audit --format json` compatibility, use `python3 scripts/cortex_project_coach_v0.py audit ... --format json` until native support is available.
 
 ## M2 Lab: Operator Workflow
 
@@ -87,15 +115,17 @@ Demonstrate safe rollout-mode transitions, rollback drill execution, and transit
 
 ### Command Checklist
 
-1. Read mode:
+1. Rerun required preflight:
+- `python3 scripts/client_onboarding_command_preflight_v0.py --project-dir . --format json`
+2. Read mode:
 - `cortex-coach rollout-mode --project-dir . --format json`
-2. Drill transition to `off`:
+3. Drill transition to `off`:
 - `cortex-coach rollout-mode --project-dir . --set-mode off --changed-by <actor> --reason "<reason>" --format json`
-3. Restore to `experimental`:
+4. Restore to `experimental`:
 - `cortex-coach rollout-mode --project-dir . --set-mode experimental --changed-by <actor> --reason "<reason>" --incident-ref <incident_ref> --format json`
-4. Audit transitions:
+5. Audit transitions:
 - `cortex-coach rollout-mode-audit --project-dir . --format json`
-5. (Instructor-supervised only) transition to `default` with full linkage:
+6. (Instructor-supervised only) transition to `default` with full linkage:
 - `cortex-coach rollout-mode --project-dir . --set-mode default --changed-by <actor> --reason "<reason>" --decision-refs <decision_refs> --reflection-refs <reflection_refs> --audit-refs <audit_refs> --format json`
 
 ### Expected Results

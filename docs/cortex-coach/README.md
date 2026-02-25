@@ -8,6 +8,7 @@ This documentation is for users running `cortex-coach` in their own projects.
 2. [Quickstart](quickstart.md)
    - Includes Minimal Workflow and Complete Workflow paths
 3. [Client Training Labs](client_training_labs_v0.md)
+   - Includes required command-surface preflight before `M2` and `M4`
 4. [Commands](commands.md)
 5. [Maintainer Mode](maintainer-mode.md)
 6. [Agent Context Loader](agent-context-loader.md)

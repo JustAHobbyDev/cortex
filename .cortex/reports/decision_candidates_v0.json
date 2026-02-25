@@ -743,8 +743,30 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T033718Z_complete_ct_005_pilot_ca_v0.json",
       "status": "promoted",
       "title": "CT-005 calibration complete; defer external rollout until CT-006 remediations"
+    },
+    {
+      "captured_at": "2026-02-25T03:44:46Z",
+      "decision": "Introduce a required command-surface preflight script and enforce its use before M2 and M4 labs.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_gate_onboarding_labs_with_command_surface_preflight_v1.md",
+      "decision_id": "dec_20260225T034446Z_gate_onboarding_labs_wit",
+      "impact_scope": [
+        "governance",
+        "docs",
+        "training"
+      ],
+      "linked_artifacts": [
+        "scripts/client_onboarding_command_preflight_v0.py",
+        "docs/cortex-coach/client_training_labs_v0.md",
+        "docs/cortex-coach/README.md"
+      ],
+      "promoted_at": "2026-02-25T03:44:47Z",
+      "rationale": "CT-005 pilot showed command capability drift can invalidate onboarding runs; preflight blocks early and provides deterministic remediation guidance.",
+      "reflection_id": "ref_20260225T034446Z_add_onboarding_command_s",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T034446Z_add_onboarding_command_s_v0.json",
+      "status": "promoted",
+      "title": "Gate onboarding labs with command-surface preflight"
     }
   ],
-  "updated_at": "2026-02-25T03:37:19Z",
+  "updated_at": "2026-02-25T03:44:47Z",
   "version": "v0"
 }

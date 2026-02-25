@@ -71,7 +71,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 1.7456285000080243,
+      "duration_seconds": 2.1878536900039762,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -111,7 +111,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.768278060015291,
+      "duration_seconds": 0.9121696099173278,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -131,7 +131,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.597993109957315,
+      "duration_seconds": 1.059482270036824,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -153,7 +153,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.6343673599185422,
+      "duration_seconds": 0.8273776500718668,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -178,7 +178,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 1.1655863999621943,
+      "duration_seconds": 1.4360717799281701,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -186,11 +186,43 @@
       "stderr": "",
       "stdout_excerpt": "{",
       "summary": {
-        "decision_match_count": 3,
-        "governance_impact_file_count": 1,
-        "required_status_entry_count": 31,
-        "required_status_mapping_count": 31,
-        "scaffold_reports_scanned": 31
+        "decision_match_count": 0,
+        "governance_impact_file_count": 0,
+        "required_status_entry_count": 34,
+        "required_status_mapping_count": 34,
+        "scaffold_reports_scanned": 34
+      }
+    },
+    {
+      "check_id": "context_hydration_compliance_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/context_hydration_gate_v0.py",
+        "compliance",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--enforcement-mode",
+        "block",
+        "--emit-events",
+        "new_session,window_rollover",
+        "--verify-event",
+        "pre_closeout",
+        "--required-events",
+        "new_session,window_rollover",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.7260854700580239,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {
+        "finding_count": 0,
+        "required_events_covered": true,
+        "verify_step_pass": true
       }
     },
     {
@@ -203,7 +235,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.3603268900187686,
+      "duration_seconds": 0.4135418100049719,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -224,7 +256,7 @@
         "--format",
         "json"
       ],
-      "duration_seconds": 0.2962089899228886,
+      "duration_seconds": 0.3399317900184542,
       "payload_status": "pass",
       "report_path": null,
       "returncode": 0,
@@ -238,7 +270,7 @@
       "command": [
         "./scripts/quality_gate_ci_v0.sh"
       ],
-      "duration_seconds": 20.95419077691622,
+      "duration_seconds": 24.76604184997268,
       "returncode": 0,
       "status": "pass",
       "stderr_first_line": "",
@@ -246,7 +278,7 @@
     }
   ],
   "findings": [],
-  "generated_at": "2026-02-25T04:08:54Z",
+  "generated_at": "2026-02-25T10:05:06Z",
   "inputs": {
     "assessor_name": "automation",
     "assessor_role": "Conformance QA Lead",
@@ -263,6 +295,16 @@
     "track_end_date": "2026-02-25",
     "track_start_date": "2026-02-25",
     "track_variant": "standard"
+  },
+  "phase6_bootstrap_readiness": {
+    "enabled": true,
+    "report_path": ".cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json",
+    "status": "pass",
+    "target_results": {
+      "bootstrap_time_to_first_green_gate_met": true,
+      "critical_safety_incidents_met": true,
+      "required_governance_gate_reliability_met": true
+    }
   },
   "project_dir": "/home/d/codex/cortex",
   "remediation_hints": [],
@@ -293,7 +335,7 @@
           ".cortex/reports/decision_candidates_v0.json"
         ],
         "minimum_required_percent": 85.0,
-        "notes": "4/4 checks passed.",
+        "notes": "5/5 checks passed.",
         "pass": true,
         "score_percent": 100.0,
         "weight_percent": 35.0
@@ -326,7 +368,7 @@
       ".cortex/reports/project_state/client_onboarding_completion_report_v0.md",
       ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json"
     ],
-    "generated_at": "2026-02-25T04:08:54Z",
+    "generated_at": "2026-02-25T10:05:06Z",
     "hard_fail_conditions": {
       "notes": "",
       "required_governance_gate_bypass_detected": false,

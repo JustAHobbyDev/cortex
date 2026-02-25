@@ -1,0 +1,89 @@
+{
+  "artifact": "phase6_bootstrap_readiness_report_v0",
+  "check_results": [
+    {
+      "check_id": "command_surface_preflight",
+      "duration_seconds": 2.1878536900039762,
+      "status": "pass"
+    },
+    {
+      "check_id": "dependency_bootstrap_control",
+      "duration_seconds": 0.0,
+      "status": "pass"
+    },
+    {
+      "check_id": "audit_all",
+      "duration_seconds": 0.9121696099173278,
+      "status": "pass"
+    },
+    {
+      "check_id": "decision_gap_check",
+      "duration_seconds": 1.059482270036824,
+      "status": "pass"
+    },
+    {
+      "check_id": "reflection_completeness_check",
+      "duration_seconds": 0.8273776500718668,
+      "status": "pass"
+    },
+    {
+      "check_id": "reflection_enforcement_gate",
+      "duration_seconds": 1.4360717799281701,
+      "status": "pass"
+    },
+    {
+      "check_id": "context_hydration_compliance_gate",
+      "duration_seconds": 0.7260854700580239,
+      "status": "pass"
+    },
+    {
+      "check_id": "project_state_boundary_gate",
+      "duration_seconds": 0.4135418100049719,
+      "status": "pass"
+    },
+    {
+      "check_id": "quality_gate_sync_check",
+      "duration_seconds": 0.3399317900184542,
+      "status": "pass"
+    },
+    {
+      "check_id": "quality_gate_ci",
+      "duration_seconds": 24.76604184997268,
+      "status": "pass"
+    }
+  ],
+  "generated_at": "2026-02-25T10:05:06Z",
+  "measurement_mode": "phase6_bootstrap_readiness_harness_v0",
+  "metrics": {
+    "bootstrap_time_to_first_green_gate_minutes": 0.544,
+    "critical_safety_incidents": 0,
+    "failed_check_ids": [],
+    "required_governance_gate_reliability_rate": 1.0
+  },
+  "project_dir": "/home/d/codex/cortex",
+  "required_check_ids": [
+    "command_surface_preflight",
+    "dependency_bootstrap_control",
+    "audit_all",
+    "decision_gap_check",
+    "reflection_completeness_check",
+    "reflection_enforcement_gate",
+    "context_hydration_compliance_gate",
+    "project_state_boundary_gate",
+    "quality_gate_sync_check",
+    "quality_gate_ci"
+  ],
+  "source_certification_report": ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json",
+  "status": "pass",
+  "target_results": {
+    "bootstrap_time_to_first_green_gate_met": true,
+    "critical_safety_incidents_met": true,
+    "required_governance_gate_reliability_met": true
+  },
+  "thresholds": {
+    "bootstrap_time_to_first_green_gate_minutes_max": 30.0,
+    "critical_safety_incidents_max": 0,
+    "required_governance_gate_reliability_min": 1.0
+  },
+  "version": "v0"
+}

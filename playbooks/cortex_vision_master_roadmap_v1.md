@@ -284,6 +284,10 @@ Exit Criteria:
   - `playbooks/cortex_phase0_role_charters_v0.md`
   - `docs/cortex-coach/README.md`
   - `.cortex/reports/project_state/phase6_role_capability_pack_report_v0.md`
-8. Next: start PH6-006 bootstrap readiness harness + certification evidence for first-green-gate portability checks.
-  - target: `scripts/client_onboarding_certification_pack_v0.py`;`.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`
-9. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+8. Done: complete PH6-006 bootstrap readiness harness + certification evidence for first-green-gate portability checks.
+  - `scripts/client_onboarding_certification_pack_v0.py`
+  - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`
+  - `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
+9. Next: start PH6-007 external pilot validation on non-Cortex seed repos.
+  - target: `.cortex/reports/project_state/phase6_external_pilot_report_v0.md`
+10. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

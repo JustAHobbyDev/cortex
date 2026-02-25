@@ -95,6 +95,19 @@ python3 scripts/cortex_project_coach_v0.py bootstrap-scaffold \
   --format json
 ```
 
+Bootstrap readiness harness + certification:
+
+```bash
+python3 scripts/client_onboarding_certification_pack_v0.py \
+  --project-dir . \
+  --python-bin python3 \
+  --run-quality-gate \
+  --emit-phase6-bootstrap-readiness \
+  --phase6-bootstrap-readiness-file .cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json \
+  --out-file .cortex/reports/project_state/client_onboarding_certification_pack_v0.json \
+  --format json
+```
+
 ## Planned Artifacts
 
 - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`

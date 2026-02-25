@@ -250,6 +250,88 @@ def _build_cadence_schedule(go_live_date: date) -> dict[str, Any]:
     }
 
 
+def _build_phase6_bootstrap_readiness_payload(
+    *,
+    project_dir: Path,
+    certification_report_path: Path,
+    checks: list[dict[str, Any]],
+    bootstrap_elapsed_minutes: float,
+) -> dict[str, Any]:
+    required_check_ids = [
+        "command_surface_preflight",
+        "dependency_bootstrap_control",
+        "audit_all",
+        "decision_gap_check",
+        "reflection_completeness_check",
+        "reflection_enforcement_gate",
+        "context_hydration_compliance_gate",
+        "project_state_boundary_gate",
+        "quality_gate_sync_check",
+        "quality_gate_ci",
+    ]
+
+    check_results: list[dict[str, Any]] = []
+    total_duration_seconds = 0.0
+    failed_checks: list[str] = []
+    for check_id in required_check_ids:
+        match = next((item for item in checks if item.get("check_id") == check_id), None)
+        if not isinstance(match, dict):
+            check_results.append({"check_id": check_id, "status": "missing", "duration_seconds": 0.0})
+            failed_checks.append(check_id)
+            continue
+        status = str(match.get("status", "unknown"))
+        duration = float(match.get("duration_seconds", 0.0) or 0.0)
+        check_results.append({"check_id": check_id, "status": status, "duration_seconds": duration})
+        total_duration_seconds += max(0.0, duration)
+        if status != "pass":
+            failed_checks.append(check_id)
+
+    reliability_rate = 0.0
+    if check_results:
+        pass_count = sum(1 for item in check_results if item.get("status") == "pass")
+        reliability_rate = pass_count / len(check_results)
+
+    measured_elapsed_minutes = (
+        bootstrap_elapsed_minutes if bootstrap_elapsed_minutes >= 0.0 else total_duration_seconds / 60.0
+    )
+    measured_elapsed_minutes = round(max(0.0, measured_elapsed_minutes), 3)
+
+    thresholds = {
+        "bootstrap_time_to_first_green_gate_minutes_max": 30.0,
+        "required_governance_gate_reliability_min": 1.0,
+        "critical_safety_incidents_max": 0,
+    }
+    critical_safety_incidents = len(failed_checks)
+    target_results = {
+        "bootstrap_time_to_first_green_gate_met": measured_elapsed_minutes
+        <= thresholds["bootstrap_time_to_first_green_gate_minutes_max"],
+        "required_governance_gate_reliability_met": reliability_rate
+        >= thresholds["required_governance_gate_reliability_min"],
+        "critical_safety_incidents_met": critical_safety_incidents <= thresholds["critical_safety_incidents_max"],
+    }
+    status = "pass" if all(target_results.values()) else "fail"
+
+    return {
+        "artifact": "phase6_bootstrap_readiness_report_v0",
+        "version": "v0",
+        "generated_at": _now_iso(),
+        "project_dir": str(project_dir),
+        "measurement_mode": "phase6_bootstrap_readiness_harness_v0",
+        "source_certification_report": _safe_rel_path(project_dir, certification_report_path),
+        "required_check_ids": required_check_ids,
+        "check_results": check_results,
+        "metrics": {
+            "bootstrap_time_to_first_green_gate_minutes": measured_elapsed_minutes,
+            "required_governance_gate_reliability_rate": round(reliability_rate, 4),
+            "critical_safety_incidents": critical_safety_incidents,
+            "failed_check_ids": failed_checks,
+        },
+        "thresholds": thresholds,
+        "target_results": target_results,
+        "status": status,
+    }
+
+
 def _parse_reviewer_list(raw: str) -> list[str]:
     reviewers = [item.strip() for item in raw.split(",") if item.strip()]
     if not reviewers:
@@ -260,6 +342,7 @@ def _parse_reviewer_list(raw: str) -> list[str]:
 def _render_text(payload: dict[str, Any]) -> str:
     scorecard = payload.get("scorecard", {})
     cadence = payload.get("cadence", {})
+    phase6 = payload.get("phase6_bootstrap_readiness", {})
     lines = [
         f"status: {payload.get('status', 'fail')}",
         f"generated_at: {payload.get('generated_at', '')}",
@@ -270,6 +353,9 @@ def _render_text(payload: dict[str, Any]) -> str:
         ),
         f"cadence_status: {cadence.get('status', 'fail') if isinstance(cadence, dict) else 'fail'}",
     ]
+    if isinstance(phase6, dict) and phase6.get("enabled"):
+        lines.append(f"phase6_bootstrap_readiness_status: {phase6.get('status', 'fail')}")
+        lines.append(f"phase6_bootstrap_readiness_report: {phase6.get('report_path', '')}")
 
     findings = payload.get("findings", [])
     if isinstance(findings, list) and findings:
@@ -306,6 +392,17 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--out-file",
         default=".cortex/reports/project_state/client_onboarding_certification_pack_v0.json",
+    )
+    parser.add_argument("--emit-phase6-bootstrap-readiness", action="store_true")
+    parser.add_argument(
+        "--phase6-bootstrap-readiness-file",
+        default=".cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json",
+    )
+    parser.add_argument(
+        "--bootstrap-elapsed-minutes",
+        type=float,
+        default=-1.0,
+        help="Override measured bootstrap time in minutes for readiness evaluation (negative = auto-compute).",
     )
     parser.add_argument("--format", default="text", choices=("text", "json"))
     parser.add_argument("--fail-on-target-miss", action="store_true")
@@ -427,6 +524,30 @@ def main() -> int:
     )
     checks.append(
         _check_entry(
+            "context_hydration_compliance_gate",
+            [
+                args.python_bin,
+                str(scripts_dir / "context_hydration_gate_v0.py"),
+                "compliance",
+                "--project-dir",
+                str(project_dir),
+                "--enforcement-mode",
+                "block",
+                "--emit-events",
+                "new_session,window_rollover",
+                "--verify-event",
+                "pre_closeout",
+                "--required-events",
+                "new_session,window_rollover",
+                "--format",
+                "json",
+            ],
+            project_dir=project_dir,
+            timeout_seconds=args.timeout_seconds,
+        )
+    )
+    checks.append(
+        _check_entry(
             "project_state_boundary_gate",
             [
                 args.python_bin,
@@ -479,6 +600,7 @@ def main() -> int:
         "decision_gap_check",
         "reflection_completeness_check",
         "reflection_enforcement_gate",
+        "context_hydration_compliance_gate",
     }
     reliability_check_ids = {
         "command_surface_preflight",
@@ -725,6 +847,26 @@ def main() -> int:
         "status": status,
     }
 
+    phase6_bootstrap_readiness: dict[str, Any] = {"enabled": False}
+    if args.emit_phase6_bootstrap_readiness:
+        phase6_out_file = Path(args.phase6_bootstrap_readiness_file)
+        if not phase6_out_file.is_absolute():
+            phase6_out_file = (project_dir / phase6_out_file).resolve()
+        phase6_payload = _build_phase6_bootstrap_readiness_payload(
+            project_dir=project_dir,
+            certification_report_path=out_file,
+            checks=checks,
+            bootstrap_elapsed_minutes=args.bootstrap_elapsed_minutes,
+        )
+        _write_json(phase6_out_file, phase6_payload)
+        phase6_bootstrap_readiness = {
+            "enabled": True,
+            "status": phase6_payload.get("status", "fail"),
+            "report_path": _safe_rel_path(project_dir, phase6_out_file),
+            "target_results": phase6_payload.get("target_results", {}),
+        }
+    payload["phase6_bootstrap_readiness"] = phase6_bootstrap_readiness
+
     _write_json(out_file, payload)
 
     if args.format == "json":
@@ -734,7 +876,10 @@ def main() -> int:
         sys.stdout.write(_render_text(payload))
         sys.stdout.write("\n")
 
-    if args.fail_on_target_miss and status != "pass":
+    fail_on_phase6 = (
+        phase6_bootstrap_readiness.get("enabled") and phase6_bootstrap_readiness.get("status") != "pass"
+    )
+    if args.fail_on_target_miss and (status != "pass" or fail_on_phase6):
         return 1
     return 0
 

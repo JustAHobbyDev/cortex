@@ -3,6 +3,7 @@
     "playbooks/cortex_*.md"
   ],
   "durable_allowlist": [
+    "playbooks/cortex_client_onboarding_training_track_v0.md",
     "playbooks/cortex_project_coach_runbook_v0.md",
     "playbooks/cortex_vision_master_roadmap_v1.md"
   ],
@@ -148,6 +149,14 @@
       "owner": "Program Lead",
       "path": "playbooks/cortex_phase5_migration_playbook_v0.md",
       "reason": "Phase 5-scoped operator handoff and migration procedure until Gate F closeout and default-mode determination.",
+      "release_action": "exclude_from_release",
+      "status": "active"
+    },
+    {
+      "expires_on": "2026-12-31",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+      "reason": "Client-onboarding rollout execution board for v0 delivery and pilot calibration.",
       "release_action": "exclude_from_release",
       "status": "active"
     }

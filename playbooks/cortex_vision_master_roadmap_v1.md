@@ -248,3 +248,4 @@ Exit Criteria:
 2. Keep rollout transitions auditable and reversible; preserve `default -> experimental -> off` rollback readiness.
 3. Track quality-gate CI overhead and transition-audit completeness in recurring governance cadence.
 4. Route further capability expansion through new phase definitions rather than extending Phase 5 scope.
+5. Build client enablement track using `playbooks/cortex_client_onboarding_training_track_v0.md` and `playbooks/cortex_client_onboarding_training_execution_board_v0.md` as baseline execution contracts.

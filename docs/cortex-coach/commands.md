@@ -95,6 +95,40 @@ Baseline expectations:
   - `eligible_for_promotion`
   - `block_unlinked_governance_closure`
 
+## Phase 5 Rollout Mode Commands (Baseline)
+
+### `rollout-mode` (PH5-002 Baseline)
+
+Read or mutate rollout mode (`off`, `experimental`, `default`) with transition logging.
+
+```bash
+cortex-coach rollout-mode \
+  --project-dir /path/to/project \
+  --set-mode experimental \
+  --changed-by runtime_lead \
+  --reason "rollback drill restore" \
+  --incident-ref inc_2026_02_25_001 \
+  --format json
+```
+
+Baseline expectations:
+- `--set-mode default` requires linked `decision-refs`, `reflection-refs`, and `audit-refs`.
+- rollback from `default` requires `--incident-ref`.
+- transition log path: `.cortex/state/rollout_mode_transitions_v0.jsonl`.
+
+### `rollout-mode-audit` (PH5-002 Baseline)
+
+Validate transition completeness and emit Phase 5 transition-audit artifact:
+
+```bash
+cortex-coach rollout-mode-audit \
+  --project-dir /path/to/project \
+  --format json
+```
+
+Expected artifact:
+- `.cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json`
+
 ## `init`
 
 Bootstrap `.cortex/` artifacts in a target project.

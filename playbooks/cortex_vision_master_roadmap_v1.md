@@ -243,7 +243,7 @@ Exit Criteria:
 
 ## Immediate Next Actions
 
-1. Treat Phase 4 as closed (`Gate E: Pass`) and carry residual-risk follow-ups into the Phase 5 execution queue.
-2. Execute Phase 5 rollout/migration baseline artifacts (`playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md`, `playbooks/cortex_phase5_measurement_plan_v0.md`).
-3. Complete `PH5-001` rollout-mode contract/policy baseline, then progress `PH5-002` through `PH5-004`.
-4. Keep default mode at `experimental` until Gate F closeout is published and approved by `Maintainer Council`.
+1. Preserve `experimental` as the effective rollout mode; `default` remains blocked until Gate F approval.
+2. Treat `PH5-001` through `PH5-004` as completed baseline and use them as inputs for reliability cycles.
+3. Execute `PH5-005` (Cycle 1 reliability/SLO validation) with required governance gates and rollback-drill evidence.
+4. Execute `PH5-006` (Cycle 2 reliability/SLO validation), then continue to `PH5-007` and `PH5-008` Gate F closeout.

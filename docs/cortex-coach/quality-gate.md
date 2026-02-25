@@ -116,6 +116,23 @@ Required artifact outcomes:
 - `.cortex/reports/project_state/phase3_adapter_budget_report_v0.json`: `target_met=true`
 - `.cortex/reports/project_state/phase3_ci_overhead_report_v0.json`: `target_met=true`
 
+## Phase 5 Rollout Operational Add-On
+
+When executing rollout migration toward Gate F, run these checks in addition to required gate baseline.
+Commands 3-5 are planned harness checks that activate with `PH5-005` and `PH5-007` implementation work.
+
+1. `python3 scripts/cortex_project_coach_v0.py rollout-mode --project-dir . --format json`
+2. `python3 scripts/cortex_project_coach_v0.py rollout-mode-audit --project-dir . --format json`
+3. `python3 scripts/phase5_rollout_reliability_pack_v0.py --project-dir . --cycle-id cycle1`
+4. `python3 scripts/phase5_rollout_reliability_pack_v0.py --project-dir . --cycle-id cycle2`
+5. `python3 scripts/phase5_rollout_adoption_pack_v0.py --project-dir .`
+
+Required Phase 5 artifact outcomes:
+- `.cortex/reports/project_state/phase5_mode_transition_audit_report_v0.json`: `status=pass`
+- `.cortex/reports/project_state/phase5_cycle1_rollout_reliability_report_v0.json`: all required checks pass
+- `.cortex/reports/project_state/phase5_cycle2_rollout_reliability_report_v0.json`: all required checks pass
+- `.cortex/reports/project_state/phase5_reference_implementation_report_v0.md`: at least two reference implementations documented
+
 ## Phase 1 Storage/Locking Checks (Design Baseline)
 
 Phase 1 requires deterministic storage/locking validation coverage for tactical mutation commands.

@@ -23,6 +23,8 @@ NATIVE_FORMAT_COMMANDS = {
     "reflection-completeness-check",
     "decision-promote",
     "contract-check",
+    "rollout-mode",
+    "rollout-mode-audit",
 }
 
 

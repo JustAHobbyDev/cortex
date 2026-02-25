@@ -142,6 +142,14 @@
       "reason": "Phase 5-scoped execution board for rollout controls, migration readiness, and Gate F closeout.",
       "release_action": "exclude_from_release",
       "status": "active"
+    },
+    {
+      "expires_on": "2026-09-30",
+      "owner": "Program Lead",
+      "path": "playbooks/cortex_phase5_migration_playbook_v0.md",
+      "reason": "Phase 5-scoped operator handoff and migration procedure until Gate F closeout and default-mode determination.",
+      "release_action": "exclude_from_release",
+      "status": "active"
     }
   ],
   "version": "v0"

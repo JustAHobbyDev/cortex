@@ -646,8 +646,34 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260224T131608Z_establish_phase_4_baseli_v0.json",
       "status": "promoted",
       "title": "Establish Phase 4 baseline contract/fixtures and close backup-maintainer gap"
+    },
+    {
+      "captured_at": "2026-02-25T01:55:16Z",
+      "decision": "Mark PH5-003 and PH5-004 complete with migration/handoff and cross-project reference evidence, and advance immediate next actions to PH5-005/PH5-006 reliability cycles while keeping default mode blocked.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_finalize_phase_5_rollout_migration_baseline_and_immediate_sequence_closeout_v1.md",
+      "decision_id": "dec_20260225T015516Z_finalize_phase_5_rollout",
+      "impact_scope": [
+        "governance",
+        "docs",
+        "playbooks"
+      ],
+      "linked_artifacts": [
+        "contracts/temporal_playbook_release_surface_contract_v0.json",
+        "playbooks/cortex_phase5_migration_playbook_v0.md",
+        "playbooks/cortex_phase5_rollout_migration_ticket_breakdown_v0.md",
+        "playbooks/cortex_vision_master_roadmap_v1.md",
+        "docs/cortex-coach/quality-gate.md",
+        "docs/cortex-coach/commands.md",
+        "playbooks/session_governance_hybrid_plan_v0.md"
+      ],
+      "promoted_at": "2026-02-25T01:56:53Z",
+      "rationale": "Phase 5 baseline implementation is complete across contract, runtime, migration, and reference layers; governance sequencing should now move to reliability-cycle evidence.",
+      "reflection_id": "ref_20260225T015627Z_finalize_phase_5_rollout",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T015627Z_finalize_phase_5_rollout_v0.json",
+      "status": "promoted",
+      "title": "Finalize Phase 5 rollout migration baseline and immediate sequence closeout"
     }
   ],
-  "updated_at": "2026-02-24T13:16:21Z",
+  "updated_at": "2026-02-25T01:56:53Z",
   "version": "v0"
 }

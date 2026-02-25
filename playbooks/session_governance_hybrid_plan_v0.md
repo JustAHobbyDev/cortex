@@ -18,6 +18,7 @@ Balance speed during active work with strong governance enforcement at merge/rel
 1. Session start
 - run `cortex-coach audit-needed --project-dir . --format json`
 - confirm operational mode:
+  - run `cortex-coach rollout-mode --project-dir . --format json`
   - tactical features enabled/disabled
   - adapter enabled/disabled
   - kill-switch state
@@ -45,6 +46,7 @@ Balance speed during active work with strong governance enforcement at merge/rel
 - run `cortex-coach audit --project-dir . --audit-scope all`
 - run `cortex-coach decision-gap-check --project-dir . --format json`
 - run `cortex-coach reflection-completeness-check --project-dir . --format json`
+- run `cortex-coach rollout-mode-audit --project-dir . --format json` during Phase 5 rollout cycles
 - run CI quality gate (`just quality-gate-ci`)
 - when adapter-enabled runtime paths changed in the cycle, run:
   - `python3 scripts/phase3_adapter_degradation_harness_v0.py --project-dir . --coach-bin cortex-coach`
@@ -53,6 +55,9 @@ Balance speed during active work with strong governance enforcement at merge/rel
 
 Output-contract note:
 - For deterministic machine parsing across all commands in this repo, use the delegator entrypoint (`python3 scripts/cortex_project_coach_v0.py`) with `--format json` where needed.
+
+Phase 5 migration note:
+- Use `playbooks/cortex_phase5_migration_playbook_v0.md` as the operator handoff source when preparing Gate F closeout.
 
 ## Enforcement Ladder in Session Operations
 

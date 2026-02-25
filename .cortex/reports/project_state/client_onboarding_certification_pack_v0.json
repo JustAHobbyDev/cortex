@@ -1,0 +1,367 @@
+{
+  "artifact": "client_onboarding_certification_pack_v0",
+  "cadence": {
+    "latest_results": [
+      {
+        "check_id": "command_surface_preflight",
+        "status": "fail"
+      },
+      {
+        "check_id": "dependency_bootstrap_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "audit_all",
+        "status": "pass"
+      },
+      {
+        "check_id": "decision_gap_check",
+        "status": "pass"
+      },
+      {
+        "check_id": "reflection_completeness_check",
+        "status": "pass"
+      },
+      {
+        "check_id": "reflection_enforcement_gate",
+        "status": "pass"
+      },
+      {
+        "check_id": "project_state_boundary_gate",
+        "status": "pass"
+      }
+    ],
+    "next_action": "Remediate failed cadence prerequisite checks before go-live handoff.",
+    "policy": {
+      "month_2_plus_cadence": "monthly",
+      "week_1_to_4_cadence": "weekly"
+    },
+    "required_check_ids": [
+      "audit_all",
+      "decision_gap_check",
+      "reflection_completeness_check",
+      "reflection_enforcement_gate",
+      "project_state_boundary_gate",
+      "command_surface_preflight",
+      "dependency_bootstrap_control"
+    ],
+    "schedule": {
+      "monthly_checkpoints": [
+        "2026-03-27",
+        "2026-04-26",
+        "2026-05-26"
+      ],
+      "weekly_checkpoints": [
+        "2026-03-04",
+        "2026-03-11",
+        "2026-03-18",
+        "2026-03-25"
+      ]
+    },
+    "status": "fail"
+  },
+  "checks": [
+    {
+      "check_id": "command_surface_preflight",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/client_onboarding_command_preflight_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 1.2774654200766236,
+      "payload_status": "fail",
+      "report_path": null,
+      "returncode": 1,
+      "status": "fail",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {
+        "required_check_count": 4,
+        "required_check_fail_count": 3,
+        "required_check_pass_count": 1
+      }
+    },
+    {
+      "check_id": "dependency_bootstrap_control",
+      "env_uv_cache_path": "",
+      "env_uv_cache_ready": false,
+      "local_uv_cache_path": ".uv-cache",
+      "local_uv_cache_ready": true,
+      "lock_exists": true,
+      "lock_file": "uv.lock",
+      "reason_codes": [],
+      "remediation_hints": [],
+      "status": "pass",
+      "venv_exists": true,
+      "venv_path": ".venv"
+    },
+    {
+      "check_id": "audit_all",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "audit",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--audit-scope",
+        "all",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.7849933300167322,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {}
+    },
+    {
+      "check_id": "decision_gap_check",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "decision-gap-check",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.6186503400094807,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {}
+    },
+    {
+      "check_id": "reflection_completeness_check",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/cortex_project_coach_v0.py",
+        "reflection-completeness-check",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--required-decision-status",
+        "promoted",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.6121821199776605,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {}
+    },
+    {
+      "check_id": "reflection_enforcement_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/reflection_enforcement_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--required-decision-status",
+        "promoted",
+        "--min-scaffold-reports",
+        "1",
+        "--min-required-status-mappings",
+        "1",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 1.1476527699269354,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {
+        "decision_match_count": 0,
+        "governance_impact_file_count": 0,
+        "required_status_entry_count": 30,
+        "required_status_mapping_count": 30,
+        "scaffold_reports_scanned": 30
+      }
+    },
+    {
+      "check_id": "project_state_boundary_gate",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/project_state_boundary_gate_v0.py",
+        "--project-dir",
+        "/home/d/codex/cortex",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.36160849989391863,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {}
+    },
+    {
+      "check_id": "quality_gate_sync_check",
+      "command": [
+        "python3",
+        "/home/d/codex/cortex/scripts/quality_gate_sync_check_v0.py",
+        "--ci-script",
+        "scripts/quality_gate_ci_v0.sh",
+        "--local-script",
+        "scripts/quality_gate_v0.sh",
+        "--format",
+        "json"
+      ],
+      "duration_seconds": 0.2910337100038305,
+      "payload_status": "pass",
+      "report_path": null,
+      "returncode": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout_excerpt": "{",
+      "summary": {}
+    },
+    {
+      "check_id": "quality_gate_ci",
+      "command": [
+        "./scripts/quality_gate_ci_v0.sh"
+      ],
+      "duration_seconds": 21.207923879963346,
+      "returncode": 0,
+      "status": "pass",
+      "stderr_first_line": "",
+      "summary_line": "[quality-gate-ci] PASS"
+    }
+  ],
+  "findings": [
+    {
+      "cadence_status": "fail",
+      "check": "certification_pack_status",
+      "message": "Certification pack did not meet pass criteria.",
+      "schema_validation_status": "pass",
+      "scorecard_status": "fail",
+      "severity": "error"
+    }
+  ],
+  "generated_at": "2026-02-25T03:58:03Z",
+  "inputs": {
+    "assessor_name": "automation",
+    "assessor_role": "Conformance QA Lead",
+    "client_id": "internal",
+    "completion_report": ".cortex/reports/project_state/client_onboarding_completion_report_v0.md",
+    "go_live_date": "2026-02-25",
+    "project_id": "cortex",
+    "project_name": "cortex",
+    "reviewers": [
+      "Maintainer Council",
+      "CI/Gate Owner"
+    ],
+    "run_quality_gate": true,
+    "track_end_date": "2026-02-25",
+    "track_start_date": "2026-02-25",
+    "track_variant": "standard"
+  },
+  "project_dir": "/home/d/codex/cortex",
+  "remediation_hints": [
+    "Populate onboarding completion report before final M6 certification review.",
+    "Upgrade cortex-coach command surface to support onboarding rollback-mode requirements before certification pass."
+  ],
+  "scorecard": {
+    "artifact": "client_onboarding_certification_scorecard_v0",
+    "assessment": {
+      "assessor_name": "automation",
+      "assessor_role": "Conformance QA Lead",
+      "reviewers": [
+        "Maintainer Council",
+        "CI/Gate Owner"
+      ]
+    },
+    "categories": {
+      "documentation_quality": {
+        "evidence_refs": [],
+        "minimum_required_percent": 80.0,
+        "notes": "Completion report missing; documentation score capped at 70.",
+        "pass": false,
+        "score_percent": 70.0,
+        "weight_percent": 10.0
+      },
+      "governance_integrity": {
+        "evidence_refs": [
+          ".cortex/reports/lifecycle_audit_v0.json",
+          ".cortex/reports/decision_candidates_v0.json"
+        ],
+        "minimum_required_percent": 85.0,
+        "notes": "4/4 checks passed.",
+        "pass": true,
+        "score_percent": 100.0,
+        "weight_percent": 35.0
+      },
+      "operational_reliability": {
+        "evidence_refs": [
+          ".cortex/reports/project_state/client_onboarding_command_preflight_v0.json",
+          ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json"
+        ],
+        "minimum_required_percent": 85.0,
+        "notes": "4/5 checks passed. Failed checks: command_surface_preflight.",
+        "pass": false,
+        "score_percent": 80.0,
+        "weight_percent": 35.0
+      },
+      "team_readiness": {
+        "minimum_required_percent": 80.0,
+        "notes": "Team readiness score provided by assessor inputs.",
+        "pass": true,
+        "score_percent": 85.0,
+        "weight_percent": 20.0
+      }
+    },
+    "client": {
+      "client_id": "internal",
+      "project_id": "cortex",
+      "project_name": "cortex"
+    },
+    "evidence_refs": [
+      ".cortex/reports/project_state/client_onboarding_completion_report_v0.md",
+      ".cortex/reports/project_state/client_onboarding_certification_pack_v0.json"
+    ],
+    "generated_at": "2026-02-25T03:58:03Z",
+    "hard_fail_conditions": {
+      "notes": "Rollout command surface unavailable in preflight.",
+      "required_governance_gate_bypass_detected": false,
+      "rollback_drill_failed": true,
+      "triggered": true,
+      "unlinked_governance_closure_detected": false
+    },
+    "status": "fail",
+    "totals": {
+      "minimum_required_percent": 85.0,
+      "pass_by_score": true,
+      "weighted_score_percent": 87.0
+    },
+    "track": {
+      "end_date": "2026-02-25",
+      "start_date": "2026-02-25",
+      "variant": "standard"
+    },
+    "version": "v0"
+  },
+  "scorecard_schema_path": "contracts/client_onboarding_certification_scorecard_schema_v0.json",
+  "scorecard_schema_validation": {
+    "error": "",
+    "status": "pass"
+  },
+  "status": "fail",
+  "version": "v0"
+}

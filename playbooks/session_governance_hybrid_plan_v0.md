@@ -59,6 +59,24 @@ Output-contract note:
 Phase 5 migration note:
 - Use `playbooks/cortex_phase5_migration_playbook_v0.md` as the operator handoff source when preparing Gate F closeout.
 
+## Client Onboarding Certification Automation (CT-006)
+
+Certification workflow command:
+
+1. `python3 scripts/client_onboarding_certification_pack_v0.py --project-dir . --run-quality-gate --format json --out-file .cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
+
+Command behavior:
+
+1. Generates a schema-valid certification scorecard payload using `contracts/client_onboarding_certification_scorecard_schema_v0.json`.
+2. Executes recurring cadence prerequisite checks (governance, boundary, command-surface preflight, and dependency bootstrap controls).
+3. Produces weekly (weeks 1-4) and monthly (month 2+) checkpoint schedule fields for post-onboarding governance operations.
+4. Fails closed (`status=fail`) when rollout command surface, dependency bootstrap, or required documentation readiness is not met.
+
+Operating rule:
+
+1. Do not approve onboarding go-live when certification pack `status` is `fail`.
+2. Remediate findings and rerun the certification pack until scorecard + cadence checks pass.
+
 ## Enforcement Ladder in Session Operations
 
 1. Advisory mode

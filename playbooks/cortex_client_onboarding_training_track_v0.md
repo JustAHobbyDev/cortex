@@ -193,4 +193,4 @@ Training track is complete when all conditions are true:
 3. Done: add certification rubric JSON schema for machine-checkable scorecards.
 4. Done: author module lab guides (`M2`-`M5`) with deterministic command checklists.
 5. Done: pilot with one internal reference project and publish calibration evidence (`.cortex/reports/project_state/client_onboarding_pilot_calibration_report_v0.md`).
-6. Next: implement CT-006 remediation controls (command-surface preflight, dependency bootstrap, and certification automation) before external rollout.
+6. In progress: execute CT-006 certification automation and cadence controls with fail-closed evidence in `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`.

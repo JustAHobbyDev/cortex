@@ -159,18 +159,22 @@ Demonstrate client-repo operational readiness with CI-quality gates and onboardi
 3. Produce onboarding closeout package:
 - Fill `.cortex/templates/client_onboarding_completion_report_template_v0.md`
 - Produce certification scorecard JSON matching `contracts/client_onboarding_certification_scorecard_schema_v0.json`
+- Generate certification/cadence pack:
+  - `python3 scripts/client_onboarding_certification_pack_v0.py --project-dir . --run-quality-gate --format json --out-file .cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
 
 ### Expected Results
 
 1. Required gate bundle and CI gate pass.
 2. Completion report is fully populated and signed.
 3. Certification scorecard validates against schema and yields `status=pass`.
+4. Certification pack reports `status=pass` with cadence schedule populated.
 
 ### Exit Evidence
 
 1. Client CI run link or log snippet with green result.
 2. Completed onboarding report artifact.
 3. Certification scorecard artifact.
+4. `.cortex/reports/project_state/client_onboarding_certification_pack_v0.json`
 
 ## Instructor Notes
 

@@ -274,6 +274,12 @@ Exit Criteria:
   - `.cortex/reports/project_state/phase6_hydration_compliance_report_v0.json`
   - `scripts/phase6_boundary_conformance_harness_v0.py`
   - `.cortex/reports/project_state/phase6_boundary_conformance_report_v0.json`
-6. Next: start PH6-004 deterministic bootstrap scaffolder for fresh project initialization and first-green-gate workflow.
-  - target: `scripts/cortex_project_coach_v0.py`;`docs/cortex-coach/quickstart.md`;`.cortex/templates/`
-7. Done: client enablement track is established with execution board and CT-006 certification automation evidence.
+6. Done: complete PH6-004 deterministic bootstrap scaffolder for fresh project initialization and first-green-gate workflow.
+  - `scripts/cortex_project_coach_v0.py`
+  - `docs/cortex-coach/quickstart.md`
+  - `docs/cortex-coach/commands.md`
+  - `.cortex/templates/bootstrap_first_green_gate_checklist_template_v0.md`
+  - `.cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json`
+7. Next: start PH6-005 GDD role + capability pack to formalize role minimums, permissions, and escalation matrix.
+  - target: `playbooks/cortex_phase0_role_charters_v0.md`;`docs/cortex-coach/README.md`
+8. Done: client enablement track is established with execution board and CT-006 certification automation evidence.

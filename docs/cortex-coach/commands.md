@@ -149,6 +149,31 @@ Key options:
 - `--lock-stale-seconds <n>`
 - `--force-unlock`
 
+## `bootstrap-scaffold`
+
+Deterministic new-project bootstrap flow for first green gate readiness.
+
+```bash
+python3 scripts/cortex_project_coach_v0.py bootstrap-scaffold \
+  --project-dir /path/to/project \
+  --project-id my_project \
+  --project-name "My Project" \
+  --format json
+```
+
+What it does:
+
+- runs `cortex-coach init` (unless `--skip-init` is set)
+- verifies required bootstrap contract paths exist under selected `--cortex-root`
+- writes first-green-gate checklist under `.cortex/templates/`
+- emits scaffold report under `.cortex/reports/project_state/`
+
+Key options:
+
+- `--skip-init`: skip `init` and only verify/report/checklist
+- `--force`: overwrite generated checklist when it already exists
+- `--assets-dir <path>`: forwarded to `cortex-coach init`
+
 ## `audit`
 
 Validate lifecycle artifacts and emit a health report.

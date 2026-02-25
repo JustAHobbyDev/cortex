@@ -83,6 +83,18 @@ python3 scripts/phase6_boundary_conformance_harness_v0.py \
   --out-file .cortex/reports/project_state/phase6_boundary_conformance_report_v0.json
 ```
 
+Bootstrap scaffolder:
+
+```bash
+python3 scripts/cortex_project_coach_v0.py bootstrap-scaffold \
+  --project-dir . \
+  --project-id cortex \
+  --project-name "Cortex" \
+  --skip-init \
+  --force \
+  --format json
+```
+
 ## Planned Artifacts
 
 - `.cortex/reports/project_state/phase6_bootstrap_readiness_report_v0.json`

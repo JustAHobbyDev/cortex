@@ -1,0 +1,32 @@
+{
+  "artifact": "phase6_bootstrap_scaffold_report_v0",
+  "bootstrap_assets": {
+    "checklist_path": ".cortex/templates/bootstrap_first_green_gate_checklist_v0.md"
+  },
+  "cortex_root": ".cortex",
+  "first_green_gate_commands": [
+    "cortex-coach audit-needed --project-dir . --format json",
+    "cortex-coach coach --project-dir .",
+    "cortex-coach audit --project-dir .",
+    "./scripts/quality_gate_ci_v0.sh"
+  ],
+  "init": {
+    "performed": false,
+    "returncode": 0
+  },
+  "measurement_mode": "phase6_bootstrap_scaffolder_v0",
+  "missing_required_paths": [],
+  "project_dir": "/home/d/codex/cortex",
+  "project_id": "cortex",
+  "project_name": "Cortex",
+  "required_paths": [
+    ".cortex/manifest_v0.json",
+    ".cortex/spec_registry_v0.json",
+    ".cortex/artifacts",
+    ".cortex/prompts",
+    ".cortex/reports"
+  ],
+  "run_at": "2026-02-25T09:56:49Z",
+  "status": "pass",
+  "version": "v0"
+}

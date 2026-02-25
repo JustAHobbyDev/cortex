@@ -30,6 +30,33 @@ NATIVE_FORMAT_COMMANDS = {
 }
 
 ROLLOUT_MODES = {"off", "experimental", "default"}
+BOOTSTRAP_REQUIRED_PATHS = (
+    ".cortex/manifest_v0.json",
+    ".cortex/spec_registry_v0.json",
+    ".cortex/artifacts",
+    ".cortex/prompts",
+    ".cortex/reports",
+)
+BOOTSTRAP_TEMPLATE_REL_PATH = ".cortex/templates/bootstrap_first_green_gate_checklist_template_v0.md"
+BOOTSTRAP_TEMPLATE_FALLBACK = """# Bootstrap First Green Gate Checklist v0
+
+Version: v0
+Date: <YYYY-MM-DD>
+Project: <project_name> (<project_id>)
+
+## Required Setup
+
+1. Confirm `.cortex/` was initialized and committed.
+2. Run `cortex-coach audit-needed --project-dir . --format json`.
+3. If `audit_required=true`, run `cortex-coach coach --project-dir .` then `cortex-coach audit --project-dir .`.
+4. Run required gate bundle: `./scripts/quality_gate_ci_v0.sh`.
+
+## Exit Criteria
+
+1. Required governance gate bundle is green.
+2. No unresolved decision gaps for governance-impacting files.
+3. Boundary and hydration enforcement checks pass in block mode.
+"""
 
 
 def _now_iso() -> str:
@@ -145,6 +172,19 @@ def _build_rollout_mode_audit_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cortex-coach rollout-mode-audit")
     parser.add_argument("--project-dir", required=True)
     parser.add_argument("--cortex-root", default=".cortex")
+    parser.add_argument("--format", choices=("text", "json"), default="text")
+    return parser
+
+
+def _build_bootstrap_scaffold_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="cortex-coach bootstrap-scaffold")
+    parser.add_argument("--project-dir", required=True)
+    parser.add_argument("--project-id", required=True)
+    parser.add_argument("--project-name", required=True)
+    parser.add_argument("--cortex-root", default=".cortex")
+    parser.add_argument("--assets-dir", default="")
+    parser.add_argument("--force", action="store_true")
+    parser.add_argument("--skip-init", action="store_true")
     parser.add_argument("--format", choices=("text", "json"), default="text")
     return parser
 
@@ -593,6 +633,247 @@ def _run_rollout_mode_audit_command(argv: list[str]) -> int:
     return 0 if status == "pass" else 3
 
 
+def _emit_bootstrap_payload(payload: dict[str, Any], output_format: str) -> None:
+    if output_format == "json":
+        _emit_json_payload(payload)
+        return
+
+    lines = [
+        f"status: {payload.get('status', 'fail')}",
+        f"run_at: {payload.get('run_at', '')}",
+    ]
+    result = payload.get("result", {})
+    if isinstance(result, dict):
+        report_path = result.get("report_path")
+        checklist_path = result.get("checklist_path")
+        if isinstance(report_path, str) and report_path:
+            lines.append(f"report_path: {report_path}")
+        if isinstance(checklist_path, str) and checklist_path:
+            lines.append(f"checklist_path: {checklist_path}")
+        created = result.get("created_or_updated_paths", [])
+        if isinstance(created, list):
+            lines.append(f"created_or_updated_files: {len(created)}")
+    message = payload.get("message")
+    if isinstance(message, str) and message:
+        lines.append(f"message: {message}")
+    sys.stdout.write("\n".join(lines))
+    sys.stdout.write("\n")
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def _load_bootstrap_template() -> str:
+    template_path = _repo_root() / BOOTSTRAP_TEMPLATE_REL_PATH
+    if template_path.exists():
+        try:
+            return template_path.read_text(encoding="utf-8")
+        except OSError:
+            return BOOTSTRAP_TEMPLATE_FALLBACK
+    return BOOTSTRAP_TEMPLATE_FALLBACK
+
+
+def _render_bootstrap_checklist(template_text: str, project_id: str, project_name: str) -> str:
+    return (
+        template_text.replace("<project_id>", project_id)
+        .replace("<project_name>", project_name)
+        .replace("<YYYY-MM-DD>", _now_iso()[:10])
+    )
+
+
+def _bootstrap_required_paths(project_dir: Path, cortex_root: str) -> list[str]:
+    required: list[str] = []
+    for rel in BOOTSTRAP_REQUIRED_PATHS:
+        if rel.startswith(".cortex/"):
+            required.append(f"{cortex_root}{rel[len('.cortex'):]}")
+            continue
+        required.append(rel)
+    return required
+
+
+def _write_json_file(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _run_bootstrap_scaffold_command(argv: list[str], coach_bin: str | None) -> int:
+    subcommand = "bootstrap-scaffold"
+    args = argv[1:] if len(argv) > 1 else []
+    parsed, parse_code = _parse_args_with_exit(_build_bootstrap_scaffold_parser(), args)
+    if parsed is None:
+        return parse_code
+
+    project_dir = Path(parsed.project_dir).resolve()
+    project_dir.mkdir(parents=True, exist_ok=True)
+    cortex_root = str(parsed.cortex_root or ".cortex")
+    output_format = str(parsed.format)
+    project_id = str(parsed.project_id).strip()
+    project_name = str(parsed.project_name).strip()
+    skip_init = bool(parsed.skip_init)
+    force = bool(parsed.force)
+
+    if not project_id or not project_name:
+        payload = {
+            "version": "v0",
+            "command": subcommand,
+            "status": "fail",
+            "returncode": 2,
+            "run_at": _now_iso(),
+            "project_dir": str(project_dir),
+            "format_source": "delegator_bootstrap_scaffolder_v0",
+            "message": "project-id and project-name are required.",
+        }
+        _emit_bootstrap_payload(payload, output_format)
+        return 2
+
+    init_result: dict[str, Any] = {
+        "performed": False,
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "command": [],
+    }
+    if not skip_init:
+        if coach_bin is None:
+            payload = {
+                "version": "v0",
+                "command": subcommand,
+                "status": "fail",
+                "returncode": 1,
+                "run_at": _now_iso(),
+                "project_dir": str(project_dir),
+                "format_source": "delegator_bootstrap_scaffolder_v0",
+                "message": "missing `cortex-coach` on PATH; cannot run bootstrap init.",
+            }
+            _emit_bootstrap_payload(payload, output_format)
+            return 1
+        init_cmd = [
+            coach_bin,
+            "init",
+            "--project-dir",
+            str(project_dir),
+            "--project-id",
+            project_id,
+            "--project-name",
+            project_name,
+            "--cortex-root",
+            cortex_root,
+        ]
+        assets_dir = str(parsed.assets_dir).strip()
+        if assets_dir:
+            init_cmd.extend(["--assets-dir", assets_dir])
+        if force:
+            init_cmd.append("--force")
+
+        proc = subprocess.run(init_cmd, check=False, text=True, capture_output=True)
+        init_result = {
+            "performed": True,
+            "returncode": proc.returncode,
+            "stdout": proc.stdout.rstrip("\n"),
+            "stderr": proc.stderr.rstrip("\n"),
+            "command": init_cmd,
+        }
+        if proc.returncode != 0:
+            payload = {
+                "version": "v0",
+                "command": subcommand,
+                "status": "fail",
+                "returncode": 3,
+                "run_at": _now_iso(),
+                "project_dir": str(project_dir),
+                "format_source": "delegator_bootstrap_scaffolder_v0",
+                "message": "bootstrap init command failed.",
+                "result": {
+                    "init": init_result,
+                },
+            }
+            _emit_bootstrap_payload(payload, output_format)
+            return 3
+
+    required_paths = _bootstrap_required_paths(project_dir, cortex_root)
+    missing_required: list[str] = []
+    for rel in required_paths:
+        path = project_dir / rel
+        if not path.exists():
+            missing_required.append(rel)
+
+    created_or_updated_paths: list[str] = []
+    skipped_paths: list[str] = []
+
+    checklist_path = project_dir / cortex_root / "templates" / "bootstrap_first_green_gate_checklist_v0.md"
+    checklist_text = _render_bootstrap_checklist(_load_bootstrap_template(), project_id, project_name)
+    if checklist_path.exists() and not force:
+        skipped_paths.append(_safe_rel_path(project_dir, checklist_path))
+    else:
+        checklist_path.parent.mkdir(parents=True, exist_ok=True)
+        checklist_path.write_text(checklist_text, encoding="utf-8")
+        created_or_updated_paths.append(_safe_rel_path(project_dir, checklist_path))
+
+    first_green_gate_commands = [
+        "cortex-coach audit-needed --project-dir . --format json",
+        "cortex-coach coach --project-dir .",
+        "cortex-coach audit --project-dir .",
+        "./scripts/quality_gate_ci_v0.sh",
+    ]
+
+    report_path = project_dir / cortex_root / "reports" / "project_state" / "phase6_bootstrap_scaffold_report_v0.json"
+    report_payload = {
+        "artifact": "phase6_bootstrap_scaffold_report_v0",
+        "version": "v0",
+        "run_at": _now_iso(),
+        "project_dir": str(project_dir),
+        "project_id": project_id,
+        "project_name": project_name,
+        "cortex_root": cortex_root,
+        "measurement_mode": "phase6_bootstrap_scaffolder_v0",
+        "required_paths": required_paths,
+        "missing_required_paths": missing_required,
+        "init": {
+            "performed": bool(init_result.get("performed", False)),
+            "returncode": int(init_result.get("returncode", 0)),
+        },
+        "first_green_gate_commands": first_green_gate_commands,
+        "bootstrap_assets": {
+            "checklist_path": _safe_rel_path(project_dir, checklist_path),
+        },
+        "status": "pass" if not missing_required else "fail",
+    }
+    _write_json_file(report_path, report_payload)
+    created_or_updated_paths.append(_safe_rel_path(project_dir, report_path))
+
+    status = "pass" if not missing_required else "fail"
+    returncode = 0 if status == "pass" else 3
+    message = (
+        "bootstrap scaffold complete"
+        if status == "pass"
+        else "required bootstrap artifacts missing; run without --skip-init or fix init outputs."
+    )
+
+    payload = {
+        "version": "v0",
+        "command": subcommand,
+        "status": status,
+        "returncode": returncode,
+        "run_at": _now_iso(),
+        "project_dir": str(project_dir),
+        "format_source": "delegator_bootstrap_scaffolder_v0",
+        "message": message,
+        "result": {
+            "required_paths": required_paths,
+            "missing_required_paths": missing_required,
+            "created_or_updated_paths": created_or_updated_paths,
+            "skipped_paths": skipped_paths,
+            "report_path": _safe_rel_path(project_dir, report_path),
+            "checklist_path": _safe_rel_path(project_dir, checklist_path),
+            "first_green_gate_commands": first_green_gate_commands,
+            "init": init_result,
+        },
+    }
+    _emit_bootstrap_payload(payload, output_format)
+    return returncode
+
+
 def _shim_json_payload(
     subcommand: str,
     forwarded_argv: list[str],
@@ -707,7 +988,7 @@ def _run_with_format_shim(coach_bin: str, argv: list[str], subcommand: str, requ
 def main() -> int:
     argv = sys.argv[1:]
     subcommand = _extract_subcommand(argv)
-    if subcommand in {"rollout-mode", "rollout-mode-audit"}:
+    if subcommand in {"rollout-mode", "rollout-mode-audit", "bootstrap-scaffold"}:
         try:
             idx = argv.index(subcommand)
         except ValueError:
@@ -715,7 +996,10 @@ def main() -> int:
         command_argv = argv[idx:]
         if subcommand == "rollout-mode":
             return _run_rollout_mode_command(command_argv)
-        return _run_rollout_mode_audit_command(command_argv)
+        if subcommand == "rollout-mode-audit":
+            return _run_rollout_mode_audit_command(command_argv)
+        coach_bin_for_bootstrap = shutil.which("cortex-coach")
+        return _run_bootstrap_scaffold_command(command_argv, coach_bin_for_bootstrap)
 
     if os.environ.get("CORTEX_COACH_FORCE_INTERNAL") == "1":
         print(

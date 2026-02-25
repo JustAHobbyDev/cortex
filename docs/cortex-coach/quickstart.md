@@ -27,6 +27,21 @@ cortex-coach \
   --project-name "My Project"
 ```
 
+Optional deterministic bootstrap scaffold (Phase 6 path):
+
+```bash
+python3 scripts/cortex_project_coach_v0.py \
+  bootstrap-scaffold \
+  --project-dir . \
+  --project-id my_project \
+  --project-name "My Project" \
+  --format json
+```
+
+Outputs:
+- `.cortex/templates/bootstrap_first_green_gate_checklist_v0.md`
+- `.cortex/reports/project_state/phase6_bootstrap_scaffold_report_v0.json`
+
 ### 3) Risk Check
 
 ```bash

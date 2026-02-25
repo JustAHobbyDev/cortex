@@ -696,8 +696,31 @@
       "reflection_report": ".cortex/reports/reflection_scaffold_20260225T021812Z_close_phase_5_gate_f_and_v0.json",
       "status": "promoted",
       "title": "Close Phase 5 Gate F and authorize default mode"
+    },
+    {
+      "captured_at": "2026-02-25T03:23:32Z",
+      "decision": "Publish module labs (M2-M5) with deterministic command checklists, expected outputs, and exit evidence; mark CT-004 complete and unblock pilot calibration.",
+      "decision_artifact": ".cortex/artifacts/decisions/decision_add_deterministic_client_onboarding_lab_pack_for_modules_m2_m5_v1.md",
+      "decision_id": "dec_20260225T032332Z_add_deterministic_client",
+      "impact_scope": [
+        "governance",
+        "docs",
+        "playbooks"
+      ],
+      "linked_artifacts": [
+        "docs/cortex-coach/README.md",
+        "docs/cortex-coach/client_training_labs_v0.md",
+        "playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+        "playbooks/cortex_client_onboarding_training_track_v0.md"
+      ],
+      "promoted_at": "2026-02-25T03:23:39Z",
+      "rationale": "Training enablement requires operationally testable labs so client onboarding outcomes are reproducible and governance-safe.",
+      "reflection_id": "ref_20260225T032325Z_add_deterministic_client",
+      "reflection_report": ".cortex/reports/reflection_scaffold_20260225T032325Z_add_deterministic_client_v0.json",
+      "status": "promoted",
+      "title": "Add deterministic client onboarding lab pack for modules M2-M5"
     }
   ],
-  "updated_at": "2026-02-25T02:18:25Z",
+  "updated_at": "2026-02-25T03:23:39Z",
   "version": "v0"
 }

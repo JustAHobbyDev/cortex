@@ -191,5 +191,5 @@ Training track is complete when all conditions are true:
 1. Done: publish onboarding execution board and baseline ownership mapping.
 2. Done: add onboarding completion report template under `.cortex/templates/`.
 3. Done: add certification rubric JSON schema for machine-checkable scorecards.
-4. Next: author module lab guides (`M2`-`M5`) with deterministic command checklists.
+4. Done: author module lab guides (`M2`-`M5`) with deterministic command checklists.
 5. Next: pilot with one internal reference project before external client rollout.

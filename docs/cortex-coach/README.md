@@ -7,13 +7,14 @@ This documentation is for users running `cortex-coach` in their own projects.
 1. [Install](install.md)
 2. [Quickstart](quickstart.md)
    - Includes Minimal Workflow and Complete Workflow paths
-3. [Commands](commands.md)
-4. [Maintainer Mode](maintainer-mode.md)
-5. [Agent Context Loader](agent-context-loader.md)
-6. [Quality Gate](quality-gate.md)
-7. [FAQ](faq.md)
-8. [Troubleshooting](troubleshooting.md)
-9. [Migration to Standalone](migration_to_standalone_v0.md)
+3. [Client Training Labs](client_training_labs_v0.md)
+4. [Commands](commands.md)
+5. [Maintainer Mode](maintainer-mode.md)
+6. [Agent Context Loader](agent-context-loader.md)
+7. [Quality Gate](quality-gate.md)
+8. [FAQ](faq.md)
+9. [Troubleshooting](troubleshooting.md)
+10. [Migration to Standalone](migration_to_standalone_v0.md)
 
 ## What Cortex Coach Does
 

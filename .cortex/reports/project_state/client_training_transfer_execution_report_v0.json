@@ -1,0 +1,66 @@
+{
+  "artifact": "client_training_transfer_execution_report_v0",
+  "bundle_root": "/home/d/codex/cortex/.cortex/artifacts/training_migration_bundle_v0",
+  "dry_run": false,
+  "message": "training migration handoff completed",
+  "project_dir": "/home/d/codex/cortex",
+  "result": {
+    "copied_paths": [
+      "training/docs/client_ai_governance_fundamentals_v0.md",
+      "training/docs/client_training_labs_v0.md",
+      "training/playbooks/cortex_client_onboarding_training_track_v0.md",
+      "training/playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+      "training/templates/client_onboarding_completion_report_template_v0.md",
+      "training/contracts/client_onboarding_certification_scorecard_schema_v0.json",
+      "training/scripts/client_onboarding_command_preflight_v0.py",
+      "training/scripts/client_onboarding_certification_pack_v0.py"
+    ],
+    "executable_paths": [
+      "training/scripts/client_onboarding_command_preflight_v0.py",
+      "training/scripts/client_onboarding_certification_pack_v0.py"
+    ],
+    "failed_verification_count": 0,
+    "handoff_manifest_path": ".cortex/reports/project_state/client_training_project_handoff_manifest_v0.json",
+    "pointer_doc_path": "docs/cortex-coach/client_training_external_repo_v0.md",
+    "pruned_source_paths": [
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/.cortex/templates/client_onboarding_completion_report_template_v0.md",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/contracts/client_onboarding_certification_scorecard_schema_v0.json",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/docs/cortex-coach/client_ai_governance_fundamentals_v0.md",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/docs/cortex-coach/client_training_labs_v0.md",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/playbooks/cortex_client_onboarding_training_track_v0.md",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/scripts/client_onboarding_certification_pack_v0.py",
+      ".cortex/artifacts/training_migration_bundle_v0/snapshot_2f2c85b/scripts/client_onboarding_command_preflight_v0.py"
+    ],
+    "quality_gate": {
+      "ran": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "[quality-gate-ci] 1/10 quality gate sync check\n[quality-gate-ci] 2/10 decision gap check\n[quality-gate-ci] 3/10 context hydration compliance gate\n[quality-gate-ci] 4/10 phase4 enforcement blocking harness\n[quality-gate-ci] 5/10 reflection enforcement gate\n[quality-gate-ci] 6/10 mistake provenance gate\n[quality-gate-ci] 7/10 project-state boundary gate\n[quality-gate-ci] 8/10 temporal playbook release-surface gate\n[quality-gate-ci] 9/10 docs and json integrity\n[ci-validate] checking markdown links\nok: validated 69 markdown files\n[ci-validate] checking json parseability\nok: validated 112 json files\n[ci-validate] done\n[quality-gate-ci] 10/10 focused coach tests\n.............                                                            [100%]\n13 passed in 13.10s\n[quality-gate-ci] PASS"
+    },
+    "report_path": ".cortex/reports/project_state/client_training_transfer_execution_report_v0.json",
+    "target_git": {
+      "commit_created": true,
+      "push_performed": false,
+      "staged_files": [
+        "training/docs/client_ai_governance_fundamentals_v0.md",
+        "training/docs/client_training_labs_v0.md",
+        "training/playbooks/cortex_client_onboarding_training_track_v0.md",
+        "training/playbooks/cortex_client_onboarding_training_execution_board_v0.md",
+        "training/templates/client_onboarding_completion_report_template_v0.md",
+        "training/contracts/client_onboarding_certification_scorecard_schema_v0.json",
+        "training/scripts/client_onboarding_command_preflight_v0.py",
+        "training/scripts/client_onboarding_certification_pack_v0.py"
+      ],
+      "target_branch": ""
+    },
+    "target_pin_ref": "3f558891d6a805b9d576323495de82b03949ec41",
+    "transfer_mode": "move",
+    "verified_file_count": 8
+  },
+  "run_at": "2026-02-26T09:10:23Z",
+  "status": "pass",
+  "target_repo_dir": "/home/d/codex/cortex-training",
+  "transfer_mode": "move",
+  "version": "v0"
+}

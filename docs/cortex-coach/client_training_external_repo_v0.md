@@ -36,3 +36,10 @@ Legacy training scripts in `scripts/` now act as compatibility shims that emit `
 1. If you need full training content, use the standalone training project.
 2. If you are auditing historical references in this repo, legacy paths remain as compatibility stubs.
 3. Update local onboarding runbooks to pin the training repo ref explicitly in handoff manifests.
+
+## Active Pin
+
+- Pin type: `commit_sha`
+- Pin ref: `3f558891d6a805b9d576323495de82b03949ec41`
+- Updated at: `2026-02-26T09:10:23Z`
+- Source bundle: `.cortex/artifacts/training_migration_bundle_v0/manifest_v0.json`

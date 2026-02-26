@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cortex Governed Cycle"
+  short_description: "Run Cortex coach-audit-closeout workflow"
+  default_prompt: "Use this skill to execute the default Cortex governance cycle: audit-needed, coach/audit, decision-reflection linkage, and gate-validated closeout."

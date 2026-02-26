@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cortex Gate Remediation"
+  short_description: "Fix failed Cortex quality-gate runs fast"
+  default_prompt: "Use this skill to map a failed quality gate step to its command, apply minimal remediation, and verify full-gate recovery."

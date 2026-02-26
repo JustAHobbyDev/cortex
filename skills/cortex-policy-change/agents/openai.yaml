@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cortex Policy Change"
+  short_description: "Implement policy changes with right boundaries"
+  default_prompt: "Use this skill to classify governance change scope, keep policy vs playbook vs skill boundaries clean, and close out with required governance checks."

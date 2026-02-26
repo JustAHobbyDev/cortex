@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cortex Training Handoff"
+  short_description: "Run governed Cortex training transfer"
+  default_prompt: "Use this skill to execute governed training transfer between cortex and cortex-training with approval refs, pinned manifests, and closeout evidence."

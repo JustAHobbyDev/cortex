@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cortex Bootstrap Project"
+  short_description: "Bootstrap Cortex-governed projects safely"
+  default_prompt: "Use this skill to run the Cortex bootstrap-scaffold flow, validate bootstrap artifacts, and drive first-green-gate readiness."
